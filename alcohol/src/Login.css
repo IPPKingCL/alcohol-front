@@ -1,0 +1,11 @@
+.LoginText {
+    left: 0;
+    right: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.LoginImage {
+    display: block;
+    margin: auto;
+}

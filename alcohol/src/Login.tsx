@@ -1,12 +1,13 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import './Login.css';
 
 function Login() {
   return (
-    <div>
-        <input type="text" />
-        <img src="/resources/btn_google_signin_dark_disabled_web.png"></img>
+    <div className='LoginComponentBox'>
+        <h2 className='LoginText'>Login</h2>
+        <img className='LoginImage' src="/resources/btn_google_signin_dark_normal_web.png"></img>
     </div>
   );
 }
