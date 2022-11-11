@@ -10,7 +10,7 @@ import {
 
 function App() {
 
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState<boolean>(false);
 
 
 
