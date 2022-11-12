@@ -9,7 +9,7 @@ function Login() {
     const navigate = useNavigate();
 
     const redirectMain = () => {
-        navigate("/main");
+        navigate("/AddInfo");
     }
 
   return (
