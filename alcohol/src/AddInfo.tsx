@@ -28,60 +28,67 @@ function AddInfo() {
     favoriteList: new Array,
   });
 
-  const {nickname, job, MaximumPrice, favoriteList} = userAddInfo;
+  const { nickname, job, MaximumPrice, favoriteList } = userAddInfo;
 
-  const onChangeNickname = (e : any) => {
+  const onChangeNickname = (e: any) => {
     const { name, value } = e.target;
- 
 
-    const nextNickNameInput : UserAddInfo = {
+
+    const nextNickNameInput: UserAddInfo = {
       ...userAddInfo,
-      [name] : value,
+      [name]: value,
     }
     setUserAddInfo(nextNickNameInput);
     console.log(nextNickNameInput);
-    
+
   }
 
-  const onChangeJob = (e : any) => {
+  const onChangeJob = (e: any) => {
     const { name, value } = e.target;
 
 
-    const nextNickNameInput : UserAddInfo = {
+    const nextJobInput: UserAddInfo = {
       ...userAddInfo,
-      [name] : value,
+      [name]: value,
     }
-    setUserAddInfo(nextNickNameInput);
-    console.log(nextNickNameInput);
-    
+    setUserAddInfo(nextJobInput);
+    console.log(nextJobInput);
+
   }
 
-  const onChangeMaximumPrice = (e : any) => {
+  const onChangeMaximumPrice = (e: any) => {
     const { name, value } = e.target;
 
 
-    const nextNickNameInput : UserAddInfo = {
+    const nextMaximumPriceInput: UserAddInfo = {
       ...userAddInfo,
-      [name] : value,
+      [name]: value,
     }
-    setUserAddInfo(nextNickNameInput);
-    console.log(nextNickNameInput);
-    
+    setUserAddInfo(nextMaximumPriceInput);
+    console.log(nextMaximumPriceInput);
+
   }
 
-  const onChangeFavoriteList = (e : any) => {
-    const { name, value } = e.target;
+  const onChangeFavoriteList = (e: any) => {
+    console.log(e.target);
+    const { id, name, value } = e.target;
 
-    
-    console.log("value" + value);
-
-    const nextNickNameInput : UserAddInfo = {
-      ...userAddInfo,
-      [name] : value,
+    const nextFavoriteListInput: UserAddInfo = {
+      ...userAddInfo
     }
-    setUserAddInfo(nextNickNameInput);
-    console.log(nextNickNameInput);
-    
+    if (id == "select1") {
+      nextFavoriteListInput.favoriteList[0] = value;
+    }
+    else if (id == "select2") {
+      nextFavoriteListInput.favoriteList[1] = value;
+    }
+    else if (id == "select3") {
+      nextFavoriteListInput.favoriteList[2] = value;
+    }
+
+    setUserAddInfo(nextFavoriteListInput);
+    console.log(nextFavoriteListInput);
+
   }
 
 
@@ -108,7 +115,25 @@ function AddInfo() {
         <h3>닉네임 : <input type="text" placeholder='nickname' name='nickname' onChange={onChangeNickname} required></input><button>중복 확인</button></h3><hr />
         <h3>직업 : <input type="text" placeholder='job' name='job' onChange={onChangeJob} required></input></h3><hr />
         <h3>허용 최대 가격 : <input type="text" placeholder='Maximum price' name='MaximumPrice' onChange={onChangeMaximumPrice} required></input></h3><hr />
-        <h3>좋아하는 목록 : <select name='favoriteList'></select><select name='favoriteList'></select><select name='favoriteList'></select></h3><hr />
+        <h3>좋아하는 목록 :
+          <select id="select1" name='favoriteList' onChange={onChangeFavoriteList}>
+            <option value="">디폴트</option>
+            <option value={1}>1</option>
+            <option value={2}>2</option>
+            <option value={3}>3</option>
+          </select>
+          <select id="select2" name='favoriteList' onChange={onChangeFavoriteList}>
+            <option value="">디폴트</option>
+            <option value={1}>1</option>
+            <option value={2}>2</option>
+            <option value={3}>3</option>
+          </select>
+          <select id="select3" name='favoriteList' onChange={onChangeFavoriteList}>
+            <option value="">디폴트</option>
+            <option value={1}>1</option>
+            <option value={2}>2</option>
+            <option value={3}>3</option>
+          </select></h3><hr />
         <input type="submit" value="완료"></input>
       </div>
     </div>
