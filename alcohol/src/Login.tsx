@@ -27,6 +27,7 @@ function Login() {
     async function onSuccess(res: any) {
         const profile = res.getBasicProfile();
         const userdata = {
+            id : profile.getId(),
             email: profile.getEmail(),
             image: profile.getImageUrl(),
             name: profile.getName(),
@@ -34,7 +35,7 @@ function Login() {
         // 로그인 성공 후 실행하기 원하는 코드 작성.
         alert("구글 로그인에 성공하였습니다.");
 
-        console.log(userdata);
+        redirectMain(userdata);
 
     }
 
@@ -45,8 +46,8 @@ function Login() {
 
     const navigate = useNavigate();
 
-    const redirectMain = () => {
-        navigate("/AddInfo");
+    const redirectMain = (data : any) => {
+        navigate("/AddInfo", {state : data});
     }
 
     return (

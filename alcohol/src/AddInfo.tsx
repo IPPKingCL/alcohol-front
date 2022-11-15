@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './css/App.css';
 import './css/Login.css';
 import './css/AddInfo.css';
+import { useLocation } from 'react-router';
 import { useNavigate } from 'react-router-dom';
 import { deflateSync } from 'zlib';
 import internal from 'stream';
@@ -14,6 +15,9 @@ function AddInfo() {
     MaximumPrice: number;
     favoriteList: Array<string>;
   }
+
+  const { state } = useLocation();
+  console.log("state" + state.email);
 
   const navigate = useNavigate();
 

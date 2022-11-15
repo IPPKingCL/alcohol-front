@@ -8,6 +8,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+import AddInfo from './AddInfo';
 
 function App() {
 
@@ -18,7 +19,8 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Login />}></Route>
+        <Route path="/Login" element={<Login />}></Route>
+        <Route path="/AddInfo" element={<AddInfo />}></Route>
       </Routes>
     </Router>
   );
