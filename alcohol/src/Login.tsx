@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import logo from './logo.svg';
 import './css/App.css';
 import './css/Login.css';
 import { useNavigate } from 'react-router-dom';
 import { GoogleLogin } from 'react-google-login';
+import { useCookies } from 'react-cookie';
 
 function Login() {
 
+    const [cookies, setCookie] = useCookies(['rememberText']);
 
-    const clientId =
-        "722148392125-6qdo1sho8shp117jpfipd8vggfgb1qo9.apps.googleusercontent.com";
+    setCookie('rememberText', '', {sameSite: 'lax'});
+    
 
+    const clientId = "722148392125-6qdo1sho8shp117jpfipd8vggfgb1qo9.apps.googleusercontent.com";
+    
     async function onSuccess(res: any) {
         const profile = res.getBasicProfile();
         const userdata = {
@@ -18,7 +22,9 @@ function Login() {
             image: profile.getImageUrl(),
             name: profile.getName(),
         };
-        // 로그인 성공 후 실행하기 원하는 코드 작성.
+
+        alert("구글 로그인에 성공하였습니다");
+        redirectMain();
 
     }
 
