@@ -1,9 +1,66 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { board } from './interface/Board'
 //자유게시판 글 작성 컴포넌트
 function FreeWrite(){
+    const [board, setBoard] = useState<board>({
+        title:"",
+        content:""
+    })
+
+    /* 아이디 세션 처리 어떻게 할지 정해지면
+    useEffect(() => {
+        
+    },[])
+    */
+
+    const onchange = (e:any) => {
+        const {name, value} = e.target;
+        setBoard({
+            ...board,
+            [name]:value
+        });
+    }
+
+    const onclick = async () => {
+        fetch('http://localhost:5000/board/write', {
+            method: "POST",
+            headers: {
+                "Access-Control-Allow-Origin" : "http://localhost:5000" ,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                title:board.title,
+                content:board.content,
+                userId:"qudqud97",  //아이디 세션 처리 어떻게 할지 정해지면 수정 예정
+                boardType:"F"
+            }),
+        }).then((res) => res.json())
+        .then((res) => {
+            if(res.success) {
+                alert("등록 성공");
+            }else {
+                console.log("이미 존재하는 사람임.");
+            }
+        })
+
+    }
     return(
         <div>
-            
+            <div className = "input-Board">
+                <h1>Title</h1>
+            </div>
+            <input name="title" type="text" className="search-input" onChange={onchange} />
+            <div className = 'bar2'>
+                <h1>content</h1>
+            </div>
+            <table className="content_table">
+                <tr>
+                    <td><textarea name="content" className='content' id="content" onChange={onchange}></textarea></td>
+                </tr>
+
+            </table>
+            <button>등록</button>
+
         </div>
     )
 }
