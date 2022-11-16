@@ -43,8 +43,6 @@ function AddInfo() {
       [name]: value,
     }
     setUserAddInfo(nextNickNameInput);
-    console.log(nextNickNameInput);
-
   }
 
   const onChangeJob = (e: any) => {
@@ -95,6 +93,25 @@ function AddInfo() {
 
   }
 
+  function checkNickname() {
+    fetch('http://192.168.0.29:5000/user/checkUser', {
+      method: "POST",
+      headers: {
+        "Content-Type" : "application/json",
+      },
+      body: JSON.stringify({
+        nickname : userAddInfo.nickname,
+      }),
+    }).then((res) => res.json())
+    .then((res) => {
+      if(res.success) {
+        console.log("사용가능한 닉네임 입니다.");
+      } else{
+        console.log("사용 불가능한 닉네임 입니다.");
+      }
+    })
+  }
+
 
   function sendAddInfo() {
     fetch('http://localhost:5000/UserAddInfo', {
@@ -116,7 +133,7 @@ function AddInfo() {
     <div className='addInfoInputTag'>
       <h1>추가 정보를 입력해 주세요.</h1>
       <div className='formAlign'>
-        <h3>닉네임 : <input type="text" placeholder='nickname' name='nickname' onChange={onChangeNickname} required></input><button>중복 확인</button></h3><hr />
+        <h3>닉네임 : <input type="text" placeholder='nickname' name='nickname' onChange={onChangeNickname} required></input><button onClick={checkNickname}>중복 확인</button></h3><hr />
         <h3>직업 : <input type="text" placeholder='job' name='job' onChange={onChangeJob} required></input></h3><hr />
         <h3>허용 최대 가격 : <input type="text" placeholder='Maximum price' name='MaximumPrice' onChange={onChangeMaximumPrice} required></input></h3><hr />
         <h3>좋아하는 목록 :
@@ -138,7 +155,7 @@ function AddInfo() {
             <option value={2}>2</option>
             <option value={3}>3</option>
           </select></h3><hr />
-        <input type="submit" value="완료"></input>
+        <button>완료</button>
       </div>
     </div>
   );

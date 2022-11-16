@@ -26,8 +26,9 @@ function Login() {
 
     async function onSuccess(res: any) {
         const profile = res.getBasicProfile();
+        console.log(profile);
         const userdata = {
-            id : profile.getId(),
+            id: profile.getId(),
             email: profile.getEmail(),
             image: profile.getImageUrl(),
             name: profile.getName(),
@@ -35,7 +36,24 @@ function Login() {
         // 로그인 성공 후 실행하기 원하는 코드 작성.
         alert("구글 로그인에 성공하였습니다.");
 
-        redirectMain(userdata);
+
+        fetch('http://192.168.0.29:5000/user/checkEmail', {
+            method: "POST",
+            headers: {
+                "Access-Control-Allow-Origin" : "http://192.168.0.29:5000" ,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                email: userdata.email
+            }),
+        }).then((res) => res.json())
+        .then((res) => {
+            if(res.success) {
+                redirectMain(userdata);
+            }else {
+                console.log("이미 존재하는 사람임.");
+            }
+        })
 
     }
 
@@ -46,8 +64,8 @@ function Login() {
 
     const navigate = useNavigate();
 
-    const redirectMain = (data : any) => {
-        navigate("/AddInfo", {state : data});
+    const redirectMain = (data: any) => {
+        navigate("/AddInfo", { state: data });
     }
 
     return (
