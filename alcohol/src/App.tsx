@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import AddInfo from './AddInfo';
 import FreeBoard from './FreeBoard';
+import FreeWrite from './FreeWrite';
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
         <Route path="/Login" element={<Login />}></Route>
         <Route path="/AddInfo" element={<AddInfo />}></Route>
         <Route path="/free" element={<FreeBoard />}></Route>
+        <Route path="/write" element={<FreeWrite />}></Route>
       </Routes>
     </Router>
   );
