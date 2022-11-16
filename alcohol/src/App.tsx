@@ -9,6 +9,7 @@ import {
   Route,
 } from "react-router-dom";
 import AddInfo from './AddInfo';
+import FreeBoard from './FreeBoard';
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
       <Routes>
         <Route path="/Login" element={<Login />}></Route>
         <Route path="/AddInfo" element={<AddInfo />}></Route>
+        <Route path="/free" element={<FreeBoard />}></Route>
       </Routes>
     </Router>
   );
