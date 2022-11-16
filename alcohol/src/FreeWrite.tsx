@@ -22,6 +22,11 @@ function FreeWrite(){
     }
 
     const onclick = async () => {
+        if(!board.title||!board.content){
+            alert("제목과 내용을 입력해주세요");
+            return;
+        } 
+        
         fetch('http://localhost:5000/board/write', {
             method: "POST",
             headers: {
@@ -30,9 +35,9 @@ function FreeWrite(){
             },
             body: JSON.stringify({
                 title:board.title,
-                content:board.content,
-                userId:"qudqud97",  //아이디 세션 처리 어떻게 할지 정해지면 수정 예정
-                boardType:"F"
+                contents:board.content,
+                userId:1,  //아이디 세션 처리 어떻게 할지 정해지면 수정 예정
+                boardType:"F",
             }),
         }).then((res) => res.json())
         .then((res) => {
@@ -59,7 +64,7 @@ function FreeWrite(){
                 </tr>
 
             </table>
-            <button>등록</button>
+            <button onClick={onclick}>등록</button>
 
         </div>
     )
