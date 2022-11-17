@@ -120,6 +120,7 @@ function AddInfo() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+
       }),
     }).then(res => {
       if (res.ok) {
@@ -134,6 +135,9 @@ function AddInfo() {
       <h1>추가 정보를 입력해 주세요.</h1>
       <div className='formAlign'>
         <h3>닉네임 : <input type="text" placeholder='nickname' name='nickname' onChange={onChangeNickname} required></input><button onClick={checkNickname}>중복 확인</button></h3><hr />
+        <h3>나이 : <input type="text" placeholder='age' name='job' onChange={onChangeJob} required></input></h3><hr />
+        <h3>생일 : <input type="text" placeholder='birth' name='job' onChange={onChangeJob} required></input></h3><hr />
+        <h3>성별 : <input type="text" placeholder='sex' name='job' onChange={onChangeJob} required></input></h3><hr />
         <h3>직업 : <input type="text" placeholder='job' name='job' onChange={onChangeJob} required></input></h3><hr />
         <h3>허용 최대 가격 : <input type="text" placeholder='Maximum price' name='MaximumPrice' onChange={onChangeMaximumPrice} required></input></h3><hr />
         <h3>좋아하는 목록 :
