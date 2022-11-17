@@ -195,7 +195,7 @@ function AddInfo() {
           <option value="m">M</option>
           <option value="f">F</option>
         </select></h3><hr />
-        <h3>직업 : <input type="text" placeholder='job' name='job' onChange={onChangeJob} required></input></h3><hr />
+        <h3>직군 : <input type="text" placeholder='job' name='job' onChange={onChangeJob} required></input></h3><hr />
         <h3>허용 최대 가격 : <input type="text" placeholder='Maximum price' name='MaximumPrice' onChange={onChangeMaximumPrice} required></input></h3><hr />
         <h3>좋아하는 목록 :
           <select id="select1" name='favoriteList' onChange={onChangeFavoriteList}>
