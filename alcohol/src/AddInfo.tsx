@@ -11,6 +11,9 @@ function AddInfo() {
 
   interface UserAddInfo {
     nickname: string;
+    age : string;
+    birth : string;
+    sex : string;
     job: string;
     MaximumPrice: number;
     favoriteList: Array<string>;
@@ -27,12 +30,15 @@ function AddInfo() {
 
   const [userAddInfo, setUserAddInfo] = useState<UserAddInfo>({
     nickname: '',
+    age: '',
+    birth: '',
+    sex: '',
     job: '',
     MaximumPrice: 0,
     favoriteList: new Array,
   });
 
-  const { nickname, job, MaximumPrice, favoriteList } = userAddInfo;
+  const { nickname, age, birth, sex, job, MaximumPrice, favoriteList } = userAddInfo;
 
   const onChangeNickname = (e: any) => {
     const { name, value } = e.target;
@@ -43,6 +49,45 @@ function AddInfo() {
       [name]: value,
     }
     setUserAddInfo(nextNickNameInput);
+  }
+
+  const onChangeAge = (e: any) => {
+    const { name, value } = e.target;
+
+
+    const nextJobInput: UserAddInfo = {
+      ...userAddInfo,
+      [name]: value,
+    }
+    setUserAddInfo(nextJobInput);
+    console.log(nextJobInput);
+
+  }
+
+  const onChangeBirth = (e: any) => {
+    const { name, value } = e.target;
+
+
+    const nextJobInput: UserAddInfo = {
+      ...userAddInfo,
+      [name]: value,
+    }
+    setUserAddInfo(nextJobInput);
+    console.log(nextJobInput);
+
+  }
+
+  const onChangeSex = (e: any) => {
+    const { name, value } = e.target;
+
+
+    const nextJobInput: UserAddInfo = {
+      ...userAddInfo,
+      [name]: value,
+    }
+    setUserAddInfo(nextJobInput);
+    console.log(nextJobInput);
+
   }
 
   const onChangeJob = (e: any) => {
@@ -97,30 +142,38 @@ function AddInfo() {
     fetch('http://192.168.0.29:5000/user/checkUser', {
       method: "POST",
       headers: {
-        "Content-Type" : "application/json",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        nickname : userAddInfo.nickname,
+        nickname: userAddInfo.nickname,
       }),
     }).then((res) => res.json())
-    .then((res) => {
-      if(res.success) {
-        console.log("사용가능한 닉네임 입니다.");
-      } else{
-        console.log("사용 불가능한 닉네임 입니다.");
-      }
-    })
+      .then((res) => {
+        if (res.success) {
+          console.log("사용가능한 닉네임 입니다.");
+        } else {
+          console.log("사용 불가능한 닉네임 입니다.");
+        }
+      })
   }
 
 
   function sendAddInfo() {
-    fetch('http://localhost:5000/UserAddInfo', {
+    fetch('http://192.168.0.29:5000/user/insert', {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-
+        name : state.name,
+        email : state.email,
+        age : userAddInfo.age,
+        birth : userAddInfo.birth,
+        nickname : userAddInfo.nickname,
+        sex : userAddInfo.sex,
+        job : userAddInfo.job,
+        userId : '-',
+        password : '-',
       }),
     }).then(res => {
       if (res.ok) {
@@ -135,9 +188,13 @@ function AddInfo() {
       <h1>추가 정보를 입력해 주세요.</h1>
       <div className='formAlign'>
         <h3>닉네임 : <input type="text" placeholder='nickname' name='nickname' onChange={onChangeNickname} required></input><button onClick={checkNickname}>중복 확인</button></h3><hr />
-        <h3>나이 : <input type="text" placeholder='age' name='job' onChange={onChangeJob} required></input></h3><hr />
-        <h3>생일 : <input type="text" placeholder='birth' name='job' onChange={onChangeJob} required></input></h3><hr />
-        <h3>성별 : <input type="text" placeholder='sex' name='job' onChange={onChangeJob} required></input></h3><hr />
+        <h3>나이 : <input type="text" placeholder='age' name='age' onChange={onChangeAge} required></input></h3><hr />
+        <h3>생일 : <input type="text" placeholder='birth' name='birth' onChange={onChangeBirth} required></input></h3><hr />
+        <h3>성별 : <select id="selectSex" name='sex' onChange={onChangeSex}>
+          <option value="">디폴트</option>
+          <option value="m">M</option>
+          <option value="f">F</option>
+        </select></h3><hr />
         <h3>직업 : <input type="text" placeholder='job' name='job' onChange={onChangeJob} required></input></h3><hr />
         <h3>허용 최대 가격 : <input type="text" placeholder='Maximum price' name='MaximumPrice' onChange={onChangeMaximumPrice} required></input></h3><hr />
         <h3>좋아하는 목록 :
@@ -159,7 +216,7 @@ function AddInfo() {
             <option value={2}>2</option>
             <option value={3}>3</option>
           </select></h3><hr />
-        <button>완료</button>
+        <button onClick={sendAddInfo}>완료</button>
       </div>
     </div>
   );
