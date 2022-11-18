@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { board } from './interface/Board'
+import { addr } from './interface/serverAddr';
 //자유게시판 글 작성 컴포넌트
 function FreeWrite(){
     const [board, setBoard] = useState<board>({
@@ -27,7 +28,7 @@ function FreeWrite(){
             return;
         } 
         
-        fetch('http://localhost:5000/board/write', {
+        fetch(addr+'/board/write', {
             method: "POST",
             headers: {
                 "Access-Control-Allow-Origin" : "http://localhost:5000" ,

@@ -5,6 +5,7 @@ import './css/Login.css';
 import { useNavigate } from 'react-router-dom';
 import { GoogleLogin } from 'react-google-login';
 import { gapi } from 'gapi-script';
+import { addr } from './interface/serverAddr';
 
 function Login() {
 
@@ -43,7 +44,7 @@ function Login() {
         fetch('http://192.168.0.29:5000/user/checkEmail', {
             method: "POST",
             headers: {
-                "Access-Control-Allow-Origin" : "http://192.168.0.29:5000" ,
+                "Access-Control-Allow-Origin" : addr ,
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
