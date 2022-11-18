@@ -4,8 +4,7 @@ import './css/Login.css';
 import './css/AddInfo.css';
 import { useLocation } from 'react-router';
 import { useNavigate } from 'react-router-dom';
-import { deflateSync } from 'zlib';
-import internal from 'stream';
+import { addr } from './interface/serverAddr'
 
 function AddInfo() {
 
@@ -139,7 +138,7 @@ function AddInfo() {
   }
 
   function checkNickname() {
-    fetch('http://192.168.0.29:5000/user/checkUser', {
+    fetch(addr + '/user/checkUser', {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -159,7 +158,7 @@ function AddInfo() {
 
 
   function sendAddInfo() {
-    fetch('http://192.168.0.29:5000/user/insert', {
+    fetch(addr + '/user/insert', {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
