@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { boardList } from '../interface/BoardList';
 import { addr } from '../interface/serverAddr';
+import List from './List';
 
 function FreeBoard(){
     const [loading, setLoading] = useState<boolean>(true);
-    const [arrData, setArrData] = useState<boardList[]>();
+    const [arrData, setArrData] = useState<boardList[]>([]);
 
     const list = async () => {
         fetch(addr+'/board', {
@@ -14,9 +15,9 @@ function FreeBoard(){
             }
         }).then((res) => res.json())
         .then((res) => {
-            console.log(res);
-            setArrData(res);
-            console.log("arrData : "+{arrData});
+            
+            setArrData(arrData => [...arrData,res]);
+            console.log("arrData : "+arrData);
             setLoading(false);
         })
 
@@ -28,6 +29,17 @@ function FreeBoard(){
     return(
         <div>
             <h2>게시판</h2>
+
+            <hr></hr>
+
+            {loading ? <strong>Loading...</strong>:
+                <div>
+                    <List
+                        datas={arrData}
+                        
+                    />
+                </div>
+            }
         </div>
     )
 }
