@@ -186,7 +186,7 @@ function AddInfo() {
     <div className='addInfoInputTag'>
       <h1>추가 정보를 입력해 주세요.</h1>
       <div className='formAlign'>
-        <h3>닉네임 : <input type="text" placeholder='nickname' name='nickname' onChange={onChangeNickname} required></input><button onClick={checkNickname}>중복 확인</button></h3><hr />
+        <h3>닉네임 : <input type="text" placeholder='nickname' name='nickname' onChange={onChangeNickname} pattern="^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$" required></input><button onClick={checkNickname}>중복 확인</button></h3><hr />
         <h3>나이 : <input type="text" placeholder='age' name='age' onChange={onChangeAge} required></input></h3><hr />
         <h3>생일 : <input type="text" placeholder='birth' name='birth' onChange={onChangeBirth} required></input></h3><hr />
         <h3>성별 : <select id="selectSex" name='sex' onChange={onChangeSex}>
