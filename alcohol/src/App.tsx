@@ -9,8 +9,8 @@ import {
   Route,
 } from "react-router-dom";
 import AddInfo from './AddInfo';
-import FreeBoard from './FreeBoard';
-import FreeWrite from './FreeWrite';
+import FreeBoard from './Board/FreeBoard';
+import FreeWrite from './Board/FreeWrite';
 
 function App() {
 
