@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { boardList } from '../interface/BoardList';
-import Table from './Table';
+import BoardTable from './BoardTable';
 
 function List(props:any){
-    console.log("props : " +{props})
+    console.log("props : " +props.datas[0].id)
     return(
         <div>
             <table>
@@ -16,13 +16,17 @@ function List(props:any){
                     
                 </thead>
                 <tbody>
-                    {props.datas&&props.datas.map((data:any)=>{
-                        <Table
+                    {props.datas&&props.datas.map((data:any)=>(
+                        <BoardTable
                             data={data}
+                            key={data.id}
                         />
-                    })}
+                    )
+                        
+                    )}
                 </tbody>
             </table>
+            
         </div>
     )
 
