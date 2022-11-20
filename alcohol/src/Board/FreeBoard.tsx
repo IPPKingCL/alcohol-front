@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { boardList } from '../interface/BoardList';
 import { addr } from '../interface/serverAddr';
 import List from './List';
@@ -6,8 +7,10 @@ import List from './List';
 function FreeBoard(){
     const [loading, setLoading] = useState<boolean>(true);
     const [arrData, setArrData] = useState<boardList[]>([]);
+    const navigate=useNavigate();
     
     const list = async () => {
+        setArrData([]);
         fetch(addr+'/board', {
             method: "GET",
             headers: {
@@ -39,7 +42,8 @@ function FreeBoard(){
     },[])
 
     const onclick = () =>{
-        console.log("test : "+ arrData.length)
+        console.log("hi");
+        navigate('write');
     }
     return(
         <div>
@@ -53,7 +57,7 @@ function FreeBoard(){
                         datas={arrData}
                         
                     />
-                     <button onClick={onclick}>버튼</button>
+                     <button onClick={onclick}>글쓰기</button>
                 </div>
                 
             }

@@ -24,7 +24,7 @@ function App() {
         <Route path="/Login" element={<Login />}></Route>
         <Route path="/AddInfo" element={<AddInfo />}></Route>
         <Route path="/free" element={<FreeBoard />}></Route>
-        <Route path="/write" element={<FreeWrite />}></Route>
+        <Route path="/free/write" element={<FreeWrite />}></Route>
       </Routes>
     </Router>
   );

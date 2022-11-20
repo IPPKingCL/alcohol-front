@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { board } from '../interface/Board'
 import { addr } from '../interface/serverAddr';
 //자유게시판 글 작성 컴포넌트
@@ -7,7 +8,8 @@ function FreeWrite(){
         title:"",
         content:""
     })
-
+    const navigate=useNavigate();
+    
     /* 아이디 세션 처리 어떻게 할지 정해지면
     useEffect(() => {
         
@@ -44,6 +46,7 @@ function FreeWrite(){
         .then((res) => {
             if(res.success) {
                 alert("등록 성공");
+                navigate('/free')
             }else {
                 console.log("이미 존재하는 사람임.");
             }
