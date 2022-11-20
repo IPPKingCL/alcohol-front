@@ -215,7 +215,7 @@ function AddInfo() {
             <option value={2}>2</option>
             <option value={3}>3</option>
           </select></h3><hr />
-        <button onClick={sendAddInfo}>완료</button>
+        <button>완료</button>
       </div>
     </div>
   );

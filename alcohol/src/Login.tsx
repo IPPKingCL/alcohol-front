@@ -41,7 +41,7 @@ function Login() {
         alert("구글 로그인에 성공하였습니다.");
 
 
-        fetch('http://192.168.0.29:5000/user/checkEmail', {
+        fetch(addr + '/user/checkEmail', {
             method: "POST",
             headers: {
                 "Access-Control-Allow-Origin" : addr ,
