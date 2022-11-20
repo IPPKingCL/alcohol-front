@@ -18,6 +18,16 @@ function AddInfo() {
     favoriteList: Array<string>;
   }
 
+  interface UserAddInfoErrorMessage {
+    nickname: string;
+    age : string;
+    birth : string;
+    sex : string;
+    job: string;
+    MaximumPrice: string;
+    favoriteList: string;
+  }
+
   const { state } = useLocation();
   console.log("state" + state.email);
 
@@ -37,9 +47,17 @@ function AddInfo() {
     favoriteList: new Array,
   });
 
-  const { nickname, age, birth, sex, job, MaximumPrice, favoriteList } = userAddInfo;
+  const [userAddInfoErrorMessage, setUserAddInfoErrorMessage] = useState<UserAddInfoErrorMessage>({
+    nickname: '',
+    age: '',
+    birth: '',
+    sex: '',
+    job: '',
+    MaximumPrice: '',
+    favoriteList: '',
+  });
 
-  const onChangeNickname = (e: any) => {
+    const onChangeNickname = (e: any) => {
     const { name, value } = e.target;
 
 
@@ -156,6 +174,8 @@ function AddInfo() {
       })
   }
 
+  
+
 
   function sendAddInfo() {
     fetch(addr + '/user/insert', {
@@ -181,6 +201,105 @@ function AddInfo() {
     })
   }
 
+
+
+
+  const Form = () => {
+    const intialValues = { userAddInfo };
+    const [formValues, setFormValues] = useState(intialValues);
+    const [formErrors, setFormErrors] = useState({});
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const submitForm = () => {
+      console.log(formValues);
+    };
+  
+   const handleChange = (e : any) => {
+      const { name, value } = e.target;
+      setFormValues({ ...formValues, [name]: value });
+    };
+  
+  const handleSubmit = (e : any) => {
+      e.preventDefault();
+      setFormErrors(validate(formValues));
+      setIsSubmitting(true);
+    };
+  
+  const validate = (values : any) => {
+      let errors = userAddInfoErrorMessage;
+      
+      //정규식 표현
+      const regexNickname = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+
+      const regexAge = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+
+      const regexBirth = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+
+      const regexSex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+
+      const regexJob = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+
+      const regexMaximumPrice = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+
+      const regexFavoriteList = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+      
+      //닉네임 값이 없을시
+    if (!values.nickname) {
+      errors.nickname = "Cannot be blank";
+      //닉네임 정규식 표현이 옳지 않을시
+    } else if (!regexNickname.test(values.email)) {
+      errors.nickname = "Invalid email format";
+    }
+    
+    //나이 값이 없을시
+    if (!values.age) {
+      errors.age = "Cannot be blank";
+      //나이의 길이(length)가 4글자 이하일 때
+    } else if (!regexAge.test(values.email)) {
+      errors.age = "Password must be more than 4 characters";
+    }
+
+
+    if (!values.birth) {
+      errors.age = "Cannot be blank";
+      //비밀번호의 길이(length)가 4글자 이하일 때
+    } else if (!regexBirth.test(values.email)) {
+      errors.birth = "Password must be more than 4 characters";
+    }
+
+    if (!values.sex) {
+      errors.age = "Cannot be blank";
+      //비밀번호의 길이(length)가 4글자 이하일 때
+    } else if (!regexSex.test(values.email)) {
+      errors.sex = "Password must be more than 4 characters";
+    }
+
+    if (!values.job) {
+      errors.age = "Cannot be blank";
+      //비밀번호의 길이(length)가 4글자 이하일 때
+    } else if (!regexJob.test(values.email)) {
+      errors.job = "Password must be more than 4 characters";
+    }
+
+    if (!values.MaximumPrice) {
+      errors.age = "Cannot be blank";
+      //비밀번호의 길이(length)가 4글자 이하일 때
+    } else if (!regexMaximumPrice.test(values.email)) {
+      errors.MaximumPrice = "Password must be more than 4 characters";
+    }
+
+    if (!values.favoriteList) {
+      errors.age = "Cannot be blank";
+      //비밀번호의 길이(length)가 4글자 이하일 때
+    } else if (!regexFavoriteList.test(values.email)) {
+      errors.favoriteList = "Password must be more than 4 characters";
+    }
+      
+      //에러를 반환해줘 !
+      return errors;
+    };
+
+  }
 
   return (
     <div className='addInfoInputTag'>
