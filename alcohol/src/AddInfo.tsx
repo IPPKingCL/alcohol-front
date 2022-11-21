@@ -10,9 +10,9 @@ function AddInfo() {
 
   interface UserAddInfo {
     nickname: string;
-    age : string;
-    birth : string;
-    sex : string;
+    age: string;
+    birth: string;
+    sex: string;
     job: string;
     MaximumPrice: number;
     favoriteList: Array<string>;
@@ -20,9 +20,9 @@ function AddInfo() {
 
   interface UserAddInfoErrorMessage {
     nickname: string;
-    age : string;
-    birth : string;
-    sex : string;
+    age: string;
+    birth: string;
+    sex: string;
     job: string;
     MaximumPrice: string;
     favoriteList: string;
@@ -57,7 +57,7 @@ function AddInfo() {
     favoriteList: '',
   });
 
-    const onChangeNickname = (e: any) => {
+  const onChangeNickname = (e: any) => {
     const { name, value } = e.target;
 
 
@@ -174,7 +174,7 @@ function AddInfo() {
       })
   }
 
-  
+
 
 
   function sendAddInfo() {
@@ -184,15 +184,15 @@ function AddInfo() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name : state.name,
-        email : state.email,
-        age : userAddInfo.age,
-        birth : userAddInfo.birth,
-        nickname : userAddInfo.nickname,
-        sex : userAddInfo.sex,
-        job : userAddInfo.job,
-        userId : '-',
-        password : '-',
+        name: state.name,
+        email: state.email,
+        age: userAddInfo.age,
+        birth: userAddInfo.birth,
+        nickname: userAddInfo.nickname,
+        sex: userAddInfo.sex,
+        job: userAddInfo.job,
+        userId: '-',
+        password: '-',
       }),
     }).then(res => {
       if (res.ok) {
@@ -204,53 +204,53 @@ function AddInfo() {
 
 
 
-  const Form = () => {
-    const intialValues = { userAddInfo };
-    const [formValues, setFormValues] = useState(intialValues);
-    const [formErrors, setFormErrors] = useState({});
-    const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const submitForm = () => {
-      console.log(formValues);
-    };
-  
-   const handleChange = (e : any) => {
-      const { name, value } = e.target;
-      setFormValues({ ...formValues, [name]: value });
-    };
-  
-  const handleSubmit = (e : any) => {
-      e.preventDefault();
-      setFormErrors(validate(formValues));
-      setIsSubmitting(true);
-    };
-  
-  const validate = (values : any) => {
-      let errors = userAddInfoErrorMessage;
-      
-      //정규식 표현
-      const regexNickname = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+  const intialValues = { userAddInfo };
+  const [formValues, setFormValues] = useState(intialValues);
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-      const regexAge = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+  const submitForm = () => {
+    console.log(formValues);
+  };
 
-      const regexBirth = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+  const handleChange = (e: any) => {
+    const { name, value } = e.target;
+    setFormValues({ ...formValues, [name]: value });
+  };
 
-      const regexSex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    setFormErrors(validate(formValues));
+    setIsSubmitting(true);
+  };
 
-      const regexJob = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+  const validate = (values: any) => {
+    let errors = userAddInfoErrorMessage;
 
-      const regexMaximumPrice = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+    //정규식 표현
+    const regexNickname = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 
-      const regexFavoriteList = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-      
-      //닉네임 값이 없을시
+    const regexAge = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+
+    const regexBirth = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+
+    const regexSex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+
+    const regexJob = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+
+    const regexMaximumPrice = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+
+    const regexFavoriteList = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+
+    //닉네임 값이 없을시
     if (!values.nickname) {
       errors.nickname = "Cannot be blank";
       //닉네임 정규식 표현이 옳지 않을시
     } else if (!regexNickname.test(values.email)) {
       errors.nickname = "Invalid email format";
     }
-    
+
     //나이 값이 없을시
     if (!values.age) {
       errors.age = "Cannot be blank";
@@ -261,51 +261,50 @@ function AddInfo() {
 
 
     if (!values.birth) {
-      errors.age = "Cannot be blank";
+      errors.birth = "Cannot be blank";
       //비밀번호의 길이(length)가 4글자 이하일 때
     } else if (!regexBirth.test(values.email)) {
       errors.birth = "Password must be more than 4 characters";
     }
 
     if (!values.sex) {
-      errors.age = "Cannot be blank";
+      errors.sex = "Cannot be blank";
       //비밀번호의 길이(length)가 4글자 이하일 때
     } else if (!regexSex.test(values.email)) {
       errors.sex = "Password must be more than 4 characters";
     }
 
     if (!values.job) {
-      errors.age = "Cannot be blank";
+      errors.job = "Cannot be blank";
       //비밀번호의 길이(length)가 4글자 이하일 때
     } else if (!regexJob.test(values.email)) {
       errors.job = "Password must be more than 4 characters";
     }
 
     if (!values.MaximumPrice) {
-      errors.age = "Cannot be blank";
+      errors.MaximumPrice = "Cannot be blank";
       //비밀번호의 길이(length)가 4글자 이하일 때
     } else if (!regexMaximumPrice.test(values.email)) {
       errors.MaximumPrice = "Password must be more than 4 characters";
     }
 
     if (!values.favoriteList) {
-      errors.age = "Cannot be blank";
+      errors.favoriteList = "Cannot be blank";
       //비밀번호의 길이(length)가 4글자 이하일 때
     } else if (!regexFavoriteList.test(values.email)) {
       errors.favoriteList = "Password must be more than 4 characters";
     }
-      
-      //에러를 반환해줘 !
-      return errors;
-    };
 
-  }
+    //에러를 반환해줘 !
+    return errors;
+  };
 
   return (
     <div className='addInfoInputTag'>
       <h1>추가 정보를 입력해 주세요.</h1>
       <div className='formAlign'>
         <h3>닉네임 : <input type="text" placeholder='nickname' name='nickname' onChange={onChangeNickname} pattern="^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$" required></input><button onClick={checkNickname}>중복 확인</button></h3><hr />
+        <h4 style={{ color: 'red' }}>{userAddInfo.nickname ? null : validate(userAddInfo).nickname}</h4>
         <h3>나이 : <input type="text" placeholder='age' name='age' onChange={onChangeAge} required></input></h3><hr />
         <h3>생일 : <input type="text" placeholder='birth' name='birth' onChange={onChangeBirth} required></input></h3><hr />
         <h3>성별 : <select id="selectSex" name='sex' onChange={onChangeSex}>
