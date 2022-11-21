@@ -6,7 +6,7 @@ import { addr } from '../interface/serverAddr';
 function FreeWrite(){
     const [board, setBoard] = useState<board>({
         title:"",
-        content:""
+        contents:""
     })
     const navigate=useNavigate();
     
@@ -25,7 +25,7 @@ function FreeWrite(){
     }
 
     const onclick = async () => {
-        if(!board.title||!board.content){
+        if(!board.title||!board.contents){
             alert("제목과 내용을 입력해주세요");
             return;
         } 
@@ -38,7 +38,7 @@ function FreeWrite(){
             },
             body: JSON.stringify({
                 title:board.title,
-                contents:board.content,
+                contents:board.contents,
                 userId:1,  //아이디 세션 처리 어떻게 할지 정해지면 수정 예정
                 boardType:"F",
             }),
