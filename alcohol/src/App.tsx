@@ -11,6 +11,7 @@ import {
 import AddInfo from './AddInfo';
 import FreeBoard from './Board/FreeBoard';
 import FreeWrite from './Board/FreeWrite';
+import FreeRead from './Board/FreeRead';
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
         <Route path="/AddInfo" element={<AddInfo />}></Route>
         <Route path="/free" element={<FreeBoard />}></Route>
         <Route path="/free/write" element={<FreeWrite />}></Route>
+        <Route path="/free/read/:id" element={<FreeRead />}></Route>
       </Routes>
     </Router>
   );
