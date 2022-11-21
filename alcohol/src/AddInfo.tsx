@@ -29,8 +29,6 @@ function AddInfo() {
   }
 
   const { state } = useLocation();
-  console.log("state" + state.email);
-
   const navigate = useNavigate();
 
   const redirectMain = () => {
@@ -229,7 +227,7 @@ function AddInfo() {
     let errors = userAddInfoErrorMessage;
 
     //정규식 표현
-    const regexNickname = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+    const regexNickname = /^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/i;
 
     const regexAge = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 
@@ -243,11 +241,12 @@ function AddInfo() {
 
     const regexFavoriteList = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 
+    console.log(values.nickname);
     //닉네임 값이 없을시
     if (!values.nickname) {
       errors.nickname = "Cannot be blank";
       //닉네임 정규식 표현이 옳지 않을시
-    } else if (!regexNickname.test(values.email)) {
+    } else if (!regexNickname.test(values.nickname)) {
       errors.nickname = "Invalid email format";
     }
 
@@ -255,7 +254,7 @@ function AddInfo() {
     if (!values.age) {
       errors.age = "Cannot be blank";
       //나이의 길이(length)가 4글자 이하일 때
-    } else if (!regexAge.test(values.email)) {
+    } else if (!regexAge.test(values.age)) {
       errors.age = "Password must be more than 4 characters";
     }
 
@@ -263,35 +262,35 @@ function AddInfo() {
     if (!values.birth) {
       errors.birth = "Cannot be blank";
       //비밀번호의 길이(length)가 4글자 이하일 때
-    } else if (!regexBirth.test(values.email)) {
+    } else if (!regexBirth.test(values.birth)) {
       errors.birth = "Password must be more than 4 characters";
     }
 
     if (!values.sex) {
       errors.sex = "Cannot be blank";
       //비밀번호의 길이(length)가 4글자 이하일 때
-    } else if (!regexSex.test(values.email)) {
+    } else if (!regexSex.test(values.sex)) {
       errors.sex = "Password must be more than 4 characters";
     }
 
     if (!values.job) {
       errors.job = "Cannot be blank";
       //비밀번호의 길이(length)가 4글자 이하일 때
-    } else if (!regexJob.test(values.email)) {
+    } else if (!regexJob.test(values.job)) {
       errors.job = "Password must be more than 4 characters";
     }
 
     if (!values.MaximumPrice) {
       errors.MaximumPrice = "Cannot be blank";
       //비밀번호의 길이(length)가 4글자 이하일 때
-    } else if (!regexMaximumPrice.test(values.email)) {
+    } else if (!regexMaximumPrice.test(values.MaximumPrice)) {
       errors.MaximumPrice = "Password must be more than 4 characters";
     }
 
     if (!values.favoriteList) {
       errors.favoriteList = "Cannot be blank";
       //비밀번호의 길이(length)가 4글자 이하일 때
-    } else if (!regexFavoriteList.test(values.email)) {
+    } else if (!regexFavoriteList.test(values.favoriteList)) {
       errors.favoriteList = "Password must be more than 4 characters";
     }
 
@@ -303,17 +302,22 @@ function AddInfo() {
     <div className='addInfoInputTag'>
       <h1>추가 정보를 입력해 주세요.</h1>
       <div className='formAlign'>
-        <h3>닉네임 : <input type="text" placeholder='nickname' name='nickname' onChange={onChangeNickname} pattern="^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$" required></input><button onClick={checkNickname}>중복 확인</button></h3><hr />
-        <h4 style={{ color: 'red' }}>{userAddInfo.nickname ? null : validate(userAddInfo).nickname}</h4>
-        <h3>나이 : <input type="text" placeholder='age' name='age' onChange={onChangeAge} required></input></h3><hr />
-        <h3>생일 : <input type="text" placeholder='birth' name='birth' onChange={onChangeBirth} required></input></h3><hr />
+        <h3>닉네임 : <input type="text" placeholder='nickname' name='nickname' onChange={onChangeNickname} required></input><button onClick={checkNickname}>중복 확인</button></h3>
+        <h4 style={{ color: 'red' }}>{userAddInfo.nickname ? null : validate(userAddInfo.nickname).nickname}</h4><hr />
+        <h3>나이 : <input type="text" placeholder='age' name='age' onChange={onChangeAge} required></input></h3>
+        <h4 style={{ color: 'red' }}>{userAddInfo.age ? null : validate(userAddInfo).age}</h4><hr />
+        <h3>생일 : <input type="text" placeholder='birth' name='birth' onChange={onChangeBirth} required></input></h3>
+        <h4 style={{ color: 'red' }}>{userAddInfo.birth ? null : validate(userAddInfo).birth}</h4><hr />
         <h3>성별 : <select id="selectSex" name='sex' onChange={onChangeSex}>
           <option value="">디폴트</option>
           <option value="m">M</option>
           <option value="f">F</option>
-        </select></h3><hr />
-        <h3>직군 : <input type="text" placeholder='job' name='job' onChange={onChangeJob} required></input></h3><hr />
-        <h3>허용 최대 가격 : <input type="text" placeholder='Maximum price' name='MaximumPrice' onChange={onChangeMaximumPrice} required></input></h3><hr />
+        </select></h3>
+        <h4 style={{ color: 'red' }}>{userAddInfo.sex ? null : validate(userAddInfo).sex}</h4><hr />
+        <h3>직군 : <input type="text" placeholder='job' name='job' onChange={onChangeJob} required></input></h3>
+        <h4 style={{ color: 'red' }}>{userAddInfo.job ? null : validate(userAddInfo).job}</h4><hr />
+        <h3>허용 최대 가격 : <input type="text" placeholder='Maximum price' name='MaximumPrice' onChange={onChangeMaximumPrice} required></input></h3>
+        <h4 style={{ color: 'red' }}>{userAddInfo.MaximumPrice ? null : validate(userAddInfo).MaximumPrice}</h4><hr />
         <h3>좋아하는 목록 :
           <select id="select1" name='favoriteList' onChange={onChangeFavoriteList}>
             <option value="">디폴트</option>
@@ -332,7 +336,8 @@ function AddInfo() {
             <option value={1}>1</option>
             <option value={2}>2</option>
             <option value={3}>3</option>
-          </select></h3><hr />
+          </select></h3>
+          <h4 style={{ color: 'red' }}>{userAddInfo.favoriteList ? null : validate(userAddInfo).favoriteList}</h4><hr />
         <button>완료</button>
       </div>
     </div>
