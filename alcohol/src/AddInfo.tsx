@@ -227,7 +227,7 @@ function AddInfo() {
     let errors = userAddInfoErrorMessage;
 
     //정규식 표현
-    const regexNickname = /^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/i;
+    const regexNickname = /^[가-힣]{2,4}/i;
 
     const regexAge = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 
@@ -241,15 +241,16 @@ function AddInfo() {
 
     const regexFavoriteList = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 
-    console.log(values.nickname);
+
     //닉네임 값이 없을시
-    if (!values.nickname) {
+    if (values.nickname === "") {
       errors.nickname = "Cannot be blank";
       //닉네임 정규식 표현이 옳지 않을시
     } else if (!regexNickname.test(values.nickname)) {
-      errors.nickname = "Invalid email format";
+      errors.nickname = "Invalid nickname format";
+    } else {
+      errors.nickname = "";
     }
-
     //나이 값이 없을시
     if (!values.age) {
       errors.age = "Cannot be blank";
@@ -303,21 +304,21 @@ function AddInfo() {
       <h1>추가 정보를 입력해 주세요.</h1>
       <div className='formAlign'>
         <h3>닉네임 : <input type="text" placeholder='nickname' name='nickname' onChange={onChangeNickname} required></input><button onClick={checkNickname}>중복 확인</button></h3>
-        <h4 style={{ color: 'red' }}>{userAddInfo.nickname ? null : validate(userAddInfo.nickname).nickname}</h4><hr />
+        <h4 style={{ color: 'red' }}>{validate(userAddInfo).nickname}</h4><hr />
         <h3>나이 : <input type="text" placeholder='age' name='age' onChange={onChangeAge} required></input></h3>
-        <h4 style={{ color: 'red' }}>{userAddInfo.age ? null : validate(userAddInfo).age}</h4><hr />
+        <h4 style={{ color: 'red' }}>{validate(userAddInfo).age}</h4><hr />
         <h3>생일 : <input type="text" placeholder='birth' name='birth' onChange={onChangeBirth} required></input></h3>
-        <h4 style={{ color: 'red' }}>{userAddInfo.birth ? null : validate(userAddInfo).birth}</h4><hr />
+        <h4 style={{ color: 'red' }}>{validate(userAddInfo).birth}</h4><hr />
         <h3>성별 : <select id="selectSex" name='sex' onChange={onChangeSex}>
           <option value="">디폴트</option>
           <option value="m">M</option>
           <option value="f">F</option>
         </select></h3>
-        <h4 style={{ color: 'red' }}>{userAddInfo.sex ? null : validate(userAddInfo).sex}</h4><hr />
+        <h4 style={{ color: 'red' }}>{validate(userAddInfo).sex}</h4><hr />
         <h3>직군 : <input type="text" placeholder='job' name='job' onChange={onChangeJob} required></input></h3>
-        <h4 style={{ color: 'red' }}>{userAddInfo.job ? null : validate(userAddInfo).job}</h4><hr />
+        <h4 style={{ color: 'red' }}>{validate(userAddInfo).job}</h4><hr />
         <h3>허용 최대 가격 : <input type="text" placeholder='Maximum price' name='MaximumPrice' onChange={onChangeMaximumPrice} required></input></h3>
-        <h4 style={{ color: 'red' }}>{userAddInfo.MaximumPrice ? null : validate(userAddInfo).MaximumPrice}</h4><hr />
+        <h4 style={{ color: 'red' }}>{validate(userAddInfo).MaximumPrice}</h4><hr />
         <h3>좋아하는 목록 :
           <select id="select1" name='favoriteList' onChange={onChangeFavoriteList}>
             <option value="">디폴트</option>

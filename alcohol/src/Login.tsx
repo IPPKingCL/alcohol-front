@@ -26,11 +26,9 @@ function Login() {
     }, []);
 
     async function onSuccess(res: any) {
+
         const profile = res.getBasicProfile();
-        console.log(profile);
-        console.log(profile.ma);
-        console.log(profile.sU);
-        console.log(profile.nU);
+        
         const userdata = {
             id: profile.getId(),
             email: profile.getEmail(),
