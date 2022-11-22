@@ -3,7 +3,7 @@ import { boardList } from '../interface/BoardList';
 import BoardTable from './BoardTable';
 
 function List(props:any){
-    console.log("props : " +props.datas[0].id)
+    
     return(
         <div>
             <table>
