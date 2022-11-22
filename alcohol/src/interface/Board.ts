@@ -1,4 +1,5 @@
 export interface board{
+    boardType: string;
     title:string,
     contents:string,
     
@@ -6,7 +7,6 @@ export interface board{
 
 export interface boardRead extends board{
     dateTime:string,
-    boardType:string,
     isDeleted:Boolean,
     isModified:Boolean,
     userId:string,
