@@ -227,7 +227,7 @@ function AddInfo() {
     let errors = userAddInfoErrorMessage;
 
     //정규식 표현
-    const regexNickname = /^[가-힣]{2,4}/i;
+    const regexNickname = /^[가-힣a-zA-z0-9]{2,8}$/i;
 
     const regexAge = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 
@@ -257,6 +257,8 @@ function AddInfo() {
       //나이의 길이(length)가 4글자 이하일 때
     } else if (!regexAge.test(values.age)) {
       errors.age = "Password must be more than 4 characters";
+    } else {
+      errors.age = "";
     }
 
 
@@ -265,6 +267,8 @@ function AddInfo() {
       //비밀번호의 길이(length)가 4글자 이하일 때
     } else if (!regexBirth.test(values.birth)) {
       errors.birth = "Password must be more than 4 characters";
+    } else {
+      errors.birth = "";
     }
 
     if (!values.sex) {
@@ -272,6 +276,8 @@ function AddInfo() {
       //비밀번호의 길이(length)가 4글자 이하일 때
     } else if (!regexSex.test(values.sex)) {
       errors.sex = "Password must be more than 4 characters";
+    } else {
+      errors.sex = "";
     }
 
     if (!values.job) {
@@ -279,6 +285,8 @@ function AddInfo() {
       //비밀번호의 길이(length)가 4글자 이하일 때
     } else if (!regexJob.test(values.job)) {
       errors.job = "Password must be more than 4 characters";
+    } else {
+      errors.job = "";
     }
 
     if (!values.MaximumPrice) {
@@ -286,6 +294,8 @@ function AddInfo() {
       //비밀번호의 길이(length)가 4글자 이하일 때
     } else if (!regexMaximumPrice.test(values.MaximumPrice)) {
       errors.MaximumPrice = "Password must be more than 4 characters";
+    } else {
+      errors.MaximumPrice = "";
     }
 
     if (!values.favoriteList) {
@@ -293,6 +303,8 @@ function AddInfo() {
       //비밀번호의 길이(length)가 4글자 이하일 때
     } else if (!regexFavoriteList.test(values.favoriteList)) {
       errors.favoriteList = "Password must be more than 4 characters";
+    } else {
+      errors.favoriteList = "";
     }
 
     //에러를 반환해줘 !

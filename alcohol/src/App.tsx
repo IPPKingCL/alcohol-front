@@ -17,8 +17,6 @@ function App() {
 
   const [isLogin, setIsLogin] = useState<boolean>(false);
 
-
-
   return (
     <Router>
       <Routes>
