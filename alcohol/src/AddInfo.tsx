@@ -80,6 +80,7 @@ function AddInfo() {
       [name]: value,
     }
     setUserAddInfo(nextNickNameInput);
+    console.log(userAddInfoErrorMessage);
   }
 
   const onChangeAge = (e: any) => {
@@ -239,8 +240,14 @@ function AddInfo() {
     setIsSubmitting(true);
   };
 
+  const nicknameValidate = () => {
+    
+  }
+
   const validate = (values: any) => {
-    let errors = userAddInfoErrorMessage;
+    const errors : UserAddInfoErrorMessage = {
+      ...userAddInfoErrorMessage
+    };
 
     //정규식 표현
     const regexNickname = /^[가-힣a-zA-z0-9]{2,8}$/i;
@@ -322,20 +329,26 @@ function AddInfo() {
 
     if (!values.MaximumPrice) {
       errors.MaximumPrice = "Cannot be blank";
+      errors.MaximumPriceValidation = false;
       //비밀번호의 길이(length)가 4글자 이하일 때
     } else if (!regexMaximumPrice.test(values.MaximumPrice)) {
       errors.MaximumPrice = "Invalid Price format";
+      errors.MaximumPriceValidation = false;
     } else {
       errors.MaximumPrice = "";
+      errors.MaximumPriceValidation = true;
     }
 
     if (!values.favoriteList) {
       errors.favoriteList = "Cannot be blank";
+      errors.favoriteListValidation = false;
       //비밀번호의 길이(length)가 4글자 이하일 때
     } else if (!regexFavoriteList.test(values.favoriteList)) {
       errors.favoriteList = "Password must be more than 4 characters";
+      errors.favoriteListValidation = false;
     } else {
       errors.favoriteList = "";
+      errors.favoriteListValidation = true;
     }
 
     //에러를 반환해줘 !
