@@ -55,7 +55,8 @@ function FreeWrite(){
                 alert("등록 성공");
                 navigate('/free')
             }else {
-                console.log("이미 존재하는 사람임.");
+                console.log("등록 과정 중 에러 발생.");
+                alert("등록 과정 중 에러발생 \n다시 시도해주세요");
             }
         })
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { boardRead } from '../interface/Board';
 import { addr } from '../interface/serverAddr';
 
@@ -7,6 +7,8 @@ function FreeRead(){
     const [loading,setLoading] = useState<boolean>(true);
     const [board, setBoard] = useState<boardRead>();
     const {id} = useParams();
+    const navigate = useNavigate();
+    
     const list = async () => {
         
         fetch(addr+'/board/read/'+id,{
@@ -28,7 +30,7 @@ function FreeRead(){
     },[])
     const onclick = () => {
         //수정 함수 작성 예쩡
-        
+        navigate('/free/modify/'+id);
     }
     return(
         <div>

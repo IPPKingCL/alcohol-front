@@ -6,16 +6,8 @@ function List(props:any){
     
     return(
         <div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>seq</th>
-                        <th>title</th>
-                        <th>dateTime</th>
-                    </tr>
-                    
-                </thead>
-                <tbody>
+            
+               
                     {props.datas&&props.datas.map((data:any)=>(
                         <BoardTable
                             data={data}
@@ -24,9 +16,7 @@ function List(props:any){
                     )
                         
                     )}
-                </tbody>
-            </table>
-            
+                
         </div>
     )
 
