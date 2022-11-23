@@ -5,6 +5,23 @@ import { addr } from '../interface/serverAddr';
 function Comment(){
     const [content, setContent] = useState<string>();
     const {id} = useParams();
+
+    const commentList = async () => {
+        fetch(addr+'/board/comment/'+id,{
+            method:"GET",
+            headers: {
+                "Content-Type" : "application/json",
+            }
+        }).then((res)=>res.json())
+        .then((res) => {
+            console.log(res);
+        })
+    }
+
+    useEffect(() => {
+        commentList();
+    },[]);
+
     const onchange = (e:any) => {
         setContent(e.target.value);
     }
@@ -30,10 +47,17 @@ function Comment(){
     }
 
     return(
-        <div className="comment-box">
-            <input type="text" name="comment" className='select-search' onChange={onchange}></input>
-            <button className = "btn-submit"onClick={onclick}>등록</button>
+        <div>
+            <div>
+                <span>댓글</span>
+                <hr></hr>
+            </div>
+            <div className="comment-box">
+                <input type="text" name="comment" className='select-search' onChange={onchange}></input>
+                <button className = "btn-submit" onClick={onclick}>등록</button>
+            </div>
         </div>
+        
     )
 }
 
