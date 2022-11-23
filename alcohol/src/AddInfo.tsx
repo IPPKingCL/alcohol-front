@@ -5,6 +5,7 @@ import './css/AddInfo.css';
 import { useLocation } from 'react-router';
 import { useNavigate } from 'react-router-dom';
 import { addr } from './interface/serverAddr'
+import DatePicker from './DatePicker';
 
 function AddInfo() {
 
@@ -229,9 +230,9 @@ function AddInfo() {
     //정규식 표현
     const regexNickname = /^[가-힣a-zA-z0-9]{2,8}$/i;
 
-    const regexAge = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+    const regexAge = /^[1-9][0-9]?$/i;
 
-    const regexBirth = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+    const regexBirth = /^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/i;
 
     const regexSex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 
@@ -256,7 +257,7 @@ function AddInfo() {
       errors.age = "Cannot be blank";
       //나이의 길이(length)가 4글자 이하일 때
     } else if (!regexAge.test(values.age)) {
-      errors.age = "Password must be more than 4 characters";
+      errors.age = "Invalid age format";
     } else {
       errors.age = "";
     }
@@ -266,7 +267,7 @@ function AddInfo() {
       errors.birth = "Cannot be blank";
       //비밀번호의 길이(length)가 4글자 이하일 때
     } else if (!regexBirth.test(values.birth)) {
-      errors.birth = "Password must be more than 4 characters";
+      errors.birth = "Invalid birth format";
     } else {
       errors.birth = "";
     }
@@ -319,7 +320,9 @@ function AddInfo() {
         <h4 style={{ color: 'red' }}>{validate(userAddInfo).nickname}</h4><hr />
         <h3>나이 : <input type="text" placeholder='age' name='age' onChange={onChangeAge} required></input></h3>
         <h4 style={{ color: 'red' }}>{validate(userAddInfo).age}</h4><hr />
-        <h3>생일 : <input type="text" placeholder='birth' name='birth' onChange={onChangeBirth} required></input></h3>
+        <h3>생일 : <input type="text" placeholder='birth' name='birth' onChange={onChangeBirth} required></input>
+        </h3>
+        <DatePicker />
         <h4 style={{ color: 'red' }}>{validate(userAddInfo).birth}</h4><hr />
         <h3>성별 : <select id="selectSex" name='sex' onChange={onChangeSex}>
           <option value="">디폴트</option>
@@ -350,7 +353,7 @@ function AddInfo() {
             <option value={2}>2</option>
             <option value={3}>3</option>
           </select></h3>
-          <h4 style={{ color: 'red' }}>{userAddInfo.favoriteList ? null : validate(userAddInfo).favoriteList}</h4><hr />
+        <h4 style={{ color: 'red' }}>{userAddInfo.favoriteList ? null : validate(userAddInfo).favoriteList}</h4><hr />
         <button>완료</button>
       </div>
     </div>
