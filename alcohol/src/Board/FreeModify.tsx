@@ -82,13 +82,16 @@ function FreeModify(){
         <div>
             {loading ?<strong>loading...</strong>:
                <div className = "input-Board">
-                    
+                    <div>
+                        <h2>게시판 수정</h2>
+                    </div>
+                    <hr></hr>
                     <div className = 'bar2'>
-                        <h1>Title</h1>
+                        <h3>Title</h3>
                     </div>
                     <input name='title' type="text" className="search-input" defaultValue={board?.title} onChange={onchange} />
                     <div className = 'bar2'>
-                        <h1>content</h1>
+                        <h3>content</h3>
                     </div>
                     <table className="content_table">
                         <tbody>
@@ -111,7 +114,7 @@ function FreeModify(){
                         <option value = "R">레시피 게시판</option>
                     </select>
                 
-                    <button className="d-btn" ><Link to="/" >목록</Link></button>
+                    <button className="d-btn" ><Link to="/free" >목록</Link></button>
                     <button className="m-btn" onClick={onclick}>저장</button>
                </div>
             }

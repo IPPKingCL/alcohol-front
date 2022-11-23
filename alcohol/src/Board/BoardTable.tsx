@@ -13,7 +13,7 @@ function BoardTable(props:any){
     return(
         
         <div>
-            <p onClick={onclick}>{props.data.title}</p>
+            <p className="board-title" onClick={onclick}>{props.data.title}</p>
             <hr></hr>
         </div>
            
