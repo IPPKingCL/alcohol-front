@@ -27,6 +27,14 @@ function AddInfo() {
     job: string;
     MaximumPrice: string;
     favoriteList: string;
+
+    nicknameValidation : boolean,
+    ageValidation : boolean,
+    birthValidation : boolean,
+    sexValidation : boolean,
+    jobValidation : boolean,
+    MaximumPriceValidation : boolean,
+    favoriteListValidation : boolean
   }
 
   const { state } = useLocation();
@@ -54,6 +62,13 @@ function AddInfo() {
     job: '',
     MaximumPrice: '',
     favoriteList: '',
+    nicknameValidation: false,
+    ageValidation: false,
+    birthValidation: false,
+    sexValidation: false,
+    jobValidation: false,
+    MaximumPriceValidation: false,
+    favoriteListValidation: false
   });
 
   const onChangeNickname = (e: any) => {
@@ -234,11 +249,11 @@ function AddInfo() {
 
     const regexBirth = /^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/i;
 
-    const regexSex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+    const regexSex = /^[MF]$/i;
 
     const regexJob = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 
-    const regexMaximumPrice = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+    const regexMaximumPrice = /^\d{3,7}$/i;
 
     const regexFavoriteList = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 
@@ -246,55 +261,70 @@ function AddInfo() {
     //닉네임 값이 없을시
     if (values.nickname === "") {
       errors.nickname = "Cannot be blank";
+      errors.nicknameValidation = false;
       //닉네임 정규식 표현이 옳지 않을시
     } else if (!regexNickname.test(values.nickname)) {
       errors.nickname = "Invalid nickname format";
+      errors.nicknameValidation = false;
     } else {
       errors.nickname = "";
+      errors.nicknameValidation = true;
     }
     //나이 값이 없을시
     if (!values.age) {
       errors.age = "Cannot be blank";
+      errors.ageValidation = false;
       //나이의 길이(length)가 4글자 이하일 때
     } else if (!regexAge.test(values.age)) {
       errors.age = "Invalid age format";
+      errors.ageValidation = false;
     } else {
       errors.age = "";
+      errors.ageValidation = true;
     }
 
 
     if (!values.birth) {
       errors.birth = "Cannot be blank";
+      errors.birthValidation = false;
       //비밀번호의 길이(length)가 4글자 이하일 때
     } else if (!regexBirth.test(values.birth)) {
       errors.birth = "Invalid birth format";
+      errors.birthValidation = false;
     } else {
       errors.birth = "";
+      errors.birthValidation = true;
     }
 
     if (!values.sex) {
       errors.sex = "Cannot be blank";
+      errors.sexValidation = false;
       //비밀번호의 길이(length)가 4글자 이하일 때
     } else if (!regexSex.test(values.sex)) {
       errors.sex = "Password must be more than 4 characters";
+      errors.sexValidation = false;
     } else {
       errors.sex = "";
+      errors.sexValidation = true;
     }
 
     if (!values.job) {
       errors.job = "Cannot be blank";
+      errors.jobValidation = false;
       //비밀번호의 길이(length)가 4글자 이하일 때
     } else if (!regexJob.test(values.job)) {
       errors.job = "Password must be more than 4 characters";
+      errors.jobValidation = false;
     } else {
       errors.job = "";
+      errors.jobValidation = true;
     }
 
     if (!values.MaximumPrice) {
       errors.MaximumPrice = "Cannot be blank";
       //비밀번호의 길이(length)가 4글자 이하일 때
     } else if (!regexMaximumPrice.test(values.MaximumPrice)) {
-      errors.MaximumPrice = "Password must be more than 4 characters";
+      errors.MaximumPrice = "Invalid Price format";
     } else {
       errors.MaximumPrice = "";
     }
@@ -320,8 +350,7 @@ function AddInfo() {
         <h4 style={{ color: 'red' }}>{validate(userAddInfo).nickname}</h4><hr />
         <h3>나이 : <input type="text" placeholder='age' name='age' onChange={onChangeAge} required></input></h3>
         <h4 style={{ color: 'red' }}>{validate(userAddInfo).age}</h4><hr />
-        <h3>생일 : <input type="text" placeholder='birth' name='birth' onChange={onChangeBirth} required></input>
-        </h3>
+        <h3>생일 : <input type="text" placeholder='birth' name='birth' onChange={onChangeBirth} required></input></h3>
         <DatePicker />
         <h4 style={{ color: 'red' }}>{validate(userAddInfo).birth}</h4><hr />
         <h3>성별 : <select id="selectSex" name='sex' onChange={onChangeSex}>
