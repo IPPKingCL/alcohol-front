@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { boardRead } from '../interface/Board';
 import { addr } from '../interface/serverAddr';
 
-function FreeRead(){
-    const [loading,setLoading] = useState<boolean>(true);
+function FreeModify(){
+    const [loading, setLoading] = useState<boolean>(true);
     const [board, setBoard] = useState<boardRead>();
     const {id} = useParams();
-    const navigate = useNavigate();
-    
-    const list = async () => {
-        
+
+    const getBoard = async () => {
         fetch(addr+'/board/read/'+id,{
             method: "GET",
             headers: {
@@ -26,12 +24,13 @@ function FreeRead(){
     }
 
     useEffect(() => {
-        list();
-    },[])
+        getBoard();
+    },[]);
+
     const onclick = () => {
-        //수정 함수 작성 예쩡
-        navigate('/free/modify/'+id);
+
     }
+
     return(
         <div>
             {loading ?<strong>loading...</strong>:
@@ -40,7 +39,7 @@ function FreeRead(){
                     <div className = 'bar2'>
                         <h1>Title</h1>
                     </div>
-                    <input name='title' type="text" className="search-input" value={board?.title} disabled/>
+                    <input name='title' type="text" className="search-input" defaultValue={board?.title} />
                     <div className = 'bar2'>
                         <h1>content</h1>
                     </div>
@@ -48,7 +47,7 @@ function FreeRead(){
                         <tbody>
                             <tr>
                                 <td>
-                                    <textarea name="content" className="content" id="content" value={board?.contents} disabled></textarea>
+                                    <textarea name="content" className="content" id="content" defaultValue={board?.contents} ></textarea>
                                 </td>
                             </tr>
                         </tbody>
@@ -58,17 +57,14 @@ function FreeRead(){
                     <div className = 'bar2'>
                         <h1>ID & Date</h1>
                     </div>
-                    <input name='title' type="text" className="search-input" value={board?.userId} disabled/>
-
-                    <input name='title' type="text" className="search-input" value={board?.dateTime} disabled/>
+                   
                 
                     <button className="d-btn" ><Link to="/" >목록</Link></button>
-                    <button className="m-btn" onClick={onclick}>수정</button>
+                    <button className="m-btn" onClick={onclick}>저장</button>
                </div>
             }
         </div>
     )
-
 }
 
-export default FreeRead;
+export default FreeModify;
