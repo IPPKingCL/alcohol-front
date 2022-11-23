@@ -31,8 +31,8 @@ function Comment(){
 
     return(
         <div className="comment-box">
-            <input type="text" name="comment" onChange={onchange}></input>
-            <button onClick={onclick}>등록</button>
+            <input type="text" name="comment" className='select-search' onChange={onchange}></input>
+            <button className = "btn-submit"onClick={onclick}>등록</button>
         </div>
     )
 }
