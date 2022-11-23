@@ -112,7 +112,9 @@ function FreeBoard(){
                         
                     />
                      <button className='btn-write' onClick={onclick}>글쓰기</button>
+                
                 </div>
+                
                 
             }
 

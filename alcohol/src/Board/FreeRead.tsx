@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { boardRead } from '../interface/Board';
 import { addr } from '../interface/serverAddr';
+import Comment from './Comment';
+import '../css/board.css';
 
 function FreeRead(){
     const [loading,setLoading] = useState<boolean>(true);
@@ -32,38 +34,43 @@ function FreeRead(){
         //수정 함수 작성 예쩡
         navigate('/free/modify/'+id);
     }
+
+    const boardList = () => {
+        navigate('/free');
+    }
     return(
         <div>
+            <div>
+                <h2>&nbsp;&nbsp;게시판</h2>
+            </div>
+            <hr></hr>
             {loading ?<strong>loading...</strong>:
                <div className = "input-Board">
-                    
+                     
                     <div className = 'bar2'>
-                        <h1>Title</h1>
+                        <h3>Title</h3>
                     </div>
                     <input name='title' type="text" className="search-input" value={board?.title} disabled/>
                     <div className = 'bar2'>
-                        <h1>content</h1>
+                        <h3>content</h3>
                     </div>
-                    <table className="content_table">
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <textarea name="content" className="content" id="content" value={board?.contents} disabled></textarea>
-                                </td>
-                            </tr>
-                        </tbody>
-                        
-                    </table>
+                    
+                        <textarea name="content" className="content" id="content" value={board?.contents} disabled></textarea>
+                  
 
                     <div className = 'bar2'>
-                        <h1>ID & Date</h1>
+                        <h3>ID & Date</h3>
                     </div>
                     <input name='title' type="text" className="search-input" value={board?.userId} disabled/>
 
                     <input name='title' type="text" className="search-input" value={board?.dateTime} disabled/>
-                
-                    <button className="d-btn" ><Link to="/" >목록</Link></button>
-                    <button className="m-btn" onClick={onclick}>수정</button>
+                    <div className='input-btn'>
+                        <button className="d-btn" onClick={boardList}>목록</button>
+                        <button className="m-btn" onClick={onclick}>수정</button>
+                    </div>
+                    <div>
+                        <Comment/>
+                    </div>
                </div>
             }
         </div>
