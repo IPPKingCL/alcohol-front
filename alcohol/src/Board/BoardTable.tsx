@@ -12,11 +12,12 @@ function BoardTable(props:any){
 
     return(
         
-        <tr>
-            <td>{props.data.id}</td>
-            <td onClick={onclick}>{props.data.title}</td>
-            <td>{props.data.dateTime}</td>
-        </tr>  
+        <div>
+            <p onClick={onclick}>{props.data.title}</p>
+            <hr></hr>
+        </div>
+           
+        
     );
 
 }

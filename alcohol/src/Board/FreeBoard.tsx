@@ -3,6 +3,7 @@ import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { boardList } from '../interface/BoardList';
 import { addr } from '../interface/serverAddr';
 import List from './List';
+import '../css/board.css';
 
 function FreeBoard(){
     const [loading, setLoading] = useState<boolean>(true);
@@ -91,13 +92,17 @@ function FreeBoard(){
 
     return(
         <div>
-            <select name="selectBoard" id="selectBoard" onChange={onChangeBoard}>
-                <option value= "D">전체 게시글</option>
-                <option value = "F">자유게시판</option>
-                <option value = "A">술 관련 게시판</option>
-                <option value = "R">레시피 게시판</option>
-            </select>
-
+            <div className='search-tool'>
+                <select name="selectBoard" id="selectBoard" className="select-search" onChange={onChangeBoard}>
+                    <option value= "D">전체 게시글</option>
+                    <option value = "F">자유게시판</option>
+                    <option value = "A">술 관련 게시판</option>
+                    <option value = "R">레시피 게시판</option>
+                </select>
+                <input type="text" id="search"></input>
+                <button className='btn-submit'>검색</button>
+            </div>
+            
             <hr></hr>
 
             {loading ? <strong>Loading...</strong>:
@@ -106,7 +111,7 @@ function FreeBoard(){
                         datas={arrData}
                         
                     />
-                     <button onClick={onclick}>글쓰기</button>
+                     <button className='btn-write' onClick={onclick}>글쓰기</button>
                 </div>
                 
             }
