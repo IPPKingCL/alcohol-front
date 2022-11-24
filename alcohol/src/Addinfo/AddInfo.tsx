@@ -10,36 +10,10 @@ import AddInfoTextNickname from './AddInfoNickname';
 import AddInfoTextAge from './AddInfoAge';
 import AddInfoSex from './AddInfoSex';
 import AddInfoMaximumPrice from './AddInfoMaximumPrice';
+import {UserAddInfo} from '../interface/UserAddInfo'
+import {UserAddInfoErrorMessage} from '../interface/UserAddInfoErrorMessage'
 
 function AddInfo() {
-
-  interface UserAddInfo {
-    nickname: string;
-    age: string;
-    birth: string;
-    sex: string;
-    job: string;
-    MaximumPrice: number;
-    favoriteList: Array<string>;
-  }
-
-  interface UserAddInfoErrorMessage {
-    nickname: string;
-    age: string;
-    birth: string;
-    sex: string;
-    job: string;
-    MaximumPrice: string;
-    favoriteList: string;
-
-    nicknameValidation : boolean,
-    ageValidation : boolean,
-    birthValidation : boolean,
-    sexValidation : boolean,
-    jobValidation : boolean,
-    MaximumPriceValidation : boolean,
-    favoriteListValidation : boolean
-  }
 
   const { state } = useLocation();
   const navigate = useNavigate();
@@ -87,16 +61,7 @@ function AddInfo() {
 
   }
 
-  const onChangeSex = (e: any) => {
-    const { name, value } = e.target;
-
-
-    const nextJobInput: UserAddInfo = {
-      ...userAddInfo,
-      [name]: value,
-    }
-    setUserAddInfo(nextJobInput);
-  }
+  
 
   const onChangeJob = (e: any) => {
     const { name, value } = e.target;
@@ -107,18 +72,6 @@ function AddInfo() {
       [name]: value,
     }
     setUserAddInfo(nextJobInput);
-
-  }
-
-  const onChangeMaximumPrice = (e: any) => {
-    const { name, value } = e.target;
-
-
-    const nextMaximumPriceInput: UserAddInfo = {
-      ...userAddInfo,
-      [name]: value,
-    }
-    setUserAddInfo(nextMaximumPriceInput);
 
   }
 
@@ -189,10 +142,6 @@ function AddInfo() {
     })
   }
 
-
-
-
-
   const intialValues = { userAddInfo };
 
   const validateBirth = (values: any) => {
@@ -219,28 +168,6 @@ function AddInfo() {
     return errors;
   }
 
-  const validateSex = (values: any) => {
-    const errors : UserAddInfoErrorMessage = {
-      ...userAddInfoErrorMessage
-    };
-
-    const regexSex = /^[MF]$/i;
-
-    if (!values.sex) {
-      errors.sex = "Cannot be blank";
-      errors.sexValidation = false;
-
-    } else if (!regexSex.test(values.sex)) {
-      errors.sex = "Password must be more than 4 characters";
-      errors.sexValidation = false;
-    } else {
-      errors.sex = "";
-      errors.sexValidation = true;
-    }
-
-    return errors;
-  }
-
   const validateJob = (values: any) => {
     const errors : UserAddInfoErrorMessage = {
       ...userAddInfoErrorMessage
@@ -261,30 +188,6 @@ function AddInfo() {
     }
 
     return errors;
-  }
-
-  const validateMaximumPrice = (values: any) => {
-    const errors : UserAddInfoErrorMessage = {
-      ...userAddInfoErrorMessage
-    };
-
-    const regexMaximumPrice = /^\d{3,7}$/i;
-   
-    
-    if (!values.MaximumPrice) {
-      errors.MaximumPrice = "Cannot be blank";
-      errors.MaximumPriceValidation = false;
-      //비밀번호의 길이(length)가 4글자 이하일 때
-    } else if (!regexMaximumPrice.test(values.MaximumPrice)) {
-      errors.MaximumPrice = "Invalid Price format";
-      errors.MaximumPriceValidation = false;
-    } else {
-      errors.MaximumPrice = "";
-      errors.MaximumPriceValidation = true;
-    }
-
-    return errors;
-
   }
 
 
@@ -314,7 +217,7 @@ function AddInfo() {
     <div className='addInfoInputTag'>
       <h1>추가 정보를 입력해 주세요.</h1>
       <div className='formAlign'>
-        <AddInfoTextNickname type="닉네임"/>
+        <AddInfoTextNickname type="닉네임" func={setUserAddInfoErrorMessage}/>
         <AddInfoTextAge type="나이"/>
         <h3>생일 : <input type="text" placeholder='birth' name='birth' onChange={onChangeBirth} required></input></h3>
         <DatePicker />
