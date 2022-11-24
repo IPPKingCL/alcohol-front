@@ -1,11 +1,17 @@
+import { listenerCount } from 'process';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { boardList } from '../interface/BoardList';
+import { commentList } from '../interface/CommentList';
 import { addr } from '../interface/serverAddr';
+import CommentList from './CommentList';
 
 function Comment(){
+    const [loading, setLoading] = useState<boolean>(true);
     const [content, setContent] = useState<string>();
     const {id} = useParams();
-
+    const [comment,setComment] = useState<commentList[]>([]);
+    const [commentNum,setCommentNum] = useState<number>();
     const commentList = async () => {
         fetch(addr+'/board/comment/'+id,{
             method:"GET",
@@ -15,6 +21,20 @@ function Comment(){
         }).then((res)=>res.json())
         .then((res) => {
             console.log(res);
+            let i:number = 0;
+            setCommentNum(res.length);
+            for(i;i<res.length;i++){
+                const data:commentList = {
+                    id:res[i].id,
+                    contents:res[i].contents,
+                    dateTime:res[i].dateTime,
+                    nickname:res[i].nickname,
+                    isDeleted:res[i].isDeleted,
+                    isModified:res[i].isModified
+                }
+                setComment(comment => [...comment,data])
+            }
+            setLoading(false);
         })
     }
 
@@ -41,6 +61,8 @@ function Comment(){
             if(res.success){
                 alert("등록 성공");
                 setContent('');
+                setLoading(true);
+                commentList();
             }else{
                 alert("등록 실패");
             }
@@ -50,13 +72,20 @@ function Comment(){
     return(
         <div>
             <div>
-                <span>댓글</span>
+                <span>댓글 {commentNum}</span>
                 <hr></hr>
             </div>
             <div className="comment-box">
                 <input type="text" name="comment" className='select-search' value={content||''} onChange={onchange}></input>
                 <button className = "btn-submit" onClick={onclick}>등록</button>
             </div>
+            <hr></hr>
+            {loading ? <strong>loading...</strong> :
+                <div>
+                    <CommentList
+                        datas={comment}/>
+                </div>
+            }
         </div>
         
     )
