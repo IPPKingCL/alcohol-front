@@ -59,7 +59,7 @@ function Comment(){
         }).then((res) => res.json())
         .then((res) => {
             if(res.success){
-                alert("등록 성공");
+                
                 setContent('');
                 setLoading(true);
                 commentList();

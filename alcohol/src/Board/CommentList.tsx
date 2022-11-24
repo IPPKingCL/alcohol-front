@@ -3,7 +3,7 @@ import { commentList } from '../interface/CommentList';
 import CommentOne from './CommentOne';
 
 function CommentList(props:any){
-    console.log(props)
+    
     return(
         <div>
             {props.datas.map((data:any)=>(
