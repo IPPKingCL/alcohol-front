@@ -6,7 +6,10 @@ import { useLocation } from 'react-router';
 import { useNavigate } from 'react-router-dom';
 import { addr } from '../interface/serverAddr'
 import DatePicker from '../DatePicker';
-import AddInfoText from './AddInfoText';
+import AddInfoTextNickname from './AddInfoNickname';
+import AddInfoTextAge from './AddInfoAge';
+import AddInfoSex from './AddInfoSex';
+import AddInfoMaximumPrice from './AddInfoMaximumPrice';
 
 function AddInfo() {
 
@@ -71,28 +74,6 @@ function AddInfo() {
     MaximumPriceValidation: false,
     favoriteListValidation: false
   });
-
-  const onChangeNickname = (e: any) => {
-    const { name, value } = e.target;
-
-
-    const nextNickNameInput: UserAddInfo = {
-      ...userAddInfo,
-      [name]: value,
-    }
-    setUserAddInfo(nextNickNameInput);
-  }
-
-  const onChangeAge = (e: any) => {
-    const { name, value } = e.target;
-
-
-    const nextJobInput: UserAddInfo = {
-      ...userAddInfo,
-      [name]: value,
-    }
-    setUserAddInfo(nextJobInput);
-  }
 
   const onChangeBirth = (e: any) => {
     const { name, value } = e.target;
@@ -214,56 +195,6 @@ function AddInfo() {
 
   const intialValues = { userAddInfo };
 
-  const validateNickname = (values : any) => {
-    const errors : UserAddInfoErrorMessage = {
-      ...userAddInfoErrorMessage
-    };
-
-    const regexNickname = /^[가-힣a-zA-z0-9]{2,8}$/i;
-
-    //닉네임 값이 없을시
-    if (values === "") {
-      errors.nickname = "Cannot be blank";
-      errors.nicknameValidation = false;
-      //닉네임 정규식 표현이 옳지 않을시
-    } else if (!regexNickname.test(values.nickname)) {
-      errors.nickname = "Invalid nickname format";
-      errors.nicknameValidation = false;
-    } else {
-      errors.nickname = "";
-      errors.nicknameValidation = true;
-    }
-
-    console.log("설마 이렇게 해도 다 뜨니? nickname");
-    return errors;
-
-  }
-
-  const validateAge = (values : any) => {
-    const errors : UserAddInfoErrorMessage = {
-      ...userAddInfoErrorMessage
-    };
-
-    const regexAge = /^[1-9][0-9]?$/i;
-
-    if (!values) {
-      errors.age = "Cannot be blank";
-      errors.ageValidation = false;
-      //나이의 길이(length)가 4글자 이하일 때
-    } else if (!regexAge.test(values.age)) {
-      errors.age = "Invalid age format";
-      errors.ageValidation = false;
-    } else {
-      errors.age = "";
-      errors.ageValidation = true;
-    }
-
-
-    console.log("설마 이렇게 해도 다 뜨니? age");
-
-    return errors;
-  }
-
   const validateBirth = (values: any) => {
     const errors : UserAddInfoErrorMessage = {
       ...userAddInfoErrorMessage
@@ -383,20 +314,15 @@ function AddInfo() {
     <div className='addInfoInputTag'>
       <h1>추가 정보를 입력해 주세요.</h1>
       <div className='formAlign'>
-        <AddInfoText type="닉네임"/>
-        <AddInfoText type="나이"/>
+        <AddInfoTextNickname type="닉네임"/>
+        <AddInfoTextAge type="나이"/>
         <h3>생일 : <input type="text" placeholder='birth' name='birth' onChange={onChangeBirth} required></input></h3>
         <DatePicker />
         <h4 style={{ color: 'red' }}>{validateBirth(userAddInfo.birth).birth}</h4><hr />
-        <h3>성별 : <select id="selectSex" name='sex' onChange={onChangeSex}>
-          <option value="">디폴트</option>
-          <option value="m">M</option>
-          <option value="f">F</option>
-        </select></h3>
-        <h4 style={{ color: 'red' }}>{validateSex(userAddInfo).sex}</h4><hr />
+        <AddInfoSex type="성별"/>
         <h3>직군 : <input type="text" placeholder='job' name='job' onChange={onChangeJob} required></input></h3>
         <h4 style={{ color: 'red' }}>{validateJob(userAddInfo).job}</h4><hr />
-        <AddInfoText type="허용 최대 가격"/>
+        <AddInfoMaximumPrice type="허용 최대 가격"/>
         <h3>좋아하는 목록 :
           <select id="select1" name='favoriteList' onChange={onChangeFavoriteList}>
             <option value="">디폴트</option>
