@@ -50,20 +50,20 @@ function FreeRead(){
                     <div className = 'bar2'>
                         <h3>Title</h3>
                     </div>
-                    <input name='title' type="text" className="search-input" value={board?.title} disabled/>
+                    <input name='title' type="text" className="search-input" value={board?.title||''} disabled/>
                     <div className = 'bar2'>
                         <h3>content</h3>
                     </div>
                     
-                        <textarea name="content" className="content" id="content" value={board?.contents} disabled></textarea>
+                        <textarea name="content" className="content" id="content" value={board?.contents||''} disabled></textarea>
                   
 
                     <div className = 'bar2'>
                         <h3>ID & Date</h3>
                     </div>
-                    <input name='title' type="text" className="search-input" value={board?.userId} disabled/>
+                    <input name='title' type="text" className="search-input" value={board?.userId||''} disabled/>
 
-                    <input name='title' type="text" className="search-input" value={board?.dateTime} disabled/>
+                    <input name='title' type="text" className="search-input" value={board?.dateTime||''} disabled/>
                     <div className='input-btn'>
                         <button className="d-btn" onClick={boardList}>목록</button>
                         <button className="m-btn" onClick={onclick}>수정</button>

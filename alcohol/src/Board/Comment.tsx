@@ -40,6 +40,7 @@ function Comment(){
         .then((res) => {
             if(res.success){
                 alert("등록 성공");
+                setContent('');
             }else{
                 alert("등록 실패");
             }
@@ -53,7 +54,7 @@ function Comment(){
                 <hr></hr>
             </div>
             <div className="comment-box">
-                <input type="text" name="comment" className='select-search' onChange={onchange}></input>
+                <input type="text" name="comment" className='select-search' value={content||''} onChange={onchange}></input>
                 <button className = "btn-submit" onClick={onclick}>등록</button>
             </div>
         </div>
