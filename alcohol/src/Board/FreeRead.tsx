@@ -67,6 +67,7 @@ function FreeRead(){
                     <div className='input-btn'>
                         <button className="d-btn" onClick={boardList}>목록</button>
                         <button className="m-btn" onClick={onclick}>수정</button>
+                        <button className="m-btn" >삭제</button>
                     </div>
                     <div>
                         <Comment/>

@@ -64,7 +64,7 @@
 
 .input-btn{
     padding : 10px;
-    margin-left:34%;
+    margin-left:27%;
 }
 
 .d-btn{
@@ -87,4 +87,17 @@
 
 .comment-box{
     padding : 6px;
+}
+
+.comment-input{
+    height: 26px;
+    text-align: left;
+    width:70%;
+    font-size:15;
+    border:1px solid black;
+    border-radius: 7px;
+}
+
+.comment-span{
+    font-size: 5;
 }
