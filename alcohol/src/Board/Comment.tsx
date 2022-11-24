@@ -45,7 +45,7 @@ function Comment(){
     const onchange = (e:any) => {
         setContent(e.target.value);
     }
-    const onclick = () => { 
+    const onclick = async () => { 
         fetch(addr+'/board/insertComment',{
             method:"POST",
             headers:{

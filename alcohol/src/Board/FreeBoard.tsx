@@ -4,11 +4,15 @@ import { boardList } from '../interface/BoardList';
 import { addr } from '../interface/serverAddr';
 import List from './List';
 import '../css/board.css';
+import Pagination from './Paginattion';
 
 function FreeBoard(){
     const [loading, setLoading] = useState<boolean>(true);
     const [arrData, setArrData] = useState<boardList[]>([]);
     const navigate=useNavigate();
+    const [currentPage, setCurrentPage] = useState<number>(1);//default 1 page
+    const [pageCount,setPageCount] = useState<number>();  //page count
+    const [aData, setAData] = useState<boardList[]>([]);
     
     const list = async () => {
         setArrData([]);
@@ -32,7 +36,12 @@ function FreeBoard(){
                 }
                 setArrData(arrData => [...arrData,data]);
             }
-            
+            if(res.length%10==0){
+                setPageCount(res.length/5);
+            }else{
+                setPageCount(res.length/5+1);
+            }
+            setAData(arrData.slice(0,5));
             setLoading(false);
         })
 
@@ -90,6 +99,9 @@ function FreeBoard(){
         })
     }
 
+    const getCurrentPage = (num:number) =>{
+        alert(num);
+    }
     return(
         <div>
             <div className='search-tool'>
@@ -108,9 +120,10 @@ function FreeBoard(){
             {loading ? <strong>Loading...</strong>:
                 <div>
                     <List
-                        datas={arrData}
+                        datas={aData}
                         
                     />
+                    
                      <button className='btn-write' onClick={onclick}>글쓰기</button>
                 
                 </div>
