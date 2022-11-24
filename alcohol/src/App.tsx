@@ -8,7 +8,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import AddInfo from './AddInfo';
+import AddInfo from './Addinfo/AddInfo';
 import FreeBoard from './Board/FreeBoard';
 import FreeWrite from './Board/FreeWrite';
 import FreeRead from './Board/FreeRead';

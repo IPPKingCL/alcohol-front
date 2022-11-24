@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import './css/App.css';
-import './css/Login.css';
-import './css/AddInfo.css';
+import '../css/App.css';
+import '../css/Login.css';
+import '../css/AddInfo.css';
 import { useLocation } from 'react-router';
 import { useNavigate } from 'react-router-dom';
-import { addr } from './interface/serverAddr'
-import DatePicker from './DatePicker';
+import { addr } from '../interface/serverAddr'
+import DatePicker from '../DatePicker';
+import AddInfoText from './AddInfoText';
 
 function AddInfo() {
 
@@ -80,7 +81,6 @@ function AddInfo() {
       [name]: value,
     }
     setUserAddInfo(nextNickNameInput);
-    console.log(userAddInfoErrorMessage);
   }
 
   const onChangeAge = (e: any) => {
@@ -92,8 +92,6 @@ function AddInfo() {
       [name]: value,
     }
     setUserAddInfo(nextJobInput);
-    console.log(nextJobInput);
-
   }
 
   const onChangeBirth = (e: any) => {
@@ -105,7 +103,6 @@ function AddInfo() {
       [name]: value,
     }
     setUserAddInfo(nextJobInput);
-    console.log(nextJobInput);
 
   }
 
@@ -118,8 +115,6 @@ function AddInfo() {
       [name]: value,
     }
     setUserAddInfo(nextJobInput);
-    console.log(nextJobInput);
-
   }
 
   const onChangeJob = (e: any) => {
@@ -131,7 +126,6 @@ function AddInfo() {
       [name]: value,
     }
     setUserAddInfo(nextJobInput);
-    console.log(nextJobInput);
 
   }
 
@@ -144,7 +138,6 @@ function AddInfo() {
       [name]: value,
     }
     setUserAddInfo(nextMaximumPriceInput);
-    console.log(nextMaximumPriceInput);
 
   }
 
@@ -166,7 +159,6 @@ function AddInfo() {
     }
 
     setUserAddInfo(nextFavoriteListInput);
-    console.log(nextFavoriteListInput);
 
   }
 
@@ -221,52 +213,16 @@ function AddInfo() {
 
 
   const intialValues = { userAddInfo };
-  const [formValues, setFormValues] = useState(intialValues);
-  const [formErrors, setFormErrors] = useState({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const submitForm = () => {
-    console.log(formValues);
-  };
-
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value });
-  };
-
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    setFormErrors(validate(formValues));
-    setIsSubmitting(true);
-  };
-
-  const nicknameValidate = () => {
-    
-  }
-
-  const validate = (values: any) => {
+  const validateNickname = (values : any) => {
     const errors : UserAddInfoErrorMessage = {
       ...userAddInfoErrorMessage
     };
 
-    //정규식 표현
     const regexNickname = /^[가-힣a-zA-z0-9]{2,8}$/i;
 
-    const regexAge = /^[1-9][0-9]?$/i;
-
-    const regexBirth = /^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/i;
-
-    const regexSex = /^[MF]$/i;
-
-    const regexJob = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-
-    const regexMaximumPrice = /^\d{3,7}$/i;
-
-    const regexFavoriteList = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-
-
     //닉네임 값이 없을시
-    if (values.nickname === "") {
+    if (values === "") {
       errors.nickname = "Cannot be blank";
       errors.nicknameValidation = false;
       //닉네임 정규식 표현이 옳지 않을시
@@ -277,8 +233,20 @@ function AddInfo() {
       errors.nickname = "";
       errors.nicknameValidation = true;
     }
-    //나이 값이 없을시
-    if (!values.age) {
+
+    console.log("설마 이렇게 해도 다 뜨니? nickname");
+    return errors;
+
+  }
+
+  const validateAge = (values : any) => {
+    const errors : UserAddInfoErrorMessage = {
+      ...userAddInfoErrorMessage
+    };
+
+    const regexAge = /^[1-9][0-9]?$/i;
+
+    if (!values) {
       errors.age = "Cannot be blank";
       errors.ageValidation = false;
       //나이의 길이(length)가 4글자 이하일 때
@@ -291,7 +259,19 @@ function AddInfo() {
     }
 
 
-    if (!values.birth) {
+    console.log("설마 이렇게 해도 다 뜨니? age");
+
+    return errors;
+  }
+
+  const validateBirth = (values: any) => {
+    const errors : UserAddInfoErrorMessage = {
+      ...userAddInfoErrorMessage
+    };
+
+    const regexBirth = /^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/i;
+
+    if (!values) {
       errors.birth = "Cannot be blank";
       errors.birthValidation = false;
       //비밀번호의 길이(length)가 4글자 이하일 때
@@ -303,10 +283,22 @@ function AddInfo() {
       errors.birthValidation = true;
     }
 
+    console.log("설마 이렇게 해도 다 뜨니? birth");
+
+    return errors;
+  }
+
+  const validateSex = (values: any) => {
+    const errors : UserAddInfoErrorMessage = {
+      ...userAddInfoErrorMessage
+    };
+
+    const regexSex = /^[MF]$/i;
+
     if (!values.sex) {
       errors.sex = "Cannot be blank";
       errors.sexValidation = false;
-      //비밀번호의 길이(length)가 4글자 이하일 때
+
     } else if (!regexSex.test(values.sex)) {
       errors.sex = "Password must be more than 4 characters";
       errors.sexValidation = false;
@@ -314,6 +306,16 @@ function AddInfo() {
       errors.sex = "";
       errors.sexValidation = true;
     }
+
+    return errors;
+  }
+
+  const validateJob = (values: any) => {
+    const errors : UserAddInfoErrorMessage = {
+      ...userAddInfoErrorMessage
+    };
+
+    const regexJob = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 
     if (!values.job) {
       errors.job = "Cannot be blank";
@@ -327,6 +329,17 @@ function AddInfo() {
       errors.jobValidation = true;
     }
 
+    return errors;
+  }
+
+  const validateMaximumPrice = (values: any) => {
+    const errors : UserAddInfoErrorMessage = {
+      ...userAddInfoErrorMessage
+    };
+
+    const regexMaximumPrice = /^\d{3,7}$/i;
+   
+    
     if (!values.MaximumPrice) {
       errors.MaximumPrice = "Cannot be blank";
       errors.MaximumPriceValidation = false;
@@ -338,6 +351,18 @@ function AddInfo() {
       errors.MaximumPrice = "";
       errors.MaximumPriceValidation = true;
     }
+
+    return errors;
+
+  }
+
+
+  const validateFavoriteList = (values: any) => {
+    const errors : UserAddInfoErrorMessage = {
+      ...userAddInfoErrorMessage
+    };
+    
+    const regexFavoriteList = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 
     if (!values.favoriteList) {
       errors.favoriteList = "Cannot be blank";
@@ -351,7 +376,6 @@ function AddInfo() {
       errors.favoriteListValidation = true;
     }
 
-    //에러를 반환해줘 !
     return errors;
   };
 
@@ -359,23 +383,20 @@ function AddInfo() {
     <div className='addInfoInputTag'>
       <h1>추가 정보를 입력해 주세요.</h1>
       <div className='formAlign'>
-        <h3>닉네임 : <input type="text" placeholder='nickname' name='nickname' onChange={onChangeNickname} required></input><button onClick={checkNickname}>중복 확인</button></h3>
-        <h4 style={{ color: 'red' }}>{validate(userAddInfo).nickname}</h4><hr />
-        <h3>나이 : <input type="text" placeholder='age' name='age' onChange={onChangeAge} required></input></h3>
-        <h4 style={{ color: 'red' }}>{validate(userAddInfo).age}</h4><hr />
+        <AddInfoText type="닉네임"/>
+        <AddInfoText type="나이"/>
         <h3>생일 : <input type="text" placeholder='birth' name='birth' onChange={onChangeBirth} required></input></h3>
         <DatePicker />
-        <h4 style={{ color: 'red' }}>{validate(userAddInfo).birth}</h4><hr />
+        <h4 style={{ color: 'red' }}>{validateBirth(userAddInfo.birth).birth}</h4><hr />
         <h3>성별 : <select id="selectSex" name='sex' onChange={onChangeSex}>
           <option value="">디폴트</option>
           <option value="m">M</option>
           <option value="f">F</option>
         </select></h3>
-        <h4 style={{ color: 'red' }}>{validate(userAddInfo).sex}</h4><hr />
+        <h4 style={{ color: 'red' }}>{validateSex(userAddInfo).sex}</h4><hr />
         <h3>직군 : <input type="text" placeholder='job' name='job' onChange={onChangeJob} required></input></h3>
-        <h4 style={{ color: 'red' }}>{validate(userAddInfo).job}</h4><hr />
-        <h3>허용 최대 가격 : <input type="text" placeholder='Maximum price' name='MaximumPrice' onChange={onChangeMaximumPrice} required></input></h3>
-        <h4 style={{ color: 'red' }}>{validate(userAddInfo).MaximumPrice}</h4><hr />
+        <h4 style={{ color: 'red' }}>{validateJob(userAddInfo).job}</h4><hr />
+        <AddInfoText type="허용 최대 가격"/>
         <h3>좋아하는 목록 :
           <select id="select1" name='favoriteList' onChange={onChangeFavoriteList}>
             <option value="">디폴트</option>
@@ -395,7 +416,7 @@ function AddInfo() {
             <option value={2}>2</option>
             <option value={3}>3</option>
           </select></h3>
-        <h4 style={{ color: 'red' }}>{userAddInfo.favoriteList ? null : validate(userAddInfo).favoriteList}</h4><hr />
+        <h4 style={{ color: 'red' }}>{userAddInfo.favoriteList ? null : validateFavoriteList(userAddInfo).favoriteList}</h4><hr />
         <button>완료</button>
       </div>
     </div>
