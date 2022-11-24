@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../css/App.css';
 import '../css/Login.css';
 import '../css/AddInfo.css';
@@ -48,6 +48,18 @@ function AddInfo() {
     MaximumPriceValidation: false,
     favoriteListValidation: false
   });
+
+  useEffect(() => {
+    
+  })
+  const changeStateNickname = (state : boolean) => {
+    const stateChange : UserAddInfoErrorMessage = {
+      ...userAddInfoErrorMessage,
+      nicknameValidation : state,
+    }
+    setUserAddInfoErrorMessage(stateChange);
+    console.log("parent props validation = " + userAddInfoErrorMessage.nicknameValidation);
+  }
 
   const onChangeBirth = (e: any) => {
     const { name, value } = e.target;
@@ -163,8 +175,6 @@ function AddInfo() {
       errors.birthValidation = true;
     }
 
-    console.log("설마 이렇게 해도 다 뜨니? birth");
-
     return errors;
   }
 
@@ -217,7 +227,7 @@ function AddInfo() {
     <div className='addInfoInputTag'>
       <h1>추가 정보를 입력해 주세요.</h1>
       <div className='formAlign'>
-        <AddInfoTextNickname type="닉네임" func={setUserAddInfoErrorMessage}/>
+        <AddInfoTextNickname type="닉네임" func={changeStateNickname}/>
         <AddInfoTextAge type="나이"/>
         <h3>생일 : <input type="text" placeholder='birth' name='birth' onChange={onChangeBirth} required></input></h3>
         <DatePicker />
