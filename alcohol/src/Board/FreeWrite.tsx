@@ -65,19 +65,14 @@ function FreeWrite(){
         <div>
             <div className = "input-Board">
                 <h1>Title</h1>
+                <input name="title" type="text" className="search-input" onChange={onchange} />
             </div>
-            <input name="title" type="text" className="search-input" onChange={onchange} />
+            
             <div className = 'bar2'>
                 <h1>content</h1>
+                <textarea name="contents" className='content' id="content" onChange={onchange}></textarea>
             </div>
-            <table className="content_table">
-                <tr>
-                    <td><textarea name="contents" className='content' id="content" onChange={onchange}></textarea></td>
-                </tr>
-
-            </table>
-            
-
+                          
             <select name="boardType" id="selectBoard" onChange={onchange}>
                 <option>카테고리 선택</option>
                 <option value = "F">자유게시판</option>
