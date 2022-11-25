@@ -197,7 +197,7 @@ function AddInfo() {
         body: JSON.stringify({
           name: state.name,
           email: state.email,
-          LoginType : state.loginType,
+          loginType : state.loginType,
           age: userAddInfo.age,
           birth: userAddInfo.birth,
           nickname: userAddInfo.nickname,
