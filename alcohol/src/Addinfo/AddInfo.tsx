@@ -54,17 +54,18 @@ function AddInfo() {
       ...userAddInfoErrorMessage,
       nicknameValidation: state,
     }
-
     const userNickChange: UserAddInfo = {
-      ...nickstate,
+      ...userAddInfo,
+      nickname : nickstate.nickname,
     }
+
     setUserAddInfo(userNickChange);
     setUserAddInfoErrorMessage(stateChange);
 
     console.log("addInfo 컴포넌트에서 하는거 = " + userAddInfo.nickname);
   }
 
-  const changeStateSex = (sexstate : string, state: boolean) => {
+  const changeStateSex = (sexstate : UserAddInfo, state: boolean) => {
     const stateChange: UserAddInfoErrorMessage = {
       ...userAddInfoErrorMessage,
       sexValidation: state,
@@ -72,13 +73,13 @@ function AddInfo() {
 
     const userSexChange : UserAddInfo = {
       ...userAddInfo,
-      sex : sexstate,
+      sex : sexstate.sex,
     }
     setUserAddInfo(userSexChange);
     setUserAddInfoErrorMessage(stateChange);
   }
 
-  const changeStateAge = (agestate : string, state: boolean) => {
+  const changeStateAge = (agestate : UserAddInfo, state: boolean) => {
     const stateChange: UserAddInfoErrorMessage = {
       ...userAddInfoErrorMessage,
       ageValidation: state,
@@ -86,10 +87,12 @@ function AddInfo() {
     
     const userAgeChange: UserAddInfo = {
       ...userAddInfo,
-      age : agestate,
+      age : agestate.age,
     }
     setUserAddInfo(userAgeChange);
     setUserAddInfoErrorMessage(stateChange);
+
+    console.log("age 메서드" + userAgeChange.age);
   }
 
   const changeStateMaximumPrice = (priceState : string, state: boolean) => {
@@ -104,6 +107,8 @@ function AddInfo() {
     }
     setUserAddInfo(userPriceChange);
     setUserAddInfoErrorMessage(stateChange);
+
+    console.log(userPriceChange.MaximumPrice);
   }
 
   const onChangeBirth = (e: any) => {
@@ -181,7 +186,7 @@ function AddInfo() {
       ...userAddInfoErrorMessage,
     }
 
-    console.log("일단 나오긴 하지?");
+    console.log("아니 또 왜");
     console.log(validate);
     console.log(userAddInfo);
 
@@ -287,6 +292,7 @@ function AddInfo() {
       <h1>추가 정보를 입력해 주세요.</h1>
       <div className='formAlign'>
         <AddInfoTextNickname type="닉네임" setState={changeStateNickname} />
+        <h4 style={{ color: 'red' }}>{userAddInfo.nickname}</h4>
         <AddInfoTextAge type="나이" setState={changeStateAge} />
         <h3>생일 : <input type="text" placeholder='birth' name='birth' onChange={onChangeBirth} required></input></h3>
         <DatePicker />

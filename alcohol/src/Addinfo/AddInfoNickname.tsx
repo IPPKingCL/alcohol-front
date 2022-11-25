@@ -45,8 +45,7 @@ function AddInfoNickName(props: { type: string , setState : any}) {
         }
 
         let errorsInput : UserAddInfoErrorMessage;
-        console.log("onChange = " + nextNickNameInput.nickname);
-        errorsInput = validateNickname(userAddInfo);
+        errorsInput = validateNickname(nextNickNameInput);
         props.setState(nextNickNameInput, errorsInput.nicknameValidation);
     }
 
