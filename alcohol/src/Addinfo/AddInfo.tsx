@@ -10,8 +10,8 @@ import AddInfoTextNickname from './AddInfoNickname';
 import AddInfoTextAge from './AddInfoAge';
 import AddInfoSex from './AddInfoSex';
 import AddInfoMaximumPrice from './AddInfoMaximumPrice';
-import {UserAddInfo} from '../interface/UserAddInfo'
-import {UserAddInfoErrorMessage} from '../interface/UserAddInfoErrorMessage'
+import { UserAddInfo } from '../interface/UserAddInfo'
+import { UserAddInfoErrorMessage } from '../interface/UserAddInfoErrorMessage'
 
 function AddInfo() {
 
@@ -49,35 +49,59 @@ function AddInfo() {
     favoriteListValidation: false
   });
 
-  const changeStateNickname = (state : boolean) => {
-    const stateChange : UserAddInfoErrorMessage = {
+  const changeStateNickname = (nickstate : string, state: boolean) => {
+    const stateChange: UserAddInfoErrorMessage = {
       ...userAddInfoErrorMessage,
-      nicknameValidation : state,
+      nicknameValidation: state,
     }
+
+    const userNickChange: UserAddInfo = {
+      ...userAddInfo,
+      nickname : nickstate,
+    }
+    setUserAddInfo(userNickChange);
     setUserAddInfoErrorMessage(stateChange);
   }
 
-  const changeStateSex = (state : boolean) => {
-    const stateChange : UserAddInfoErrorMessage = {
+  const changeStateSex = (sexstate : string, state: boolean) => {
+    const stateChange: UserAddInfoErrorMessage = {
       ...userAddInfoErrorMessage,
-      sexValidation : state,
+      sexValidation: state,
     }
+
+    const userSexChange : UserAddInfo = {
+      ...userAddInfo,
+      sex : sexstate,
+    }
+    setUserAddInfo(userSexChange);
     setUserAddInfoErrorMessage(stateChange);
   }
 
-  const changeStateAge = (state : boolean) => {
-    const stateChange : UserAddInfoErrorMessage = {
+  const changeStateAge = (agestate : string, state: boolean) => {
+    const stateChange: UserAddInfoErrorMessage = {
       ...userAddInfoErrorMessage,
-      ageValidation : state,
+      ageValidation: state,
     }
+    
+    const userAgeChange: UserAddInfo = {
+      ...userAddInfo,
+      age : agestate,
+    }
+    setUserAddInfo(userAgeChange);
     setUserAddInfoErrorMessage(stateChange);
   }
 
-  const changeStateMaximumPrice = (state : boolean) => {
-    const stateChange : UserAddInfoErrorMessage = {
+  const changeStateMaximumPrice = (priceState : string, state: boolean) => {
+    const stateChange: UserAddInfoErrorMessage = {
       ...userAddInfoErrorMessage,
-      ageValidation : state,
+      MaximumPriceValidation: state,
     }
+
+    const userPriceChange : UserAddInfo = {
+      ...userAddInfo,
+      MaximumPrice : parseInt(priceState),
+    }
+    setUserAddInfo(userPriceChange);
     setUserAddInfoErrorMessage(stateChange);
   }
 
@@ -93,7 +117,7 @@ function AddInfo() {
 
   }
 
-  
+
 
   const onChangeJob = (e: any) => {
     const { name, value } = e.target;
@@ -151,33 +175,47 @@ function AddInfo() {
 
 
   function sendAddInfo() {
-    fetch(addr + '/user/insert', {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: state.name,
-        email: state.email,
-        age: userAddInfo.age,
-        birth: userAddInfo.birth,
-        nickname: userAddInfo.nickname,
-        sex: userAddInfo.sex,
-        job: userAddInfo.job,
-        userId: '-',
-        password: '-',
-      }),
-    }).then(res => {
-      if (res.ok) {
-        alert("응답완료");
-      }
-    })
+
+    const validate: UserAddInfoErrorMessage = {
+      ...userAddInfoErrorMessage,
+    }
+
+    console.log("일단 나오긴 하지?");
+    console.log(validate);
+    console.log(userAddInfo);
+
+    if (validate.MaximumPriceValidation && validate.ageValidation && validate.nicknameValidation
+      && validate.sexValidation) {
+      console.log("근데 여기가 안되는듯?");
+      fetch(addr + '/user/insert', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: state.name,
+          email: state.email,
+          age: userAddInfo.age,
+          birth: userAddInfo.birth,
+          nickname: userAddInfo.nickname,
+          sex: userAddInfo.sex,
+          job: userAddInfo.job,
+          userId: '-',
+          password: '-',
+        }),
+      }).then(res => {
+        if (res.ok) {
+          alert("응답완료");
+        }
+      })
+    }
+
   }
 
   const intialValues = { userAddInfo };
 
   const validateBirth = (values: any) => {
-    const errors : UserAddInfoErrorMessage = {
+    const errors: UserAddInfoErrorMessage = {
       ...userAddInfoErrorMessage
     };
 
@@ -199,7 +237,7 @@ function AddInfo() {
   }
 
   const validateJob = (values: any) => {
-    const errors : UserAddInfoErrorMessage = {
+    const errors: UserAddInfoErrorMessage = {
       ...userAddInfoErrorMessage
     };
 
@@ -222,10 +260,10 @@ function AddInfo() {
 
 
   const validateFavoriteList = (values: any) => {
-    const errors : UserAddInfoErrorMessage = {
+    const errors: UserAddInfoErrorMessage = {
       ...userAddInfoErrorMessage
     };
-    
+
     const regexFavoriteList = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 
     if (!values.favoriteList) {
@@ -247,15 +285,15 @@ function AddInfo() {
     <div className='addInfoInputTag'>
       <h1>추가 정보를 입력해 주세요.</h1>
       <div className='formAlign'>
-        <AddInfoTextNickname type="닉네임" setState={changeStateNickname}/>
-        <AddInfoTextAge type="나이" setState={changeStateAge}/>
+        <AddInfoTextNickname type="닉네임" setState={changeStateNickname} />
+        <AddInfoTextAge type="나이" setState={changeStateAge} />
         <h3>생일 : <input type="text" placeholder='birth' name='birth' onChange={onChangeBirth} required></input></h3>
         <DatePicker />
         <h4 style={{ color: 'red' }}>{validateBirth(userAddInfo.birth).birth}</h4><hr />
-        <AddInfoSex type="성별" setState={changeStateSex}/>
+        <AddInfoSex type="성별" setState={changeStateSex} />
         <h3>직군 : <input type="text" placeholder='job' name='job' onChange={onChangeJob} required></input></h3>
         <h4 style={{ color: 'red' }}>{validateJob(userAddInfo).job}</h4><hr />
-        <AddInfoMaximumPrice type="허용 최대 가격" setState={changeStateMaximumPrice}/>
+        <AddInfoMaximumPrice type="허용 최대 가격" setState={changeStateMaximumPrice} />
         <h3>좋아하는 목록 :
           <select id="select1" name='favoriteList' onChange={onChangeFavoriteList}>
             <option value="">디폴트</option>
@@ -276,7 +314,7 @@ function AddInfo() {
             <option value={3}>3</option>
           </select></h3>
         <h4 style={{ color: 'red' }}>{userAddInfo.favoriteList ? null : validateFavoriteList(userAddInfo).favoriteList}</h4><hr />
-        <button>완료</button>
+        <button onClick={sendAddInfo}>완료</button>
       </div>
     </div>
   );

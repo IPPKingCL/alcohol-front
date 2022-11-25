@@ -60,17 +60,17 @@ function AddInfoText(props: { type: string, setState : any }) {
             errors.age = "Cannot be blank";
             errors.ageValidation = false;
             setAlert(errors.age);
-            props.setState(errors.age);
+            props.setState(userAddInfo.age, errors.ageValidation);
         } else if (!regexAge.test(values.age)) {
             errors.age = "Invalid age format";
             errors.ageValidation = false;
             setAlert(errors.age);
-            props.setState(errors.age);
+            props.setState(userAddInfo.age, errors.ageValidation);
         } else {
             errors.age = "";
             errors.ageValidation = true;
             setAlert(errors.age);
-            props.setState(errors.age);
+            props.setState(userAddInfo.age, errors.ageValidation);
         }
         return errors.age;
 

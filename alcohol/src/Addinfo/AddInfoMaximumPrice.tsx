@@ -61,17 +61,17 @@ function AddInfoMaximumPrice(props: { type: string, setState : any }) {
           errors.MaximumPrice = "Cannot be blank";
           errors.MaximumPriceValidation = false;
           setAlert(errors.MaximumPrice);
-          props.setState(errors.MaximumPriceValidation);
+          props.setState(userAddInfo.MaximumPrice, errors.MaximumPriceValidation);
         } else if (!regexMaximumPrice.test(values.MaximumPrice)) {
           errors.MaximumPrice = "Invalid Price format";
           errors.MaximumPriceValidation = false;
           setAlert(errors.MaximumPrice);
-          props.setState(errors.MaximumPriceValidation);
+          props.setState(userAddInfo.MaximumPrice, errors.MaximumPriceValidation);
         } else {
           errors.MaximumPrice = "";
           errors.MaximumPriceValidation = true;
           setAlert(errors.MaximumPrice);
-          props.setState(errors.MaximumPriceValidation);
+          props.setState(userAddInfo.MaximumPrice, errors.MaximumPriceValidation);
         }
     
         return errors;

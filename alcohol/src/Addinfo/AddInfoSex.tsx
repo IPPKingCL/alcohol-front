@@ -61,17 +61,17 @@ function AddInfoSex(props: { type: string, setState : any}) {
           errors.sex = "Cannot be blank";
           errors.sexValidation = false;
           setAlert(errors.sex);
-          props.setState(errors.sexValidation);
+          props.setState(userAddInfo.sex, errors.sexValidation);
         } else if (!regexSex.test(values.sex)) {
           errors.sex = "Invalid sex format";
           errors.sexValidation = false;
           setAlert(errors.sex);
-          props.setState(errors.sexValidation);
+          props.setState(userAddInfo.sex, errors.sexValidation);
         } else {
           errors.sex = "";
           errors.sexValidation = true;
           setAlert(errors.sex);
-          props.setState(errors.sexValidation);
+          props.setState(userAddInfo.sex, errors.sexValidation);
         }
     
         return errors;

@@ -61,18 +61,18 @@ function AddInfoNickName(props: { type: string , setState : any}) {
             errors.nickname = "Cannot be blank";
             setAlert("Cannot be blank");
             errors.nicknameValidation = false;
-            props.setState(false);
+            props.setState(userAddInfo.nickname, errors.nicknameValidation);
             //닉네임 정규식 표현이 옳지 않을시
         } else if (!regexNickname.test(values.nickname)) {
             errors.nickname = "Invalid nickname format";
             errors.nicknameValidation = false;
             setAlert("Invalid nickname format");
-            props.setState(false);
+            props.setState(userAddInfo.nickname, errors.nicknameValidation);
         } else {
             errors.nickname = "";
             errors.nicknameValidation = true;
             setAlert("");
-            props.setState(true);
+            props.setState(userAddInfo.nickname, errors.nicknameValidation);
         }
 
         return errors.nickname;
