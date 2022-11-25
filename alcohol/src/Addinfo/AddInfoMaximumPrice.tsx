@@ -4,7 +4,7 @@ import '../css/Login.css';
 import { UserAddInfoErrorMessage } from '../interface/UserAddInfoErrorMessage'
 import { UserAddInfo } from '../interface/UserAddInfo'
 
-function AddInfoMaximumPrice(props: { type: string }) {
+function AddInfoMaximumPrice(props: { type: string, setState : any }) {
 
     const [userAddInfoErrorMessage, setUserAddInfoErrorMessage] = useState<UserAddInfoErrorMessage>({
         nickname: '',
@@ -33,6 +33,8 @@ function AddInfoMaximumPrice(props: { type: string }) {
         favoriteList: new Array,
     });
 
+    const [alert, setAlert] = useState<string>("Cannot be blank");
+
     const onChangeMaximumPrice = (e: any) => {
         const { name, value } = e.target;
     
@@ -42,6 +44,8 @@ function AddInfoMaximumPrice(props: { type: string }) {
           [name]: value,
         }
         setUserAddInfo(nextMaximumPriceInput);
+
+        validateMaximumPrice(nextMaximumPriceInput);
     
       }
 
@@ -56,13 +60,18 @@ function AddInfoMaximumPrice(props: { type: string }) {
         if (!values.MaximumPrice) {
           errors.MaximumPrice = "Cannot be blank";
           errors.MaximumPriceValidation = false;
-          //비밀번호의 길이(length)가 4글자 이하일 때
+          setAlert(errors.MaximumPrice);
+          props.setState(errors.MaximumPriceValidation);
         } else if (!regexMaximumPrice.test(values.MaximumPrice)) {
           errors.MaximumPrice = "Invalid Price format";
           errors.MaximumPriceValidation = false;
+          setAlert(errors.MaximumPrice);
+          props.setState(errors.MaximumPriceValidation);
         } else {
           errors.MaximumPrice = "";
           errors.MaximumPriceValidation = true;
+          setAlert(errors.MaximumPrice);
+          props.setState(errors.MaximumPriceValidation);
         }
     
         return errors;
@@ -72,7 +81,7 @@ function AddInfoMaximumPrice(props: { type: string }) {
     return (
         <div>
             <h3>{props.type} : <input type="text" placeholder={props.type} name='MaximumPrice' onChange={onChangeMaximumPrice} required></input></h3>
-            <h4 style={{ color: 'red' }}>{validateMaximumPrice(userAddInfo).MaximumPrice}</h4><hr />
+            <h4 style={{ color: 'red' }}>{alert}</h4><hr />
         </div>
     );
 

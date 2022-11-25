@@ -65,6 +65,22 @@ function AddInfo() {
     setUserAddInfoErrorMessage(stateChange);
   }
 
+  const changeStateAge = (state : boolean) => {
+    const stateChange : UserAddInfoErrorMessage = {
+      ...userAddInfoErrorMessage,
+      ageValidation : state,
+    }
+    setUserAddInfoErrorMessage(stateChange);
+  }
+
+  const changeStateMaximumPrice = (state : boolean) => {
+    const stateChange : UserAddInfoErrorMessage = {
+      ...userAddInfoErrorMessage,
+      ageValidation : state,
+    }
+    setUserAddInfoErrorMessage(stateChange);
+  }
+
   const onChangeBirth = (e: any) => {
     const { name, value } = e.target;
 
@@ -232,14 +248,14 @@ function AddInfo() {
       <h1>추가 정보를 입력해 주세요.</h1>
       <div className='formAlign'>
         <AddInfoTextNickname type="닉네임" setState={changeStateNickname}/>
-        <AddInfoTextAge type="나이"/>
+        <AddInfoTextAge type="나이" setState={changeStateAge}/>
         <h3>생일 : <input type="text" placeholder='birth' name='birth' onChange={onChangeBirth} required></input></h3>
         <DatePicker />
         <h4 style={{ color: 'red' }}>{validateBirth(userAddInfo.birth).birth}</h4><hr />
         <AddInfoSex type="성별" setState={changeStateSex}/>
         <h3>직군 : <input type="text" placeholder='job' name='job' onChange={onChangeJob} required></input></h3>
         <h4 style={{ color: 'red' }}>{validateJob(userAddInfo).job}</h4><hr />
-        <AddInfoMaximumPrice type="허용 최대 가격"/>
+        <AddInfoMaximumPrice type="허용 최대 가격" setState={changeStateMaximumPrice}/>
         <h3>좋아하는 목록 :
           <select id="select1" name='favoriteList' onChange={onChangeFavoriteList}>
             <option value="">디폴트</option>

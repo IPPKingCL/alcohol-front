@@ -4,7 +4,7 @@ import '../css/Login.css';
 import { UserAddInfoErrorMessage } from '../interface/UserAddInfoErrorMessage'
 import { UserAddInfo } from '../interface/UserAddInfo'
 
-function AddInfoText(props: { type: string }) {
+function AddInfoText(props: { type: string, setState : any }) {
 
     const [userAddInfoErrorMessage, setUserAddInfoErrorMessage] = useState<UserAddInfoErrorMessage>({
         nickname: '',
@@ -33,6 +33,8 @@ function AddInfoText(props: { type: string }) {
         favoriteList: new Array,
     });
 
+    const [alert, setAlert] = useState<string>("Cannot be blank");
+
     const onChangeAge = (e: any) => {
         const { name, value } = e.target;
 
@@ -42,6 +44,8 @@ function AddInfoText(props: { type: string }) {
             [name]: value,
         }
         setUserAddInfo(nextAgeInput);
+
+        validateAge(nextAgeInput);
     }
 
 
@@ -55,13 +59,18 @@ function AddInfoText(props: { type: string }) {
         if (values.age === "") {
             errors.age = "Cannot be blank";
             errors.ageValidation = false;
-            //닉네임 정규식 표현이 옳지 않을시
+            setAlert(errors.age);
+            props.setState(errors.age);
         } else if (!regexAge.test(values.age)) {
             errors.age = "Invalid age format";
             errors.ageValidation = false;
+            setAlert(errors.age);
+            props.setState(errors.age);
         } else {
             errors.age = "";
             errors.ageValidation = true;
+            setAlert(errors.age);
+            props.setState(errors.age);
         }
         return errors.age;
 
@@ -72,7 +81,7 @@ function AddInfoText(props: { type: string }) {
 
         <div>
             <h3>{props.type} : <input type="text" placeholder={props.type} name='age' onChange={onChangeAge} required></input></h3>
-            <h4 style={{ color: 'red' }}>{validateAge(userAddInfo)}</h4><hr />
+            <h4 style={{ color: 'red' }}>{alert}</h4><hr />
         </div>
     );
 
