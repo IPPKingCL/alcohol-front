@@ -62,7 +62,6 @@ function AddInfo() {
     setUserAddInfo(userNickChange);
     setUserAddInfoErrorMessage(stateChange);
 
-    console.log("addInfo 컴포넌트에서 하는거 = " + userAddInfo.nickname);
   }
 
   const changeStateSex = (sexstate : UserAddInfo, state: boolean) => {
@@ -189,6 +188,7 @@ function AddInfo() {
     console.log("아니 또 왜");
     console.log(validate);
     console.log(userAddInfo);
+    console.log(state);
 
     if (validate.MaximumPriceValidation && validate.ageValidation && validate.nicknameValidation
       && validate.sexValidation) {
@@ -206,8 +206,9 @@ function AddInfo() {
           nickname: userAddInfo.nickname,
           sex: userAddInfo.sex,
           job: userAddInfo.job,
-          userId: '-',
+          userId: state.id,
           password: '-',
+          LoginType : state.userLoginType
         }),
       }).then(res => {
         if (res.ok) {
