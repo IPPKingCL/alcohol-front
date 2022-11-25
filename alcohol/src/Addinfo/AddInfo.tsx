@@ -215,8 +215,6 @@ function AddInfo() {
 
   }
 
-  const intialValues = { userAddInfo };
-
   const validateBirth = (values: any) => {
     const errors: UserAddInfoErrorMessage = {
       ...userAddInfoErrorMessage
