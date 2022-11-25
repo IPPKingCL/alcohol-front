@@ -91,7 +91,6 @@ function AddInfo() {
     setUserAddInfo(userAgeChange);
     setUserAddInfoErrorMessage(stateChange);
 
-    console.log("age 메서드" + userAgeChange.age);
   }
 
   const changeStateMaximumPrice = (priceState : string, state: boolean) => {
@@ -184,15 +183,12 @@ function AddInfo() {
     const validate: UserAddInfoErrorMessage = {
       ...userAddInfoErrorMessage,
     }
-
-    console.log("아니 또 왜");
     console.log(validate);
     console.log(userAddInfo);
     console.log(state);
 
     if (validate.MaximumPriceValidation && validate.ageValidation && validate.nicknameValidation
       && validate.sexValidation) {
-      console.log("근데 여기가 안되는듯?");
       fetch(addr + '/user/insert', {
         method: "POST",
         headers: {
@@ -293,7 +289,6 @@ function AddInfo() {
       <h1>추가 정보를 입력해 주세요.</h1>
       <div className='formAlign'>
         <AddInfoTextNickname type="닉네임" setState={changeStateNickname} />
-        <h4 style={{ color: 'red' }}>{userAddInfo.nickname}</h4>
         <AddInfoTextAge type="나이" setState={changeStateAge} />
         <h3>생일 : <input type="text" placeholder='birth' name='birth' onChange={onChangeBirth} required></input></h3>
         <DatePicker />
