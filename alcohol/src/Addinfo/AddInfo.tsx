@@ -49,18 +49,19 @@ function AddInfo() {
     favoriteListValidation: false
   });
 
-  const changeStateNickname = (nickstate : string, state: boolean) => {
+  const changeStateNickname = (nickstate : UserAddInfo, state: boolean) => {
     const stateChange: UserAddInfoErrorMessage = {
       ...userAddInfoErrorMessage,
       nicknameValidation: state,
     }
 
     const userNickChange: UserAddInfo = {
-      ...userAddInfo,
-      nickname : nickstate,
+      ...nickstate,
     }
     setUserAddInfo(userNickChange);
     setUserAddInfoErrorMessage(stateChange);
+
+    console.log("addInfo 컴포넌트에서 하는거 = " + userAddInfo.nickname);
   }
 
   const changeStateSex = (sexstate : string, state: boolean) => {

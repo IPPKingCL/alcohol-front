@@ -43,9 +43,11 @@ function AddInfoNickName(props: { type: string , setState : any}) {
             ...userAddInfo,
             [name]: value,
         }
-        setUserAddInfo(nextNickNameInput);
 
-        validateNickname(nextNickNameInput);
+        let errorsInput : UserAddInfoErrorMessage;
+        console.log("onChange = " + nextNickNameInput.nickname);
+        errorsInput = validateNickname(userAddInfo);
+        props.setState(nextNickNameInput, errorsInput.nicknameValidation);
     }
 
 
@@ -56,26 +58,24 @@ function AddInfoNickName(props: { type: string , setState : any}) {
 
         const regexNickname = /^[가-힣a-zA-z0-9]{2,8}$/i;
 
-        //닉네임 값이 없을시
         if (values.nickname === "") {
             errors.nickname = "Cannot be blank";
             setAlert("Cannot be blank");
             errors.nicknameValidation = false;
-            props.setState(userAddInfo.nickname, errors.nicknameValidation);
-            //닉네임 정규식 표현이 옳지 않을시
+            // props.setState(userAddInfo.nickname, errors.nicknameValidation);
         } else if (!regexNickname.test(values.nickname)) {
             errors.nickname = "Invalid nickname format";
             errors.nicknameValidation = false;
             setAlert("Invalid nickname format");
-            props.setState(userAddInfo.nickname, errors.nicknameValidation);
+            // props.setState(userAddInfo.nickname, errors.nicknameValidation);
         } else {
             errors.nickname = "";
             errors.nicknameValidation = true;
             setAlert("");
-            props.setState(userAddInfo.nickname, errors.nicknameValidation);
+            // props.setState(userAddInfo.nickname, errors.nicknameValidation);
         }
 
-        return errors.nickname;
+        return errors;
 
     }
 
@@ -84,7 +84,8 @@ function AddInfoNickName(props: { type: string , setState : any}) {
 
         <div>
             <h3>{props.type} : <input type="text" placeholder={props.type} name='nickname' onChange={onChangeNickname} required></input></h3>
-            <h4 style={{ color: 'red' }}>{alert}</h4><hr />
+            <h4 style={{ color: 'red' }}>{alert}</h4>
+            <h4 style={{ color: 'red' }}>{userAddInfo.nickname}</h4><hr />
         </div>
     );
 

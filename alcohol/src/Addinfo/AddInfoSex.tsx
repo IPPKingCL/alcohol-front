@@ -85,7 +85,8 @@ function AddInfoSex(props: { type: string, setState : any}) {
                 <option value="m">M</option>
                 <option value="f">F</option>
             </select></h3>
-            <h4 style={{ color: 'red' }}>{alert}</h4><hr />
+            <h4 style={{ color: 'red' }}>{alert}</h4>
+            <h4 style={{ color: 'red' }}>{userAddInfo.sex}</h4><hr />
         </div>
     );
 
