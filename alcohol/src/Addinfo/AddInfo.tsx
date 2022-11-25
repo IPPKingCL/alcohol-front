@@ -49,16 +49,20 @@ function AddInfo() {
     favoriteListValidation: false
   });
 
-  useEffect(() => {
-    
-  })
   const changeStateNickname = (state : boolean) => {
     const stateChange : UserAddInfoErrorMessage = {
       ...userAddInfoErrorMessage,
       nicknameValidation : state,
     }
     setUserAddInfoErrorMessage(stateChange);
-    console.log("parent props validation = " + userAddInfoErrorMessage.nicknameValidation);
+  }
+
+  const changeStateSex = (state : boolean) => {
+    const stateChange : UserAddInfoErrorMessage = {
+      ...userAddInfoErrorMessage,
+      sexValidation : state,
+    }
+    setUserAddInfoErrorMessage(stateChange);
   }
 
   const onChangeBirth = (e: any) => {
@@ -227,12 +231,12 @@ function AddInfo() {
     <div className='addInfoInputTag'>
       <h1>추가 정보를 입력해 주세요.</h1>
       <div className='formAlign'>
-        <AddInfoTextNickname type="닉네임" func={changeStateNickname}/>
+        <AddInfoTextNickname type="닉네임" setState={changeStateNickname}/>
         <AddInfoTextAge type="나이"/>
         <h3>생일 : <input type="text" placeholder='birth' name='birth' onChange={onChangeBirth} required></input></h3>
         <DatePicker />
         <h4 style={{ color: 'red' }}>{validateBirth(userAddInfo.birth).birth}</h4><hr />
-        <AddInfoSex type="성별"/>
+        <AddInfoSex type="성별" setState={changeStateSex}/>
         <h3>직군 : <input type="text" placeholder='job' name='job' onChange={onChangeJob} required></input></h3>
         <h4 style={{ color: 'red' }}>{validateJob(userAddInfo).job}</h4><hr />
         <AddInfoMaximumPrice type="허용 최대 가격"/>

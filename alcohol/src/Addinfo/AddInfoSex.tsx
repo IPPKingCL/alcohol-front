@@ -4,7 +4,7 @@ import '../css/Login.css';
 import { UserAddInfoErrorMessage } from '../interface/UserAddInfoErrorMessage'
 import { UserAddInfo } from '../interface/UserAddInfo'
 
-function AddInfoSex(props: { type: string }) {
+function AddInfoSex(props: { type: string, setState : any}) {
 
     const [userAddInfoErrorMessage, setUserAddInfoErrorMessage] = useState<UserAddInfoErrorMessage>({
         nickname: '',
@@ -33,15 +33,19 @@ function AddInfoSex(props: { type: string }) {
         favoriteList: new Array,
     });
 
+    const [alert, setAlert] = useState<string>("Cannot be blank");
+
     const onChangeSex = (e: any) => {
         const { name, value } = e.target;
     
     
-        const nextJobInput: UserAddInfo = {
+        const nextSexInput: UserAddInfo = {
           ...userAddInfo,
           [name]: value,
         }
-        setUserAddInfo(nextJobInput);
+        setUserAddInfo(nextSexInput);
+
+        validateSex(nextSexInput);
       }
 
     const validateSex = (values: any) => {
@@ -50,17 +54,21 @@ function AddInfoSex(props: { type: string }) {
         };
     
         const regexSex = /^[MF]$/i;
+
+        console.log(values.sex);
     
-        if (!values.sex) {
+        if (values.sex === "") {
           errors.sex = "Cannot be blank";
           errors.sexValidation = false;
-    
+          setAlert(errors.sex);
         } else if (!regexSex.test(values.sex)) {
-          errors.sex = "Password must be more than 4 characters";
+          errors.sex = "Invalid sex format";
           errors.sexValidation = false;
+          setAlert(errors.sex);
         } else {
           errors.sex = "";
           errors.sexValidation = true;
+          setAlert(errors.sex);
         }
     
         return errors;
@@ -70,12 +78,11 @@ function AddInfoSex(props: { type: string }) {
 
         <div>
             <h3>성별 : <select id="selectSex" name='sex' onChange={onChangeSex}>
-                <option value="">디폴트</option>
+                <option value="">성별을 선택하세요.</option>
                 <option value="m">M</option>
                 <option value="f">F</option>
             </select></h3>
-            <h4 style={{ color: 'red' }}>{validateSex(userAddInfo).sex}</h4><hr />
-
+            <h4 style={{ color: 'red' }}>{alert}</h4><hr />
         </div>
     );
 

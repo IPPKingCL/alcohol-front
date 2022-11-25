@@ -1,10 +1,10 @@
-import React, { useState, forwardRef } from 'react';
+import React, { useState, forwardRef, useEffect } from 'react';
 import '../css/App.css';
 import '../css/Login.css';
 import { UserAddInfoErrorMessage } from '../interface/UserAddInfoErrorMessage'
 import { UserAddInfo } from '../interface/UserAddInfo'
 
-function AddInfoNickName(props: { type: string , func : any}) {
+function AddInfoNickName(props: { type: string , setState : any}) {
 
     const [userAddInfoErrorMessage, setUserAddInfoErrorMessage] = useState<UserAddInfoErrorMessage>({
         nickname: '',
@@ -33,7 +33,7 @@ function AddInfoNickName(props: { type: string , func : any}) {
         favoriteList: new Array,
     });
 
-    const [alert, setAlert] = useState<string>();
+    const [alert, setAlert] = useState<string>("Cannot be blank");
 
     const onChangeNickname = (e: any) => {
         const { name, value } = e.target;
@@ -61,18 +61,18 @@ function AddInfoNickName(props: { type: string , func : any}) {
             errors.nickname = "Cannot be blank";
             setAlert("Cannot be blank");
             errors.nicknameValidation = false;
-            props.func(false);
+            props.setState(false);
             //닉네임 정규식 표현이 옳지 않을시
         } else if (!regexNickname.test(values.nickname)) {
             errors.nickname = "Invalid nickname format";
             errors.nicknameValidation = false;
             setAlert("Invalid nickname format");
-            props.func(false);
+            props.setState(false);
         } else {
             errors.nickname = "";
             errors.nicknameValidation = true;
             setAlert("");
-            props.func(true);
+            props.setState(true);
         }
 
         return errors.nickname;
