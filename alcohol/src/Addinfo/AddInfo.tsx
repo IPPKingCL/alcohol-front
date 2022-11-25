@@ -197,6 +197,7 @@ function AddInfo() {
         body: JSON.stringify({
           name: state.name,
           email: state.email,
+          LoginType : state.loginType,
           age: userAddInfo.age,
           birth: userAddInfo.birth,
           nickname: userAddInfo.nickname,
@@ -204,7 +205,6 @@ function AddInfo() {
           job: userAddInfo.job,
           userId: state.id,
           password: '-',
-          LoginType : state.userLoginType
         }),
       }).then(res => {
         if (res.ok) {
@@ -227,7 +227,6 @@ function AddInfo() {
     if (!values) {
       errors.birth = "Cannot be blank";
       errors.birthValidation = false;
-      //비밀번호의 길이(length)가 4글자 이하일 때
     } else if (!regexBirth.test(values.birth)) {
       errors.birth = "Invalid birth format";
       errors.birthValidation = false;

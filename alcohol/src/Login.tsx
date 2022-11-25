@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './css/App.css';
 import './css/Login.css';
@@ -13,6 +13,7 @@ function Login() {
         "722148392125-6qdo1sho8shp117jpfipd8vggfgb1qo9.apps.googleusercontent.com";
 
 
+    const [type, setType] = useState<string>("g");
 
     useEffect(() => {
         function start() {
@@ -34,7 +35,7 @@ function Login() {
             email: profile.getEmail(),
             image: profile.getImageUrl(),
             name: profile.getName(),
-            LoginType : "g",
+            loginType : type,
         };
         // 로그인 성공 후 실행하기 원하는 코드 작성.
         alert("구글 로그인에 성공하였습니다.");
