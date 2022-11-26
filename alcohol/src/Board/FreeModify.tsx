@@ -81,6 +81,10 @@ function FreeModify(){
         })
     }
 
+    const list = () => {
+        navigate('/free');
+    }
+
     return(
         <div>
             {loading ?<strong>loading...</strong>:
@@ -117,7 +121,7 @@ function FreeModify(){
                         <option value = "R">레시피 게시판</option>
                     </select>
                 
-                    <button className="d-btn" ><Link to="/free" >목록</Link></button>
+                    <button className="d-btn" onClick={list} >목록</button>
                     <button className="m-btn" onClick={onclick}>저장</button>
                </div>
             }
