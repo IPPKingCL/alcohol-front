@@ -42,7 +42,10 @@ function FreeModify(){
         });
     }
     
-    const onclick = async () => {
+    const onclick = async () => {//수정이슈 있음 
+        if(modiboard.title==''||modiboard.contents==''){
+            
+        }
         if(!modiboard.title||!modiboard.contents){
             alert("제목과 내용을 입력해주세요");
             return;

@@ -4,7 +4,7 @@ import BoardTable from './BoardTable';
 import Pagination from './Paginattion';
 
 function List(props:any){
-    
+    console.log(props.datas)
     return(
         <div>
             
