@@ -29,8 +29,6 @@ function Login() {
     async function onSuccess(res: any) {
 
         const profile = res.getBasicProfile();
-
-        console.log("success에서 타입 분명히 넘겻자너! " + type);
         
         const userdata = {
             id: profile.getId(),
