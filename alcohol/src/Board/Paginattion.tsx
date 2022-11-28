@@ -1,4 +1,3 @@
-import React from "react";
 
 function Pagination({ num,getCurrentPage }: number |any){
     const pageNumbers = [];
@@ -7,7 +6,6 @@ function Pagination({ num,getCurrentPage }: number |any){
     }
     
     const onclick = (e:any) => {
-        console.log(e.target.value);
         getCurrentPage(e.target.value);
     }
     

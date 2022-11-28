@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { boardList } from '../interface/BoardList';
 import BoardTable from './BoardTable';
-import Pagination from './Paginattion';
+
 
 function List(props:any){
     console.log(props.datas)

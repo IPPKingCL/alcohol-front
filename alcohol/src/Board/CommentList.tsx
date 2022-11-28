@@ -1,5 +1,3 @@
-import React, { useEffect, useState } from 'react';
-import { commentList } from '../interface/CommentList';
 import CommentOne from './CommentOne';
 
 function CommentList(props:any){

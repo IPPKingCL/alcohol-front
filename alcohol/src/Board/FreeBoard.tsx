@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { boardList } from '../interface/BoardList';
 import { addr } from '../interface/serverAddr';
 import List from './List';
@@ -23,7 +23,6 @@ function FreeBoard() {
             }
         }).then((res) => res.json())
             .then((res) => {
-                console.log(res.length)
                 let i: number = 0
                 for (i; i < res.length; i++) {
                     const data: boardList = {
@@ -53,7 +52,6 @@ function FreeBoard() {
     }, [])
 
     const onclick = () => {
-        console.log("hi");
         navigate('write');
     }
 
