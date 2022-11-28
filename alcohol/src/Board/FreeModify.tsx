@@ -24,6 +24,7 @@ function FreeModify(){
         }).then((res) => res.json())
         .then((res) => {
             setBoard(res);
+            setModiBoard(res);
             console.log(board);
         })
 
@@ -42,10 +43,8 @@ function FreeModify(){
         });
     }
     
-    const onclick = async () => {//수정이슈 있음 
-        if(modiboard.title==''||modiboard.contents==''){
-            
-        }
+    const onclick = async () => {
+       
         if(!modiboard.title||!modiboard.contents){
             alert("제목과 내용을 입력해주세요");
             return;
