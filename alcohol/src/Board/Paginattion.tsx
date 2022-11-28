@@ -1,20 +1,20 @@
 import React from "react";
 
-function Pagination({ num }: number |any){
+function Pagination({ num,getCurrentPage }: number |any){
     const pageNumbers = [];
     for (let i = 1; i <= num; i++) {
       pageNumbers.push(i);
     }
     
-    const onclick = (num:any):any => {
-        console.log(num);
-        //getCurrentPage(num.number);
+    const onclick = (e:any) => {
+        console.log(e.target.value);
+        getCurrentPage(e.target.value);
     }
     
     return (
-        <div>
+        <div className="paging">
             {pageNumbers.map(number =>(
-                <span onClick={onclick(number)}>{number}     </span>
+                <li className="bar_menu" key={number} onClick={onclick} value={number}>{number}     </li>
             ))}
         </div>
     )

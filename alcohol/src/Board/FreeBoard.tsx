@@ -6,138 +6,144 @@ import List from './List';
 import '../css/board.css';
 import Pagination from './Paginattion';
 
-function FreeBoard(){
+function FreeBoard() {
     const [loading, setLoading] = useState<boolean>(true);
     const [arrData, setArrData] = useState<boardList[]>([]);
-    const navigate=useNavigate();
+    const navigate = useNavigate();
     const [currentPage, setCurrentPage] = useState<number>(1);//default 1 page
-    const [pageCount,setPageCount] = useState<number>();  //page count
+    const [pageCount, setPageCount] = useState<number>();  //page count
     const [aData, setAData] = useState<boardList[]>([]);
-    
+
     const list = async () => {
         setArrData([]);
-        fetch(addr+'/board', {
+        fetch(addr + '/board', {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
             }
         }).then((res) => res.json())
-        .then((res) => {
-            console.log(res.length)
-            let i:number=0
-            for(i;i<res.length;i++){
-                const data:boardList = {
-                    id : res[i].id,
-                    title:res[i].title,
-                    contents:res[i].contents,
-                    dateTime:res[i].dateTime,
-                    isDeleted:res[i].isDeleted,
-                    isModified:res[i].isModified,
+            .then((res) => {
+                console.log(res.length)
+                let i: number = 0
+                for (i; i < res.length; i++) {
+                    const data: boardList = {
+                        id: res[i].id,
+                        title: res[i].title,
+                        contents: res[i].contents,
+                        dateTime: res[i].dateTime,
+                        isDeleted: res[i].isDeleted,
+                        isModified: res[i].isModified,
+                    }
+                    setArrData(arrData => [...arrData, data]);
                 }
-                setArrData(arrData => [...arrData,data]);
-            }
-            if(res.length%10==0){
-                setPageCount(res.length/5);
-            }else{
-                setPageCount(res.length/5+1);
-            }
-            setAData(arrData.slice(0,5));
-            setLoading(false);
-        })
+                if (res.length % 10 == 0) {
+                    setPageCount(res.length / 10);
+                } else {
+                    setPageCount(res.length / 10 + 1);
+                }
+                setAData(res.slice(0, 10));
 
+                console.log(aData);
+            })
+        setLoading(false);
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         list();
-    },[])
+    }, [])
 
-    const onclick = () =>{
+    const onclick = () => {
         console.log("hi");
         navigate('write');
     }
 
-    const onChangeBoard = (e:any) => {
+    const onChangeBoard = (e: any) => {
         console.log(e.target.value);
         const tag = e.target.value;
-        if(tag==='D'){
+        if (tag === 'D') {
             list();
             return;
         }
         setLoading(true);
         setArrData([]);
-        fetch(addr+'/board', {
+        fetch(addr + '/board', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                boardType:tag
+                boardType: tag
             }),
         }).then((res) => res.json())
-        .then((res) => {
-            console.log(res.length)
-            let i:number=0
-            if(res.length==0){
-                setLoading(false);
-                return;
-            }else{
-                for(i;i<res.length;i++){
-                    const data:boardList = {
-                        id : res[i].id,
-                        title:res[i].title,
-                        contents:res[i].contents,
-                        dateTime:res[i].dateTime,
-                        isDeleted:res[i].isDeleted,
-                        isModified:res[i].isModified,
+            .then((res) => {
+                console.log(res.length)
+                let i: number = 0
+                if (res.length == 0) {
+                    setLoading(false);
+                    return;
+                } else {
+                    for (i; i < res.length; i++) {
+                        const data: boardList = {
+                            id: res[i].id,
+                            title: res[i].title,
+                            contents: res[i].contents,
+                            dateTime: res[i].dateTime,
+                            isDeleted: res[i].isDeleted,
+                            isModified: res[i].isModified,
+                        }
+                        setArrData(arrData => [...arrData, data]);
                     }
-                    setArrData(arrData => [...arrData,data]);
+
+                    if (res.length % 10 == 0) {
+                        setPageCount(res.length / 10);
+                    } else {
+                        setPageCount(res.length / 10 + 1);
+                    }
+                    setAData(res.slice(0, 10));
+                    setLoading(false);
                 }
-                
-                if(res.length%10==0){
-                    setPageCount(res.length/5);
-                }else{
-                    setPageCount(res.length/5+1);
-                }
-                setAData(arrData.slice(0,5));
-                setLoading(false);
-            }
-            
-        })
+
+            })
     }
 
-    const getCurrentPage = (num:number) =>{
-        alert(num);
+    const getCurrentPage = (num: number) => {
+        let page = 10*(num-1);
+        console.log(arrData.slice(page,10))
+        setAData(arrData.slice(page,page+10));
     }
-    return(
+
+    return (
         <div>
             <div className='search-tool'>
                 <select name="selectBoard" id="selectBoard" className="select-search" onChange={onChangeBoard}>
-                    <option value= "D">전체 게시글</option>
-                    <option value = "F">자유게시판</option>
-                    <option value = "A">술 관련 게시판</option>
-                    <option value = "R">레시피 게시판</option>
+                    <option value="D">전체 게시글</option>
+                    <option value="F">자유게시판</option>
+                    <option value="A">술 관련 게시판</option>
+                    <option value="R">레시피 게시판</option>
                 </select>
                 <input type="text" id="search"></input>
                 <button className='btn-submit'>검색</button>
             </div>
-            
+
             <hr></hr>
 
-            {loading ? <strong>Loading...</strong>:
+            {loading ? <strong>Loading...</strong> :
                 <div>
                     <List
-                        datas={arrData}
-                        
+                        datas={aData}
                     />
-                    
-                     <button className='btn-write' onClick={onclick}>글쓰기</button>
-                
+                    <Pagination
+                        num={pageCount}
+                        getCurrentPage={getCurrentPage}
+                    />
+                    <button className='btn-write' onClick={onclick}>글쓰기</button>
+
                 </div>
-                
-                
+
+
             }
 
-           
+
         </div>
     )
 }
