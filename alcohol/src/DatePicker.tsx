@@ -11,6 +11,8 @@ function DatePicker() {
             {value}
         </button>
     ));
+
+    console.log(startDate);
     return (
         <div>
             <ReactDatePicker

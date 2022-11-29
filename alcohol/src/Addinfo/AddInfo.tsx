@@ -269,9 +269,8 @@ function AddInfo() {
     if (!values.favoriteList) {
       errors.favoriteList = "Cannot be blank";
       errors.favoriteListValidation = false;
-      //비밀번호의 길이(length)가 4글자 이하일 때
     } else if (!regexFavoriteList.test(values.favoriteList)) {
-      errors.favoriteList = "Password must be more than 4 characters";
+      errors.favoriteList = "List must be choosed";
       errors.favoriteListValidation = false;
     } else {
       errors.favoriteList = "";
