@@ -1,7 +1,5 @@
-import { listenerCount } from 'process';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { boardList } from '../interface/BoardList';
 import { commentList } from '../interface/CommentList';
 import { addr } from '../interface/serverAddr';
 import CommentList from './CommentList';

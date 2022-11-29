@@ -53,9 +53,9 @@ function Login() {
         }).then((res) => res.json())
         .then((res) => {
             if(res.success) {
-                redirectMain(userdata);
+                redirectAddInfo(userdata);
             }else {
-                console.log("이미 존재하는 사람임.");
+                redirectMain(userdata);
             }
         })
 
@@ -68,9 +68,15 @@ function Login() {
 
     const navigate = useNavigate();
 
-    const redirectMain = (data: any) => {
+    const redirectAddInfo = (data: any) => {
         navigate("/AddInfo", { state: data });
     }
+
+
+    const redirectMain = (data: any) => {
+        navigate("/Main", { state: data });
+    }
+
 
     return (
         <div className='LoginComponentBox'>

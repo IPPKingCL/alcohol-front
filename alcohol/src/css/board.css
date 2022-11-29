@@ -18,6 +18,7 @@
     border-radius: 10px;
     font-size:5;
     margin-left : 44%;
+    margin-top:10px;
 }
 
 #search{
@@ -100,4 +101,16 @@
 
 .comment-span{
     font-size: 5;
+}
+
+.paging{
+    margin-left: 36%;
+    padding : 6px;
+}
+.bar_menu{
+	margin-left : 20px;
+	display :flex;
+	list-style :none;
+	padding-left : 0;
+	float: left;
 }
