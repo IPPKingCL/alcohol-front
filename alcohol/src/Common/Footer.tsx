@@ -10,7 +10,7 @@ function Footer(){
     const myPage = () => {};
 
     return(
-        <div>
+        <>
            
             <div id="footer">
                 <div className='menu'>
@@ -23,7 +23,7 @@ function Footer(){
                 
             </div>
 
-        </div>
+        </>
     )
 }
 

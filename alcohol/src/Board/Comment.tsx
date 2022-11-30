@@ -60,6 +60,7 @@ function Comment(){
                 
                 setContent('');
                 setLoading(true);
+                setComment([]);
                 commentList();
             }else{
                 alert("등록 실패");
@@ -84,6 +85,12 @@ function Comment(){
                         datas={comment}/>
                 </div>
             }
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            
+
         </div>
         
     )

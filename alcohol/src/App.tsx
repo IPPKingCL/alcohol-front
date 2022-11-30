@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import logo from './logo.svg';
 import './css/App.css';
 import Login from './Login';
 
@@ -22,15 +21,18 @@ function App() {
 
   return (
     <Router>
-      <Routes>
-        <Route path="/Login" element={<Login />}></Route>
-        <Route path="/AddInfo" element={<AddInfo />}></Route>
-        <Route path="/free" element={<FreeBoard />}></Route>
-        <Route path="/free/write" element={<FreeWrite />}></Route>
-        <Route path="/free/read/:id" element={<FreeRead />}></Route>
-        <Route path="/free/modify/:id" element={<FreeModify />}></Route>
-        {/*<Route path="/Main" element={<Main />}></Route>*/}
-      </Routes>
+      <div className="content-all">
+        <Routes>
+          <Route path="/Login" element={<Login />}></Route>
+          <Route path="/AddInfo" element={<AddInfo />}></Route>
+          <Route path="/free" element={<FreeBoard />}></Route>
+          <Route path="/free/write" element={<FreeWrite />}></Route>
+          <Route path="/free/read/:id" element={<FreeRead />}></Route>
+          <Route path="/free/modify/:id" element={<FreeModify />}></Route>
+          {/*<Route path="/Main" element={<Main />}></Route>*/}
+        </Routes>
+      </div>
+      
       <Footer></Footer>
     </Router>
     
