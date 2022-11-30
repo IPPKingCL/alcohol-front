@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { boardList } from '../interface/BoardList';
 import { addr } from '../interface/serverAddr';
@@ -14,6 +14,8 @@ function FreeBoard() {
     const [pageCount, setPageCount] = useState<number>();  //page count
     const [aData, setAData] = useState<boardList[]>([]);
     const [search,setSearch] = useState<string>("");//검색어
+    const focusRef = useRef<HTMLInputElement>();
+
     const list = async () => {
         setArrData([]);
         fetch(addr + '/board', {
@@ -55,7 +57,7 @@ function FreeBoard() {
         navigate('write');
     }
 
-    const onChangeBoard = (e: any) => {
+    const onChangeBoard = (e: React.ChangeEvent<HTMLSelectElement>) => {
         console.log(e.target.value);
         const tag = e.target.value;
         if (tag === 'D') {
@@ -116,20 +118,23 @@ function FreeBoard() {
 
     /**/
     
-    const onSearch = (e:any) => {
+    const onSearch = (e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.log(search);
         const filterData = aData.filter((row)=>row.title.includes(search));
         
+
         if (filterData.length % 10 == 0) {
             setPageCount(filterData.length / 10);
         } else {
             setPageCount(filterData.length / 10 + 1);
         }
         setAData(filterData.slice(0, 10));
+        setSearch('');
+        //focusRef.current.focus()
     }
 
-    const onChangeSearch = (e:any) => {
+    const onChangeSearch = (e:React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
         setSearch(e.target.value);
     }
@@ -143,7 +148,7 @@ function FreeBoard() {
                     <option value="R">레시피 게시판</option>
                 </select>
                 <form className='search-form' onSubmit={e => onSearch(e)}>
-                    <input type="text" id="search" value={search} onChange={onChangeSearch}></input>
+                    <input type="text" id="search" value={search} onChange={onChangeSearch} ></input>
                     <button type='submit' className='btn-submit'>검색</button>
                 </form>
             </div>

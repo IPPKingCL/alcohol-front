@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { boardRead,board } from '../interface/Board';
 import { addr } from '../interface/serverAddr';
@@ -35,7 +35,7 @@ function FreeModify(){
         getBoard();
     },[]);
 
-    const onchange = (e:any) => {
+    const onchange = (e:React.ChangeEvent<HTMLInputElement>|React.ChangeEvent<HTMLTextAreaElement>|React.ChangeEvent<HTMLSelectElement>) => {
         const {name, value} = e.target;
         setModiBoard({
             ...modiboard,

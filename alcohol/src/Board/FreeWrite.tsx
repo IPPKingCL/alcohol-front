@@ -1,4 +1,4 @@
-import {  useState } from 'react';
+import React, {  useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { board } from '../interface/Board'
 import { addr } from '../interface/serverAddr';
@@ -17,7 +17,7 @@ function FreeWrite(){
     },[])
     */
 
-    const onchange = (e:any) => {
+    const onchange = (e:React.ChangeEvent<HTMLInputElement>|React.ChangeEvent<HTMLTextAreaElement>|React.ChangeEvent<HTMLSelectElement>) => {
         const {name, value} = e.target;
         setBoard({
             ...board,

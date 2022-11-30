@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { commentList } from '../interface/CommentList';
 import { addr } from '../interface/serverAddr';
@@ -40,7 +40,7 @@ function Comment(){
         commentList();
     },[]);
 
-    const onchange = (e:any) => {
+    const onchange = (e:React.ChangeEvent<HTMLInputElement>) => {
         setContent(e.target.value);
     }
     const onclick = async () => { 
