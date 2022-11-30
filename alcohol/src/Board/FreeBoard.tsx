@@ -42,7 +42,7 @@ function FreeBoard() {
                 }
                 setAData(res.slice(0, 10));
 
-                console.log(aData);
+                
             })
         setLoading(false);
     }
@@ -106,10 +106,28 @@ function FreeBoard() {
 
     const getCurrentPage = (num: number) => {
         let page = 10*(num-1);
-        console.log(arrData.slice(page,10))
         setAData(arrData.slice(page,page+10));
     }
 
+    /**/
+    const [search,setSearch] = useState<string>("");
+    const onSearch = (e:any) => {
+        e.preventDefault();
+        console.log(search);
+        const filterData = aData.filter((row)=>row.title.includes(search));
+        
+        if (filterData.length % 10 == 0) {
+            setPageCount(filterData.length / 10);
+        } else {
+            setPageCount(filterData.length / 10 + 1);
+        }
+        setAData(filterData.slice(0, 10));
+    }
+
+    const onChangeSearch = (e:any) => {
+        e.preventDefault();
+        setSearch(e.target.value);
+    }
     return (
         <div>
             <div className='search-tool'>
@@ -119,8 +137,10 @@ function FreeBoard() {
                     <option value="A">술 관련 게시판</option>
                     <option value="R">레시피 게시판</option>
                 </select>
-                <input type="text" id="search"></input>
-                <button className='btn-submit'>검색</button>
+                <form className='search-form' onSubmit={e => onSearch(e)}>
+                    <input type="text" id="search" value={search} onChange={onChangeSearch}></input>
+                    <button type='submit' className='btn-submit'>검색</button>
+                </form>
             </div>
 
             <hr></hr>

@@ -114,3 +114,7 @@
 	padding-left : 0;
 	float: left;
 }
+
+.search-form{
+    display:inline
+}

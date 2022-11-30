@@ -21,7 +21,7 @@ function FreeRead(){
         }).then((res) => res.json())
         .then((res) => {
             setBoard(res);
-            console.log(board);
+           
         })
 
         setLoading(false);
@@ -31,7 +31,6 @@ function FreeRead(){
         list();
     },[])
     const onclick = () => {
-        //수정 함수 작성 예쩡
         navigate('/free/modify/'+id);
     }
 
