@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { commentList } from '../interface/CommentList';
 import { addr } from '../interface/serverAddr';
 import CommentList from './CommentList';
+import '../css/footer.css';
 
 function Comment(){
     const [loading, setLoading] = useState<boolean>(true);
@@ -69,7 +70,7 @@ function Comment(){
     }
 
     return(
-        <div>
+        <div id='wrapper'>
             <div>
                 <span>댓글 {commentNum}</span>
                 <hr></hr>
@@ -84,12 +85,7 @@ function Comment(){
                     <CommentList
                         datas={comment}/>
                 </div>
-            }
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            
+            }           
 
         </div>
         

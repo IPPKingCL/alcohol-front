@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './css/App.css';
 import './css/Login.css';
+import './css/footer.css';
 import { useNavigate } from 'react-router-dom';
 import { GoogleLogin } from 'react-google-login';
 import { gapi } from 'gapi-script';
@@ -29,13 +30,13 @@ function Login() {
     async function onSuccess(res: any) {
 
         const profile = res.getBasicProfile();
-        
+
         const userdata = {
             id: profile.getId(),
             email: profile.getEmail(),
             image: profile.getImageUrl(),
             name: profile.getName(),
-            loginType : type,
+            loginType: type,
         };
         // 로그인 성공 후 실행하기 원하는 코드 작성.
         alert("구글 로그인에 성공하였습니다.");
@@ -44,20 +45,20 @@ function Login() {
         fetch(addr + '/user/checkEmail', {
             method: "POST",
             headers: {
-                "Access-Control-Allow-Origin" : addr ,
+                "Access-Control-Allow-Origin": addr,
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
                 email: userdata.email
             }),
         }).then((res) => res.json())
-        .then((res) => {
-            if(res.success) {
-                redirectAddInfo(userdata);
-            }else {
-                redirectMain(userdata);
-            }
-        })
+            .then((res) => {
+                if (res.success) {
+                    redirectAddInfo(userdata);
+                } else {
+                    redirectMain(userdata);
+                }
+            })
 
     }
 
@@ -79,14 +80,16 @@ function Login() {
 
 
     return (
-        <div className='LoginComponentBox'>
-            <h2 className='LoginText'>Login</h2>
-            <GoogleLogin
-                clientId={clientId}
-                buttonText="Login with Google" // 버튼에 뜨는 텍스트
-                onSuccess={onSuccess}
-                onFailure={onFailure}
-            />
+        <div id='wrapper'>
+            <div className='LoginComponentBox'>
+                <h2 className='LoginText'>Login</h2>
+                <GoogleLogin
+                    clientId={clientId}
+                    buttonText="Login with Google" // 버튼에 뜨는 텍스트
+                    onSuccess={onSuccess}
+                    onFailure={onFailure}
+                />
+            </div>
         </div>
     );
 }

@@ -139,7 +139,7 @@ function FreeBoard() {
         setSearch(e.target.value);
     }
     return (
-        <div>
+        <div id='wrapper'>
             <div className='search-tool'>
                 <select name="selectBoard" id="selectBoard" className="select-search" onChange={onChangeBoard}>
                     <option value="D">전체 게시글</option>

@@ -14,7 +14,7 @@ function DatePicker() {
 
     console.log(startDate);
     return (
-        <div>
+        <div className='wrapper'>
             <ReactDatePicker
                 selected={startDate}
                 onChange={(date: Date) => setStartDate(date)}
