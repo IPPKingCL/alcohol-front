@@ -23,3 +23,15 @@ padding:20px;
     bottom: 0;
     height: 5rem;
   }
+
+.menu{
+    padding: 10px;
+}
+.bar_menu{
+    margin-left : 20px;
+	display :flex;
+	list-style :none;
+	padding-left : 0;
+	float: left;
+    color:#ccc
+}
