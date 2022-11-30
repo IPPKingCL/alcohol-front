@@ -2,8 +2,11 @@ import React, {  useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { board } from '../interface/Board'
 import { addr } from '../interface/serverAddr';
+import AWS from 'aws-sdk';
+
 //자유게시판 글 작성 컴포넌트
 function FreeWrite(){
+
     const [board, setBoard] = useState<board>({
         title:"",
         contents:"",
@@ -61,9 +64,11 @@ function FreeWrite(){
         })
 
     }
+
+
     return(
-        <div>
-            <div className = "input-Board">
+        <div className = "input-Board">
+            <div >
                 <h1>Title</h1>
                 <input name="title" type="text" className="search-input" onChange={onchange} />
             </div>
@@ -79,6 +84,10 @@ function FreeWrite(){
                 <option value = "A">술 관련 게시판</option>
                 <option value = "R">레시피 게시판</option>
             </select>
+            <div>
+                <input className='file' type='file' />
+            </div>
+            
             <button onClick={onclick}>등록</button>
 
         </div>
