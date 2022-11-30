@@ -2,7 +2,7 @@ import BoardTable from './BoardTable';
 
 
 function List(props:any){
-    console.log(props.datas)
+    
     return(
         <div>
             
