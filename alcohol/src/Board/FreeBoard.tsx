@@ -13,7 +13,7 @@ function FreeBoard() {
     const [currentPage, setCurrentPage] = useState<number>(1);//default 1 page
     const [pageCount, setPageCount] = useState<number>();  //page count
     const [aData, setAData] = useState<boardList[]>([]);
-
+    const [search,setSearch] = useState<string>("");//검색어
     const list = async () => {
         setArrData([]);
         fetch(addr + '/board', {
@@ -106,11 +106,16 @@ function FreeBoard() {
 
     const getCurrentPage = (num: number) => {
         let page = 10*(num-1);
-        setAData(arrData.slice(page,page+10));
+        //if(search===''||search === null){
+            setAData(arrData.slice(page,page+10));
+       // }else{
+
+        //}
+        
     }
 
     /**/
-    const [search,setSearch] = useState<string>("");
+    
     const onSearch = (e:any) => {
         e.preventDefault();
         console.log(search);
