@@ -1,8 +1,8 @@
-body{
+/*body{
     margin:0;
     padding:0;
     height:100vh;
-}
+}*/
 #wrapper {
 
 min-height:100vh;
@@ -17,7 +17,7 @@ padding:20px;
 }
 #footer {
     position: fixed;
-    background-color: green; 
+    background-color: black; 
     left: 0;
     right: 0;
     bottom: 0;
