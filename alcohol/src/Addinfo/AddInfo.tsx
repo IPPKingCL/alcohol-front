@@ -247,9 +247,8 @@ function AddInfo() {
     if (!values.job) {
       errors.job = "Cannot be blank";
       errors.jobValidation = false;
-      //비밀번호의 길이(length)가 4글자 이하일 때
     } else if (!regexJob.test(values.job)) {
-      errors.job = "Password must be more than 4 characters";
+      errors.job = "Invalid Job Format";
       errors.jobValidation = false;
     } else {
       errors.job = "";
