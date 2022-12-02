@@ -7,7 +7,7 @@ function Footer(){
     const mbti = () => {};//오늘의 술
     const home = () => {navigate('/Main')};
     const free = () => {navigate('/free')};
-    const myPage = () => {};
+    const myPage = () => {navigate('/myPage')};
 
     return(
         <>

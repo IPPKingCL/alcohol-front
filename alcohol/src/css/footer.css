@@ -9,30 +9,35 @@
     position: relative;
     padding-bottom: 60px;
 }
+
 #header {
-height:70px;
-background:#ccc;
+    height: 70px;
+    background: #ccc;
 }
+
 #container {
     overflow: scroll;
-padding:20px;
+    padding: 20px;
 }
+
 #footer {
-    background-color: black; 
+    background-color: black;
+    position :fixed;
     left: 0;
     right: 0;
     bottom: 0;
     height: 5rem;
-  }
+}
 
-.menu{
+.menu {
     padding: 10px;
 }
-.bar_menu{
-    margin-left : 20px;
-	display :flex;
-	list-style :none;
-	padding-left : 0;
-	float: left;
-    color:#ccc
+
+.bar_menu {
+    margin-left: 20px;
+    display: flex;
+    list-style: none;
+    padding-left: 0;
+    float: left;
+    color: #ccc
 }

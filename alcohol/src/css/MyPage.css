@@ -1,0 +1,21 @@
+.mypage{
+    display: flex;
+    justify-content : center;
+}
+
+.myImg{
+    display: flex;
+    margin-left: 11%;
+}
+
+.myName{
+    margin-left: 45%;
+}
+
+.myHi{
+    margin-left: 25%;
+}
+
+.myDrink{
+    background-color: rgb(231, 227, 222);
+}

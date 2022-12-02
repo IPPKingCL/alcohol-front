@@ -13,7 +13,9 @@ import FreeWrite from './Board/FreeWrite';
 import FreeRead from './Board/FreeRead';
 import FreeModify from './Board/FreeModify';
 import Footer from './Common/Footer';
-//import Main from './Main/main'
+import Main from './Main/main';
+import MyPage from './MyPage/MyPage';
+
 
 function App() {
 
@@ -29,7 +31,9 @@ function App() {
           <Route path="/free/write" element={<FreeWrite />}></Route>
           <Route path="/free/read/:id" element={<FreeRead />}></Route>
           <Route path="/free/modify/:id" element={<FreeModify />}></Route>
-          {/*<Route path="/Main" element={<Main />}></Route>*/}
+          <Route path="/Main" element={<Main />}></Route>
+
+          <Route path="/myPage" element={<MyPage/>}/>
         </Routes>
       </div>
       

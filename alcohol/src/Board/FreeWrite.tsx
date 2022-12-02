@@ -29,6 +29,9 @@ function FreeWrite(){
     }
 
     const onclick = async () => {
+        
+        console.log("selectedFile : "+selectedFile.name);
+        uploadFile(selectedFile);
         console.log(board);
         if(!board.title||!board.contents){
             alert("제목과 내용을 입력해주세요");
@@ -65,7 +68,57 @@ function FreeWrite(){
 
     }
 
+    const [progress, setProgress] = useState(0);
+    const [selectedFile, setSelectedFile] = useState<any>('');
+    const [showAlert, setShowAlert] = useState(false);
 
+    const ACCESS_KEY = process.env.REACT_APP_accessKeyId;
+    const SECRET_ACCESS_KEY = process.env.REACT_APP_secretAccessKey;
+    const REGION = process.env.REACT_APP_region;
+    const S3_BUCKET = "alcoholcocktail";
+
+    AWS.config.update({
+        accessKeyId : ACCESS_KEY,
+        secretAccessKey : SECRET_ACCESS_KEY,
+        region:REGION
+    });
+
+    const myBucket = new AWS.S3({
+        params:{Bucket : S3_BUCKET},
+        region : REGION,
+    });
+
+    const handleFileInput = (e:any) => {
+        console.log("event : "+e);
+        const file = e.target.files[0];
+        console.log(file);
+        setProgress(0);
+        setSelectedFile(file);
+        
+    }
+    
+    const uploadFile = (file: any) => {
+        const params = {
+            ACL:'public-read',
+            Body:file,
+            Bucket:S3_BUCKET,
+            Key:file.name
+        };
+
+        myBucket.putObject(params)
+        .on('httpUploadProgress',(evt) => {
+            setProgress(Math.round((evt.loaded / evt.total) * 100))
+            setShowAlert(true);
+            setTimeout(() => {
+            setShowAlert(false);
+            setSelectedFile(null);
+            }, 3000)
+        })
+        .send((err) => {
+        if (err) console.log(err)
+        })
+        
+    }
     return(
         <div className = "input-Board">
             <div >
@@ -85,7 +138,7 @@ function FreeWrite(){
                 <option value = "R">레시피 게시판</option>
             </select>
             <div>
-                <input className='file' type='file' />
+                <input className='file' type='file' onChange={handleFileInput}/>
             </div>
             
             <button onClick={onclick}>등록</button>
