@@ -109,15 +109,19 @@ function AddInfo() {
     console.log(userPriceChange.MaximumPrice);
   }
 
-  const onChangeBirth = (e: any) => {
-    const { name, value } = e.target;
+  const onChangeBirth = (birthState : string, state: boolean) => {
 
-
-    const nextJobInput: UserAddInfo = {
-      ...userAddInfo,
-      [name]: value,
+    const stateChange: UserAddInfoErrorMessage = {
+      ...userAddInfoErrorMessage,
+      birthValidation : state,
     }
-    setUserAddInfo(nextJobInput);
+
+    const nextBirthInput: UserAddInfo = {
+      ...userAddInfo,
+      birth : birthState,
+    }
+    setUserAddInfo(nextBirthInput);
+    setUserAddInfoErrorMessage(stateChange);
 
   }
 
