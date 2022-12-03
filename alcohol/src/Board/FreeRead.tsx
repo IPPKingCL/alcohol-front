@@ -54,6 +54,27 @@ function FreeRead(){
             }
         })
     }
+
+    const deleteBoard = () => {
+        const message = "게시글을 삭제하시겠습니까";
+        if (window.confirm(message)) {
+            //세션 비교해서 삭제 권한 있는지 확인하는 작업 필요
+            fetch(addr+"/board/deleteBoard/"+id,{
+                method:"Get",
+            }).then((res) => res.json())
+            .then((res) => {
+                if(res.success){
+                    alert("삭제되었습니다");
+                    navigate("/free");
+                }else{
+                    alert("삭제 도중 에러 발생");
+                    return;
+                }
+            })
+        }else{
+            return;
+        }
+    }
     return(
         <div>
             <div>
@@ -83,7 +104,7 @@ function FreeRead(){
                     <div className='input-btn'>
                         <button className="d-btn" onClick={boardList}>목록</button>
                         <button className="m-btn" onClick={onclick}>수정</button>
-                        <button className="m-btn" >삭제</button>
+                        <button className="m-btn" onClick={deleteBoard}>삭제</button>
                         <button className='m-btn' onClick={recommend}>추천</button>
                     </div>
                     <div>
