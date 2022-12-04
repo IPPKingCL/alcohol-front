@@ -109,7 +109,7 @@ function AddInfo() {
     console.log(userPriceChange.MaximumPrice);
   }
 
-  const onChangeBirth = (birthState : string, state: boolean) => {
+  const onChangeBirth = (birthState : Date, state: boolean) => {
 
     const stateChange: UserAddInfoErrorMessage = {
       ...userAddInfoErrorMessage,
@@ -118,7 +118,7 @@ function AddInfo() {
 
     const nextBirthInput: UserAddInfo = {
       ...userAddInfo,
-      birth : birthState,
+      birth : birthState.toLocaleDateString(),
     }
     setUserAddInfo(nextBirthInput);
     setUserAddInfoErrorMessage(stateChange);
@@ -291,7 +291,7 @@ function AddInfo() {
       <div className='formAlign'>
         <AddInfoTextNickname type="닉네임" setState={changeStateNickname} />
         <AddInfoTextAge type="나이" setState={changeStateAge} />
-        <h3 style={{display : 'inline-block'}}>생일 : <DatePicker /></h3>        
+        <h3 style={{display : 'inline-block'}}>생일 : <DatePicker type="생일" setState={onChangeBirth}/></h3>        
         <h4 style={{ color: 'red' }}>{validateBirth(userAddInfo.birth).birth}</h4><hr />
         <AddInfoSex type="성별" setState={changeStateSex} />
         <h3>직군 : <input type="text" placeholder='job' name='job' onChange={onChangeJob} required></input></h3>
