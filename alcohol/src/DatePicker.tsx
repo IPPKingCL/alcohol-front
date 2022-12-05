@@ -77,6 +77,7 @@ function DatePicker(props : {type : string, setState : any}) {
                 onChange={(date: Date) => onDateChange(date)}
                 customInput={<ExampleCustomInput />}
             />
+            <h4 style={{ color: 'red' }}>{userAddInfo.birth}</h4><hr />
         </div>
     );
 
