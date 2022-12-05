@@ -42,7 +42,9 @@ function Comment(){
     },[]);
 
     const onRemove = (id:number) => {
-        setComment(comment.filter(comment => comment.id !== id));
+        //setComment(comment.filter(comment => comment.id !== id));
+        setComment([]);
+        commentList();
     }
     const onchange = (e:React.ChangeEvent<HTMLInputElement>) => {
         setContent(e.target.value);
