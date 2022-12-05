@@ -1,7 +1,9 @@
+import { useNavigate, useParams } from "react-router-dom";
 import { addr } from "../interface/serverAddr";
 
 
 function CommentOne(prop:any){
+   
     const onclick = async () => {
         //아이디 비교하는 과정 필요
         
