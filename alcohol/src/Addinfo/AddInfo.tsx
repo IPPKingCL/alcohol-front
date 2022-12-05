@@ -225,7 +225,7 @@ function AddInfo() {
       ...userAddInfoErrorMessage
     };
 
-    const regexBirth = /^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/i;
+    const regexBirth = /^\d{4}. (0[1-9]|1[012]). (0[1-9]|[12][0-9]|3[01])$/i;
 
     if (!values) {
       errors.birth = "Cannot be blank";
@@ -291,7 +291,7 @@ function AddInfo() {
       <div className='formAlign'>
         <AddInfoTextNickname type="닉네임" setState={changeStateNickname} />
         <AddInfoTextAge type="나이" setState={changeStateAge} />
-        <h3 style={{display : 'inline-block'}}>생일 : <DatePicker type="생일" setState={onChangeBirth}/></h3>        
+        <h3 style={{display : 'inline-block'}}>생일 : {userAddInfo.birth}<DatePicker type="생일" setState={onChangeBirth}/></h3>        
         <h4 style={{ color: 'red' }}>{validateBirth(userAddInfo.birth).birth}</h4><hr />
         <AddInfoSex type="성별" setState={changeStateSex} />
         <h3>직군 : <input type="text" placeholder='job' name='job' onChange={onChangeJob} required></input></h3>
