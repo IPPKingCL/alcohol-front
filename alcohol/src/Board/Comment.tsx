@@ -41,6 +41,9 @@ function Comment(){
         commentList();
     },[]);
 
+    const onRemove = (id:number) => {
+        setComment(comment.filter(comment => comment.id !== id));
+    }
     const onchange = (e:React.ChangeEvent<HTMLInputElement>) => {
         setContent(e.target.value);
     }
@@ -83,7 +86,9 @@ function Comment(){
             {loading ? <strong>loading...</strong> :
                 <div>
                     <CommentList
-                        datas={comment}/>
+                        datas={comment}
+                        onRemove={onRemove}
+                    />
                 </div>
             }           
 

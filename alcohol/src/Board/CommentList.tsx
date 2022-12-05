@@ -8,6 +8,7 @@ function CommentList(props:any){
                 <CommentOne
                     data={data}
                     key={data.id}
+                    onRemove={props.onRemove}
                 />
             )
             )}
