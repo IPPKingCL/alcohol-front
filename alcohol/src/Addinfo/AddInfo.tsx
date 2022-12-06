@@ -220,26 +220,7 @@ function AddInfo() {
 
   }
 
-  const validateBirth = (values: any) => {
-    const errors: UserAddInfoErrorMessage = {
-      ...userAddInfoErrorMessage
-    };
-
-    const regexBirth = /^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/i;
-
-    if (!values) {
-      errors.birth = "Cannot be blank";
-      errors.birthValidation = false;
-    } else if (!regexBirth.test(values.birth)) {
-      errors.birth = "Invalid birth format";
-      errors.birthValidation = false;
-    } else {
-      errors.birth = "";
-      errors.birthValidation = true;
-    }
-
-    return errors;
-  }
+  
 
   const validateJob = (values: any) => {
     const errors: UserAddInfoErrorMessage = {
@@ -291,8 +272,7 @@ function AddInfo() {
       <div className='formAlign'>
         <AddInfoTextNickname type="닉네임" setState={changeStateNickname} />
         <AddInfoTextAge type="나이" setState={changeStateAge} />
-        <h3 style={{display : 'inline-block'}}>생일 : <DatePicker type="생일" setState={onChangeBirth}/></h3>        
-        <h4 style={{ color: 'red' }}>{validateBirth(userAddInfo.birth).birth}</h4><hr />
+        <h3 style={{display : 'inline-block'}}>생일 : {userAddInfo.birth}<DatePicker type="생일" setState={onChangeBirth}/></h3>
         <AddInfoSex type="성별" setState={changeStateSex} />
         <h3>직군 : <input type="text" placeholder='job' name='job' onChange={onChangeJob} required></input></h3>
         <h4 style={{ color: 'red' }}>{validateJob(userAddInfo).job}</h4><hr />
