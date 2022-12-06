@@ -17,13 +17,12 @@ function FreeModify(){
     const {id} = useParams();
     let boardId = id;
     const getBoard = async () => {
-        console.log(getCookie("myToken"))
         fetch(addr+'/board/modi',{
             method: "POST",
             headers: {
                 "Access-Control-Allow-Origin" : "http://localhost:5000" ,
                 "Content-Type": "application/json",
-                Authorization:"Bearer +getCookie('myToken')}",
+                "Authorization" :`Bearer ${getCookie('myToken')}`,
             },
             body: JSON.stringify({
                 id:id,
