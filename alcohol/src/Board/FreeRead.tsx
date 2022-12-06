@@ -78,7 +78,7 @@ function FreeRead(){
                     alert("삭제되었습니다");
                     navigate("/free");
                 }else{
-                    alert(res.msg);
+                    alert("삭제 도중 에러발생 \n다시 시도해주세요");
                     return;
                 }
             })
