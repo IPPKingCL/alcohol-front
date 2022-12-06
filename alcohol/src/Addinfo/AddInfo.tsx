@@ -12,6 +12,7 @@ import AddInfoSex from './AddInfoSex';
 import AddInfoMaximumPrice from './AddInfoMaximumPrice';
 import { UserAddInfo } from '../interface/UserAddInfo'
 import { UserAddInfoErrorMessage } from '../interface/UserAddInfoErrorMessage'
+import { setCookie } from '../Common/Cookies';
 
 function AddInfo() {
 
@@ -210,10 +211,20 @@ function AddInfo() {
           userId: state.id,
           password: '-',
         }),
-      }).then(res => {
-        if (res.ok) {
+      }).then(res => res.json())
+      .then((res) => {
+        if (res.success) {
           alert("응답완료");
+          setCookie('myToken',res.token,{
+            path:"/",
+            secure:true,
+            sameSite:"none"
+          })
+        
           navigate("/Main");
+        }else{
+          alert("회원가입 중 에러 발생");
+          return;
         }
       })
     }
