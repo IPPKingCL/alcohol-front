@@ -7,14 +7,16 @@ import { useNavigate } from 'react-router-dom';
 import { GoogleLogin } from 'react-google-login';
 import { gapi } from 'gapi-script';
 import { addr } from './interface/serverAddr';
+import { setCookie } from './Common/Cookies';
 
 function Login() {
-
+    
     const clientId =
         "722148392125-6qdo1sho8shp117jpfipd8vggfgb1qo9.apps.googleusercontent.com";
 
 
     const [type, setType] = useState<string>("g");
+
 
     useEffect(() => {
         function start() {
@@ -56,11 +58,24 @@ function Login() {
                 if (res.success) {
                     redirectAddInfo(userdata);
                 } else {
+                    console.log(res.token)
+                    setCookie('myToken',res.token,{
+                        path:"/",
+                        secure:true,
+                        sameSite:"none"
+                    })
                     redirectMain(userdata);
                 }
             })
 
     }
+
+    /*인증할 때 보내는 헤더 예시 참조*/
+    /*headers:{
+        "Content-Type":"application/json"
+        Authorization:"Bearer ${getCookie('myToken')}",
+    }
+    */ 
 
     const onFailure = (res: any) => {
         alert("구글 로그인에 실패하였습니다");
