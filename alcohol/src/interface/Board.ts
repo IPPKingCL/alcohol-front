@@ -9,7 +9,7 @@ export interface boardRead extends board{
     dateTime:string,
     isDeleted:Boolean,
     isModified:Boolean,
-    userId:string,
+    userId:number,
     nickname:string
 }
 

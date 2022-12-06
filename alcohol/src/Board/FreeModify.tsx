@@ -23,7 +23,7 @@ function FreeModify(){
             headers: {
                 "Access-Control-Allow-Origin" : "http://localhost:5000" ,
                 "Content-Type": "application/json",
-                "Authorization":"Bearer `${getCookie('myToken')}`",
+                Authorization:"Bearer +getCookie('myToken')}",
             },
             body: JSON.stringify({
                 id:id,

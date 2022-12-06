@@ -4,6 +4,7 @@ import { boardRead } from '../interface/Board';
 import { addr } from '../interface/serverAddr';
 import Comment from './Comment';
 import '../css/board.css';
+import { getCookie } from '../Common/Cookies';
 
 function FreeRead(){
     const [loading,setLoading] = useState<boolean>(true);
@@ -59,15 +60,25 @@ function FreeRead(){
         const message = "게시글을 삭제하시겠습니까";
         if (window.confirm(message)) {
             //세션 비교해서 삭제 권한 있는지 확인하는 작업 필요
-            fetch(addr+"/board/deleteBoard/"+id,{
-                method:"Get",
+            fetch(addr+"/board/deleteBoard/",{
+                method:"Post",
+                headers: {
+                    "Access-Control-Allow-Origin" : "http://localhost:5000" ,
+                    "Content-Type": "application/json",
+                    "Authorization":"Bearer ${getCookie('myToken')}",
+                },
+                body: JSON.stringify({
+                    id:id,
+                    userId:board?.userId,
+                    token:getCookie("myToken")
+                }),
             }).then((res) => res.json())
             .then((res) => {
                 if(res.success){
                     alert("삭제되었습니다");
                     navigate("/free");
                 }else{
-                    alert("삭제 도중 에러 발생");
+                    alert(res.msg);
                     return;
                 }
             })
