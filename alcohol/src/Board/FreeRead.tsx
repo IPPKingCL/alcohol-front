@@ -98,7 +98,7 @@ function FreeRead(){
                     <div className = 'bar2'>
                         <h3>ID & Date</h3>
                     </div>
-                    <input name='title' type="text" className="search-input" value={board?.userId||''} disabled/>
+                    <input name='title' type="text" className="search-input" value={board?.nickname||''} disabled/>
 
                     <input name='title' type="text" className="search-input" value={board?.dateTime||''} disabled/>
                     <div className='input-btn'>

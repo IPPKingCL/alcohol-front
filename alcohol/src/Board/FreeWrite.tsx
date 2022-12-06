@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { board } from '../interface/Board'
 import { addr } from '../interface/serverAddr';
 import AWS from 'aws-sdk';
+import { getCookie } from '../Common/Cookies';
 
 //자유게시판 글 작성 컴포넌트
 function FreeWrite(){
@@ -48,12 +49,13 @@ function FreeWrite(){
             headers: {
                 "Access-Control-Allow-Origin" : "http://localhost:5000" ,
                 "Content-Type": "application/json",
+                "Authorization":"Bearer ${getCookie('myToken')}",
             },
             body: JSON.stringify({
                 title:board.title,
                 contents:board.contents,
-                userId:1,  //아이디 세션 처리 어떻게 할지 정해지면 수정 예정
                 boardType:board.boardType,
+                token:getCookie("myToken")
             }),
         }).then((res) => res.json())
         .then((res) => {

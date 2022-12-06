@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { getCookie } from '../Common/Cookies';
 import { boardRead,board } from '../interface/Board';
 import { addr } from '../interface/serverAddr';
 
@@ -16,16 +17,35 @@ function FreeModify(){
     const {id} = useParams();
     let boardId = id;
     const getBoard = async () => {
-        fetch(addr+'/board/read/'+id,{
-            method: "GET",
+        console.log(getCookie("myToken"))
+        fetch(addr+'/board/modi',{
+            method: "POST",
             headers: {
+                "Access-Control-Allow-Origin" : "http://localhost:5000" ,
                 "Content-Type": "application/json",
-            }
+                "Authorization":"Bearer `${getCookie('myToken')}`",
+            },
+            body: JSON.stringify({
+                id:id,
+                token:getCookie("myToken")
+            })
         }).then((res) => res.json())
         .then((res) => {
-            setBoard(res);
-            setModiBoard(res);
-            console.log(board);
+            console.log(res);
+            if(res.success){
+                if(!res.auth){
+                    alert("권한이 없습니다")
+                    window.history.go(-1);
+                }else{
+                    alert("오류가 발생했습니다\n 다시 시도해주세요");
+                    window.history.go(-1);
+                }
+            }else{
+                setBoard(res);
+                setModiBoard(res);
+                console.log(board);
+            }
+            
         })
 
         setLoading(false);
@@ -60,13 +80,14 @@ function FreeModify(){
             headers: {
                 "Access-Control-Allow-Origin" : "http://localhost:5000" ,
                 "Content-Type": "application/json",
+                Authorization:"Bearer ${getCookie('myToken')}",
             },
             body: JSON.stringify({
                 id:id,
                 title:modiboard.title,
                 contents:modiboard.contents,
-                userId:1,  //아이디 세션 처리 어떻게 할지 정해지면 수정 예정
                 boardType:modiboard.boardType,
+                token:getCookie("myToken")
             }),
         }).then((res) => res.json())
         .then((res) => {
