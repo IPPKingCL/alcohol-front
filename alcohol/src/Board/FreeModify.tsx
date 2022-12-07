@@ -75,19 +75,20 @@ function FreeModify(){
             return;
         }
         console.log(modiboard);
+        
         fetch(addr+'/board/modify', {
             method: "POST",
             headers: {
                 "Access-Control-Allow-Origin" : "http://localhost:5000" ,
                 "Content-Type": "application/json",
-                Authorization:"Bearer ${getCookie('myToken')}",
+                Authorization:`Bearer ${getCookie('myToken')}`,
             },
             body: JSON.stringify({
                 id:id,
                 title:modiboard.title,
                 contents:modiboard.contents,
                 boardType:modiboard.boardType,
-                token:getCookie("myToken")
+               
             }),
         }).then((res) => res.json())
         .then((res) => {
