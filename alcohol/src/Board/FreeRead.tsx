@@ -70,7 +70,7 @@ function FreeRead(){
                 body: JSON.stringify({
                     id:id,
                     userId:board?.userId,
-                    token:getCookie("myToken")
+                    
                 }),
             }).then((res) => res.json())
             .then((res) => {
