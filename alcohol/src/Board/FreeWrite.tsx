@@ -56,7 +56,7 @@ function FreeWrite(){
                 title:board.title,
                 contents:board.contents,
                 boardType:board.boardType,
-                token:getCookie('myToken'),
+                
             }),
         }).then((res) => res.json())
         .then((res) => {

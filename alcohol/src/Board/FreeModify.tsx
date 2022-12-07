@@ -16,18 +16,18 @@ function FreeModify(){
     const navigate=useNavigate();
     const {id} = useParams();
     let boardId = id;
-    const tok = getCookie('myToken');
+    
     const getBoard = async () => {
         fetch(addr+'/board/modi',{
             method: "POST",
             headers: {
                 "Access-Control-Allow-Origin" : "http://localhost:5000" ,
                 "Content-Type": "application/json",
-                "Authorization" :`Bearer `+tok,
+                "Authorization":`Bearer ${getCookie('myToken')}`,
             },
             body: JSON.stringify({
                 id:id,
-                token:getCookie("myToken")
+               
             })
         }).then((res) => res.json())
         .then((res) => {
@@ -75,19 +75,20 @@ function FreeModify(){
             return;
         }
         console.log(modiboard);
+        
         fetch(addr+'/board/modify', {
             method: "POST",
             headers: {
                 "Access-Control-Allow-Origin" : "http://localhost:5000" ,
                 "Content-Type": "application/json",
-                Authorization:"Bearer ${getCookie('myToken')}",
+                Authorization:`Bearer ${getCookie('myToken')}`,
             },
             body: JSON.stringify({
                 id:id,
                 title:modiboard.title,
                 contents:modiboard.contents,
                 boardType:modiboard.boardType,
-                token:getCookie("myToken")
+               
             }),
         }).then((res) => res.json())
         .then((res) => {

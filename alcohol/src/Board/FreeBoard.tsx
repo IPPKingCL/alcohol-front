@@ -5,6 +5,7 @@ import { addr } from '../interface/serverAddr';
 import List from './List';
 import '../css/board.css';
 import Pagination from './Paginattion';
+import { getCookie } from '../Common/Cookies';
 
 function FreeBoard() {
     const [loading, setLoading] = useState<boolean>(true);
@@ -54,7 +55,26 @@ function FreeBoard() {
     }, [])
 
     const onclick = () => {
-        navigate('write');
+        fetch(addr + '/board/check', {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization:`Bearer ${getCookie('myToken')}`,
+            },
+        }).then((res) => res.json())
+        .then((res) => {
+            if(res.success){
+                navigate('write');
+            }else{
+                if(res.message=="Unauthorized"){
+                    alert('로그인 후 사용가능합니다');
+                    navigate('/login');
+                }else{
+                    alert('에러 발생 잠시 후 시도해주세요');
+                }
+            }
+        })
+        
     }
 
     const onChangeBoard = (e: React.ChangeEvent<HTMLSelectElement>) => {
