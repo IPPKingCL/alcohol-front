@@ -44,14 +44,21 @@ function FreeRead(){
         fetch(addr+'/board/recommendBoard/'+id,{
             method :"Get",
             headers: {
-                "Content-Type" :"application/json"
+                "Content-Type" :"application/json",
+                "Authorization":`Bearer ${getCookie('myToken')}`,
             }
         }).then((res)=>res.json())
         .then((res) => {
             if(res.success){
                 alert("추천되었습니다");
             }else{
-                alert("게시글 추천 도중 에러 발생");
+                if(res.message=='Unauthorized'){
+                    alert('로그인 후 이용 가능합니다')
+                    navigate('/login');
+                }else{
+                    alert("게시글 추천 도중 에러 발생");
+                }
+                
             }
         })
     }
@@ -78,8 +85,13 @@ function FreeRead(){
                     alert("삭제되었습니다");
                     navigate("/free");
                 }else{
-                    alert("삭제 도중 에러발생 \n다시 시도해주세요");
-                    return;
+                    if(res.message=='Unauthorized'){
+                        alert('로그인 후 이용 가능합니다')
+                        navigate('/login');
+                    }else{
+                        alert("삭제 도중 에러발생 \n다시 시도해주세요");
+                        return;
+                    }
                 }
             })
         }else{
