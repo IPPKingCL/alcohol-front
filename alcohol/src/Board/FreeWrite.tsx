@@ -43,19 +43,20 @@ function FreeWrite(){
             alert("카테고리를 입력해주세요");
             return;
         }
-        const tok = getCookie('myToken')
+        const tok = getCookie('myToken');
+
         fetch(addr+'/board/write', {
             method: "POST",
             headers: {
                 "Access-Control-Allow-Origin" : "http://localhost:5000" ,
                 "Content-Type": "application/json",
-                "Authorization":`Bearer `+tok,
+                "Authorization":`Bearer `+ tok,
             },
             body: JSON.stringify({
                 title:board.title,
                 contents:board.contents,
                 boardType:board.boardType,
-                
+                token:getCookie('myToken'),
             }),
         }).then((res) => res.json())
         .then((res) => {
