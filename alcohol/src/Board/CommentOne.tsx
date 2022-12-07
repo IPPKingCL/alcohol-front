@@ -1,4 +1,6 @@
+import { stringify } from "querystring";
 import { useNavigate, useParams } from "react-router-dom";
+import { getCookie } from "../Common/Cookies";
 import { addr } from "../interface/serverAddr";
 
 
@@ -6,13 +8,17 @@ function CommentOne(prop:any){
     console.log(prop)
     const onclick = async () => {
         //아이디 비교하는 과정 필요
-        
-        fetch(addr + '/board/deleteComment/'+prop.data.id,{
-            method:"GET",
+        console.log(prop.data.id)
+        fetch(addr + '/board/deleteComment',{
+            method:"POST",
             headers:{
                 "Content-Type":"application/json",
+                Authorization:`Bearer ${getCookie('myToken')}`,
             },
-            
+            body : JSON.stringify({
+                id:prop.data.id,
+
+            }),
         }).then((res)=>res.json())
         .then((res) => {
             if(res.success){
