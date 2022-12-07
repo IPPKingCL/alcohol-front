@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { commentList } from '../interface/CommentList';
 import { addr } from '../interface/serverAddr';
 import CommentList from './CommentList';
@@ -12,6 +12,8 @@ function Comment(){
     const {id} = useParams();
     const [comment,setComment] = useState<commentList[]>([]);
     const [commentNum,setCommentNum] = useState<number>();
+    const navigate = useNavigate();
+    
     const commentList = async () => {
         fetch(addr+'/board/comment/'+id,{
             method:"GET",
@@ -70,7 +72,13 @@ function Comment(){
                 setComment([]);
                 commentList();
             }else{
-                alert("등록 실패");
+                if(res.message=='Unauthorized'){
+                    alert('로그인 후 이용 가능합니다')
+                    navigate('/login');
+                }else{
+                    alert("등록 실패");
+                }
+                
             }
         })
     }
