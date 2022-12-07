@@ -32,7 +32,26 @@ function FreeRead(){
         list();
     },[])
     const onclick = () => {
-        navigate('/free/modify/'+id);
+        fetch(addr + '/board/check', {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization:`Bearer ${getCookie('myToken')}`,
+            },
+        }).then((res) => res.json())
+        .then((res) => {
+            if(res.success){
+                navigate('/free/modify/'+id);
+            }else{
+                if(res.message=="Unauthorized"){
+                    alert('로그인 후 사용가능합니다');
+                    navigate('/login');
+                }else{
+                    alert('에러 발생 잠시 후 시도해주세요');
+                }
+            }
+        })
+        
     }
 
     const boardList = () => {
