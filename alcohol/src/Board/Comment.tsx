@@ -4,6 +4,7 @@ import { commentList } from '../interface/CommentList';
 import { addr } from '../interface/serverAddr';
 import CommentList from './CommentList';
 import '../css/footer.css';
+import { getCookie } from '../Common/Cookies';
 
 function Comment(){
     const [loading, setLoading] = useState<boolean>(true);
@@ -54,10 +55,10 @@ function Comment(){
             method:"POST",
             headers:{
                 "Content-Type" : "application/json",
+                "Authorization":`Bearer ${getCookie('myToken')}`,
             },
             body : JSON.stringify({
                 contents : content,
-                nickname : "bk",//가라데이터 임시 사용
                 boardId : id
             }),
         }).then((res) => res.json())
