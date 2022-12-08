@@ -15,6 +15,7 @@ import FreeModify from './Board/FreeModify';
 import Footer from './Common/Footer';
 import Main from './Main/main';
 import MyPage from './MyPage/MyPage';
+import UploadImageToS3WithNativeSdk from './Board/UploadImageToS3WithNativeSdk';
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
           <Route path="/free/modify/:id" element={<FreeModify />}></Route>
           <Route path="/Main" element={<Main />}></Route>
 
+          <Route path="/test" element={<UploadImageToS3WithNativeSdk/>}></Route>
           <Route path="/myPage" element={<MyPage/>}/>
         </Routes>
       </div>
