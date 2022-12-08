@@ -32,7 +32,8 @@ function Comment(){
                     dateTime:res[i].dateTime,
                     nickname:res[i].nickname,
                     isDeleted:res[i].isDeleted,
-                    isModified:res[i].isModified
+                    isModified:res[i].isModified,
+                    userId:res[i].user.id
                 }
                 setComment(comment => [...comment,data])
             }
