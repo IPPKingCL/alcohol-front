@@ -4,5 +4,6 @@ export interface commentList{
     dateTime:Date,
     nickname:string,
     isDeleted:boolean,
-    isModified:boolean
+    isModified:boolean,
+    userId:string
 }

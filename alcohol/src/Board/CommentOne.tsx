@@ -6,9 +6,10 @@ import { addr } from "../interface/serverAddr";
 
 function CommentOne(prop:any){
     console.log(prop)
+    const navigate = useNavigate();
     const onclick = async () => {
         //아이디 비교하는 과정 필요
-        console.log(prop.data.id)
+        console.log(prop.data.userId)
         fetch(addr + '/board/deleteComment',{
             method:"POST",
             headers:{
@@ -17,7 +18,7 @@ function CommentOne(prop:any){
             },
             body : JSON.stringify({
                 id:prop.data.id,
-
+                userId:prop.data.userId
             }),
         }).then((res)=>res.json())
         .then((res) => {
@@ -25,8 +26,18 @@ function CommentOne(prop:any){
                 alert('댓글이 삭제되었습니다');
                 prop.onRemove(prop.data.id);
             }else{
-                console.log("댓글 삭제 과정 중 에러발생");
-                alert("삭제 과정 중 에러발생 \n다시 시도해주세요");
+                if(res.message=='Unauthorized'){
+                    alert('로그인 후 이용 가능합니다')
+                    navigate('/login');
+                }else{
+                    if(res.msg==='fail'){
+                        alert('권한이 없습니다');
+                        return;
+                    }
+                    console.log("댓글 삭제 과정 중 에러발생");
+                    alert("삭제 과정 중 에러발생 \n다시 시도해주세요");
+                }
+                
             }
         });
     }
