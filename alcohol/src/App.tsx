@@ -17,7 +17,7 @@ import Main from './Main/main';
 import MyPage from './MyPage/MyPage';
 import UploadImageToS3WithNativeSdk from './Board/UploadImageToS3WithNativeSdk';
 import Test from './Board/test1';
-import MainAlcohol from './alcohol/MainAlcohol';
+import AlcoholInfo from './alcohol/AlcoholInfo';
 
 
 function App() {
@@ -39,7 +39,7 @@ function App() {
           
           <Route path="/Main" element={<Main />}></Route>
 
-          <Route path='/alcohol' element={<MainAlcohol/>}></Route>
+          <Route path='/alcohol' element={<AlcoholInfo/>}></Route>
 
           <Route path="/test" element={<UploadImageToS3WithNativeSdk/>}></Route>
           <Route path="/test1" element={<Test/>}></Route>
