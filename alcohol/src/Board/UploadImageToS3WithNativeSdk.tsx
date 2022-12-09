@@ -2,12 +2,12 @@ import React ,{useState} from 'react';
 import AWS from 'aws-sdk'
 
 const S3_BUCKET ='alcoholcocktail';
-const REGION =process.env.REACT_APP_region;
+const REGION ="ap-northeast-2";
 
 
 AWS.config.update({
     accessKeyId: process.env.REACT_APP_accessKeyId,
-    secretAccessKey: process.env.REACT_APP_secretAccessKey
+    secretAccessKey: process.env.REACT_APP_secretAccessKey 
 })
 
 const myBucket = new AWS.S3({
@@ -37,12 +37,13 @@ const UploadImageToS3WithNativeSdk = () => {
             .on('httpUploadProgress', (evt) => {
                 setProgress(Math.round((evt.loaded / evt.total) * 100))
             })
-            .send((err) => {
+            .send((PutObjectAclOutput,err) => {
+                console.log(PutObjectAclOutput)
                 if (err) console.log(err)
             })
     }
 
-
+/*https://docs.aws.amazon.com/ko_kr/AmazonS3/latest/userguide/example_s3_Scenario_GettingStarted_section.html*/
     return <div>
         <div>Native SDK File Upload Progress is {progress}%</div>
         <input type="file" onChange={handleFileInput}/>
