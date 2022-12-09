@@ -42,34 +42,40 @@ function DatePicker(props : {type : string, setState : any}) {
         </button>
     ));
 
+    const [alert, setAlert] = useState<string>("Cannot be blank");
+
     const onDateChange = (date : Date) => {
         setStartDate(date);
-        validateBirth(startDate.toLocaleDateString());
+        validateBirth(startDate);
         props.setState(date, true);
     }
 
-    const validateBirth = (values: any) => {
+    const validateBirth = (values: Date) => {
         const errors: UserAddInfoErrorMessage = {
           ...userAddInfoErrorMessage
         };
     
-        const regexBirth = /^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/i;
-    
+        const regexBirth = /^\d{4}\.([1-9][0-9]?)\.([1-9][0-9]?)\.$/i;
+
+
         if (!values) {
           errors.birth = "Cannot be blank";
           errors.birthValidation = false;
-        } else if (!regexBirth.test(values.birth)) {
+          setAlert(errors.birth);
+        } else if (!regexBirth.test(values.toLocaleDateString().replace(/ /g, ''))) {
+          console.log(values.toLocaleDateString().replace(/ /g, ''));
           errors.birth = "Invalid birth format";
           errors.birthValidation = false;
+          setAlert(errors.birth);
         } else {
           errors.birth = "";
           errors.birthValidation = true;
+          setAlert(errors.birth);
         }
     
         return errors;
       }
 
-    console.log(startDate.toLocaleDateString());
     return (
         <div>
             <ReactDatePicker
@@ -77,7 +83,7 @@ function DatePicker(props : {type : string, setState : any}) {
                 onChange={(date: Date) => onDateChange(date)}
                 customInput={<ExampleCustomInput />}
             />
-            <h4 style={{ color: 'red' }}>{userAddInfo.birth}</h4><hr />
+            <h4 style={{ color: 'red' }}>{alert}</h4><hr />
         </div>
     );
 
