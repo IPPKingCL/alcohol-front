@@ -81,7 +81,10 @@ function DatePicker(props : {type : string, setState : any}) {
             <ReactDatePicker
                 selected={startDate}
                 onChange={(date: Date) => onDateChange(date)}
+                showYearDropdown
+                yearDropdownItemNumber={100}
                 customInput={<ExampleCustomInput />}
+                scrollableYearDropdown
             />
             <h4 style={{ color: 'red' }}>{alert}</h4><hr />
         </div>
