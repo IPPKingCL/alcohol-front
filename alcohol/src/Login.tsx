@@ -17,6 +17,27 @@ function Login() {
 
     const [type, setType] = useState<string>("g");
 
+    const check = () => {
+        const filter = "win16|win32|win64|mac|macintel";
+
+        let device = "";
+
+        if(navigator.platform) {
+            if(filter.indexOf(navigator.platform.toLowerCase()) < 0) {
+                device = "mobile";
+            }else {
+                device = "pc";
+            }
+            
+        }
+
+        setCookie('device', device,{
+            path:"/",
+            secure:true,
+            sameSite:"none"
+        });
+    }
+
 
     useEffect(() => {
         function start() {
@@ -30,6 +51,8 @@ function Login() {
     }, []);
 
     async function onSuccess(res: any) {
+
+        check();
 
         const profile = res.getBasicProfile();
 

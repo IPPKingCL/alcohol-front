@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { getCookie } from '../Common/Cookies';
+import { setCookie, getCookie } from '../Common/Cookies';
 import '../css/App.css';
 import '../css/Login.css';
 import { recommand } from '../interface/recommand';
@@ -9,7 +9,36 @@ function Main() {
 
     const [recommandList, setRecommandList] = useState<recommand[]>([]);
 
+    const [whereConnect, setWhereConnect] = useState<string>();
+
     const tok = getCookie('myToken');
+
+
+    const check = () => {
+        const filter = "win16|win32|win64|mac|macintel";
+
+        let device = "";
+
+        if(navigator.platform) {
+            if(filter.indexOf(navigator.platform.toLowerCase()) < 0) {
+                device = "mobile";
+                alert("mobile 쿠키 입력");
+            }else {
+                device = "pc";
+                alert("pc 쿠키 입력");
+            }
+            
+        }
+
+        setCookie('device', device,{
+            path:"/",
+            secure:true,
+            sameSite:"none"
+        });
+    }
+    
+
+    
 
     const reco = () => {
         console.log(recommandList);
@@ -62,6 +91,7 @@ function Main() {
             <h1>메인 페이지 입니다.</h1>
             <button onClick={onClick}>추천 해줘!!</button>
             <button onClick={reco}>출력</button>
+            <button onClick={check}>쿠키 입력해줘!</button>
         </div>
     );
 

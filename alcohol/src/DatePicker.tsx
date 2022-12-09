@@ -5,6 +5,7 @@ import ReactDatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import { UserAddInfoErrorMessage } from './interface/UserAddInfoErrorMessage'
 import { UserAddInfo } from './interface/UserAddInfo'
+import { getCookie } from './Common/Cookies';
 
 function DatePicker(props : {type : string, setState : any}) {
     const [startDate, setStartDate] = useState(new Date());
@@ -42,7 +43,7 @@ function DatePicker(props : {type : string, setState : any}) {
         </button>
     ));
 
-    const [alert, setAlert] = useState<string>("Cannot be blank");
+    const [errorAlert, setAlert] = useState<string>("123 Cannot be blank");
 
     const onDateChange = (date : Date) => {
         setStartDate(date);
@@ -55,23 +56,48 @@ function DatePicker(props : {type : string, setState : any}) {
           ...userAddInfoErrorMessage
         };
     
-        const regexBirth = /^\d{4}\.([1-9][0-9]?)\.([1-9][0-9]?)\.$/i;
+        const device = getCookie('device');
+        alert(device);
 
+        let regexBirth : RegExp = /^\d{4}\/([1-9][0-9]?)\/([1-9][0-9]?)$/i;
 
-        if (!values) {
-          errors.birth = "Cannot be blank";
-          errors.birthValidation = false;
-          setAlert(errors.birth);
-        } else if (!regexBirth.test(values.toLocaleDateString().replace(/ /g, ''))) {
-          console.log(values.toLocaleDateString().replace(/ /g, ''));
-          errors.birth = "Invalid birth format";
-          errors.birthValidation = false;
-          setAlert(errors.birth);
-        } else {
-          errors.birth = "";
-          errors.birthValidation = true;
-          setAlert(errors.birth);
+        if(device === "pc") {
+          console.log("pc");
+          regexBirth = /^\d{4}\/([1-9][0-9]?)\/([1-9][0-9]?)$/i;
+          if (!values) {
+            errors.birth = "Cannot be blank";
+            errors.birthValidation = false;
+            setAlert(errors.birth);
+          } else if (!regexBirth.test(values.toLocaleDateString().substring(0,values.toLocaleDateString().length-1).replace(/ /g, '').replace(/\./g,'/'))) {
+            errors.birth = "Invalid birth format";
+            errors.birthValidation = false;
+            setAlert(errors.birth);
+          } else {
+            console.log(values.toLocaleDateString().substring(0,values.toLocaleDateString().length-1).replace(/ /g, '').replace(/\./g,'/'));
+            errors.birth = "";
+            errors.birthValidation = true;
+            setAlert(errors.birth);
+          }
+        }else if(device === "mobile") {
+          console.log("mobile");
+          regexBirth = /([1-9][0-9]?)\/([1-9][0-9]?)\/^\d{4}$/i;
+          if (!values) {
+            errors.birth = "Mobile Cannot be blank";
+            errors.birthValidation = false;
+            setAlert(errors.birth);
+          } else if (!regexBirth.test(values.toLocaleDateString())) {
+            errors.birth = "Mobile Invalid birth format";
+            errors.birthValidation = false;
+            setAlert(errors.birth);
+          } else {
+            console.log(values.toLocaleDateString().substring(0,values.toLocaleDateString().length-1).replace(/ /g, '').replace(/\./g,'/'));
+            errors.birth = "Mobile ";
+            errors.birthValidation = true;
+            setAlert(errors.birth);
+          }
         }
+
+        console.log(regexBirth);
     
         return errors;
       }
@@ -86,7 +112,7 @@ function DatePicker(props : {type : string, setState : any}) {
                 customInput={<ExampleCustomInput />}
                 scrollableYearDropdown
             />
-            <h4 style={{ color: 'red' }}>{alert}</h4><hr />
+            <h4 style={{ color: 'red' }}>{errorAlert}</h4><hr />
         </div>
     );
 
