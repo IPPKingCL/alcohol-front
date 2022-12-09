@@ -16,6 +16,7 @@ import Footer from './Common/Footer';
 import Main from './Main/main';
 import MyPage from './MyPage/MyPage';
 import UploadImageToS3WithNativeSdk from './Board/UploadImageToS3WithNativeSdk';
+import Test from './Board/test1';
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
   return (
     <Router>
       <div className="content-all">
+        
         <Routes>
           <Route path="/Login" element={<Login />}></Route>
           <Route path="/AddInfo" element={<AddInfo />}></Route>
@@ -35,6 +37,7 @@ function App() {
           <Route path="/Main" element={<Main />}></Route>
 
           <Route path="/test" element={<UploadImageToS3WithNativeSdk/>}></Route>
+          <Route path="/test1" element={<Test/>}></Route>
           <Route path="/myPage" element={<MyPage/>}/>
         </Routes>
       </div>
