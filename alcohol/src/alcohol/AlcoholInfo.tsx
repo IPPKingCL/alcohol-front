@@ -37,7 +37,7 @@ function AlcoholInfo(){
         list();
     },[])
     return(
-        <div>
+        <div id='wrapper2'>
             <div className='search-tool'>
                 <select name="selectBoard" id="selectBoard" className="select-search">
                     <option value="D">카테고리</option>

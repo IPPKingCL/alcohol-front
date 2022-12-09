@@ -9,6 +9,12 @@
     position: relative;
     padding-bottom: 60px;
 }
+#wrapper2 {
+    min-height: 100%;
+    height: 150vh;
+    position: relative;
+    padding-bottom: 240px;
+}
 
 #header {
     height: 70px;
