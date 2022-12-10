@@ -62,7 +62,6 @@ function DatePicker(props : {type : string, setState : any}) {
         let regexBirth : RegExp = /^\d{4}\/([1-9][0-9]?)\/([1-9][0-9]?)$/i;
 
         if(device === "pc") {
-          console.log("pc");
           regexBirth = /^\d{4}\/([1-9][0-9]?)\/([1-9][0-9]?)$/i;
           if (!values) {
             errors.birth = "Cannot be blank";
@@ -79,7 +78,6 @@ function DatePicker(props : {type : string, setState : any}) {
             setAlert(errors.birth);
           }
         }else if(device === "mobile") {
-          console.log("mobile");
           regexBirth = /([1-9][0-9]?)\/([1-9][0-9]?)\/^\d{4}$/i;
           if (!values) {
             errors.birth = "Mobile Cannot be blank";
