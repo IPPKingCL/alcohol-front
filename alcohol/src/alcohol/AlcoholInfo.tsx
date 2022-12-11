@@ -39,7 +39,7 @@ function AlcoholInfo(){
 
     const onChange = (e:any) => {
         let category = '';
-
+        
         switch(e.target.value){
             case 'D':
                 list();
@@ -73,6 +73,31 @@ function AlcoholInfo(){
                 break;
         }
         console.log(category)
+        setLoading(true);
+        setArrData([]);
+        fetch(addr+'/alcohol/category/'+category,{
+            method:'GET',
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }).then((res) => res.json())
+        .then((res) => {
+            let i:number = 0;
+            for (i; i < res.length; i++) {
+                const data:alcho ={
+                    id:res[i].id,
+                    name:res[i].name,
+                    category:res[i].category,
+                    sugar:res[i].sugar,
+                    color : res[i].color,
+                    dosu : res[i].dosu,
+                    price : res[i].price,
+                    imgUrl : res[i].imgUrl
+                }
+                setArrData(arrData => [...arrData,data]);
+            }
+            setLoading(false);
+        })
     }
     return(
         <div id='wrapper2'>
