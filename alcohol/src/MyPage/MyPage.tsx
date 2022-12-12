@@ -1,6 +1,9 @@
+import { useState } from 'react';
 import '../css/MyPage.css';
+import { User } from '../interface/user';
 
 function MyPage(){
+    const [userData, setUserData] = useState<User>();
     return(
         <div>
             <div className='mypage'>
