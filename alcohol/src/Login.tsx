@@ -33,8 +33,7 @@ function Login() {
 
         setCookie('device', device,{
             path:"/",
-            secure:true,
-            sameSite:"none"
+            sameSite:"Lax"
         });
     }
 

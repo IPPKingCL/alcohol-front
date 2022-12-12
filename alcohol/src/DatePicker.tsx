@@ -57,8 +57,6 @@ function DatePicker(props : {type : string, setState : any}) {
         };
     
         const device = getCookie('device');
-        const all = getAllCookie();
-        alert(all['device']);
 
         let regexBirth : RegExp = /^\d{4}\/([1-9][0-9]?)\/([1-9][0-9]?)$/i;
 
@@ -79,12 +77,13 @@ function DatePicker(props : {type : string, setState : any}) {
             setAlert(errors.birth);
           }
         }else if(device === "mobile") {
-          regexBirth = /([1-9][0-9]?)\/([1-9][0-9]?)\/^\d{4}$/i;
+          regexBirth = /^\d{4}\/([1-9][0-9]?)\/([1-9][0-9]?)$/i;
           if (!values) {
             errors.birth = "Mobile Cannot be blank";
             errors.birthValidation = false;
             setAlert(errors.birth);
           } else if (!regexBirth.test(values.toLocaleDateString())) {
+            alert(values.toLocaleDateString());
             errors.birth = "Mobile Invalid birth format";
             errors.birthValidation = false;
             setAlert(errors.birth);

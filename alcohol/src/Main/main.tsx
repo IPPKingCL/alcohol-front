@@ -30,8 +30,7 @@ function Main() {
 
         setCookie('device', device,{
             path:"/",
-            secure:true,
-            sameSite:"none"
+            sameSite:"Lax"
         });
 
         alert(getCookie('device') + "  " + device);
