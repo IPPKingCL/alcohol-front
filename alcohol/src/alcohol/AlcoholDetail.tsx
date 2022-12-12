@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getCookie } from "../Common/Cookies";
 import { alcho } from "../interface/Alcho";
 import { addr } from "../interface/serverAddr";
@@ -8,7 +8,10 @@ function AlcoholDetail(prop:any){
     const {id} = useParams();
     const [loading, setLoading] = useState<boolean>(true);
     const [alcoholData,setAlcoholData] = useState<alcho>();
+    const [color,setColor] = useState<string>(); 
+    const navigate = useNavigate();
     const detail = async () => {
+        
         fetch(addr+'/alcohol/detail/'+id,{
             method:"GET",
             headers:{
@@ -18,7 +21,11 @@ function AlcoholDetail(prop:any){
         .then((res)=>{
             console.log(res)
             setAlcoholData(res);
+            if(res.color=='tp'){
+                setColor("Transparency(무색)")
+            }
             setLoading(false);
+            
         })
     }
 
@@ -26,18 +33,27 @@ function AlcoholDetail(prop:any){
         detail()
     },[]);
 
+    const onclick = () => {
+        navigate('/alcohol')
+    }
     return (
         <div>
             {loading ? <strong>loading...</strong>:
             <div>
                 <h2>{alcoholData?.name}</h2>
-                <span>종류 : {alcoholData?.category} </span>
-                <span>당도 : {alcoholData?.sugar} </span>
-                <span>색 : {alcoholData?.color} </span>
-                <span>도수 : {alcoholData?.dosu} </span>
-                <span>가격 : {alcoholData?.price} </span>
-                <img src = {alcoholData?.imgUrl}/>
+                <p>종류 : {alcoholData?.category} </p>
+                <p>당도 : {alcoholData?.sugar} (달수록 숫자가 높습니다)</p>
+                <p>색 : {color} </p>
+                <p>도수 : {alcoholData?.dosu} </p>
+                <p>가격 : {alcoholData?.price} </p>
+                <img className="alcoholImg" src = {alcoholData?.imgUrl}/>
+                <div>
+                    <button onClick={onclick}>뒤로</button>
+                    <button>칵테일 레시피</button>
+                </div>
             </div>
+
+           
                 
             }
         </div>

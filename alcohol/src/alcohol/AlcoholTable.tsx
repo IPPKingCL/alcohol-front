@@ -9,8 +9,8 @@ function AlcoholTable(prop:any){
     }
 
     return (
-        <div className="alchoWrapper"> 
-            <h2 className="board-title" onClick={onclick}>{prop.data.name}</h2>
+        <div className="alchoWrapper" onClick={onclick}> 
+            <h2 className="board-title" >{prop.data.name}</h2>
             <span className="board-title"> {prop.data.category}</span>
             <img className="alcoholImg" src={prop.data.imgUrl}/>
             <hr></hr>

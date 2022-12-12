@@ -57,8 +57,8 @@
 }
 
 .content{ /*작성내용 작성 하는 공간*/
-    width:80%;
-    height:200px;
+    width:90%;
+    height:300px;
     white-space:pre-line;
     border-radius: 5px;
     border:1px solid black;
