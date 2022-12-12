@@ -13,6 +13,7 @@ import AddInfoMaximumPrice from './AddInfoMaximumPrice';
 import { UserAddInfo } from '../interface/UserAddInfo'
 import { UserAddInfoErrorMessage } from '../interface/UserAddInfoErrorMessage'
 import { setCookie } from '../Common/Cookies';
+import TransferList from './AddInfoFavorList';
 
 function AddInfo() {
 
@@ -288,25 +289,8 @@ function AddInfo() {
         <h3>직군 : <input type="text" placeholder='job' name='job' onChange={onChangeJob} required></input></h3>
         <h4 style={{ color: 'red' }}>{validateJob(userAddInfo).job}</h4><hr />
         <AddInfoMaximumPrice type="허용 최대 가격" setState={changeStateMaximumPrice} />
-        <h3>좋아하는 목록 :
-          <select id="select1" name='favoriteList' onChange={onChangeFavoriteList}>
-            <option value="">디폴트</option>
-            <option value={1}>1</option>
-            <option value={2}>2</option>
-            <option value={3}>3</option>
-          </select>
-          <select id="select2" name='favoriteList' onChange={onChangeFavoriteList}>
-            <option value="">디폴트</option>
-            <option value={1}>1</option>
-            <option value={2}>2</option>
-            <option value={3}>3</option>
-          </select>
-          <select id="select3" name='favoriteList' onChange={onChangeFavoriteList}>
-            <option value="">디폴트</option>
-            <option value={1}>1</option>
-            <option value={2}>2</option>
-            <option value={3}>3</option>
-          </select></h3>
+        <h3>좋아하는 목록 :</h3>
+        <TransferList/>
         <h4 style={{ color: 'red' }}>{userAddInfo.favoriteList ? null : validateFavoriteList(userAddInfo).favoriteList}</h4><hr />
         <button onClick={sendAddInfo}>완료</button>
       </div>

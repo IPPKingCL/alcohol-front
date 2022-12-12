@@ -77,7 +77,7 @@ function AddInfoText(props: { type: string, setState : any }) {
     return (
 
         <div>
-            <h3>{props.type} : <input type="text" placeholder={props.type} name='age' onChange={onChangeAge} required></input></h3>
+            <h3>{props.type} : <input type="text" placeholder="1~100사이의 숫자를 입력하세요." name='age' onChange={onChangeAge} required></input></h3>
             <h4 style={{ color: 'red' }}>{alert}</h4><hr />
         </div>
     );
