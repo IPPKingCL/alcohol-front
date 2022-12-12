@@ -53,6 +53,7 @@ function FreeModify(){
 
     useEffect(() => {
         getBoard();
+        
     },[]);
 
     const onchange = (e:React.ChangeEvent<HTMLInputElement>|React.ChangeEvent<HTMLTextAreaElement>|React.ChangeEvent<HTMLSelectElement>) => {
