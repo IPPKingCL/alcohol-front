@@ -70,7 +70,7 @@ function AddInfoJob(props: { type: string }) {
 
         <div>
             <h3>성별 : <select id="selectSex" name='sex' onChange={onChangeSex}>
-                <option value="">디폴트</option>
+                <option value="">선택</option>
                 <option value="m">M</option>
                 <option value="f">F</option>
             </select></h3>

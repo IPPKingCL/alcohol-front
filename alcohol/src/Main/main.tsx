@@ -85,7 +85,6 @@ function Main() {
 
 
     return (
-
         <div>
             <h1>메인 페이지 입니다.</h1>
             <button onClick={onClick}>추천 해줘!!</button>

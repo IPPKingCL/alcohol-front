@@ -82,7 +82,7 @@ function AddInfoNickName(props: { type: string , setState : any}) {
     return (
 
         <div>
-            <h3>{props.type} : <input type="text" placeholder={props.type} name='nickname' onChange={onChangeNickname} required></input></h3>
+            <h3>{props.type} : <input type="text" placeholder="2~8글자 사이로 입력하세요." name='nickname' onChange={onChangeNickname} required></input></h3>
             <h4 style={{ color: 'red' }}>{alert}</h4>
             <h4 style={{ color: 'red' }}>{userAddInfo.nickname}</h4><hr />
         </div>

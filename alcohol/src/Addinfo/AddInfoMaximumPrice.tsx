@@ -80,7 +80,7 @@ function AddInfoMaximumPrice(props: { type: string, setState : any }) {
 
     return (
         <div>
-            <h3>{props.type} : <input type="text" placeholder={props.type} name='MaximumPrice' onChange={onChangeMaximumPrice} required></input></h3>
+            <h3>{props.type} : <input type="text" placeholder="100~10,000,000 사이로 입력" name='MaximumPrice' onChange={onChangeMaximumPrice} required></input></h3>
             <h4 style={{ color: 'red' }}>{alert}</h4>
         </div>
     );
