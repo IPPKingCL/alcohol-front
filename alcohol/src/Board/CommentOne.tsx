@@ -1,7 +1,7 @@
 import { stringify } from "querystring";
 import { useNavigate, useParams } from "react-router-dom";
 import { getCookie } from "../Common/Cookies";
-import { addr } from "../interface/serverAddr";
+import { addr } from "../Common/serverAddr";
 
 
 function CommentOne(prop:any){

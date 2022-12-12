@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { commentList } from '../interface/CommentList';
-import { addr } from '../interface/serverAddr';
+import { addr } from '../Common/serverAddr';
 import CommentList from './CommentList';
 import '../css/footer.css';
 import { getCookie } from '../Common/Cookies';
