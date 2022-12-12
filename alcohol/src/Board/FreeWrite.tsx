@@ -1,7 +1,7 @@
 import React, {  useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { board } from '../interface/Board'
-import { addr } from '../interface/serverAddr';
+import { addr } from '../Common/serverAddr';
 import AWS from 'aws-sdk';
 import { getCookie } from '../Common/Cookies';
 

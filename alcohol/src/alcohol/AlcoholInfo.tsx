@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { alcho } from "../interface/Alcho";
-import { addr } from "../interface/serverAddr";
+import { addr } from "../Common/serverAddr";
 import AlcoholList from "./AlcoholList";
 
 function AlcoholInfo(){
@@ -41,8 +41,9 @@ function AlcoholInfo(){
         let category = '';
         
         switch(e.target.value){
-            case 'D':
+            case 'A':
                 list();
+                return;
                 break;
             case 'W':
                 category='위스키';
@@ -103,7 +104,7 @@ function AlcoholInfo(){
         <div id='wrapper2'>
             <div className='search-tool'>
                 <select name="selectBoard" id="selectBoard" className="select-search" onChange = {onChange}>
-                    <option value="D">전체</option>
+                    <option value="A">전체</option>
                     <option value="W">위스키</option>
                     <option value="B">보드카</option>
                     <option value="BR">브랜디</option>

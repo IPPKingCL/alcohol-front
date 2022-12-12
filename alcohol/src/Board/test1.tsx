@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { getCookie } from "../Common/Cookies";
-import { addr } from "../interface/serverAddr";
+import { addr } from "../Common/serverAddr";
 
 function Test() {
     const [selectedFile, setSelectedFile] = useState<any>('');

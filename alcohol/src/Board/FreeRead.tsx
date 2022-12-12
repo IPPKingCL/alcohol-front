@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { boardRead } from '../interface/Board';
-import { addr } from '../interface/serverAddr';
+import { addr } from '../Common/serverAddr';
 import Comment from './Comment';
 import '../css/board.css';
 import { getCookie } from '../Common/Cookies';

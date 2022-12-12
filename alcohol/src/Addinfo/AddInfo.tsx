@@ -4,7 +4,7 @@ import '../css/Login.css';
 import '../css/AddInfo.css';
 import { useLocation } from 'react-router';
 import { useNavigate } from 'react-router-dom';
-import { addr } from '../interface/serverAddr'
+import { addr } from '../Common/serverAddr'
 import DatePicker from '../DatePicker';
 import AddInfoTextNickname from './AddInfoNickname';
 import AddInfoTextAge from './AddInfoAge';

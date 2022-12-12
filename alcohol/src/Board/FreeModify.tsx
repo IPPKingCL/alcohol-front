@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getCookie } from '../Common/Cookies';
 import { boardRead,board } from '../interface/Board';
-import { addr } from '../interface/serverAddr';
+import { addr } from '../Common/serverAddr';
 
 function FreeModify(){
     const [loading, setLoading] = useState<boolean>(true);

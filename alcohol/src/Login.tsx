@@ -6,7 +6,7 @@ import './css/footer.css';
 import { useNavigate } from 'react-router-dom';
 import { GoogleLogin } from 'react-google-login';
 import { gapi } from 'gapi-script';
-import { addr } from './interface/serverAddr';
+import { addr } from './Common/serverAddr';
 import { setCookie } from './Common/Cookies';
 
 function Login() {

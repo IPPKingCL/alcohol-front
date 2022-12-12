@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { boardList } from '../interface/BoardList';
-import { addr } from '../interface/serverAddr';
+import { addr } from '../Common/serverAddr';
 import List from './List';
 import '../css/board.css';
 import Pagination from './Paginattion';

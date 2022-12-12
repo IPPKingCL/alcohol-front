@@ -3,7 +3,7 @@ import { setCookie, getCookie } from '../Common/Cookies';
 import '../css/App.css';
 import '../css/Login.css';
 import { recommand } from '../interface/recommand';
-import { addr } from '../interface/serverAddr';
+import { addr } from '../Common/serverAddr';
 
 function Main() {
 
