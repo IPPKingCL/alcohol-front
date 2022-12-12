@@ -66,6 +66,15 @@ export default function TransferList() {
     setChecked(not(checked, rightChecked));
   };
 
+  const popList = () => {
+    const tmpLeft = leftChecked.length + 1;
+    console.log(tmpLeft);
+    if(tmpLeft > 3) {
+      alert("3개 초과 클릭 못해!");
+      
+    }
+  }
+
   const customList = (title: React.ReactNode, items: readonly number[]) => (
     <Card>
       <CardHeader
@@ -110,7 +119,8 @@ export default function TransferList() {
             >
               <ListItemIcon>
                 <Checkbox
-                  checked={checked.indexOf(value) !== -1}
+                  
+                  onChange={popList}
                   tabIndex={-1}
                   disableRipple
                   inputProps={{
