@@ -23,6 +23,8 @@ function AlcoholDetail(prop:any){
             setAlcoholData(res);
             if(res.color=='tp'){
                 setColor("Transparency(무색)")
+            }else{
+                setColor(res.color);
             }
             setLoading(false);
             
