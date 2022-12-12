@@ -22,10 +22,8 @@ function Main() {
         if(navigator.platform) {
             if(filter.indexOf(navigator.platform.toLowerCase()) < 0) {
                 device = "mobile";
-                alert("mobile 쿠키 입력");
             }else {
                 device = "pc";
-                alert("pc 쿠키 입력");
             }
             
         }
@@ -35,6 +33,8 @@ function Main() {
             secure:true,
             sameSite:"none"
         });
+
+        alert(getCookie('device') + "  " + device);
     }
     
 

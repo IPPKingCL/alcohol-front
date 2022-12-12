@@ -5,7 +5,7 @@ import ReactDatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import { UserAddInfoErrorMessage } from './interface/UserAddInfoErrorMessage'
 import { UserAddInfo } from './interface/UserAddInfo'
-import { getCookie } from './Common/Cookies';
+import { getAllCookie, getCookie } from './Common/Cookies';
 
 function DatePicker(props : {type : string, setState : any}) {
     const [startDate, setStartDate] = useState(new Date());
@@ -57,7 +57,8 @@ function DatePicker(props : {type : string, setState : any}) {
         };
     
         const device = getCookie('device');
-        alert(device);
+        const all = getAllCookie();
+        alert(all['device']);
 
         let regexBirth : RegExp = /^\d{4}\/([1-9][0-9]?)\/([1-9][0-9]?)$/i;
 
