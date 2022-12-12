@@ -278,7 +278,7 @@ function AddInfo() {
   
 
   return (
-    <div className='addInfoInputTag'>
+    <div className='addInfoInputTag' id='wrapper'>
       <h1>추가 정보를 입력해 주세요.</h1>
       <div className='formAlign'>
         <AddInfoTextNickname type="닉네임" setState={changeStateNickname} />
