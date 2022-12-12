@@ -82,14 +82,13 @@ function DatePicker(props : {type : string, setState : any}) {
             errors.birth = "Mobile Cannot be blank";
             errors.birthValidation = false;
             setAlert(errors.birth);
-          } else if (!regexBirth.test(values.toLocaleDateString())) {
-            alert(values.toLocaleDateString());
+          } else if (!regexBirth.test(values.toLocaleDateString().substring(0,values.toLocaleDateString().length-1).replace(/ /g, '').replace(/\./g,'/'))) {
             errors.birth = "Mobile Invalid birth format";
             errors.birthValidation = false;
             setAlert(errors.birth);
           } else {
             console.log(values.toLocaleDateString().substring(0,values.toLocaleDateString().length-1).replace(/ /g, '').replace(/\./g,'/'));
-            errors.birth = "Mobile ";
+            errors.birth = "";
             errors.birthValidation = true;
             setAlert(errors.birth);
           }
