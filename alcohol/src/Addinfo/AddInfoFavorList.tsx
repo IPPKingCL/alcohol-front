@@ -77,6 +77,7 @@ export default function TransferList(props : {type : string, setState : any}) {
     }
 
     setChecked(newChecked);
+    console.log(leftList)
   };
 
   const numberOfChecked = (items: readonly number[]) =>
