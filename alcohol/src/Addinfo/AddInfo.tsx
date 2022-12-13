@@ -204,6 +204,7 @@ function AddInfo() {
           sex: userAddInfo.sex,
           job: userAddInfo.job,
           userId: state.id,
+          price : userAddInfo.MaximumPrice,
           password: '-',
         }),
       }).then(res => res.json())
