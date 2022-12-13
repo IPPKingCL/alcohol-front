@@ -47,7 +47,7 @@ function AlcoholDetail(prop:any){
                 <p>당도 : {alcoholData?.sugar} (달수록 숫자가 높습니다)</p>
                 <p>색 : {color} </p>
                 <p>도수 : {alcoholData?.dosu} </p>
-                <p>가격 : {alcoholData?.price} </p>
+                <p>가격 : {alcoholData?.price}원 (판매점마다 가격이 다를 수 있습니다)</p>
                 <img className="alcoholImg" src = {alcoholData?.imgUrl}/>
                 <div>
                     <button onClick={onclick}>뒤로</button>

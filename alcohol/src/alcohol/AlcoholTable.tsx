@@ -11,7 +11,7 @@ function AlcoholTable(prop:any){
     return (
         <div className="alchoWrapper" onClick={onclick}> 
             <h2 className="board-title" >{prop.data.name}</h2>
-            <span className="board-title"> {prop.data.category}</span>
+            <span className="board-title">종류 : {prop.data.category}</span>
             <img className="alcoholImg" src={prop.data.imgUrl}/>
             <hr></hr>
         </div>
