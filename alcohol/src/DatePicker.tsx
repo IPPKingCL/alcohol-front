@@ -58,36 +58,36 @@ function DatePicker(props : {type : string, setState : any}) {
     
         const device = getCookie('device');
 
-        let regexBirth : RegExp = /^\d{4}\/([1-9][0-9]?)\/([1-9][0-9]?)$/i;
+        let regexBirth : RegExp = /^\d{4}-([1-9][0-9]?)-([1-9][0-9]?)$/i;
 
         if(device === "pc") {
-          regexBirth = /^\d{4}\/([1-9][0-9]?)\/([1-9][0-9]?)$/i;
+          regexBirth = /^\d{4}-([1-9][0-9]?)-([1-9][0-9]?)$/i;
           if (!values) {
             errors.birth = "Cannot be blank";
             errors.birthValidation = false;
             setAlert(errors.birth);
-          } else if (!regexBirth.test(values.toLocaleDateString().substring(0,values.toLocaleDateString().length-1).replace(/ /g, '').replace(/\./g,'/'))) {
+          } else if (!regexBirth.test(values.toLocaleDateString().substring(0,values.toLocaleDateString().length-1).replace(/ /g, '').replace(/\./g,'-'))) {
             errors.birth = "Invalid birth format";
             errors.birthValidation = false;
             setAlert(errors.birth);
           } else {
-            console.log(values.toLocaleDateString().substring(0,values.toLocaleDateString().length-1).replace(/ /g, '').replace(/\./g,'/'));
+            console.log(values.toLocaleDateString().substring(0,values.toLocaleDateString().length-1).replace(/ /g, '').replace(/\./g,'-'));
             errors.birth = "";
             errors.birthValidation = true;
             setAlert(errors.birth);
           }
         }else if(device === "mobile") {
-          regexBirth = /^\d{4}\/([1-9][0-9]?)\/([1-9][0-9]?)$/i;
+          regexBirth = /^\d{4}-([1-9][0-9]?)-([1-9][0-9]?)$/i;
           if (!values) {
             errors.birth = "Mobile Cannot be blank";
             errors.birthValidation = false;
             setAlert(errors.birth);
-          } else if (!regexBirth.test(values.toLocaleDateString().substring(0,values.toLocaleDateString().length-1).replace(/ /g, '').replace(/\./g,'/'))) {
+          } else if (!regexBirth.test(values.toLocaleDateString().substring(0,values.toLocaleDateString().length-1).replace(/ /g, '').replace(/\./g,'-'))) {
             errors.birth = "Mobile Invalid birth format";
             errors.birthValidation = false;
             setAlert(errors.birth);
           } else {
-            console.log(values.toLocaleDateString().substring(0,values.toLocaleDateString().length-1).replace(/ /g, '').replace(/\./g,'/'));
+            console.log(values.toLocaleDateString().substring(0,values.toLocaleDateString().length-1).replace(/ /g, '').replace(/\./g,'-'));
             errors.birth = "";
             errors.birthValidation = true;
             setAlert(errors.birth);
