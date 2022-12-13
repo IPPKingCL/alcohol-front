@@ -107,8 +107,6 @@ function AddInfo() {
     }
     setUserAddInfo(userPriceChange);
     setUserAddInfoErrorMessage(stateChange);
-
-    console.log(userPriceChange.MaximumPrice);
   }
 
   const onChangeBirth = (birthState : Date, state: boolean) => {

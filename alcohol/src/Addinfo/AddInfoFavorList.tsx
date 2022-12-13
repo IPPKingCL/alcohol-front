@@ -25,7 +25,7 @@ function union(a: readonly number[], b: readonly number[]) {
 export default function TransferList() {
   const [checked, setChecked] = React.useState<readonly number[]>([]);
   const [left, setLeft] = React.useState<readonly number[]>([0, 1, 2, 3]);
-  const [right, setRight] = React.useState<readonly number[]>([4, 5, 6, 7]);
+  const [right, setRight] = React.useState<readonly number[]>([4, 5, 6]);
 
   const leftChecked = intersection(checked, left);
   const rightChecked = intersection(checked, right);
@@ -55,9 +55,16 @@ export default function TransferList() {
   };
 
   const handleCheckedRight = () => {
-    setRight(right.concat(leftChecked));
-    setLeft(not(left, leftChecked));
-    setChecked(not(checked, leftChecked));
+    console.log(right.length);
+    console.log(leftChecked.length);
+    if (right.length >= 3 || leftChecked.length > 3) {
+      alert("3개만 선택 할 수 있습니다.");
+    } else {
+      setRight(right.concat(leftChecked));
+      setLeft(not(left, leftChecked));
+      setChecked(not(checked, leftChecked));
+    }
+
   };
 
   const handleCheckedLeft = () => {
@@ -65,15 +72,6 @@ export default function TransferList() {
     setRight(not(right, rightChecked));
     setChecked(not(checked, rightChecked));
   };
-
-  const popList = () => {
-    const tmpLeft = leftChecked.length + 1;
-    console.log(tmpLeft);
-    if(tmpLeft > 3) {
-      alert("3개 초과 클릭 못해!");
-      
-    }
-  }
 
   const customList = (title: React.ReactNode, items: readonly number[]) => (
     <Card>
@@ -119,8 +117,7 @@ export default function TransferList() {
             >
               <ListItemIcon>
                 <Checkbox
-                  
-                  onChange={popList}
+                  checked={checked.indexOf(value) !== -1}
                   tabIndex={-1}
                   disableRipple
                   inputProps={{

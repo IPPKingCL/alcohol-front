@@ -46,7 +46,7 @@ function AddInfoMaximumPrice(props: { type: string, setState : any }) {
         setUserAddInfo(nextMaximumPriceInput);
 
         validateMaximumPrice(nextMaximumPriceInput);
-    
+        
       }
 
     const validateMaximumPrice = (values: any) => {
