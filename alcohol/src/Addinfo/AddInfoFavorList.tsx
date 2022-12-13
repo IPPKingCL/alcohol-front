@@ -9,6 +9,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import Checkbox from '@mui/material/Checkbox';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
+import { useEffect } from 'react';
 
 function not(a: readonly number[], b: readonly number[]) {
   return a.filter((value) => b.indexOf(value) === -1);
@@ -22,13 +23,23 @@ function union(a: readonly number[], b: readonly number[]) {
   return [...a, ...not(b, a)];
 }
 
-export default function TransferList() {
+export default function TransferList(props : {type : string, setState : any}) {
   const [checked, setChecked] = React.useState<readonly number[]>([]);
-  const [left, setLeft] = React.useState<readonly number[]>([0, 1, 2, 3]);
-  const [right, setRight] = React.useState<readonly number[]>([4, 5, 6]);
+  const [left, setLeft] = React.useState<readonly number[]>([0, 1, 2, 3,4,5,6]);
+  const [right, setRight] = React.useState<readonly number[]>([]);
 
   const leftChecked = intersection(checked, left);
   const rightChecked = intersection(checked, right);
+
+
+  useEffect(() => {
+    if(right.length == 3) {
+      console.log(right);
+      props.setState(right, true);
+    }else {
+      props.setState(right, false);
+    }
+  },[right]);
 
   const handleToggle = (value: number) => () => {
     const currentIndex = checked.indexOf(value);
@@ -55,15 +66,15 @@ export default function TransferList() {
   };
 
   const handleCheckedRight = () => {
-    console.log(right.length);
-    console.log(leftChecked.length);
     if (right.length >= 3 || leftChecked.length > 3) {
       alert("3개만 선택 할 수 있습니다.");
     } else {
       setRight(right.concat(leftChecked));
       setLeft(not(left, leftChecked));
       setChecked(not(checked, leftChecked));
+      console.log(right.length);
     }
+    
 
   };
 

@@ -5,5 +5,5 @@ export interface UserAddInfo {
     sex: string;
     job: string;
     MaximumPrice: number;
-    favoriteList: Array<string>;
+    favoriteList: number[];
   }

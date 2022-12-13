@@ -139,24 +139,20 @@ function AddInfo() {
 
   }
 
-  const onChangeFavoriteList = (e: any) => {
-    console.log(e.target);
-    const { id, name, value } = e.target;
+  const onChangeFavoriteList = (favoriteListstate : number[], state : boolean) => {
 
     const nextFavoriteListInput: UserAddInfo = {
-      ...userAddInfo
+      ...userAddInfo,
+      favoriteList: favoriteListstate,
     }
-    if (id == "select1") {
-      nextFavoriteListInput.favoriteList[0] = value;
-    }
-    else if (id == "select2") {
-      nextFavoriteListInput.favoriteList[1] = value;
-    }
-    else if (id == "select3") {
-      nextFavoriteListInput.favoriteList[2] = value;
+
+    const stateChange : UserAddInfoErrorMessage = {
+      ...userAddInfoErrorMessage,
+      favoriteListValidation: state,
     }
 
     setUserAddInfo(nextFavoriteListInput);
+    setUserAddInfoErrorMessage(stateChange);
 
   }
 
@@ -187,12 +183,12 @@ function AddInfo() {
     const validate: UserAddInfoErrorMessage = {
       ...userAddInfoErrorMessage,
     }
-    console.log(validate);
+
     console.log(userAddInfo);
-    console.log(state);
+    console.log(userAddInfoErrorMessage);
 
     if (validate.MaximumPriceValidation && validate.ageValidation && validate.nicknameValidation
-      && validate.sexValidation) {
+      && validate.sexValidation && validate.favoriteListValidation) {
       fetch(addr + '/user/insert', {
         method: "POST",
         headers: {
@@ -288,7 +284,7 @@ function AddInfo() {
         <h4 style={{ color: 'red' }}>{validateJob(userAddInfo).job}</h4><hr />
         <AddInfoMaximumPrice type="허용 최대 가격" setState={changeStateMaximumPrice} />
         <h3>좋아하는 목록 :</h3>
-        <TransferList/>
+        <TransferList type="리스트" setState={onChangeFavoriteList}/>
         <h4 style={{ color: 'red' }}>{userAddInfo.favoriteList ? null : validateFavoriteList(userAddInfo).favoriteList}</h4><hr />
         <button onClick={sendAddInfo}>완료</button>
       </div>
