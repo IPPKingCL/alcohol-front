@@ -10,6 +10,8 @@ import Checkbox from '@mui/material/Checkbox';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
 import { useEffect } from 'react';
+import { addr } from '../Common/serverAddr';
+import {AlchoCategory} from '../interface/AlchoCategory'
 
 function not(a: readonly number[], b: readonly number[]) {
   return a.filter((value) => b.indexOf(value) === -1);
@@ -25,12 +27,35 @@ function union(a: readonly number[], b: readonly number[]) {
 
 export default function TransferList(props : {type : string, setState : any}) {
   const [checked, setChecked] = React.useState<readonly number[]>([]);
-  const [left, setLeft] = React.useState<readonly number[]>([0, 1, 2, 3,4,5,6]);
+  const [left, setLeft] = React.useState<readonly number[]>([1,2,3,4,5,6]);
   const [right, setRight] = React.useState<readonly number[]>([]);
+  
+  const [leftList, setLeftList] = React.useState<AlchoCategory[]>([]);
+  const [rightList, setRightList] = React.useState<AlchoCategory[]>([]);
 
   const leftChecked = intersection(checked, left);
   const rightChecked = intersection(checked, right);
 
+  useEffect(() => {
+    fetch(addr + '/alcohol/category', {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then(res => res.json())
+    .then((res) => {
+      let i = 0;
+      for(i; i<res.length; i++) {
+        const alcho : AlchoCategory = {id : res[i].id, category : res[i].category};
+        console.log("1 " + res[i].id);
+        console.log("2 " + res[i].category);
+        console.log("alcho " + alcho.id);
+        console.log("alcho " + alcho.category);
+        setLeftList(leftList => [...leftList, alcho]);
+      }
+
+    })
+  },[])
 
   useEffect(() => {
     if(right.length == 3) {

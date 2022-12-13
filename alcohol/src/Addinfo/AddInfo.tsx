@@ -31,7 +31,7 @@ function AddInfo() {
     sex: '',
     job: '',
     MaximumPrice: 0,
-    favoriteList: new Array,
+    favoriteList: [],
   });
 
   const [userAddInfoErrorMessage, setUserAddInfoErrorMessage] = useState<UserAddInfoErrorMessage>({
@@ -210,6 +210,7 @@ function AddInfo() {
         }),
       }).then(res => res.json())
       .then((res) => {
+        console.log(res.success);
         if (res.success) {
           alert("응답완료");
           setCookie('myToken',res.token,{
