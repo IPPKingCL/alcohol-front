@@ -66,7 +66,7 @@ export default function TransferList(props : {type : string, setState : any}) {
   };
 
   const handleCheckedRight = () => {
-    if (right.length >= 3 || leftChecked.length > 3) {
+    if (right.length >= 3 || leftChecked.length + right.length > 3) {
       alert("3개만 선택 할 수 있습니다.");
     } else {
       setRight(right.concat(leftChecked));

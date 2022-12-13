@@ -118,7 +118,7 @@ function AddInfo() {
 
     const nextBirthInput: UserAddInfo = {
       ...userAddInfo,
-      birth : birthState.toLocaleDateString(),
+      birth : birthState.toLocaleDateString().substring(0,birthState.toLocaleDateString().length-1).replace(/ /g, '').replace(/\./g,'-'),
     }
     setUserAddInfo(nextBirthInput);
     setUserAddInfoErrorMessage(stateChange);
@@ -205,6 +205,7 @@ function AddInfo() {
           job: userAddInfo.job,
           userId: state.id,
           price : userAddInfo.MaximumPrice,
+          favorite : userAddInfo.favoriteList,
           password: '-',
         }),
       }).then(res => res.json())
