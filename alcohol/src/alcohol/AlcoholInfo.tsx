@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { alcho } from "../interface/Alcho";
 import { addr } from "../Common/serverAddr";
 import AlcoholList from "./AlcoholList";
+import { setServers } from "dns/promises";
 
 function AlcoholInfo(){
     const [arrData,setArrData] = useState<alcho[]>([])
@@ -10,6 +11,7 @@ function AlcoholInfo(){
     const [searchData,setSearchData] = useState<alcho[]>([])
     const list = async () => {
         setArrData([]);
+        setSearchData([]);
         fetch(addr+'/alcohol',{
             method:"GET",
             headers:{
@@ -30,7 +32,9 @@ function AlcoholInfo(){
                     imgUrl : res[i].imgUrl
                 }
                 setArrData(arrData => [...arrData,data])
+                setSearchData(searchData => [...searchData,data]);
             }
+            
         })
         setLoading(false);
     }
@@ -105,11 +109,17 @@ function AlcoholInfo(){
         })
     }
     const onSearch = (e:React.FormEvent<HTMLFormElement>) => {
+        
         e.preventDefault();
         console.log(search);
-        const filterData = arrData.filter((row)=>row.name.includes(search));
+        if(search==''){
+            list();
+            return;
+        }
+        const filterData = searchData.filter((row)=>row.name.includes(search));
 
         setArrData(filterData)
+        setSearch('');
     }
 
     const onChangeSearch = (e:React.ChangeEvent<HTMLInputElement>) => {
@@ -134,7 +144,7 @@ function AlcoholInfo(){
                     <option value='WI'>와인</option>
                 </select>
                 <form className='search-form' onSubmit={e => onSearch(e)}>
-                    <input type="text" id="search" onChange={onChangeSearch} ></input>
+                    <input type="text" id="search" value={search} onChange={onChangeSearch} ></input>
                     <button type='submit' className='btn-submit'>검색</button>
                 </form>
             </div>
