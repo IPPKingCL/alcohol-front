@@ -1,17 +1,21 @@
-import { useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { getCookie } from '../Common/Cookies';
 import { addr } from '../Common/serverAddr';
 import '../css/MyPage.css';
 import { User } from '../interface/user';
+import MyFavorite from './MyFavorite';
+
 
 function MyPage(){
     const [userData, setUserData] = useState<User>();
     const [loading, setLoading] = useState<boolean>(true);
+    const [favoirtes, setFavorite] = useState<string[]>([]);
     const navigate = useNavigate();
 
     const user = () =>{
         console.log(getCookie('myToken'))
+        
         fetch(addr+'/user/selectUser',{
             method:'GET',
             headers: {
@@ -31,6 +35,25 @@ function MyPage(){
             }
             console.log(res);
             setUserData(res);
+            favoriteList();
+            
+        })
+    }
+
+    const favoriteList = () => {
+        setFavorite([])
+        fetch(addr+'/user/selectFavorite',{
+            method:"GET",
+            headers : {
+                "Content-Type": "application/json",
+                "Authorization":`Bearer ${getCookie('myToken')}`,
+            }
+        }).then((res)=>res.json())
+        .then((res) => {
+            
+            for(let i =0; i<res.length;i++){
+                setFavorite(favoirtes => [...favoirtes,res[i].alcho.category])
+            }
             setLoading(false);
         })
     }
@@ -48,41 +71,34 @@ function MyPage(){
                 </div>
          
              <hr></hr>
-                <div>
+                <div >
                     <img className="myImg" src="https://ifh.cc/g/QCO7Gm.png"/>
-                    <div >
-                        <p className='myName'>{userData?.name}</p>
-                        <p className=''>{userData?.email}</p>
-                        <span className='myHi'>안녕하세요 등 소개글 작성</span>{/*css 변경 예정*/}
+                    <div className='myHi'>
+                        <p className=''> {userData?.name}</p>
+                        <p className=''> {userData?.nickname}</p>
+                        <p className=''> {userData?.birth}</p>
+                        <p className=''> {userData?.job}</p>
+                        <p className=''> {userData?.price}</p>
+                        <p className=''> {userData?.email}</p>
+                        
                     </div>
+                    
+                   
                     
                 </div>
-
-                <div className='myDrink'>
-                    <p>좋아하는 술 목록</p>{/*이 부분 컴포넌트 분리해서 map으로 뿌릴 예정입니다*/}
-                    <div>
-                        <span>1 </span>
-                        <input type="text" value={"잭 다니엘"}/>
-                    </div>
+                
+               <MyFavorite
                     
-                    <div>
-                        <span>2 </span>
-                        <input type="text" value={"스미노프 레드"}/>
-                    </div>
-                    
-                    <div>
-                        <span>3 </span>
-                        <input type="text" value={"메이커스 마커스"}/>
-                    </div>
-                    
-                </div>
+                    datas={favoirtes}/>
+                
             </div>
-
+            
             }
            
 
         </div>
     )
 }
+
 
 export default MyPage;
