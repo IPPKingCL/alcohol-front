@@ -28,13 +28,15 @@ function DatePicker(props : {type : string, setState : any}) {
         job: '',
         MaximumPrice: '',
         favoriteList: '',
+        duplication: '',
         nicknameValidation: false,
         ageValidation: false,
         birthValidation: false,
         sexValidation: false,
         jobValidation: false,
         MaximumPriceValidation: false,
-        favoriteListValidation: false
+        favoriteListValidation: false,
+        duplicationCheck : false
       });
 
     const ExampleCustomInput = forwardRef<any>(({ value, onClick }: any, ref) => (

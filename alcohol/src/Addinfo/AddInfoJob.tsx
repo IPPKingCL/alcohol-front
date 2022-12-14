@@ -14,13 +14,15 @@ function AddInfoJob(props: { type: string }) {
         job: '',
         MaximumPrice: '',
         favoriteList: '',
+        duplication: '',
         nicknameValidation: false,
         ageValidation: false,
         birthValidation: false,
         sexValidation: false,
         jobValidation: false,
         MaximumPriceValidation: false,
-        favoriteListValidation: false
+        favoriteListValidation: false,
+        duplicationCheck : false
     });
 
     const [userAddInfo, setUserAddInfo] = useState<UserAddInfo>({

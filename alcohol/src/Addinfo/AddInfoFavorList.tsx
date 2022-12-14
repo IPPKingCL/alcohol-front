@@ -13,28 +13,26 @@ import { useEffect } from 'react';
 import { addr } from '../Common/serverAddr';
 import {AlchoCategory} from '../interface/AlchoCategory'
 
-function not(a: readonly number[], b: readonly number[]) {
+function not(a: readonly AlchoCategory[], b: readonly AlchoCategory[]) {
   return a.filter((value) => b.indexOf(value) === -1);
 }
 
-function intersection(a: readonly number[], b: readonly number[]) {
+function intersection(a: readonly AlchoCategory[], b: readonly AlchoCategory[]) {
   return a.filter((value) => b.indexOf(value) !== -1);
 }
 
-function union(a: readonly number[], b: readonly number[]) {
+function union(a: readonly AlchoCategory[], b: readonly AlchoCategory[]) {
   return [...a, ...not(b, a)];
 }
 
 export default function TransferList(props : {type : string, setState : any}) {
-  const [checked, setChecked] = React.useState<readonly number[]>([]);
-  const [left, setLeft] = React.useState<readonly number[]>([1,2,3,4,5,6]);
-  const [right, setRight] = React.useState<readonly number[]>([]);
+  const [checked, setChecked] = React.useState<readonly AlchoCategory[]>([]);
   
   const [leftList, setLeftList] = React.useState<AlchoCategory[]>([]);
   const [rightList, setRightList] = React.useState<AlchoCategory[]>([]);
 
-  const leftChecked = intersection(checked, left);
-  const rightChecked = intersection(checked, right);
+  const leftChecked = intersection(checked, leftList);
+  const rightChecked = intersection(checked, rightList);
 
   useEffect(() => {
     fetch(addr + '/alcohol/category', {
@@ -58,15 +56,15 @@ export default function TransferList(props : {type : string, setState : any}) {
   },[])
 
   useEffect(() => {
-    if(right.length == 3) {
-      console.log(right);
-      props.setState(right, true);
+    if(rightList.length == 3) {
+      console.log(rightList);
+      props.setState(rightList, true);
     }else {
-      props.setState(right, false);
+      props.setState(rightList, false);
     }
-  },[right]);
+  },[rightList]);
 
-  const handleToggle = (value: number) => () => {
+  const handleToggle = (value: AlchoCategory) => () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
 
@@ -80,10 +78,10 @@ export default function TransferList(props : {type : string, setState : any}) {
     console.log(leftList)
   };
 
-  const numberOfChecked = (items: readonly number[]) =>
+  const numberOfChecked = (items: readonly AlchoCategory[]) =>
     intersection(checked, items).length;
 
-  const handleToggleAll = (items: readonly number[]) => () => {
+  const handleToggleAll = (items: readonly AlchoCategory[]) => () => {
     if (numberOfChecked(items) === items.length) {
       setChecked(not(checked, items));
     } else {
@@ -92,25 +90,25 @@ export default function TransferList(props : {type : string, setState : any}) {
   };
 
   const handleCheckedRight = () => {
-    if (right.length >= 3 || leftChecked.length + right.length > 3) {
+    if (rightList.length >= 3 || leftChecked.length + rightList.length > 3) {
       alert("3개만 선택 할 수 있습니다.");
     } else {
-      setRight(right.concat(leftChecked));
-      setLeft(not(left, leftChecked));
+      setRightList(rightList.concat(leftChecked));
+      setLeftList(not(leftList, leftChecked));
       setChecked(not(checked, leftChecked));
-      console.log(right.length);
+      console.log(rightList.length);
     }
     
 
   };
 
   const handleCheckedLeft = () => {
-    setLeft(left.concat(rightChecked));
-    setRight(not(right, rightChecked));
+    setLeftList(leftList.concat(rightChecked));
+    setRightList(not(rightList, rightChecked));
     setChecked(not(checked, rightChecked));
   };
 
-  const customList = (title: React.ReactNode, items: readonly number[]) => (
+  const customList = (title: React.ReactNode, items: readonly AlchoCategory[]) => (
     <Card>
       <CardHeader
         sx={{ px: 2, py: 1 }}
@@ -142,12 +140,12 @@ export default function TransferList(props : {type : string, setState : any}) {
         component="div"
         role="list"
       >
-        {items.map((value: number) => {
+        {items.map((value: AlchoCategory) => {
           const labelId = `transfer-list-all-item-${value}-label`;
 
           return (
             <ListItem
-              key={value}
+              key={value.id}
               role="listitem"
               button
               onClick={handleToggle(value)}
@@ -162,7 +160,7 @@ export default function TransferList(props : {type : string, setState : any}) {
                   }}
                 />
               </ListItemIcon>
-              <ListItemText id={labelId} primary={value} />
+              <ListItemText id={labelId} primary={value.category} />
             </ListItem>
           );
         })}
@@ -173,7 +171,7 @@ export default function TransferList(props : {type : string, setState : any}) {
 
   return (
     <Grid container spacing={2} justifyContent="center" alignItems="center">
-      <Grid item>{customList('Choices', left)}</Grid>
+      <Grid item>{customList('Choices', leftList)}</Grid>
       <Grid item>
         <Grid container direction="column" alignItems="center">
           <Button
@@ -198,7 +196,7 @@ export default function TransferList(props : {type : string, setState : any}) {
           </Button>
         </Grid>
       </Grid>
-      <Grid item>{customList('Chosen', right)}</Grid>
+      <Grid item>{customList('Chosen', rightList)}</Grid>
     </Grid>
   );
 }

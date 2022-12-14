@@ -6,6 +6,7 @@ export interface UserAddInfoErrorMessage {
     job: string;
     MaximumPrice: string;
     favoriteList: string;
+    duplication : string;
 
     nicknameValidation : boolean,
     ageValidation : boolean,
@@ -13,5 +14,6 @@ export interface UserAddInfoErrorMessage {
     sexValidation : boolean,
     jobValidation : boolean,
     MaximumPriceValidation : boolean,
-    favoriteListValidation : boolean
+    favoriteListValidation : boolean,
+    duplicationCheck : boolean
   }
