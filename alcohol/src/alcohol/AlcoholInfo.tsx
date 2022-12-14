@@ -6,6 +6,8 @@ import AlcoholList from "./AlcoholList";
 function AlcoholInfo(){
     const [arrData,setArrData] = useState<alcho[]>([])
     const [loading,setLoading] = useState<boolean>(true);
+    const [search, setSearch] = useState<string>("");
+    const [searchData,setSearchData] = useState<alcho[]>([])
     const list = async () => {
         setArrData([]);
         fetch(addr+'/alcohol',{
@@ -29,6 +31,7 @@ function AlcoholInfo(){
                 }
                 setArrData(arrData => [...arrData,data])
             }
+            setSearchData(arrData)
         })
         setLoading(false);
     }
@@ -96,10 +99,26 @@ function AlcoholInfo(){
                     imgUrl : res[i].imgUrl
                 }
                 setArrData(arrData => [...arrData,data]);
+                
             }
+            
             setLoading(false);
         })
     }
+    const onSearch = (e:React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        console.log(search);
+        const filterData = arrData.filter((row)=>row.name.includes(search));
+
+        setSearchData(filterData)
+    }
+
+    const onChangeSearch = (e:React.ChangeEvent<HTMLInputElement>) => {
+        e.preventDefault();
+        setSearch(e.target.value);
+    }
+
+    
     return(
         <div id='wrapper2'>
             <div className='search-tool'>
@@ -115,8 +134,8 @@ function AlcoholInfo(){
                     <option value="D">데낄라</option>
                     <option value='WI'>와인</option>
                 </select>
-                <form className='search-form' >
-                    <input type="text" id="search"  ></input>
+                <form className='search-form' onSubmit={e => onSearch(e)}>
+                    <input type="text" id="search" onChange={onChangeSearch} ></input>
                     <button type='submit' className='btn-submit'>검색</button>
                 </form>
             </div>
@@ -126,7 +145,7 @@ function AlcoholInfo(){
             {loading ? <strong>Loading...</strong> :
                 <div>
                     <AlcoholList
-                        datas={arrData}
+                        datas={searchData}
                     />
                 </div>    
             }
