@@ -14,6 +14,7 @@ function AddInfoJob(props: { type: string }) {
         job: '',
         MaximumPrice: '',
         favoriteList: '',
+        duplication: '',
         nicknameValidation: false,
         ageValidation: false,
         birthValidation: false,

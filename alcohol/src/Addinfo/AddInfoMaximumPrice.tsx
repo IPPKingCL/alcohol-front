@@ -14,6 +14,7 @@ function AddInfoMaximumPrice(props: { type: string, setState : any }) {
         job: '',
         MaximumPrice: '',
         favoriteList: '',
+        duplication: '',
         nicknameValidation: false,
         ageValidation: false,
         birthValidation: false,
@@ -44,10 +45,10 @@ function AddInfoMaximumPrice(props: { type: string, setState : any }) {
           ...userAddInfo,
           [name]: value,
         }
-        setUserAddInfo(nextMaximumPriceInput);
-
-        validateMaximumPrice(nextMaximumPriceInput);
-        
+        console.log(nextMaximumPriceInput);
+        let errorsInput : UserAddInfoErrorMessage;
+        errorsInput = validateMaximumPrice(nextMaximumPriceInput);
+        props.setState(nextMaximumPriceInput.MaximumPrice, errorsInput.MaximumPriceValidation);
       }
 
     const validateMaximumPrice = (values: any) => {

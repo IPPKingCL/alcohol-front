@@ -14,6 +14,7 @@ function AddInfoText(props: { type: string, setState : any }) {
         job: '',
         MaximumPrice: '',
         favoriteList: '',
+        duplication: '',
         nicknameValidation: false,
         ageValidation: false,
         birthValidation: false,
