@@ -20,7 +20,8 @@ function AddInfoJob(props: { type: string }) {
         sexValidation: false,
         jobValidation: false,
         MaximumPriceValidation: false,
-        favoriteListValidation: false
+        favoriteListValidation: false,
+        duplicationCheck : false
     });
 
     const [userAddInfo, setUserAddInfo] = useState<UserAddInfo>({

@@ -14,4 +14,5 @@ export interface UserAddInfoErrorMessage {
     jobValidation : boolean,
     MaximumPriceValidation : boolean,
     favoriteListValidation : boolean
+    duplicationCheck : boolean
   }

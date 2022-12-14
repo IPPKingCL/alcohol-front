@@ -48,7 +48,8 @@ function AddInfo() {
     sexValidation: false,
     jobValidation: false,
     MaximumPriceValidation: false,
-    favoriteListValidation: false
+    favoriteListValidation: false,
+    duplicationCheck : false
   });
 
   const changeStateNickname = (nickstate : UserAddInfo, state: boolean) => {
@@ -63,6 +64,8 @@ function AddInfo() {
 
     setUserAddInfo(userNickChange);
     setUserAddInfoErrorMessage(stateChange);
+
+    setUserAddInfoErrorMessage({...userAddInfoErrorMessage, duplicationCheck : false});
 
   }
 
@@ -157,7 +160,7 @@ function AddInfo() {
   }
 
   function checkNickname() {
-    fetch(addr + '/user/checkUser', {
+    fetch(addr + '/user/checkNickName', {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -169,6 +172,7 @@ function AddInfo() {
       .then((res) => {
         if (res.success) {
           console.log("사용가능한 닉네임 입니다.");
+          setUserAddInfoErrorMessage({...userAddInfoErrorMessage, duplicationCheck : true});
         } else {
           console.log("사용 불가능한 닉네임 입니다.");
         }
@@ -188,7 +192,7 @@ function AddInfo() {
     console.log(userAddInfoErrorMessage);
 
     if (validate.MaximumPriceValidation && validate.ageValidation && validate.nicknameValidation
-      && validate.sexValidation && validate.favoriteListValidation) {
+      && validate.sexValidation && validate.favoriteListValidation && validate.birthValidation) {
       fetch(addr + '/user/insert', {
         method: "POST",
         headers: {
@@ -279,7 +283,7 @@ function AddInfo() {
     <div className='addInfoInputTag' id='wrapper'>
       <h1>추가 정보를 입력해 주세요.</h1>
       <div className='formAlign'>
-        <AddInfoTextNickname type="닉네임" setState={changeStateNickname} />
+        <AddInfoTextNickname type="닉네임" setState={changeStateNickname} checkNick={checkNickname}/>
         <AddInfoTextAge type="나이" setState={changeStateAge} />
         <h3 style={{display : 'inline-block'}}>생일 : {userAddInfo.birth}<DatePicker type="생일" setState={onChangeBirth}/></h3>
         <AddInfoSex type="성별" setState={changeStateSex} />
