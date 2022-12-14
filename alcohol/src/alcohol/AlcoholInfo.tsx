@@ -31,7 +31,6 @@ function AlcoholInfo(){
                 }
                 setArrData(arrData => [...arrData,data])
             }
-            setSearchData(arrData)
         })
         setLoading(false);
     }
@@ -110,7 +109,7 @@ function AlcoholInfo(){
         console.log(search);
         const filterData = arrData.filter((row)=>row.name.includes(search));
 
-        setSearchData(filterData)
+        setArrData(filterData)
     }
 
     const onChangeSearch = (e:React.ChangeEvent<HTMLInputElement>) => {
@@ -145,7 +144,7 @@ function AlcoholInfo(){
             {loading ? <strong>Loading...</strong> :
                 <div>
                     <AlcoholList
-                        datas={searchData}
+                        datas={arrData}
                     />
                 </div>    
             }
