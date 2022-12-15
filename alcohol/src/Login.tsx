@@ -8,9 +8,10 @@ import { GoogleLogin } from 'react-google-login';
 import { gapi } from 'gapi-script';
 import { addr } from './Common/serverAddr';
 import { setCookie } from './Common/Cookies';
+import EmailLogin from './Login/EmailLogin';
 
 function Login() {
-    
+
     const clientId =
         "722148392125-6qdo1sho8shp117jpfipd8vggfgb1qo9.apps.googleusercontent.com";
 
@@ -22,18 +23,18 @@ function Login() {
 
         let device = "";
 
-        if(navigator.platform) {
-            if(filter.indexOf(navigator.platform.toLowerCase()) < 0) {
+        if (navigator.platform) {
+            if (filter.indexOf(navigator.platform.toLowerCase()) < 0) {
                 device = "mobile";
-            }else {
+            } else {
                 device = "pc";
             }
-            
+
         }
 
-        setCookie('device', device,{
-            path:"/",
-            sameSite:"Lax"
+        setCookie('device', device, {
+            path: "/",
+            sameSite: "Lax"
         });
     }
 
@@ -81,10 +82,10 @@ function Login() {
                     redirectAddInfo(userdata);
                 } else {
                     console.log(res.token)
-                    setCookie('myToken',res.token,{
-                        path:"/",
-                        secure:true,
-                        sameSite:"none"
+                    setCookie('myToken', res.token, {
+                        path: "/",
+                        secure: true,
+                        sameSite: "none"
                     })
                     redirectMain(userdata);
                 }
@@ -97,7 +98,7 @@ function Login() {
         "Content-Type":"application/json"
         Authorization:"Bearer ${getCookie('myToken')}",
     }
-    */ 
+    */
 
     const onFailure = (res: any) => {
         alert("구글 로그인에 실패하였습니다");
@@ -120,12 +121,17 @@ function Login() {
         <div id='wrapper'>
             <div className='LoginComponentBox'>
                 <h2 className='LoginText'>Login</h2>
-                <GoogleLogin
-                    clientId={clientId}
-                    buttonText="Login with Google" // 버튼에 뜨는 텍스트
-                    onSuccess={onSuccess}
-                    onFailure={onFailure}
-                />
+                <EmailLogin />
+                <hr/>
+                <h2 style={{textAlign:"center"}}>소셜ID로 로그인하기</h2>
+                <div style={{textAlign:"center"}}>
+                    <GoogleLogin
+                        clientId={clientId}
+                        buttonText="Login with Google" // 버튼에 뜨는 텍스트
+                        onSuccess={onSuccess}
+                        onFailure={onFailure}
+                    />
+                </div>
             </div>
         </div>
     );
