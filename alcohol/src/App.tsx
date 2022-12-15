@@ -19,6 +19,7 @@ import UploadImageToS3WithNativeSdk from './Board/UploadImageToS3WithNativeSdk';
 import Test from './Board/test1';
 import AlcoholInfo from './alcohol/AlcoholInfo';
 import AlcoholDetail from './alcohol/AlcoholDetail';
+import MyPageModify from './MyPage/MyPageModify';
 
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
           <Route path="/test" element={<UploadImageToS3WithNativeSdk/>}></Route>
           <Route path="/test1" element={<Test/>}></Route>
           <Route path="/myPage" element={<MyPage/>}/>
+          <Route path='/myPage/modify' element={<MyPageModify/>}/>
         </Routes>
       </div>
       
