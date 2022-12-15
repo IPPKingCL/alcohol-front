@@ -19,7 +19,9 @@ import UploadImageToS3WithNativeSdk from './Board/UploadImageToS3WithNativeSdk';
 import Test from './Board/test1';
 import AlcoholInfo from './alcohol/AlcoholInfo';
 import AlcoholDetail from './alcohol/AlcoholDetail';
+import MyPageModify from './MyPage/MyPageModify';
 import LabelBottomNavigation from './Common/LabelBottomNavigation';
+
 
 
 function App() {
@@ -61,6 +63,19 @@ function App() {
       </Router>
     </>
 
+<<<<<<< HEAD
+=======
+          <Route path="/test" element={<UploadImageToS3WithNativeSdk/>}></Route>
+          <Route path="/test1" element={<Test/>}></Route>
+          <Route path="/myPage" element={<MyPage/>}/>
+          <Route path='/myPage/modify' element={<MyPageModify/>}/>
+        </Routes>
+      </div>
+      
+      <LabelBottomNavigation></LabelBottomNavigation>
+    </Router>
+    
+>>>>>>> 69233ec28fa4da25c2ae4e772371befa8d920a84
   );
 }
 

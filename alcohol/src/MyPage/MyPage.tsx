@@ -95,7 +95,7 @@ function MyPage(){
             
             }
            
-
+            <button onClick = {()=>{navigate('/myPage/modify')}} >수정</button>
         </div>
     )
 }
