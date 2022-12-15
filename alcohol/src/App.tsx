@@ -19,6 +19,7 @@ import UploadImageToS3WithNativeSdk from './Board/UploadImageToS3WithNativeSdk';
 import Test from './Board/test1';
 import AlcoholInfo from './alcohol/AlcoholInfo';
 import AlcoholDetail from './alcohol/AlcoholDetail';
+import LabelBottomNavigation from './Common/LabelBottomNavigation';
 
 
 function App() {
@@ -49,7 +50,7 @@ function App() {
         </Routes>
       </div>
       
-      <Footer></Footer>
+      <LabelBottomNavigation></LabelBottomNavigation>
     </Router>
     
   );
