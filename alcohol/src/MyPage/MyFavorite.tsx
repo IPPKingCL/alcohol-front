@@ -8,7 +8,7 @@ function MyFavorite(props:any){
             <p>좋아하는 술 목록</p>
             {props.datas&&props.datas.map((data:any)=>(
                 <div key={data}>
-                 <input type="text" defaultValue={data||''}/>
+                 <input type="text" defaultValue={data||''} disabled/>
                  </div>
             ))}
         </div>
