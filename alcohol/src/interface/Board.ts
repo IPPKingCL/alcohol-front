@@ -10,7 +10,8 @@ export interface boardRead extends board{
     isDeleted:Boolean,
     isModified:Boolean,
     userId:number,
-    nickname:string
+    nickname:string,
+    imgUrl:string,
 }
 
 

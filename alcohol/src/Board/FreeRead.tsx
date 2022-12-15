@@ -134,7 +134,10 @@ function FreeRead(){
                         <h3>content</h3>
                     </div>
                     
-                        <textarea name="content" className="content" id="content" value={board?.contents||''} disabled></textarea>
+                        <div className="content" id="content">
+                            {board?.contents||''}
+                            <img src={board?.imgUrl||''}></img>
+                        </div>
                   
 
                     <div className = 'bar2'>

@@ -57,11 +57,14 @@
 }
 
 .content{ /*작성내용 작성 하는 공간*/
-    width:90%;
-    height:300px;
-    white-space:pre-line;
-    border-radius: 5px;
-    border:1px solid black;
+    margin-left:auto;
+    margin-right:auto;
+    width:95%;
+    height: 45vh;
+    border: 1px solid #0e0d0d;
+    overflow-y:auto;
+    background: #fff;
+  
 }
 
 .input-btn{
