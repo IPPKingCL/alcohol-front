@@ -30,7 +30,7 @@ export default function LabelBottomNavigation() {
 
   return (
     <div id='footer'>
-      <BottomNavigation sx={{ width: 500 }} value={value} onChange={handleChange}>
+      <BottomNavigation value={value} onChange={handleChange}>
         <BottomNavigationAction
           label="오늘의 술"
           value="오늘의 술"
