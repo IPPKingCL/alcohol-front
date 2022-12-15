@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import AddInfoAge from "../Addinfo/AddInfoAge";
 import TransferList from "../Addinfo/AddInfoFavorList";
@@ -55,6 +55,10 @@ function MyPageModify(){
         
     })
   }
+
+  useEffect(()=>{
+    list();
+  },[])
 
   const [userAddInfoErrorMessage, setUserAddInfoErrorMessage] = useState<UserAddInfoErrorMessage>({
     nickname: '',
@@ -310,14 +314,13 @@ function MyPageModify(){
         <div className='addInfoInputTag' id='wrapper'>
             <h1>정보를 수정해주세요.</h1>
             <hr></hr>
-            <AddInfoNickname type="닉네임" setState={changeStateNickname} checkNick={checkNickname} />
-            <h4 style={{ color: 'red' }}>{userAddInfoErrorMessage.duplication}</h4><hr />
-            <AddInfoAge type="나이" setState={changeStateAge} />
+            <AddInfoNickname type="닉네임" setState={changeStateNickname} checkNick={checkNickname} nickname={userData?.nickname}/>
+            <AddInfoAge type="나이" setState={changeStateAge} age={userData?.age}/>
             <h3 style={{ display: 'inline-block' }}>생일 : {userAddInfo.birth}<DatePicker type="생일" setState={onChangeBirth} /></h3>
-            <AddInfoSex type="성별" setState={changeStateSex} />
-            <h3>직군 : <input type="text" placeholder='job' name='job' onChange={onChangeJob} required></input></h3>
+            <AddInfoSex type="성별" setState={changeStateSex} sex={userData?.sex}/>
+            <h3>직군 : <input type="text" placeholder='job' name='job' onChange={onChangeJob} defaultValue={userData?.job} required></input></h3>
             <h4 style={{ color: 'red' }}>{validateJob(userAddInfo).job}</h4><hr />
-            <AddInfoMaximumPrice type="허용 최대 가격" setState={changeStateMaximumPrice} />
+            <AddInfoMaximumPrice type="허용 최대 가격" setState={changeStateMaximumPrice} price={userData?.price} />
             <h3>좋아하는 목록 :</h3>
             <TransferList type="리스트" setState={onChangeFavoriteList} />
             <h4 style={{ color: 'red' }}>{userAddInfo.favoriteList ? null : validateFavoriteList(userAddInfo).favoriteList}</h4><hr />

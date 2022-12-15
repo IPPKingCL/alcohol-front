@@ -4,8 +4,8 @@ import '../css/Login.css';
 import { UserAddInfoErrorMessage } from '../interface/UserAddInfoErrorMessage'
 import { UserAddInfo } from '../interface/UserAddInfo'
 
-function AddInfoNickName(props: { type: string , setState : any, checkNick : any}) {
-
+function AddInfoNickName(props: { type: string , setState : any, checkNick : any, nickname? : string}) {
+    console.log(props.nickname)
     const [userAddInfoErrorMessage, setUserAddInfoErrorMessage] = useState<UserAddInfoErrorMessage>({
         nickname: '',
         age: '',
@@ -85,7 +85,7 @@ function AddInfoNickName(props: { type: string , setState : any, checkNick : any
     return (
 
         <div>
-            <h3>{props.type} : <input type="text" placeholder="2~8글자 사이로 입력하세요." name='nickname' onChange={onChangeNickname} required></input></h3>
+            <h3>{props.type} : <input type="text" placeholder="2~8글자 사이로 입력하세요." name='nickname' onChange={onChangeNickname} defaultValue = {props.nickname||''} required></input></h3>
             <button onClick={props.checkNick}>닉네임 중복 확인</button>
             <h4 style={{ color: 'red' }}>{alert}</h4>
             <h4 style={{ color: 'red' }}>{userAddInfo.nickname}</h4>

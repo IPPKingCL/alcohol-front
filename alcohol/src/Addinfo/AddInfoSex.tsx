@@ -4,7 +4,7 @@ import '../css/Login.css';
 import { UserAddInfoErrorMessage } from '../interface/UserAddInfoErrorMessage'
 import { UserAddInfo } from '../interface/UserAddInfo'
 
-function AddInfoSex(props: { type: string, setState : any}) {
+function AddInfoSex(props: { type: string, setState : any, sex?:string}) {
 
     const [userAddInfoErrorMessage, setUserAddInfoErrorMessage] = useState<UserAddInfoErrorMessage>({
         nickname: '',
@@ -83,7 +83,7 @@ function AddInfoSex(props: { type: string, setState : any}) {
     return (
 
         <div>
-            <h3>성별 : <select id="selectSex" name='sex' onChange={onChangeSex}>
+            <h3>성별 : <select id="selectSex" name='sex' onChange={onChangeSex} >
                 <option value="">성별을 선택하세요.</option>
                 <option value="m">M</option>
                 <option value="f">F</option>
