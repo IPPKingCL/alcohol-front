@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import AddInfoAge from "../Addinfo/AddInfoAge";
 import TransferList from "../Addinfo/AddInfoFavorList";
@@ -52,9 +52,14 @@ function MyPageModify(){
         }
         console.log(res);
         setUserData(res);
+        setUserAddInfo(res);
         
     })
   }
+
+  useEffect(()=>{
+    list();
+  },[])
 
   const [userAddInfoErrorMessage, setUserAddInfoErrorMessage] = useState<UserAddInfoErrorMessage>({
     nickname: '',
@@ -183,6 +188,12 @@ function MyPageModify(){
   }
 
   function checkNickname() {
+    console.log("zzz"+userAddInfo.nickname)
+    if(userAddInfo.nickname==userData?.nickname){
+        console.log("사용가능한 닉네임 입니다.");
+        setUserAddInfoErrorMessage({ ...userAddInfoErrorMessage, duplicationCheck: true, duplication: "중복체크 완료!" });
+        return;
+    }
     fetch(addr + '/user/checkNickName', {
       method: "POST",
       headers: {
@@ -305,23 +316,69 @@ function MyPageModify(){
 
     return errors;
   };
-
+  
+  const modiInfo = () => {
+    const validate: UserAddInfoErrorMessage = {
+        ...userAddInfoErrorMessage,
+      }
+  
+      console.log(userAddInfo);
+      console.log(userAddInfoErrorMessage);
+  
+      if (validate.MaximumPriceValidation && validate.ageValidation && validate.nicknameValidation
+        && validate.sexValidation && validate.favoriteListValidation && validate.birthValidation
+        && validate.duplicationCheck) {
+        fetch(addr + '/user/modify', {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            
+            
+            age: userAddInfo.age,
+            birth: userAddInfo.birth,
+            nickname: userAddInfo.nickname,
+            sex: userAddInfo.sex,
+            job: userAddInfo.job,
+            price: userAddInfo.MaximumPrice,
+            favorite: userAddInfo.favoriteList,
+            password: '-',
+          }),
+        }).then(res => res.json())
+          .then((res) => {
+            console.log(res.success);
+            if (res.success) {
+              alert("응답완료");
+              setCookie('myToken', res.token, {
+                path: "/",
+                secure: true,
+                sameSite: "none"
+              })
+  
+              navigate("/Main");
+            } else {
+              alert("회원가입 중 에러 발생");
+              return;
+            }
+          })
+      }
+  }
     return(
         <div className='addInfoInputTag' id='wrapper'>
             <h1>정보를 수정해주세요.</h1>
             <hr></hr>
-            <AddInfoNickname type="닉네임" setState={changeStateNickname} checkNick={checkNickname} />
-            <h4 style={{ color: 'red' }}>{userAddInfoErrorMessage.duplication}</h4><hr />
-            <AddInfoAge type="나이" setState={changeStateAge} />
+            <AddInfoNickname type="닉네임" setState={changeStateNickname} checkNick={checkNickname} nickname={userData?.nickname}/>
+            <AddInfoAge type="나이" setState={changeStateAge} age={userData?.age}/>
             <h3 style={{ display: 'inline-block' }}>생일 : {userAddInfo.birth}<DatePicker type="생일" setState={onChangeBirth} /></h3>
-            <AddInfoSex type="성별" setState={changeStateSex} />
-            <h3>직군 : <input type="text" placeholder='job' name='job' onChange={onChangeJob} required></input></h3>
+            <AddInfoSex type="성별" setState={changeStateSex} sex={userData?.sex}/>
+            <h3>직군 : <input type="text" placeholder='job' name='job' onChange={onChangeJob} defaultValue={userData?.job} required></input></h3>
             <h4 style={{ color: 'red' }}>{validateJob(userAddInfo).job}</h4><hr />
-            <AddInfoMaximumPrice type="허용 최대 가격" setState={changeStateMaximumPrice} />
+            <AddInfoMaximumPrice type="허용 최대 가격" setState={changeStateMaximumPrice} price={userData?.price} />
             <h3>좋아하는 목록 :</h3>
             <TransferList type="리스트" setState={onChangeFavoriteList} />
             <h4 style={{ color: 'red' }}>{userAddInfo.favoriteList ? null : validateFavoriteList(userAddInfo).favoriteList}</h4><hr />
-            <button onClick={sendAddInfo}>완료</button>
+            <button onClick={modiInfo}>완료</button>
         </div>
     )
 }

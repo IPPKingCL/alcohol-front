@@ -4,7 +4,7 @@ import '../css/Login.css';
 import { UserAddInfoErrorMessage } from '../interface/UserAddInfoErrorMessage'
 import { UserAddInfo } from '../interface/UserAddInfo'
 
-function AddInfoMaximumPrice(props: { type: string, setState : any }) {
+function AddInfoMaximumPrice(props: { type: string, setState : any , price?:number}) {
 
     const [userAddInfoErrorMessage, setUserAddInfoErrorMessage] = useState<UserAddInfoErrorMessage>({
         nickname: '',
@@ -82,7 +82,7 @@ function AddInfoMaximumPrice(props: { type: string, setState : any }) {
 
     return (
         <div>
-            <h3>{props.type} : <input type="text" placeholder="100~10,000,000 사이로 입력" name='MaximumPrice' onChange={onChangeMaximumPrice} required></input></h3>
+            <h3>{props.type} : <input type="text" placeholder="100~10,000,000 사이로 입력" name='MaximumPrice' onChange={onChangeMaximumPrice} defaultValue={props.price||''} required></input></h3>
             <h4 style={{ color: 'red' }}>{alert}</h4>
         </div>
     );
