@@ -52,6 +52,7 @@ function MyPageModify(){
         }
         console.log(res);
         setUserData(res);
+        setUserAddInfo(res);
         
     })
   }
@@ -187,6 +188,12 @@ function MyPageModify(){
   }
 
   function checkNickname() {
+    console.log("zzz"+userAddInfo.nickname)
+    if(userAddInfo.nickname==userData?.nickname){
+        console.log("사용가능한 닉네임 입니다.");
+        setUserAddInfoErrorMessage({ ...userAddInfoErrorMessage, duplicationCheck: true, duplication: "중복체크 완료!" });
+        return;
+    }
     fetch(addr + '/user/checkNickName', {
       method: "POST",
       headers: {
@@ -309,7 +316,54 @@ function MyPageModify(){
 
     return errors;
   };
-
+  
+  const modiInfo = () => {
+    const validate: UserAddInfoErrorMessage = {
+        ...userAddInfoErrorMessage,
+      }
+  
+      console.log(userAddInfo);
+      console.log(userAddInfoErrorMessage);
+  
+      if (validate.MaximumPriceValidation && validate.ageValidation && validate.nicknameValidation
+        && validate.sexValidation && validate.favoriteListValidation && validate.birthValidation
+        && validate.duplicationCheck) {
+        fetch(addr + '/user/modify', {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            
+            
+            age: userAddInfo.age,
+            birth: userAddInfo.birth,
+            nickname: userAddInfo.nickname,
+            sex: userAddInfo.sex,
+            job: userAddInfo.job,
+            price: userAddInfo.MaximumPrice,
+            favorite: userAddInfo.favoriteList,
+            password: '-',
+          }),
+        }).then(res => res.json())
+          .then((res) => {
+            console.log(res.success);
+            if (res.success) {
+              alert("응답완료");
+              setCookie('myToken', res.token, {
+                path: "/",
+                secure: true,
+                sameSite: "none"
+              })
+  
+              navigate("/Main");
+            } else {
+              alert("회원가입 중 에러 발생");
+              return;
+            }
+          })
+      }
+  }
     return(
         <div className='addInfoInputTag' id='wrapper'>
             <h1>정보를 수정해주세요.</h1>
@@ -324,7 +378,7 @@ function MyPageModify(){
             <h3>좋아하는 목록 :</h3>
             <TransferList type="리스트" setState={onChangeFavoriteList} />
             <h4 style={{ color: 'red' }}>{userAddInfo.favoriteList ? null : validateFavoriteList(userAddInfo).favoriteList}</h4><hr />
-            <button onClick={sendAddInfo}>완료</button>
+            <button onClick={modiInfo}>완료</button>
         </div>
     )
 }
