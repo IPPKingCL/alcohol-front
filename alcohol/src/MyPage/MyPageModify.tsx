@@ -324,6 +324,7 @@ function MyPageModify(){
   
       console.log(userAddInfo);
       console.log(userAddInfoErrorMessage);
+      console.log(userAddInfo.favoriteList)
   
       if (validate.MaximumPriceValidation && validate.ageValidation && validate.nicknameValidation
         && validate.sexValidation && validate.favoriteListValidation && validate.birthValidation
@@ -332,6 +333,7 @@ function MyPageModify(){
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            "Authorization": `Bearer ` + getCookie('myToken'),
           },
           body: JSON.stringify({
             
