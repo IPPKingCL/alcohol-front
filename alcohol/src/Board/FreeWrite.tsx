@@ -4,7 +4,7 @@ import { board } from '../interface/Board'
 import { addr } from '../Common/serverAddr';
 import AWS from 'aws-sdk';
 import { getCookie } from '../Common/Cookies';
-import { IconButton } from '@mui/material';
+import { Button, IconButton } from '@mui/material';
 import { PhotoCamera } from '@mui/icons-material';
 
 //자유게시판 글 작성 컴포넌트
@@ -126,8 +126,12 @@ function FreeWrite() {
                 <option value="R">레시피 게시판</option>
             </select>
             <div>
+                <Button variant="contained" component="label">
+                    Upload
+                    <input hidden accept="image/*" multiple type="file" onChange={handleFileInput}/>
+                </Button>
                 <IconButton color="primary" aria-label="upload picture" component="label">
-                    <input hidden accept="image/*" type="file" onChange={handleFileInput}/>
+                    <input hidden accept="image/*" type="file" onChange={handleFileInput} />
                     <PhotoCamera />
                 </IconButton>
             </div>
