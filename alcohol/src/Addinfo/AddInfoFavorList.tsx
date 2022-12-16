@@ -11,7 +11,10 @@ import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
 import { useEffect } from 'react';
 import { addr } from '../Common/serverAddr';
-import {AlchoCategory} from '../interface/AlchoCategory'
+import { AlchoCategory } from '../interface/AlchoCategory'
+import '../css/App.css';
+import '../css/Login.css';
+import '../css/transferList.css';
 
 function not(a: readonly AlchoCategory[], b: readonly AlchoCategory[]) {
   return a.filter((value) => b.indexOf(value) === -1);
@@ -25,9 +28,9 @@ function union(a: readonly AlchoCategory[], b: readonly AlchoCategory[]) {
   return [...a, ...not(b, a)];
 }
 
-export default function TransferList(props : {type : string, setState : any}) {
+export default function TransferList(props: { type: string, setState: any }) {
   const [checked, setChecked] = React.useState<readonly AlchoCategory[]>([]);
-  
+
   const [leftList, setLeftList] = React.useState<AlchoCategory[]>([]);
   const [rightList, setRightList] = React.useState<AlchoCategory[]>([]);
 
@@ -41,28 +44,28 @@ export default function TransferList(props : {type : string, setState : any}) {
         "Content-Type": "application/json",
       },
     }).then(res => res.json())
-    .then((res) => {
-      let i = 0;
-      for(i; i<res.length; i++) {
-        const alcho : AlchoCategory = {id : res[i].id, category : res[i].category};
-        console.log("1 " + res[i].id);
-        console.log("2 " + res[i].category);
-        console.log("alcho " + alcho.id);
-        console.log("alcho " + alcho.category);
-        setLeftList(leftList => [...leftList, alcho]);
-      }
+      .then((res) => {
+        let i = 0;
+        for (i; i < res.length; i++) {
+          const alcho: AlchoCategory = { id: res[i].id, category: res[i].category };
+          console.log("1 " + res[i].id);
+          console.log("2 " + res[i].category);
+          console.log("alcho " + alcho.id);
+          console.log("alcho " + alcho.category);
+          setLeftList(leftList => [...leftList, alcho]);
+        }
 
-    })
-  },[])
+      })
+  }, [])
 
   useEffect(() => {
-    if(rightList.length == 3) {
+    if (rightList.length == 3) {
       console.log(rightList);
       props.setState(rightList, true);
-    }else {
+    } else {
       props.setState(rightList, false);
     }
-  },[rightList]);
+  }, [rightList]);
 
   const handleToggle = (value: AlchoCategory) => () => {
     const currentIndex = checked.indexOf(value);
@@ -98,7 +101,7 @@ export default function TransferList(props : {type : string, setState : any}) {
       setChecked(not(checked, leftChecked));
       console.log(rightList.length);
     }
-    
+
 
   };
 
@@ -170,33 +173,35 @@ export default function TransferList(props : {type : string, setState : any}) {
   );
 
   return (
-    <Grid container spacing={2} justifyContent="center" alignItems="center">
-      <Grid item>{customList('Choices', leftList)}</Grid>
-      <Grid item>
-        <Grid container direction="column" alignItems="center">
-          <Button
-            sx={{ my: 0.5 }}
-            variant="outlined"
-            size="small"
-            onClick={handleCheckedRight}
-            disabled={leftChecked.length === 0}
-            aria-label="move selected right"
-          >
-            &gt;
-          </Button>
-          <Button
-            sx={{ my: 0.5 }}
-            variant="outlined"
-            size="small"
-            onClick={handleCheckedLeft}
-            disabled={rightChecked.length === 0}
-            aria-label="move selected left"
-          >
-            &lt;
-          </Button>
+    <div id="transferList">
+      <Grid container spacing={2} justifyContent="center" alignItems="center">
+        <Grid item>{customList('Choices', leftList)}</Grid>
+        <Grid item>
+          <Grid container direction="column" alignItems="center">
+            <Button
+              sx={{ my: 0.5 }}
+              variant="outlined"
+              size="small"
+              onClick={handleCheckedRight}
+              disabled={leftChecked.length === 0}
+              aria-label="move selected right"
+            >
+              &gt;
+            </Button>
+            <Button
+              sx={{ my: 0.5 }}
+              variant="outlined"
+              size="small"
+              onClick={handleCheckedLeft}
+              disabled={rightChecked.length === 0}
+              aria-label="move selected left"
+            >
+              &lt;
+            </Button>
+          </Grid>
         </Grid>
+        <Grid item>{customList('Chosen', rightList)}</Grid>
       </Grid>
-      <Grid item>{customList('Chosen', rightList)}</Grid>
-    </Grid>
+    </div>
   );
 }

@@ -57,8 +57,8 @@ function AddInfo() {
     const stateChange: UserAddInfoErrorMessage = {
       ...userAddInfoErrorMessage,
       nicknameValidation: state,
-      duplicationCheck : false,
-      duplication : "중복 여부를 확인해주세요!"
+      duplicationCheck: false,
+      duplication: "중복 여부를 확인해주세요!"
     }
     const userNickChange: UserAddInfo = {
       ...userAddInfo,
