@@ -122,7 +122,6 @@ function Login() {
             <div className='LoginComponentBox'>
                 <h2 className='LoginText'>Login</h2>
                 <EmailLogin />
-                <button>Login</button>
                 <hr/>
                 <h2 style={{textAlign:"center"}}>소셜ID로 로그인하기</h2>
                 <div style={{textAlign:"center"}}>
