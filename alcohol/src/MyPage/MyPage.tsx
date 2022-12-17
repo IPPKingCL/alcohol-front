@@ -12,7 +12,7 @@ function MyPage(){
     const [loading, setLoading] = useState<boolean>(true);
     const [favoirtes, setFavorite] = useState<string[]>([]);
     const navigate = useNavigate();
-
+    let copy;
     const user = () =>{
         console.log(getCookie('myToken'))
         
@@ -36,6 +36,14 @@ function MyPage(){
             console.log(res);
             setUserData(res);
             favoriteList();
+            if(res.img===null){
+                let copy= {...userData};
+
+                copy['img']='https://ifh.cc/g/QCO7Gm.png';
+
+               // setUserData(copy);
+                
+            }
             
         })
     }
