@@ -5,7 +5,6 @@ import { UserAddInfoErrorMessage } from '../interface/UserAddInfoErrorMessage'
 import { UserAddInfo } from '../interface/UserAddInfo'
 
 function AddInfoNickName(props: { type: string , setState : any, checkNick : any, nickname? : string}) {
-    console.log(props.nickname)
     const [userAddInfoErrorMessage, setUserAddInfoErrorMessage] = useState<UserAddInfoErrorMessage>({
         nickname: '',
         age: '',
