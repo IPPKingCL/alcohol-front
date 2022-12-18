@@ -11,6 +11,7 @@ function MyPage(){
     const [userData, setUserData] = useState<User>();
     const [loading, setLoading] = useState<boolean>(true);
     const [favoirtes, setFavorite] = useState<string[]>([]);
+    const [img, setImg] = useState<string>(); 
     const navigate = useNavigate();
     let copy;
     const user = () =>{
@@ -36,13 +37,16 @@ function MyPage(){
             console.log(res);
             setUserData(res);
             favoriteList();
-            if(res.img===null){
+            
+            if(res.img===""){
                 let copy= {...userData};
 
-                copy['img']='https://ifh.cc/g/QCO7Gm.png';
+                setImg('https://ifh.cc/g/QCO7Gm.png');
 
                // setUserData(copy);
                 
+            }else{
+                setImg(res.img);
             }
             
         })
@@ -80,7 +84,7 @@ function MyPage(){
          
              <hr></hr>
                 <div >
-                    <img className="myImg" src="https://ifh.cc/g/QCO7Gm.png"/>
+                    <img className="myImg" src={img}/>
                     <div className='myHi'>
                         <p className=''> {userData?.name}</p>
                         <p className=''> {userData?.nickname}</p>
