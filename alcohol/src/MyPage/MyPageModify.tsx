@@ -11,6 +11,8 @@ import DatePicker from "../DatePicker";
 import { UserAddInfo } from "../interface/UserAddInfo";
 import { UserAddInfoErrorMessage } from "../interface/UserAddInfoErrorMessage";
 import { User } from '../interface/user';
+import { Button, IconButton } from '@mui/material';
+import { PhotoCamera } from '@mui/icons-material';
 
 function MyPageModify(){
     const { state } = useLocation();
@@ -380,6 +382,15 @@ function MyPageModify(){
             <h3>좋아하는 목록 :</h3>
             <TransferList type="리스트" setState={onChangeFavoriteList} />
             <h4 style={{ color: 'red' }}>{userAddInfo.favoriteList ? null : validateFavoriteList(userAddInfo).favoriteList}</h4><hr />
+            <h3>프로필 사진</h3>
+            <Button variant="contained" component="label">
+                    Upload
+                    <input hidden accept="image/*" multiple type="file" />
+                </Button>
+                <IconButton color="primary" aria-label="upload picture" component="label">
+                    <input hidden accept="image/*" type="file"  />
+                    <PhotoCamera />
+                </IconButton>
             <button onClick={modiInfo}>완료</button>
         </div>
     )
