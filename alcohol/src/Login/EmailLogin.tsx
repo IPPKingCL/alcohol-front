@@ -45,29 +45,34 @@ function EmailLogin() {
     }
 
     const handleClick = () => {
-        console.log("ㅇㅇ?");
-        setLoading(true);
-        fetch(addr + '/user/EmailLogin', {
-            method: "POST",
-            headers: {
-                "Access-Control-Allow-Origin": addr,
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                email: userEmailPassword.email,
-                password: userEmailPassword.password,
-            }),
-        }).then((res) => res.json())
-            .then((res) => {
-                if (!res.success) {
-                    console.log("통신 다녀옴?");
-                    console.log(res.msg);
-                    console.log(res.token);
+
+        if (userEmailPassword.email !== '' && userEmailPassword.password !== '') {
+            setLoading(true);
+            fetch(addr + '/user/EmailLogin', {
+                method: "POST",
+                headers: {
+                    "Access-Control-Allow-Origin": addr,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    email: userEmailPassword.email,
+                    password: userEmailPassword.password,
+                }),
+            }).then((res) => res.json())
+                .then((res) => {
+                    if (!res.success) {
+                        console.log("통신 다녀옴?");
+                        console.log(res.msg);
+                        console.log(res.token);
+                        setLoading(false);
+                    }
+                    alert("존재하지 않는 사용자입니다.");
                     setLoading(false);
-                }
-                alert("존재하지 않는 사용자입니다.");
-                setLoading(false);
-            })
+                })
+        }else {
+            alert('이메일 또는 패스워드를 입력하세요.');
+        }
+
     }
 
     return (
