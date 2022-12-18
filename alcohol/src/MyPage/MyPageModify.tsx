@@ -33,6 +33,7 @@ function MyPageModify(){
   });
 
   const [userData, setUserData] = useState<User>();
+  const [imgUrl,setImgUrl] = useState<string>('');
 
   const list = () => {
     fetch(addr+'/user/selectUser',{
@@ -348,6 +349,7 @@ function MyPageModify(){
             price: userAddInfo.MaximumPrice,
             favorite: userAddInfo.favoriteList,
             password: '-',
+            img:imgUrl
           }),
         }).then(res => res.json())
           .then((res) => {
@@ -367,7 +369,43 @@ function MyPageModify(){
             }
           })
       }
-  }
+      
+    }
+    const [selectedFile, setSelectedFile] = useState<any>('');
+
+    const handleFileInput = (e: any) => {
+      console.log("event : " + e);
+      const file = e.target.files[0];
+      console.log(file);
+      setSelectedFile(file);
+    }
+
+    const imgUpload = async () => {
+      fetch(addr + '/board/s3url', {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+
+        }
+      }).then((res) => res.json())
+        .then((res) => {
+            console.log(res.data);
+
+            fetch(res.data, {
+                method: "put",
+                headers: {
+                    "Content-Type": "multipart/form-data",
+
+                },
+                body: selectedFile
+            })
+
+            const imageUrl = res.data.split('?')[0]
+            console.log(imageUrl)
+            setImgUrl(imageUrl);
+            modiInfo();
+    })}
+
     return(
         <div className='addInfoInputTag' id='wrapper'>
             <h1>정보를 수정해주세요.</h1>
@@ -382,16 +420,20 @@ function MyPageModify(){
             <h3>좋아하는 목록 :</h3>
             <TransferList type="리스트" setState={onChangeFavoriteList} />
             <h4 style={{ color: 'red' }}>{userAddInfo.favoriteList ? null : validateFavoriteList(userAddInfo).favoriteList}</h4><hr />
-            <h3>프로필 사진</h3>
-            <Button variant="contained" component="label">
-                    Upload
-                    <input hidden accept="image/*" multiple type="file" />
-                </Button>
-                <IconButton color="primary" aria-label="upload picture" component="label">
-                    <input hidden accept="image/*" type="file"  />
-                    <PhotoCamera />
-                </IconButton>
-            <button onClick={modiInfo}>완료</button>
+            
+            <div>
+              <h3>프로필 사진</h3>
+              <Button variant="contained" component="label">
+                      Upload
+                      <input hidden accept="image/*" multiple type="file" onChange={handleFileInput} />
+                  </Button>
+                  <IconButton color="primary" aria-label="upload picture" component="label">
+                      <input hidden accept="image/*" type="file" onChange={handleFileInput} />
+                      <PhotoCamera />
+                  </IconButton>
+            </div>
+     
+            <button onClick={imgUpload}>완료</button>
         </div>
     )
 }
