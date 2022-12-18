@@ -38,7 +38,7 @@ function MyPage(){
             setUserData(res);
             favoriteList();
             
-            if(res.img===null){
+            if(res.img===""){
                 let copy= {...userData};
 
                 setImg('https://ifh.cc/g/QCO7Gm.png');
