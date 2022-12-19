@@ -21,6 +21,7 @@ import AlcoholInfo from './alcohol/AlcoholInfo';
 import AlcoholDetail from './alcohol/AlcoholDetail';
 import MyPageModify from './MyPage/MyPageModify';
 import LabelBottomNavigation from './Common/LabelBottomNavigation';
+import Cover from './Main/cover';
 
 
 
@@ -34,6 +35,7 @@ function App() {
       <Router>
         <div className="content-all">
           <Routes>
+            <Route path="/" element={<Cover />}></Route>
             <Route path="/Login" element={<Login />}></Route>
             <Route path="/AddInfo" element={<AddInfo />}></Route>
 
@@ -55,12 +57,6 @@ function App() {
         </div>
         <LabelBottomNavigation></LabelBottomNavigation>
 
-      </Router>
-      <Router>
-        <div className="content-all">
-          <Routes>
-          </Routes>
-        </div>
       </Router>
     </>
 
