@@ -9,7 +9,6 @@ import { gapi } from 'gapi-script';
 import { addr } from './Common/serverAddr';
 import { setCookie } from './Common/Cookies';
 import EmailLogin from './Login/EmailLogin';
-
 function Login() {
 
     const clientId =
@@ -122,9 +121,9 @@ function Login() {
             <div className='LoginComponentBox'>
                 <h2 className='LoginText'>Login</h2>
                 <EmailLogin />
-                <hr/>
-                <h2 style={{textAlign:"center"}}>소셜ID로 로그인하기</h2>
-                <div style={{textAlign:"center"}}>
+                <hr />
+                <h2 style={{ textAlign: "center" }}>소셜ID로 로그인하기</h2>
+                <div style={{ textAlign: "center" }}>
                     <GoogleLogin
                         clientId={clientId}
                         buttonText="Login with Google" // 버튼에 뜨는 텍스트
