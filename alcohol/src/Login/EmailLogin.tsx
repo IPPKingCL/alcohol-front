@@ -1,4 +1,4 @@
-import { Box, FormControl, FormControlLabel, IconButton, InputAdornment, InputLabel, OutlinedInput, Switch, TextField } from '@mui/material';
+import { Box, FormControl, FormControlLabel, Grid, IconButton, InputAdornment, InputLabel, OutlinedInput, Switch, TextField } from '@mui/material';
 import React, { useState, forwardRef, useEffect } from 'react';
 import '../css/App.css';
 import '../css/Login.css';
@@ -86,32 +86,49 @@ function EmailLogin() {
 
     return (
         <div>
+            <Grid container spacing={0}>
+                <Grid item xs={5}>
+                    <div style={{ textAlign: "center" }}>
+                        <h2 style={{ display: "inline-block" }}>Email : &nbsp;</h2>
+                    </div>
+                </Grid>
+                <Grid item xs={5}>
+                    <TextField id="outlined-basic" name="email" label="Email" variant="outlined" onChange={changeEmail} />
+                </Grid>
+            </Grid>
+            <Grid container spacing={0}>
+                <Grid item xs={5}>
+                    <div style={{ textAlign: "center" }}>
+                        <h2 style={{ display: "inline-block" }}>PW : &nbsp;</h2>
+                    </div>
+                </Grid>
+                <Grid item xs={5}>
+                    <FormControl variant="outlined">
+                        <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                        <OutlinedInput
+                            id="outlined-adornment-password"
+                            type={showPassword ? 'text' : 'password'}
+                            endAdornment={
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        aria-label="toggle password visibility"
+                                        onClick={handleClickShowPassword}
+                                        onMouseDown={handleMouseDownPassword}
+                                        edge="end"
+                                    >
+                                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                                </InputAdornment>
+                            }
+                            label="Password"
+                            onChange={changePassword}
+                        />
+                    </FormControl>
+                </Grid>
+            </Grid>
             <div style={{ textAlign: "center" }}>
-                <h2 style={{ display: "inline-block" }}>Email : &nbsp;</h2><TextField id="outlined-basic" name="email" label="Email" variant="outlined" onChange={changeEmail} />
-            </div>
-            <div style={{ textAlign: "center" }}>
-                <h2 style={{ display: "inline-block" }}>Password : &nbsp;</h2>
-                <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                    <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-                    <OutlinedInput
-                        id="outlined-adornment-password"
-                        type={showPassword ? 'text' : 'password'}
-                        endAdornment={
-                            <InputAdornment position="end">
-                                <IconButton
-                                    aria-label="toggle password visibility"
-                                    onClick={handleClickShowPassword}
-                                    onMouseDown={handleMouseDownPassword}
-                                    edge="end"
-                                >
-                                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                                </IconButton>
-                            </InputAdornment>
-                        }
-                        label="Password"
-                        onChange={changePassword}
-                    />
-                </FormControl>
+
+
             </div>
             <div style={{ textAlign: 'center' }}>
                 <Box>
