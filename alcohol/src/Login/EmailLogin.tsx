@@ -89,7 +89,7 @@ function EmailLogin() {
             <Grid container spacing={0}>
                 <Grid item xs={5}>
                     <div style={{ textAlign: "center" }}>
-                        <h2 style={{ display: "inline-block" }}>Email : &nbsp;</h2>
+                        <h2 style={{ display: "inline-block" }}>Email : </h2>
                     </div>
                 </Grid>
                 <Grid item xs={5}>
@@ -99,10 +99,10 @@ function EmailLogin() {
             <Grid container spacing={0}>
                 <Grid item xs={5}>
                     <div style={{ textAlign: "center" }}>
-                        <h2 style={{ display: "inline-block" }}>PW : &nbsp;</h2>
+                        <h2 style={{ display: "inline-block" }}>PW : </h2>
                     </div>
                 </Grid>
-                <Grid item xs={5}>
+                <Grid item xs={4.33}>
                     <FormControl variant="outlined">
                         <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                         <OutlinedInput
