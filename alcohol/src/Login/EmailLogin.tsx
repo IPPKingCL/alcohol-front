@@ -1,4 +1,4 @@
-import { Box, FormControl, FormControlLabel, Grid, IconButton, InputAdornment, InputLabel, OutlinedInput, Switch, TextField } from '@mui/material';
+import { Box, Checkbox, FormControl, FormControlLabel, Grid, IconButton, InputAdornment, InputLabel, OutlinedInput, Stack, Switch, TextField, Typography } from '@mui/material';
 import React, { useState, forwardRef, useEffect } from 'react';
 import '../css/App.css';
 import '../css/Login.css';
@@ -19,6 +19,8 @@ function EmailLogin() {
         event.preventDefault();
     };
 
+
+    const [checked, setChecked] = useState<boolean>(true);
     const [loading, setLoading] = React.useState<boolean>(false);
     const [userEmailPassword, setUserEmailPassword] = React.useState<UserEmailLogin>({
         email: '',
@@ -85,7 +87,7 @@ function EmailLogin() {
     }
 
     return (
-        <div>
+        <>
             <Grid container spacing={0}>
                 <Grid item xs={5}>
                     <div style={{ textAlign: "center" }}>
@@ -108,6 +110,7 @@ function EmailLogin() {
                         <OutlinedInput
                             id="outlined-adornment-password"
                             type={showPassword ? 'text' : 'password'}
+                            name="password"
                             endAdornment={
                                 <InputAdornment position="end">
                                     <IconButton
@@ -130,23 +133,37 @@ function EmailLogin() {
 
 
             </div>
-            <div style={{ textAlign: 'center' }}>
-                <Box>
-                    <Box sx={{ '& > button': { m: 1 } }}>
-                        <LoadingButton
-                            size="small"
-                            onClick={handleClick}
-                            endIcon={<SendIcon />}
-                            loading={loading}
-                            loadingPosition="end"
-                            variant="contained"
-                        >
-                            Login
-                        </LoadingButton>
-                    </Box>
-                </Box>
-            </div>
-        </div>
+            <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
+                <FormControlLabel
+                    control={
+                        <Checkbox
+                            checked={checked}
+                            onChange={(event) => setChecked(event.target.checked)}
+                            name="checked"
+                            color="primary"
+                        />
+                    }
+                    label="Remember me"
+                />
+                <Typography variant="subtitle1" color="secondary" sx={{ textDecoration: 'none', cursor: 'pointer' }}>
+                    Forgot Password?
+                </Typography>
+            </Stack>
+
+            <Box sx={{ mt: 2 }}>
+                <LoadingButton
+                    size="small"
+                    onClick={handleClick}
+                    endIcon={<SendIcon />}
+                    loading={loading}
+                    loadingPosition="end"
+                    variant="contained"
+                    fullWidth
+                >
+                    Login
+                </LoadingButton>
+            </Box>
+        </>
     );
 }
 

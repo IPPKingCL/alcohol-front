@@ -9,6 +9,8 @@ import { gapi } from 'gapi-script';
 import { addr } from './Common/serverAddr';
 import { setCookie } from './Common/Cookies';
 import EmailLogin from './Login/EmailLogin';
+import { Container } from 'reactstrap';
+import { Box, Grid } from '@mui/material';
 function Login() {
 
     const clientId =
@@ -117,22 +119,26 @@ function Login() {
 
 
     return (
-        <div id='wrapper'>
-            <div className='LoginComponentBox'>
-                <h2 className='LoginText'>Login</h2>
-                <EmailLogin />
-                <hr />
-                <h2 style={{ textAlign: "center" }}>소셜ID로 로그인하기</h2>
-                <div style={{ textAlign: "center" }}>
-                    <GoogleLogin
-                        clientId={clientId}
-                        buttonText="Login with Google" // 버튼에 뜨는 텍스트
-                        onSuccess={onSuccess}
-                        onFailure={onFailure}
-                    />
+        <Container maxWidth="sm">
+            <Grid item xs={4}>
+                <div id='wrapper'>
+                    <div className='LoginComponentBox'>
+                        <h2 className='LoginText'>Login</h2>
+                        <EmailLogin />
+                        <hr />
+                        <h2 style={{ textAlign: "center" }}>소셜ID로 로그인하기</h2>
+                        <div style={{ textAlign: "center" }}>
+                            <GoogleLogin
+                                clientId={clientId}
+                                buttonText="Login with Google" // 버튼에 뜨는 텍스트
+                                onSuccess={onSuccess}
+                                onFailure={onFailure}
+                            />
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+            </Grid>
+        </Container>
     );
 }
 
