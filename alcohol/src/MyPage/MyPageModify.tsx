@@ -384,7 +384,6 @@ function MyPageModify(){
     }
 
     const imgUpload = async () => {
-      console.log(selectedFile);
       if(selectedFile.size>0){
         fetch(addr + '/board/s3url', {
           method: "GET",
