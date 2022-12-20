@@ -321,6 +321,7 @@ function MyPageModify(){
   };
   
   const modiInfo = async (imageUrl:string) => {
+    console.log(userData)
     const validate: UserAddInfoErrorMessage = {
         ...userAddInfoErrorMessage,
       }
@@ -333,6 +334,7 @@ function MyPageModify(){
       if (validate.MaximumPriceValidation && validate.ageValidation && validate.nicknameValidation
         && validate.sexValidation && validate.favoriteListValidation && validate.birthValidation
         && validate.duplicationCheck) {
+          console.log(userAddInfo)
         fetch(addr + '/user/modify', {
           method: "POST",
           headers: {
@@ -382,30 +384,39 @@ function MyPageModify(){
     }
 
     const imgUpload = async () => {
-      fetch(addr + '/board/s3url', {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
+      console.log(selectedFile);
+      if(selectedFile.size>0){
+        fetch(addr + '/board/s3url', {
+          method: "GET",
+          headers: {
+              "Content-Type": "application/json",
 
-        }
-      }).then((res) => res.json())
-        .then((res) => {
-            console.log(res.data);
+          }
+        }).then((res) => res.json())
+          .then((res) => {
+              console.log(res.data);
+              
+                fetch(res.data, {
+                  method: "put",
+                  headers: {
+                      "Content-Type": "multipart/form-data",
 
-            fetch(res.data, {
-                method: "put",
-                headers: {
-                    "Content-Type": "multipart/form-data",
+                  },
+                  body: selectedFile
+                })
 
-                },
-                body: selectedFile
-            })
-
-            const imageUrl = res.data.split('?')[0]
-            console.log(imageUrl)
+                const imageUrl = res.data.split('?')[0]
+                console.log(imageUrl)
+                modiInfo(imageUrl);
+            }
             
-            modiInfo(imageUrl);
-    })}
+            
+            
+      )}else{
+        const imageUrl = '';
+        modiInfo(imageUrl);
+      }
+    }
 
     return(
         <div className='addInfoInputTag' id='wrapper'>
