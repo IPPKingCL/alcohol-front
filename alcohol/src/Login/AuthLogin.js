@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
+
 import {
     Box,
     Button,
@@ -18,7 +19,8 @@ import {
     OutlinedInput,
     Stack,
     Typography,
-    useMediaQuery
+    useMediaQuery,
+    Container
 } from '@mui/material';
 
 // third party
@@ -34,10 +36,122 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 import Google from './social-google.svg';
+import { GoogleLogin } from 'react-google-login';
+
+import { useNavigate } from 'react-router-dom';
+import { gapi } from 'gapi-script';
+import { addr } from '../Common/serverAddr';
+import { setCookie } from '../Common/Cookies';
 
 // ============================|| FIREBASE - LOGIN ||============================ //
 
 const FirebaseLogin = ({ ...others }) => {
+
+    const clientId =
+        "722148392125-6qdo1sho8shp117jpfipd8vggfgb1qo9.apps.googleusercontent.com";
+
+
+    const [type, setType] = useState("g");
+
+    const check = () => {
+        const filter = "win16|win32|win64|mac|macintel";
+
+        let device = "";
+
+        if (navigator.platform) {
+            if (filter.indexOf(navigator.platform.toLowerCase()) < 0) {
+                device = "mobile";
+            } else {
+                device = "pc";
+            }
+
+        }
+
+        setCookie('device', device, {
+            path: "/",
+            sameSite: "Lax"
+        });
+    }
+
+
+    useEffect(() => {
+        function start() {
+            gapi.client.init({
+                clientId,
+                scope: 'email',
+                width: 500,
+            });
+        }
+
+        gapi.load('client:auth2', start);
+    }, []);
+
+    async function onSuccess(res) {
+
+        check();
+
+        const profile = res.getBasicProfile();
+
+        const userdata = {
+            id: profile.getId(),
+            email: profile.getEmail(),
+            image: profile.getImageUrl(),
+            name: profile.getName(),
+            loginType: type,
+        };
+        // 로그인 성공 후 실행하기 원하는 코드 작성.
+        alert("구글 로그인에 성공하였습니다.");
+
+
+        fetch(addr + '/user/checkEmail', {
+            method: "POST",
+            headers: {
+                "Access-Control-Allow-Origin": addr,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                email: userdata.email
+            }),
+        }).then((res) => res.json())
+            .then((res) => {
+                if (res.success) {
+                    redirectAddInfo(userdata);
+                } else {
+                    console.log(res.token)
+                    setCookie('myToken', res.token, {
+                        path: "/",
+                        secure: true,
+                        sameSite: "none"
+                    })
+                    redirectMain(userdata);
+                }
+            })
+
+    }
+
+    /*인증할 때 보내는 헤더 예시 참조*/
+    /*headers:{
+        "Content-Type":"application/json"
+        Authorization:"Bearer ${getCookie('myToken')}",
+    }
+    */
+
+    const onFailure = (res) => {
+        alert("구글 로그인에 실패하였습니다");
+        console.log("err", res);
+    };
+
+    const navigate = useNavigate();
+
+    const redirectAddInfo = (data) => {
+        navigate("/AddInfo", { state: data });
+    }
+
+
+    const redirectMain = (data) => {
+        navigate("/Main", { state: data });
+    }
+
     const theme = useTheme();
     const scriptedRef = useScriptRef();
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
@@ -74,10 +188,17 @@ const FirebaseLogin = ({ ...others }) => {
                                 borderColor: theme.palette.grey[100]
                             }}
                         >
-                            <Box sx={{ mr: { xs: 1, sm: 2, width: 20 } }}>
-                                <img src={Google} alt="google" width={16} height={16} style={{ marginRight: matchDownSM ? 8 : 16 }} />
+                            <Box fullWidth>
+                                <Container fixed>
+                                    <GoogleLogin
+                                        clientId={clientId}
+                                        fullWidth
+                                        onSuccess={onSuccess}
+                                        onFailure={onFailure}
+                                    />
+                                </Container>
                             </Box>
-                            구글 로그인
+
                         </Button>
                     </AnimateButton>
                 </Grid>
