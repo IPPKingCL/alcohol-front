@@ -33,7 +33,7 @@ function MyPageModify(){
   });
 
   const [userData, setUserData] = useState<User>();
-  const [imgUrl,setImgUrl] = useState<string>('');
+ 
 
   const list = () => {
     fetch(addr+'/user/selectUser',{
@@ -265,7 +265,7 @@ function MyPageModify(){
               sameSite: "none"
             })
 
-            navigate("/Main");
+            window.history.go(-1);
           } else {
             alert("회원가입 중 에러 발생");
             return;
@@ -320,11 +320,12 @@ function MyPageModify(){
     return errors;
   };
   
-  const modiInfo = () => {
+  const modiInfo = async (imageUrl:string) => {
     const validate: UserAddInfoErrorMessage = {
         ...userAddInfoErrorMessage,
       }
-  
+      
+      
       console.log(userAddInfo);
       console.log(userAddInfoErrorMessage);
       console.log(userAddInfo.favoriteList)
@@ -349,7 +350,7 @@ function MyPageModify(){
             price: userAddInfo.MaximumPrice,
             favorite: userAddInfo.favoriteList,
             password: '-',
-            img:imgUrl
+            img:imageUrl
           }),
         }).then(res => res.json())
           .then((res) => {
@@ -362,7 +363,7 @@ function MyPageModify(){
                 sameSite: "none"
               })
   
-              navigate("/Main");
+              window.history.go(-1);
             } else {
               alert("회원가입 중 에러 발생");
               return;
@@ -402,8 +403,8 @@ function MyPageModify(){
 
             const imageUrl = res.data.split('?')[0]
             console.log(imageUrl)
-            setImgUrl(imageUrl);
-            modiInfo();
+            
+            modiInfo(imageUrl);
     })}
 
     return(
