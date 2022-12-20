@@ -22,6 +22,8 @@ import AlcoholDetail from './alcohol/AlcoholDetail';
 import MyPageModify from './MyPage/MyPageModify';
 import LabelBottomNavigation from './Common/LabelBottomNavigation';
 import Cover from './Main/cover';
+import { CssBaseline } from '@mui/material';
+import LoginTest from './Login/LoginTest';
 
 
 
@@ -32,11 +34,13 @@ function App() {
 
   return (
     <>
+      <CssBaseline />
       <Router>
         <div className="content-all">
           <Routes>
             <Route path="/" element={<Cover />}></Route>
             <Route path="/Login" element={<Login />}></Route>
+            <Route path="/LoginTest" element={<LoginTest />}></Route>
             <Route path="/AddInfo" element={<AddInfo />}></Route>
 
             <Route path="/free" element={<FreeBoard />}></Route>
