@@ -10,6 +10,7 @@ function AlcoholList(props:any){
                     key={data.id}
                 />
             ))}
+            <hr></hr>
         </div>
     )
 }
