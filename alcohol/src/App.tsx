@@ -23,7 +23,7 @@ import MyPageModify from './MyPage/MyPageModify';
 import LabelBottomNavigation from './Common/LabelBottomNavigation';
 import Cover from './Main/cover';
 import { CssBaseline } from '@mui/material';
-import LoginTest from './Login/LoginTest';
+import LoginTest from './Login/LoginC';
 
 
 
