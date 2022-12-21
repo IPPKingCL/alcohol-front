@@ -23,7 +23,8 @@ import MyPageModify from './MyPage/MyPageModify';
 import LabelBottomNavigation from './Common/LabelBottomNavigation';
 import Cover from './Main/cover';
 import { CssBaseline } from '@mui/material';
-import LoginTest from './Login/LoginC';
+import Register from './register/Register';
+import LoginC from './Login/LoginC';
 
 
 
@@ -40,7 +41,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Cover />}></Route>
             <Route path="/Login" element={<Login />}></Route>
-            <Route path="/LoginTest" element={<LoginTest />}></Route>
+            <Route path="/LoginTest" element={<LoginC />}></Route>
+            <Route path="/register" element={<Register />}></Route>
             <Route path="/AddInfo" element={<AddInfo />}></Route>
 
             <Route path="/free" element={<FreeBoard />}></Route>

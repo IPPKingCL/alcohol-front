@@ -367,7 +367,7 @@ const FirebaseLogin = ({ ...others }) => {
                                         .then((res) => {                                            
                                             if (!res.success) {
                                                 alert("로그인 성공!");
-                                                // navigate("/Main")
+                                                navigate("/Main")
                                             }else {
                                                 alert("이메일이 존재하지 않거나 비밀번호 오류입니다.");
                                             }
