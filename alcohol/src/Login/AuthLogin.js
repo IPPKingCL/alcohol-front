@@ -187,7 +187,7 @@ const FirebaseLogin = ({ ...others }) => {
                     console.log("통신 다녀옴?");
                     console.log(value);
                 }
-                alert("존재하지 않는 사용자입니다.");
+                console.log("왜 3번일까? "+ value);
             })
     }
 
@@ -266,6 +266,7 @@ const FirebaseLogin = ({ ...others }) => {
                     password: Yup.string().max(255).required('비밀번호를 입력하세요!')
                 })}
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
+                    console.log("여기 뜨나?");
                     try {
                         if (scriptedRef.current) {
                             setStatus({ success: true });
@@ -365,7 +366,25 @@ const FirebaseLogin = ({ ...others }) => {
                                     disableElevation
                                     disabled={isSubmitting}
                                     fullWidth
-                                    onClick={(initialValues) => console.log(initialValues)}
+                                    onClick={() => fetch(addr + '/user/EmailLogin', {
+                                        method: "POST",
+                                        headers: {
+                                            "Access-Control-Allow-Origin": addr,
+                                            "Content-Type": "application/json",
+                                        },
+                                        body: JSON.stringify({
+                                            email: values.email,
+                                            password: values.password,
+                                        }),
+                                    }).then((res) => res.json())
+                                        .then((res) => {                                            
+                                            if (!res.success) {
+                                                alert("로그인 성공!");
+                                                // navigate("/Main")
+                                            }else {
+                                                alert("이메일이 존재하지 않거나 비밀번호 오류입니다.");
+                                            }
+                                        })}
                                     size="large"
                                     type="submit"
                                     variant="contained"
