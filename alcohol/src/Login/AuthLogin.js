@@ -194,28 +194,15 @@ const FirebaseLogin = ({ ...others }) => {
     return (
         <>
             <Grid container direction="column" justifyContent="center" spacing={2}>
-                <Grid item xs={12}>
+                <Grid item xs={12} justifyContent="center" display="flex">
                     <AnimateButton>
-                        <Button
-                            disableElevation
-                            onClick={googleHandler}
-                            fullWidth
-                            size="large"
-                            variant="outlined"
-                            sx={{
-                                color: 'grey.700',
-                                backgroundColor: theme.palette.grey[50],
-                                borderColor: theme.palette.grey[100]
-                            }}
-                        >
                             <GoogleLogin
                                 clientId={clientId}
                                 theme="dark"
-                                buttonText="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;구글 로그인 하기&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+                                buttonText="구글 로그인 하기"
                                 onSuccess={onSuccess}
                                 onFailure={onFailure}
                             />
-                        </Button>
                     </AnimateButton>
                 </Grid>
                 <Grid item xs={12}>
