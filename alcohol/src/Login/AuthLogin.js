@@ -79,7 +79,6 @@ const FirebaseLogin = ({ ...others }) => {
             gapi.client.init({
                 clientId,
                 scope: 'email',
-                width: 500,
             });
         }
 
@@ -171,6 +170,27 @@ const FirebaseLogin = ({ ...others }) => {
         event.preventDefault();
     };
 
+    const handle = (value) => {
+        fetch(addr + '/user/EmailLogin', {
+            method: "POST",
+            headers: {
+                "Access-Control-Allow-Origin": addr,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                email: value.email,
+                password: value.password,
+            }),
+        }).then((res) => res.json())
+            .then((res) => {
+                if (!res.success) {
+                    console.log("통신 다녀옴?");
+                    console.log(value);
+                }
+                alert("존재하지 않는 사용자입니다.");
+            })
+    }
+
     return (
         <>
             <Grid container direction="column" justifyContent="center" spacing={2}>
@@ -178,8 +198,8 @@ const FirebaseLogin = ({ ...others }) => {
                     <AnimateButton>
                         <Button
                             disableElevation
-                            fullWidth
                             onClick={googleHandler}
+                            fullWidth
                             size="large"
                             variant="outlined"
                             sx={{
@@ -188,17 +208,13 @@ const FirebaseLogin = ({ ...others }) => {
                                 borderColor: theme.palette.grey[100]
                             }}
                         >
-                            <Box fullWidth>
-                                <Container fixed>
-                                    <GoogleLogin
-                                        clientId={clientId}
-                                        fullWidth
-                                        onSuccess={onSuccess}
-                                        onFailure={onFailure}
-                                    />
-                                </Container>
-                            </Box>
-
+                            <GoogleLogin
+                                clientId={clientId}
+                                theme="dark"
+                                buttonText="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;구글 로그인 하기&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+                                onSuccess={onSuccess}
+                                onFailure={onFailure}
+                            />
                         </Button>
                     </AnimateButton>
                 </Grid>
@@ -349,6 +365,7 @@ const FirebaseLogin = ({ ...others }) => {
                                     disableElevation
                                     disabled={isSubmitting}
                                     fullWidth
+                                    onClick={(initialValues) => console.log(initialValues)}
                                     size="large"
                                     type="submit"
                                     variant="contained"
