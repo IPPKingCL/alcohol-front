@@ -110,7 +110,7 @@ const FirebaseRegister = ({ ...others }) => {
                     nickname: '',
                     age: '',
                     birth: '',
-                    sec: '',
+                    sex: '',
                     job: '',
                     maxPrice: '',
                     FavorList: new Array(),
@@ -121,7 +121,8 @@ const FirebaseRegister = ({ ...others }) => {
                     password: Yup.string().max(255).required('비밀번호를 입력하세요.'),
                     nickname: Yup.string().min(2, "2글자 이상 입력하세요").max(8, "8글자 이하만 가능합니다.").matches(/^[가-힣a-zA-z]*$/, { message: "닉네임 형식이 올바르지 않습니다." }).required('닉네임을 입력하세요'),
                     age: Yup.number({ message: '숫자만 입력하세요.' }).max(3, "100이하만 입력하세요.").required('나이를 입력하세요'),
-                    sex: Yup.string().required('성별을 입력하세요'),
+                    birth: Yup.date().required('생일을 입력하세요'),
+                    maxPrice: Yup.number().min(1000, '1000원 이상 입력하세요').max(99999999, '1억원 미만으로 입력하세요').required('허용 최대 가격을 입력하세요'),
                 })}
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
                     try {
@@ -289,13 +290,18 @@ const FirebaseRegister = ({ ...others }) => {
                                 label="생일"
                                 type="date"
                                 name="birth"
-                                value={values.birth}
+                                defaultValue="2000-01-01"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
                             />
+                            {touched.bitrh && errors.birth && (
+                                <FormHelperText error id="standard-weight-helper-text-birth-register">
+                                    {errors.birth}
+                                </FormHelperText>
+                            )}
                         </FormControl>
 
                         <FormControl fullWidth error={Boolean(touched.sex && errors.sex)} sx={{ ...theme.typography.customInput }} margin='normal'>
