@@ -121,7 +121,7 @@ const FirebaseRegister = ({ ...others }) => {
                     password: Yup.string().max(255).required('비밀번호를 입력하세요.'),
                     nickname: Yup.string().min(2, "2글자 이상 입력하세요").max(8, "8글자 이하만 가능합니다.").matches(/^[가-힣a-zA-z]*$/, { message: "닉네임 형식이 올바르지 않습니다." }).required('닉네임을 입력하세요'),
                     age: Yup.number({ message: '숫자만 입력하세요.' }).max(3, "100이하만 입력하세요.").required('나이를 입력하세요'),
-
+                    sex: Yup.string().required('성별을 입력하세요'),
                 })}
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
                     try {
@@ -288,7 +288,10 @@ const FirebaseRegister = ({ ...others }) => {
                                 id="date"
                                 label="생일"
                                 type="date"
-                                defaultValue=""
+                                name="birth"
+                                value={values.birth}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
@@ -297,7 +300,7 @@ const FirebaseRegister = ({ ...others }) => {
 
                         <FormControl fullWidth error={Boolean(touched.sex && errors.sex)} sx={{ ...theme.typography.customInput }} margin='normal'>
                             <FormLabel htmlFor="outlined-adornment-sex-register">성별</FormLabel>
-                            <RadioGroup row aria-label="gender" name="gender" value={values.sex} onChange={handleChange}>
+                            <RadioGroup row aria-label="sex" name="sex" onChange={handleChange} defaultValue="M">
                                 <FormControlLabel value="M" control={<Radio />} label="Male" />
                                 <FormControlLabel value="F" control={<Radio />} label="Female" />
                             </RadioGroup>
