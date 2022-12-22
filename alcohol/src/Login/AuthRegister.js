@@ -12,11 +12,14 @@ import {
     FormControl,
     FormControlLabel,
     FormHelperText,
+    FormLabel,
     Grid,
     IconButton,
     InputAdornment,
     InputLabel,
     OutlinedInput,
+    Radio,
+    RadioGroup,
     TextField,
     Typography,
     useMediaQuery
@@ -264,16 +267,11 @@ const FirebaseRegister = ({ ...others }) => {
                         </FormControl>
 
                         <FormControl fullWidth error={Boolean(touched.sex && errors.sex)} sx={{ ...theme.typography.customInput }} margin='normal'>
-                            <InputLabel htmlFor="outlined-adornment-sex-register">성별</InputLabel>
-                            <OutlinedInput
-                                id="outlined-adornment-sex-register"
-                                type="text"
-                                value={values.sex}
-                                name="sex"
-                                onBlur={handleBlur}
-                                onChange={handleChange}
-                                inputProps={{}}
-                            />
+                            <FormLabel htmlFor="outlined-adornment-sex-register">성별</FormLabel>
+                            <RadioGroup row aria-label="gender" name="gender" value={values.sex} onChange={handleChange}>
+                                <FormControlLabel value="M" control={<Radio />} label="Male" />
+                                <FormControlLabel value="F" control={<Radio />} label="Female" />
+                            </RadioGroup>
                             {touched.sex && errors.sex && (
                                 <FormHelperText error id="standard-weight-helper-text-sex-register">
                                     {errors.sex}
