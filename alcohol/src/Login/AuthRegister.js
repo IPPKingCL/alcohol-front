@@ -284,17 +284,15 @@ const FirebaseRegister = ({ ...others }) => {
                         </FormControl>
 
                         <FormControl fullWidth error={Boolean(touched.age && errors.age)} sx={{ ...theme.typography.customInput }} margin='normal'>
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                <DesktopDatePicker
-                                    label="생일"
-                                    inputFormat="YYYY/MM/DD"
-                                    name="birth"
-                                    value={values.birth}
-                                    onBlur={handleBlur}
-                                    onChange={handleChange}
-                                    renderInput={(params) => <TextField {...params} />}
-                                />
-                            </LocalizationProvider>
+                            <TextField
+                                id="date"
+                                label="생일"
+                                type="date"
+                                defaultValue=""
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                            />
                         </FormControl>
 
                         <FormControl fullWidth error={Boolean(touched.sex && errors.sex)} sx={{ ...theme.typography.customInput }} margin='normal'>
