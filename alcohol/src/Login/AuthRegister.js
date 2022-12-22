@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { makeStyles } from '@material-ui/core/styles';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -22,7 +23,9 @@ import {
     RadioGroup,
     TextField,
     Typography,
-    useMediaQuery
+    useMediaQuery,
+    Select,
+    MenuItem
 } from '@mui/material';
 
 // third party
@@ -31,16 +34,24 @@ import { Formik } from 'formik';
 
 // project imports
 import useScriptRef from './useScriptRef';
-import Google from './social-google.svg';
 import AnimateButton from './AnimateButton';
 import { strengthColor, strengthIndicator } from './password-strength';
 
 // assets
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { margin } from '@mui/system';
 
 // ===========================|| FIREBASE - REGISTER ||=========================== //
+
+const useStyles = makeStyles((theme) => ({
+    formControl: {
+        margin: theme.spacing(1),
+        minWidth: 120,
+    },
+    selectEmpty: {
+        marginTop: theme.spacing(2),
+    },
+}));
 
 const FirebaseRegister = ({ ...others }) => {
     const theme = useTheme();
@@ -48,6 +59,7 @@ const FirebaseRegister = ({ ...others }) => {
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
     const customization = useSelector((state) => state.customization);
     const [showPassword, setShowPassword] = useState(false);
+    const classes = useStyles();
     const [checked, setChecked] = useState(true);
 
     const [strength, setStrength] = useState(0);
@@ -74,6 +86,7 @@ const FirebaseRegister = ({ ...others }) => {
     useEffect(() => {
         changePassword('123456');
     }, []);
+    
 
     return (
         <>
@@ -279,23 +292,31 @@ const FirebaseRegister = ({ ...others }) => {
                             )}
                         </FormControl>
 
-                        <FormControl fullWidth error={Boolean(touched.job && errors.job)} sx={{ ...theme.typography.customInput }} margin='normal'>
-                            <InputLabel htmlFor="outlined-adornment-job-register">직군</InputLabel>
-                            <OutlinedInput
-                                id="outlined-adornment-job-register"
-                                type="text"
+                        <FormControl variant='outlined' className={classes.formControl} fullWidth error={Boolean(touched.job && errors.job)} sx={{ ...theme.typography.customInput }} margin='normal'>
+                            <InputLabel id="demo-simple-select-label">직군</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
                                 value={values.job}
-                                name="job"
-                                onBlur={handleBlur}
                                 onChange={handleChange}
-                                inputProps={{}}
-                            />
+                                name="job"
+                                label="job"
+                            >
+                                <MenuItem value="">
+                                    직군을 선택하세요.
+                                </MenuItem>
+                                <MenuItem value={10}>Ten</MenuItem>
+                                <MenuItem value={20}>Twenty</MenuItem>
+                                <MenuItem value={30}>Thirty</MenuItem>
+                            </Select>
+
                             {touched.job && errors.job && (
                                 <FormHelperText error id="standard-weight-helper-text-job-register">
                                     {errors.job}
                                 </FormHelperText>
                             )}
                         </FormControl>
+                        
 
                         <FormControl fullWidth error={Boolean(touched.maxPrice && errors.maxPrice)} sx={{ ...theme.typography.customInput }} margin='normal'>
                             <InputLabel htmlFor="outlined-adornment-maxPrice-register">허용최대가격</InputLabel>
