@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import {
@@ -86,7 +89,7 @@ const FirebaseRegister = ({ ...others }) => {
     useEffect(() => {
         changePassword('123456');
     }, []);
-    
+
 
     return (
         <>
@@ -118,6 +121,7 @@ const FirebaseRegister = ({ ...others }) => {
                     password: Yup.string().max(255).required('비밀번호를 입력하세요.'),
                     nickname: Yup.string().min(2, "2글자 이상 입력하세요").max(8, "8글자 이하만 가능합니다.").matches(/^[가-힣a-zA-z]*$/, { message: "닉네임 형식이 올바르지 않습니다." }).required('닉네임을 입력하세요'),
                     age: Yup.number({ message: '숫자만 입력하세요.' }).max(3, "100이하만 입력하세요.").required('나이를 입력하세요'),
+
                 })}
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
                     try {
@@ -279,6 +283,20 @@ const FirebaseRegister = ({ ...others }) => {
                             )}
                         </FormControl>
 
+                        <FormControl fullWidth error={Boolean(touched.age && errors.age)} sx={{ ...theme.typography.customInput }} margin='normal'>
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DesktopDatePicker
+                                    label="생일"
+                                    inputFormat="YYYY/MM/DD"
+                                    name="birth"
+                                    value={values.birth}
+                                    onBlur={handleBlur}
+                                    onChange={handleChange}
+                                    renderInput={(params) => <TextField {...params} />}
+                                />
+                            </LocalizationProvider>
+                        </FormControl>
+
                         <FormControl fullWidth error={Boolean(touched.sex && errors.sex)} sx={{ ...theme.typography.customInput }} margin='normal'>
                             <FormLabel htmlFor="outlined-adornment-sex-register">성별</FormLabel>
                             <RadioGroup row aria-label="gender" name="gender" value={values.sex} onChange={handleChange}>
@@ -316,7 +334,7 @@ const FirebaseRegister = ({ ...others }) => {
                                 </FormHelperText>
                             )}
                         </FormControl>
-                        
+
 
                         <FormControl fullWidth error={Boolean(touched.maxPrice && errors.maxPrice)} sx={{ ...theme.typography.customInput }} margin='normal'>
                             <InputLabel htmlFor="outlined-adornment-maxPrice-register">허용최대가격</InputLabel>
