@@ -73,53 +73,10 @@ const FirebaseRegister = ({ ...others }) => {
 
     return (
         <>
-            <Grid container direction="column" justifyContent="center" spacing={2}>
-                <Grid item xs={12}>
-                    <AnimateButton>
-                        <Button
-                            variant="outlined"
-                            fullWidth
-                            onClick={googleHandler}
-                            size="large"
-                            sx={{
-                                color: 'grey.700',
-                                backgroundColor: theme.palette.grey[50],
-                                borderColor: theme.palette.grey[100]
-                            }}
-                        >
-                            <Box sx={{ mr: { xs: 1, sm: 2, width: 20 } }}>
-                                <img src={Google} alt="google" width={16} height={16} style={{ marginRight: matchDownSM ? 8 : 16 }} />
-                            </Box>
-                            Sign up with Google
-                        </Button>
-                    </AnimateButton>
-                </Grid>
-                <Grid item xs={12}>
-                    <Box sx={{ alignItems: 'center', display: 'flex' }}>
-                        <Divider sx={{ flexGrow: 1 }} orientation="horizontal" />
-                        <Button
-                            variant="outlined"
-                            sx={{
-                                cursor: 'unset',
-                                m: 2,
-                                py: 0.5,
-                                px: 7,
-                                borderColor: `${theme.palette.grey[100]} !important`,
-                                color: `${theme.palette.grey[900]}!important`,
-                                fontWeight: 500,
-                                borderRadius: `${customization.borderRadius}px`
-                            }}
-                            disableRipple
-                            disabled
-                        >
-                            OR
-                        </Button>
-                        <Divider sx={{ flexGrow: 1 }} orientation="horizontal" />
-                    </Box>
-                </Grid>
+            <Grid container direction="column" justifyContent="center" spacing={2}>                
                 <Grid item xs={12} container alignItems="center" justifyContent="center">
                     <Box sx={{ mb: 2 }}>
-                        <Typography variant="subtitle1">Sign up with Email address</Typography>
+                        <Typography variant="subtitle1">이메일 주소로 회원가입</Typography>
                     </Box>
                 </Grid>
             </Grid>
@@ -128,11 +85,22 @@ const FirebaseRegister = ({ ...others }) => {
                 initialValues={{
                     email: '',
                     password: '',
+                    fname: '',
+                    ename: '',
+                    nickname: '',
+                    age: '',
+                    birth: '',
+                    sec: '',
+                    job: '',
+                    maxPrice: '',
+                    FavorList : new Array(),
                     submit: null
                 }}
                 validationSchema={Yup.object().shape({
-                    email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
-                    password: Yup.string().max(255).required('Password is required')
+                    email: Yup.string().email('이메일 형식이 아닙니다.').max(255).required('이메일을 입력하세요.'),
+                    password: Yup.string().max(255).required('비밀번호를 입력하세요.'),
+                    nickname: Yup.string().min(2, "2글자 이상 입력하세요").max(8, "8글자 이하만 가능합니다.").matches(/^[가-힣a-zA-z]*$/, {message : "닉네임 형식이 올바르지 않습니다."}).required('닉네임을 입력하세요'),
+                    age: Yup.number('숫자만 입력하세요.').max(2, "100이하만 입력하세요.").required('나이를 입력하세요'),
                 })}
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
                     try {
@@ -153,31 +121,35 @@ const FirebaseRegister = ({ ...others }) => {
                 {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
                     <form noValidate onSubmit={handleSubmit} {...others}>
                         <Grid container spacing={matchDownSM ? 0 : 2}>
-                            <Grid item xs={12} sm={6}>
+                            <Grid item xs={6} sm={6}>
                                 <TextField
                                     fullWidth
-                                    label="First Name"
+                                    label="성"
                                     margin="normal"
                                     name="fname"
                                     type="text"
-                                    defaultValue=""
+                                    value={values.fname}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
                                     sx={{ ...theme.typography.customInput }}
                                 />
                             </Grid>
-                            <Grid item xs={12} sm={6}>
+                            <Grid item xs={6} sm={6}>
                                 <TextField
                                     fullWidth
-                                    label="Last Name"
+                                    label="이름"
                                     margin="normal"
-                                    name="lname"
+                                    name="ename"
                                     type="text"
-                                    defaultValue=""
+                                    value={values.ename}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
                                     sx={{ ...theme.typography.customInput }}
                                 />
                             </Grid>
                         </Grid>
                         <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
-                            <InputLabel htmlFor="outlined-adornment-email-register">Email Address / Username</InputLabel>
+                            <InputLabel htmlFor="outlined-adornment-email-register">이메일 주소</InputLabel>
                             <OutlinedInput
                                 id="outlined-adornment-email-register"
                                 type="email"
@@ -188,7 +160,7 @@ const FirebaseRegister = ({ ...others }) => {
                                 inputProps={{}}
                             />
                             {touched.email && errors.email && (
-                                <FormHelperText error id="standard-weight-helper-text--register">
+                                <FormHelperText error id="standard-weight-helper-text-email-register">
                                     {errors.email}
                                 </FormHelperText>
                             )}
@@ -199,7 +171,7 @@ const FirebaseRegister = ({ ...others }) => {
                             error={Boolean(touched.password && errors.password)}
                             sx={{ ...theme.typography.customInput }}
                         >
-                            <InputLabel htmlFor="outlined-adornment-password-register">Password</InputLabel>
+                            <InputLabel htmlFor="outlined-adornment-password-register">비밀번호</InputLabel>
                             <OutlinedInput
                                 id="outlined-adornment-password-register"
                                 type={showPassword ? 'text' : 'password'}
@@ -229,6 +201,114 @@ const FirebaseRegister = ({ ...others }) => {
                             {touched.password && errors.password && (
                                 <FormHelperText error id="standard-weight-helper-text-password-register">
                                     {errors.password}
+                                </FormHelperText>
+                            )}
+                        </FormControl>
+
+                        <FormControl fullWidth error={Boolean(touched.nickname && errors.nickname)} sx={{ ...theme.typography.customInput }}>
+                            <InputLabel htmlFor="outlined-adornment-nickname-register">닉네임</InputLabel>
+                            <OutlinedInput
+                                id="outlined-adornment-nickname-register"
+                                type="nickname"
+                                value={values.nickname}
+                                name="nickname"
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                inputProps={{}}
+                            />
+                            {touched.nickname && errors.nickname && (
+                                <FormHelperText error id="standard-weight-helper-text-nickname-register">
+                                    {errors.nickname}
+                                </FormHelperText>
+                            )}
+                        </FormControl>
+
+                        <FormControl fullWidth error={Boolean(touched.age && errors.age)} sx={{ ...theme.typography.customInput }}>
+                            <InputLabel htmlFor="outlined-adornment-age-register">나이</InputLabel>
+                            <OutlinedInput
+                                id="outlined-adornment-age-register"
+                                type="age"
+                                value={values.age}
+                                name="age"
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                inputProps={{}}
+                            />
+                            {touched.age && errors.age && (
+                                <FormHelperText error id="standard-weight-helper-text-age-register">
+                                    {errors.age}
+                                </FormHelperText>
+                            )}
+                        </FormControl>
+
+                        <FormControl fullWidth error={Boolean(touched.sex && errors.sex)} sx={{ ...theme.typography.customInput }}>
+                            <InputLabel htmlFor="outlined-adornment-sex-register">성별</InputLabel>
+                            <OutlinedInput
+                                id="outlined-adornment-sex-register"
+                                type="sex"
+                                value={values.sex}
+                                name="sex"
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                inputProps={{}}
+                            />
+                            {touched.sex && errors.sex && (
+                                <FormHelperText error id="standard-weight-helper-text-sex-register">
+                                    {errors.sex}
+                                </FormHelperText>
+                            )}
+                        </FormControl>
+
+                        <FormControl fullWidth error={Boolean(touched.job && errors.job)} sx={{ ...theme.typography.customInput }}>
+                            <InputLabel htmlFor="outlined-adornment-job-register">직군</InputLabel>
+                            <OutlinedInput
+                                id="outlined-adornment-job-register"
+                                type="job"
+                                value={values.job}
+                                name="job"
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                inputProps={{}}
+                            />
+                            {touched.job && errors.job && (
+                                <FormHelperText error id="standard-weight-helper-text-job-register">
+                                    {errors.job}
+                                </FormHelperText>
+                            )}
+                        </FormControl>
+
+                        <FormControl fullWidth error={Boolean(touched.maxPrice && errors.maxPrice)} sx={{ ...theme.typography.customInput }}>
+                            <InputLabel htmlFor="outlined-adornment-maxPrice-register">허용최대가격</InputLabel>
+                            <OutlinedInput
+                                id="outlined-adornment-maxPrice-register"
+                                type="maxPrice"
+                                value={values.maxPrice}
+                                name="maxPrice"
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                inputProps={{}}
+                            />
+                            {touched.maxPrice && errors.maxPrice && (
+                                <FormHelperText error id="standard-weight-helper-text-maxPrice-register">
+                                    {errors.maxPrice}
+                                </FormHelperText>
+                            )}
+                        </FormControl>
+
+                        <FormControl fullWidth error={Boolean(touched.FavorList && errors.FavorList)} sx={{ ...theme.typography.customInput }}>
+                            <InputLabel htmlFor="outlined-adornment-FavorList-register">좋아하는 목록</InputLabel>
+                            <OutlinedInput
+                                id="outlined-adornment-FavorList-register"
+                                type="FavorList"
+                                value={values.FavorList}
+                                name="FavorList"
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                inputProps={{}}
+                            />
+                            {touched.FavorList && errors.FavorList && (
+                                <FormHelperText error id="standard-weight-helper-text-FavorList-register">
+                                    {errors.FavorList}
                                 </FormHelperText>
                             )}
                         </FormControl>
@@ -292,7 +372,7 @@ const FirebaseRegister = ({ ...others }) => {
                                     variant="contained"
                                     color="secondary"
                                 >
-                                    Sign up
+                                    가입하기
                                 </Button>
                             </AnimateButton>
                         </Box>
