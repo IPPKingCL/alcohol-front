@@ -63,7 +63,7 @@ function AlchoComment(){
                 "Authorization":`Bearer ${getCookie('myToken')}`,
             },
             body : JSON.stringify({
-                contents : content,
+                content : content,
                 alchoId : id
             }),
         }).then((res) => res.json())
