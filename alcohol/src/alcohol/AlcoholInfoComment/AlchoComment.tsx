@@ -55,7 +55,6 @@ function AlchoComment(){
     }
 
     const onclick = async () => { 
-        console.log(comment)/*
         fetch(addr+'/alcohol/insertComment',{
             method:"POST",
             headers:{
@@ -83,7 +82,7 @@ function AlchoComment(){
                 }
                 
             }
-        })*/
+        })
     }
 
     
