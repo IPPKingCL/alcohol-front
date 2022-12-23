@@ -4,6 +4,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getCookie } from "../../Common/Cookies";
 import { addr } from "../../Common/serverAddr";
 import { commentList } from "../../interface/CommentList";
+import AlchoCoList from "./AlchoCoList";
+import AlchoCoOne from "./AlchoCoOne";
 
 function AlchoComment(){
     const [loading, setLoading] = useState<boolean>(true);
@@ -98,10 +100,10 @@ function AlchoComment(){
             <hr></hr>
             {loading ? <strong>loading...</strong> :
                 <div>
-                    {/*<CommentList
+                    <AlchoCoList
                         datas={comment}
                         onRemove={onRemove}
-                    />*/}
+                    />
                 </div>
             }           
 
