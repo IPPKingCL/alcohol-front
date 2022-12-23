@@ -3,15 +3,16 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getCookie } from "../../Common/Cookies";
 import { addr } from "../../Common/serverAddr";
+import { alchoComment } from "../../interface/AlchoComment";
 import { commentList } from "../../interface/CommentList";
 import AlchoCoList from "./AlchoCoList";
-import AlchoCoOne from "./AlchoCoOne";
+
 
 function AlchoComment(){
     const [loading, setLoading] = useState<boolean>(true);
     const [content, setContent] = useState<string>();
     const {id} = useParams();
-    const [comment,setComment] = useState<commentList[]>([]);
+    const [comment,setComment] = useState<alchoComment[]>([]);
     const [commentNum,setCommentNum] = useState<number>();
     const navigate = useNavigate();
 
@@ -27,13 +28,11 @@ function AlchoComment(){
             let i:number = 0;
             setCommentNum(res.length);
             for(i;i<res.length;i++){
-                const data:commentList = {
+                const data:alchoComment = {
                     id:res[i].id,
-                    contents:res[i].contents,
+                    content:res[i].content,
                     dateTime:res[i].dateTime,
                     nickname:res[i].nickname,
-                    isDeleted:res[i].isDeleted,
-                    isModified:res[i].isModified,
                     userId:res[i].user.id
                 }
                 setComment(comment => [...comment,data])
@@ -56,6 +55,7 @@ function AlchoComment(){
     }
 
     const onclick = async () => { 
+        console.log(comment)/*
         fetch(addr+'/alcohol/insertComment',{
             method:"POST",
             headers:{
@@ -83,7 +83,7 @@ function AlchoComment(){
                 }
                 
             }
-        })
+        })*/
     }
 
     

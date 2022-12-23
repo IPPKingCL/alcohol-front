@@ -8,7 +8,6 @@ function CommentOne(prop:any){
     console.log(prop)
     const navigate = useNavigate();
     const onclick = async () => {
-        //아이디 비교하는 과정 필요
         console.log(prop.data.userId)
         fetch(addr + '/board/deleteComment',{
             method:"POST",

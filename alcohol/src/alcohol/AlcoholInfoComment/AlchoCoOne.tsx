@@ -1,8 +1,13 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getCookie } from "../../Common/Cookies";
 import { addr } from "../../Common/serverAddr";
 
 function AlchoCoOne(prop:any){
+    console.log("qlqlqlq")
+    useEffect(()=>{
+        console.log("hihihihih"+prop.data)
+    },[]);
     const navigate = useNavigate();
     const onclick = async () => {
         
@@ -39,8 +44,9 @@ function AlchoCoOne(prop:any){
         });
     }
     return(
-        <div>
-            {prop.data.nickname} : <input type="text" className="comment-input" value={prop.data.contents} disabled/> <span onClick={onclick} className="comment-span">삭제</span>
+        <div className="g">
+            {prop.data.nickname} : <input type="text" className="comment-input" value={prop.data.content} disabled/> <span onClick={onclick} className="comment-span">삭제</span>
+            <hr></hr>
         </div>
     )
 }
