@@ -156,7 +156,7 @@ const FirebaseRegister = ({ ...others }) => {
                 }}
                 validationSchema={Yup.object().shape({
                     fname: Yup.string().required('성을 입력하세요'),
-                    ㄷname: Yup.string().required('이름을 입력하세요'),
+                    ename: Yup.string().required('이름을 입력하세요'),
                     email: Yup.string().email('이메일 형식이 아닙니다.').max(255).required('이메일을 입력하세요.'),
                     password: Yup.string().max(255).required('비밀번호를 입력하세요.'),
                     passwordConfirm: Yup.string().oneOf([Yup.ref('password'), null], '비밀번호가 일치 하지 않습니다.').required('비밀번호를 다시 입력해주세요.'),
@@ -196,6 +196,11 @@ const FirebaseRegister = ({ ...others }) => {
                                     onBlur={handleBlur}
                                     sx={{ ...theme.typography.customInput }}
                                 />
+                                {touched.fname && errors.fname && (
+                                    <FormHelperText error id="standard-weight-helper-text-fname-register">
+                                        {errors.fname}
+                                    </FormHelperText>
+                                )}
                             </Grid>
                             <Grid item xs={6} sm={6}>
                                 <TextField
@@ -209,7 +214,16 @@ const FirebaseRegister = ({ ...others }) => {
                                     onBlur={handleBlur}
                                     sx={{ ...theme.typography.customInput }}
                                 />
+                                {touched.ename && errors.ename && (
+                                    <FormHelperText error id="standard-weight-helper-text-ename-register">
+                                        {errors.ename}
+                                    </FormHelperText>
+                                )}
                             </Grid>
+
+
+
+
                         </Grid>
                         <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
                             <InputLabel htmlFor="outlined-adornment-email-register">이메일</InputLabel>
