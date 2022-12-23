@@ -24,7 +24,7 @@ import LabelBottomNavigation from './Common/LabelBottomNavigation';
 import Cover from './Main/cover';
 import { CssBaseline } from '@mui/material';
 import Register from './register/Register';
-import LoginC from './Login/LoginC';
+import LoginC from './Login';
 
 
 
@@ -32,7 +32,7 @@ function App() {
 
   const [isLogin, setIsLogin] = useState<boolean>(false);
 
-
+ 
   return (
     <>
       <CssBaseline />
