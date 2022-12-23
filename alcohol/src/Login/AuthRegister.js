@@ -412,7 +412,7 @@ const FirebaseRegister = ({ ...others }) => {
                             )}
                         </FormControl>
 
-                        <FormControl variant='outlined' className={classes.formControl} fullWidth error={Boolean(touched.job && errors.job)} sx={{ ...theme.typography.customInput }} margin='normal'>
+                        <FormControl fullWidth error={Boolean(touched.job && errors.job)} sx={{ ...theme.typography.customInput }} margin='normal'>
                             <InputLabel id="demo-simple-select-label">직군</InputLabel>
                             <Select
                                 id="demo-simple-select"
