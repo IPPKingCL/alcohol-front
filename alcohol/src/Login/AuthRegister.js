@@ -162,7 +162,7 @@ const FirebaseRegister = ({ ...others }) => {
                     passwordConfirm: Yup.string().oneOf([Yup.ref('password'), null], '비밀번호가 일치 하지 않습니다.').required('비밀번호를 다시 입력해주세요.'),
                     nickname: Yup.string().min(2, "2글자 이상 입력하세요").max(8, "8글자 이하만 가능합니다.").matches(/^[가-힣a-zA-z]*$/, { message: "닉네임 형식이 올바르지 않습니다." }).required('닉네임을 입력하세요'),
                     age: Yup.number({ message: '숫자만 입력하세요.' }).max(100, "100이하만 입력하세요.").required('나이를 입력하세요'),
-                    birth: Yup.date().required('생일을 입력하세요'),
+                    birth: Yup.date().max(new Date(), 'You can\'t be born in the future!').required('생일을 입력하세요'),
                     maxPrice: Yup.number().min(1000, '1000원 이상 입력하세요').max(99999999, '1억원 미만으로 입력하세요').required('허용 최대 가격을 입력하세요'),
                 })}
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
