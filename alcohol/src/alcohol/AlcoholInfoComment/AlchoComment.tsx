@@ -42,6 +42,7 @@ function AlchoComment(){
     }
 
     useEffect(() => {
+        setComment([]);
         commentList();
     },[]);
 

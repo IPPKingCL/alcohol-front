@@ -30,7 +30,7 @@ function AlcoholDetail(prop:any){
             setLoading(false);
             
         })
-    }
+    }  
 
     useEffect(() => {
         detail()
