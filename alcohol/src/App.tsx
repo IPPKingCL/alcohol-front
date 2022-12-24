@@ -24,7 +24,7 @@ import LabelBottomNavigation from './Common/LabelBottomNavigation';
 import Cover from './Main/cover';
 import { CssBaseline } from '@mui/material';
 import Register from './register/Register';
-import LoginC from './Login';
+import LoginC from './Login/LoginC';
 
 
 

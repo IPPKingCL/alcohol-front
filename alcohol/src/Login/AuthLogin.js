@@ -253,7 +253,6 @@ const FirebaseLogin = ({ ...others }) => {
                     password: Yup.string().max(255).required('비밀번호를 입력하세요!')
                 })}
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
-                    console.log("여기 뜨나?");
                     try {
                         if (scriptedRef.current) {
                             setStatus({ success: true });
