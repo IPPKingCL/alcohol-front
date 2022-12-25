@@ -45,26 +45,41 @@ function AlcoholDetail(prop:any){
     return (
         <div>
             {loading ? <strong>loading...</strong>:
-            <><div>
-                    <h2>{alcoholData?.name}</h2>
-                    <p>종류 : {alcoholData?.category} </p>
-                    <p>당도 : {alcoholData?.sugar} (달수록 숫자가 높습니다)</p>
-                    <p>색 : {color} </p>
-                    <p>도수 : {alcoholData?.dosu} </p>
-                    <p>가격 : {alcoholData?.price}원 (판매점마다 가격이 다를 수 있습니다)</p>
-                    <img className="alcoholImg" src={alcoholData?.imgUrl} />
-                    <div>
-                        <button onClick={onclick}>뒤로</button>
-                        <button>칵테일 레시피</button>
+            <>
+                <div className = "input-Board">
+                    <div className = 'bar2'>
+                        <h3>Title</h3>
                     </div>
-                </div>
-                <div>
-                
-                </div>
+
+                    <input name='title' type="text" className="search-input" value={alcoholData?.name} disabled/>
+                    <div className = 'bar2'>
+                        <h3>detail</h3>
+                    </div>
+                        
+                    <div className="content" id="content">
+                        <p>종류 : {alcoholData?.category} </p>
+                        <p>당도 : {alcoholData?.sugar} (달수록 숫자가 높습니다)</p>
+                        <p>색 : {color} </p>
+                        <p>도수 : {alcoholData?.dosu} </p>
+                        <p>가격 : {alcoholData?.price}원 (판매점마다 가격이 다를 수 있습니다)</p>
+                    
+                        <div>
+                            <img className="alcoholImg" src={alcoholData?.imgUrl} />
+                        </div>
+                    
+
+                        
+                    </div>
+
+                    <div className='input-btn'>
+                        <button className="d-btn" onClick={onclick}>뒤로</button>
+                        <button className="m-btn">칵테일 레시피</button>
+                    </div>
                 <div>
                     <AlchoComment></AlchoComment>
-                </div></>
-                
+                </div>
+            </div> 
+            </>
             }
         </div>
     )

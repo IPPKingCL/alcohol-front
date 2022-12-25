@@ -2,7 +2,9 @@ import { stringify } from "querystring";
 import { useNavigate, useParams } from "react-router-dom";
 import { getCookie } from "../Common/Cookies";
 import { addr } from "../Common/serverAddr";
-
+import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
 
 function CommentOne(prop:any){
     console.log(prop)
@@ -42,7 +44,11 @@ function CommentOne(prop:any){
     }
     return (
         <div>
-            {prop.data.nickname} : <input type="text" className="comment-input" value={prop.data.contents} disabled/> <span onClick={onclick} className="comment-span">삭제</span>
+            {prop.data.nickname} : <input type="text" className="comment-input" value={prop.data.contents} disabled/>     <Tooltip title="Delete">
+            <IconButton>
+                <DeleteIcon onClick={onclick}/>
+            </IconButton>
+            </Tooltip>
             <hr></hr>
         </div>
     )
