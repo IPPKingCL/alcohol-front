@@ -129,7 +129,7 @@ const FirebaseRegister = ({ ...others }) => {
 
 
     return (
-        <>
+        <div>
             <Grid container direction="column" justifyContent="center" spacing={2}>
                 <Grid item xs={12} container alignItems="center" justifyContent="center">
                     <Box sx={{ mb: 2 }}>
@@ -510,7 +510,7 @@ const FirebaseRegister = ({ ...others }) => {
                     </form>
                 )}
             </Formik>
-        </>
+        </div>
     );
 };
 
