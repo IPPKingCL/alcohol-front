@@ -29,38 +29,42 @@ export default function LabelBottomNavigation() {
   );
 
   return (
-    <div id='footer'>
-      <BottomNavigation value={value} onChange={handleChange} showLabels>
-        <BottomNavigationAction
-          label="오늘의 술"
-          value="오늘의 술"
-          icon={<FavoriteIcon />}
-        />
-        <BottomNavigationAction
-          label="술 정보"
-          value="술 정보"
-          icon={<LocalBar />}
-          onClick={mbti}
-        />
-        <BottomNavigationAction
-          label="홈"
-          value="홈"
-          icon={<HomeIcon />}
-          onClick={home}
-        />
-        <BottomNavigationAction
-          label="게시판"
-          value="게시판"
-          icon={<EventNote />}
-          onClick={free}
-        />
-        <BottomNavigationAction
-          label="Home"
-          value="Home"
-          icon={<Person />}
-          onClick={myPage}
-        />
-      </BottomNavigation>
-    </div>
+    <BottomNavigation value={value} onChange={handleChange} showLabels sx={{
+      background: 'white',
+      position: 'fixed',
+      left: 0,
+      right: 0,
+      bottom: 0
+    }}>
+      <BottomNavigationAction
+        label="오늘의 술"
+        value="오늘의 술"
+        icon={<FavoriteIcon />}
+      />
+      <BottomNavigationAction
+        label="술 정보"
+        value="술 정보"
+        icon={<LocalBar />}
+        onClick={mbti}
+      />
+      <BottomNavigationAction
+        label="홈"
+        value="홈"
+        icon={<HomeIcon />}
+        onClick={home}
+      />
+      <BottomNavigationAction
+        label="게시판"
+        value="게시판"
+        icon={<EventNote />}
+        onClick={free}
+      />
+      <BottomNavigationAction
+        label="Home"
+        value="Home"
+        icon={<Person />}
+        onClick={myPage}
+      />
+    </BottomNavigation>
   );
 }

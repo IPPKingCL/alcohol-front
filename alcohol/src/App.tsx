@@ -32,7 +32,7 @@ function App() {
 
   const [isLogin, setIsLogin] = useState<boolean>(false);
 
- 
+
   return (
     <>
       <CssBaseline />
@@ -61,7 +61,8 @@ function App() {
             <Route path='/myPage/modify' element={<MyPageModify />} />
           </Routes>
         </div>
-        <LabelBottomNavigation></LabelBottomNavigation>
+        <LabelBottomNavigation />
+
 
       </Router>
     </>
