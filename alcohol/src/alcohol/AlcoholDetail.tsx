@@ -5,6 +5,9 @@ import { alcho } from "../interface/Alcho";
 import { addr } from "../Common/serverAddr";
 import AlchoComment from "./AlcoholInfoComment/AlchoComment";
 
+
+
+
 function AlcoholDetail(prop:any){
     const {id} = useParams();
     const [loading, setLoading] = useState<boolean>(true);
@@ -54,6 +57,9 @@ function AlcoholDetail(prop:any){
                         <button onClick={onclick}>뒤로</button>
                         <button>칵테일 레시피</button>
                     </div>
+                </div>
+                <div>
+                
                 </div>
                 <div>
                     <AlchoComment></AlchoComment>

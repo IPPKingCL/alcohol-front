@@ -2,6 +2,9 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getCookie } from "../../Common/Cookies";
 import { addr } from "../../Common/serverAddr";
+import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
 
 function AlchoCoOne(prop:any){
     console.log("qlqlqlq")
@@ -45,7 +48,11 @@ function AlchoCoOne(prop:any){
     }
     return(
         <div className="g">
-            {prop.data.nickname} : <input type="text" className="comment-input" value={prop.data.content} disabled/> <span onClick={onclick} className="comment-span">삭제</span>
+            {prop.data.nickname} : <input type="text" className="comment-input" value={prop.data.content} disabled/> <Tooltip title="Delete">
+            <IconButton>
+                <DeleteIcon onClick={onclick}/>
+            </IconButton>
+            </Tooltip>
             <hr></hr>
         </div>
     )
