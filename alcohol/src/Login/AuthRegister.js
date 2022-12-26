@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
+import { React, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Check from '@mui/icons-material/Check';
 import Chip from '@mui/material/Chip';
+import CommentIcon from '@mui/icons-material/Comment';
 
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -32,7 +33,12 @@ import {
     Select,
     MenuItem,
     ThemeProvider,
-    createTheme
+    createTheme,
+    List,
+    ListItem,
+    ListItemButton,
+    ListItemIcon,
+    ListItemText
 } from '@mui/material';
 
 // third party
@@ -126,6 +132,32 @@ const FirebaseRegister = ({ ...others }) => {
     useEffect(() => {
         changePassword('123456');
     }, []);
+
+    const [checked, setChecked] = useState([]);
+
+    useEffect(() => {
+    }, [checked]);
+
+    const handleToggle = (value) => () => {
+        const currentIndex = checked.indexOf(value);
+        const newChecked = [...checked];
+
+        console.log(checked.length);
+
+        if (checked.length > 3) {
+            alert("3개 이상 안돼!");
+            newChecked.splice(currentIndex, 1);
+        } else {
+            if (currentIndex === -1) {
+                newChecked.push(value);
+            } else {
+                newChecked.splice(currentIndex, 1);
+            }
+
+            setChecked(newChecked);
+        }
+
+    };
 
 
     return (
@@ -468,17 +500,37 @@ const FirebaseRegister = ({ ...others }) => {
                         </FormControl>
 
                         <FormControl fullWidth error={Boolean(touched.FavorList && errors.FavorList)} sx={{ ...theme.typography.customInput }} margin='normal'>
-                            <InputLabel htmlFor="outlined-adornment-FavorList-register">좋아하는 목록</InputLabel>
-                            <OutlinedInput
-                                id="outlined-adornment-FavorList-register"
-                                type="text"
-                                value={values.FavorList}
-                                name="FavorList"
-                                onBlur={handleBlur}
-                                onChange={handleChange}
-                                inputProps={{}}
-                                label="좋아하는 목록"
-                            />
+                            <Typography variant="subtitle1">(*선택사항) 좋아하는 술 목록 (최대 3개)</Typography>
+                            <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+                                {[0, 1, 2, 3].map((value) => {
+                                    const labelId = `checkbox-list-label-${value}`;
+
+                                    return (
+                                        <ListItem
+                                            key={value}
+                                            secondaryAction={
+                                                <IconButton edge="end" aria-label="comments">
+                                                    <CommentIcon />
+                                                </IconButton>
+                                            }
+                                            disablePadding
+                                        >
+                                            <ListItemButton role={undefined} onClick={handleToggle(value)} dense>
+                                                <ListItemIcon>
+                                                    <Checkbox
+                                                        edge="start"
+                                                        checked={checked.indexOf(value) !== -1}
+                                                        tabIndex={-1}
+                                                        disableRipple
+                                                        inputProps={{ 'aria-labelledby': labelId }}
+                                                    />
+                                                </ListItemIcon>
+                                                <ListItemText id={labelId} primary={`Line item ${value + 1}`} />
+                                            </ListItemButton>
+                                        </ListItem>
+                                    );
+                                })}
+                            </List>
                             {touched.FavorList && errors.FavorList && (
                                 <FormHelperText error id="standard-weight-helper-text-FavorList-register">
                                     {errors.FavorList}

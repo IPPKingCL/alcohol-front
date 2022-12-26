@@ -34,7 +34,8 @@ export default function LabelBottomNavigation() {
       position: 'fixed',
       left: 0,
       right: 0,
-      bottom: 0
+      bottom: 0,
+      height : '7vh',
     }}>
       <BottomNavigationAction
         label="오늘의 술"
