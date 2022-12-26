@@ -54,6 +54,8 @@ import { strengthColor, strengthIndicator } from './password-strength';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
+import { addr } from '../Common/serverAddr';
+
 // ===========================|| FIREBASE - REGISTER ||=========================== //
 
 const useStyles = makeStyles((theme) => ({
@@ -133,32 +135,59 @@ const FirebaseRegister = ({ ...others }) => {
         changePassword('123456');
     }, []);
 
+
+
+
+
     const [checked, setChecked] = useState([]);
 
     useEffect(() => {
-    }, [checked]);
+        console.log(checked);
+    }, [checked])
 
     const handleToggle = (value) => () => {
         const currentIndex = checked.indexOf(value);
         const newChecked = [...checked];
 
-        console.log(checked.length);
 
-        if (checked.length > 3) {
-            alert("3개 이상 안돼!");
-            newChecked.splice(currentIndex, 1);
+
+        if(checked.length > 2 && currentIndex === -1)  {
+            alert('3개이상은 안돼요!');
         } else {
             if (currentIndex === -1) {
                 newChecked.push(value);
             } else {
                 newChecked.splice(currentIndex, 1);
             }
-
+    
             setChecked(newChecked);
         }
+        
 
     };
 
+    const [itemList, setItemList] = useState([]);
+
+    useEffect(() => {
+        fetch(addr + '/alcohol/category', {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }).then(res => res.json())
+          .then((res) => {
+            let i = 0;
+            for (i; i < res.length; i++) {
+              const alcho = { id: res[i].id, category: res[i].category };
+              console.log("1 " + res[i].id);
+              console.log("2 " + res[i].category);
+              console.log("alcho " + alcho.id);
+              console.log("alcho " + alcho.category);
+              setItemList(itemList => [...itemList, alcho]);
+            }
+    
+          })
+      }, [])
 
     return (
         <div>
@@ -183,7 +212,7 @@ const FirebaseRegister = ({ ...others }) => {
                     sex: '',
                     job: '',
                     maxPrice: '',
-                    FavorList: new Array(),
+                    FavorList: itemList,
                     submit: null
                 }}
                 validationSchema={Yup.object().shape({
@@ -470,6 +499,15 @@ const FirebaseRegister = ({ ...others }) => {
                                 <MenuItem value="">
                                     직군을 선택하세요.
                                 </MenuItem>
+                                <MenuItem value="IT직군">
+                                    IT직군
+                                </MenuItem>
+                                <MenuItem value="영업직군">
+                                    영업직군
+                                </MenuItem>
+                                <MenuItem value="생산직군">
+                                    생산직군
+                                </MenuItem>
                             </Select>
 
                             {touched.job && errors.job && (
@@ -502,12 +540,12 @@ const FirebaseRegister = ({ ...others }) => {
                         <FormControl fullWidth error={Boolean(touched.FavorList && errors.FavorList)} sx={{ ...theme.typography.customInput }} margin='normal'>
                             <Typography variant="subtitle1">(*선택사항) 좋아하는 술 목록 (최대 3개)</Typography>
                             <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-                                {[0, 1, 2, 3].map((value) => {
-                                    const labelId = `checkbox-list-label-${value}`;
+                                {itemList.map((value) => {
+                                    const labelId = `checkbox-list-label-${value.id}`;
 
                                     return (
                                         <ListItem
-                                            key={value}
+                                            key={value.category}
                                             secondaryAction={
                                                 <IconButton edge="end" aria-label="comments">
                                                     <CommentIcon />
@@ -525,7 +563,7 @@ const FirebaseRegister = ({ ...others }) => {
                                                         inputProps={{ 'aria-labelledby': labelId }}
                                                     />
                                                 </ListItemIcon>
-                                                <ListItemText id={labelId} primary={`Line item ${value + 1}`} />
+                                                <ListItemText id={labelId} primary={`${value.category}`} />
                                             </ListItemButton>
                                         </ListItem>
                                     );
