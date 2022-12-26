@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Check from '@mui/icons-material/Check';
 import Chip from '@mui/material/Chip';
 import CommentIcon from '@mui/icons-material/Comment';
+import { useNavigate } from 'react-router-dom';
 
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -49,6 +50,7 @@ import { Formik } from 'formik';
 import useScriptRef from './useScriptRef';
 import AnimateButton from './AnimateButton';
 import { strengthColor, strengthIndicator } from './password-strength';
+import { setCookie } from '../Common/Cookies';
 
 // assets
 import Visibility from '@mui/icons-material/Visibility';
@@ -106,6 +108,8 @@ const FirebaseRegister = ({ ...others }) => {
         }
     };
 
+    const navigate = useNavigate();
+
     const finalTheme = createTheme({
         components: {
             MuiChip: {
@@ -151,7 +155,7 @@ const FirebaseRegister = ({ ...others }) => {
 
 
 
-        if(checked.length > 2 && currentIndex === -1)  {
+        if (checked.length > 2 && currentIndex === -1) {
             alert('3개이상은 안돼요!');
         } else {
             if (currentIndex === -1) {
@@ -159,10 +163,10 @@ const FirebaseRegister = ({ ...others }) => {
             } else {
                 newChecked.splice(currentIndex, 1);
             }
-    
+
             setChecked(newChecked);
         }
-        
+
 
     };
 
@@ -170,24 +174,24 @@ const FirebaseRegister = ({ ...others }) => {
 
     useEffect(() => {
         fetch(addr + '/alcohol/category', {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
         }).then(res => res.json())
-          .then((res) => {
-            let i = 0;
-            for (i; i < res.length; i++) {
-              const alcho = { id: res[i].id, category: res[i].category };
-              console.log("1 " + res[i].id);
-              console.log("2 " + res[i].category);
-              console.log("alcho " + alcho.id);
-              console.log("alcho " + alcho.category);
-              setItemList(itemList => [...itemList, alcho]);
-            }
-    
-          })
-      }, [])
+            .then((res) => {
+                let i = 0;
+                for (i; i < res.length; i++) {
+                    const alcho = { id: res[i].id, category: res[i].category };
+                    console.log("1 " + res[i].id);
+                    console.log("2 " + res[i].category);
+                    console.log("alcho " + alcho.id);
+                    console.log("alcho " + alcho.category);
+                    setItemList(itemList => [...itemList, alcho]);
+                }
+
+            })
+    }, [])
 
     return (
         <div>
@@ -209,10 +213,11 @@ const FirebaseRegister = ({ ...others }) => {
                     nickname: '',
                     age: '',
                     birth: '',
-                    sex: '',
+                    sex: 'M',
                     job: '',
                     maxPrice: '',
-                    FavorList: itemList,
+                    FavorList: [],
+                    loginType: 'd',
                     submit: null
                 }}
                 validationSchema={Yup.object().shape({
@@ -221,7 +226,7 @@ const FirebaseRegister = ({ ...others }) => {
                     email: Yup.string().email('이메일 형식이 아닙니다.').max(255).required('이메일을 입력하세요.'),
                     password: Yup.string().max(255).required('비밀번호를 입력하세요.'),
                     passwordConfirm: Yup.string().oneOf([Yup.ref('password'), null], '비밀번호가 일치 하지 않습니다.').required('비밀번호를 다시 입력해주세요.'),
-                    nickname: Yup.string().min(2, "2글자 이상 입력하세요").max(8, "8글자 이하만 가능합니다.").matches(/^[가-힣a-zA-z]*$/, { message: "닉네임 형식이 올바르지 않습니다." }).required('닉네임을 입력하세요'),
+                    nickname: Yup.string().min(2, "2글자 이상 입력하세요").max(8, "8글자 이하만 가능합니다.").matches(/^[가-힣a-zA-z0-9]*$/, { message: "닉네임 형식이 올바르지 않습니다." }).required('닉네임을 입력하세요'),
                     age: Yup.number({ message: '숫자만 입력하세요.' }).max(100, "100이하만 입력하세요.").required('나이를 입력하세요'),
                     birth: Yup.date().max(new Date(), 'You can\'t be born in the future!').required('생일을 입력하세요'),
                     maxPrice: Yup.number().min(1000, '1000원 이상 입력하세요').max(99999999, '1억원 미만으로 입력하세요').required('허용 최대 가격을 입력하세요'),
@@ -231,6 +236,43 @@ const FirebaseRegister = ({ ...others }) => {
                         if (scriptedRef.current) {
                             setStatus({ success: true });
                             setSubmitting(false);
+
+                            fetch(addr + '/user/insert', {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json",
+                                },
+                                body: JSON.stringify({
+                                    name: values.fname + values.ename,
+                                    email: values.email,
+                                    loginType: values.loginType,
+                                    age: values.age,
+                                    birth: values.birth,
+                                    nickname: values.nickname,
+                                    sex: values.sex,
+                                    job: values.job,
+                                    userId: values.email,
+                                    price: values.maxPrice,
+                                    favorite: values.FavorList,
+                                    password: values.password,
+                                }),
+                            }).then(res => res.json())
+                                .then((res) => {
+                                    console.log(res.success);
+                                    if (res.success) {
+                                        alert("응답완료");
+                                        setCookie('myToken', res.token, {
+                                            path: "/",
+                                            secure: true,
+                                            sameSite: "none"
+                                        })
+
+                                        navigate("/Main");
+                                    } else {
+                                        alert("회원가입 중 에러 발생");
+                                        return;
+                                    }
+                                })
                         }
                     } catch (err) {
                         console.error(err);
@@ -537,9 +579,9 @@ const FirebaseRegister = ({ ...others }) => {
                             )}
                         </FormControl>
 
-                        <FormControl fullWidth error={Boolean(touched.FavorList && errors.FavorList)} sx={{ ...theme.typography.customInput }} margin='normal'>
+                        <FormControl fullWidth error={Boolean(touched.FavorList && errors.FavorList)} sx={{ ...theme.typography.customInput }} margin='normal' onChange={() => console.log(values)}>
                             <Typography variant="subtitle1">(*선택사항) 좋아하는 술 목록 (최대 3개)</Typography>
-                            <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+                            <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }} id="FavorList" name="FavorList" onChange={handleChange}>
                                 {itemList.map((value) => {
                                     const labelId = `checkbox-list-label-${value.id}`;
 
