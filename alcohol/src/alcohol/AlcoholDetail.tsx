@@ -42,6 +42,11 @@ function AlcoholDetail(prop:any){
     const onclick = () => {
         navigate('/alcohol')
     }
+
+    const Recipe = () => {
+        navigate('/cocktail/recipe/'+id);
+    }
+
     return (
         <div>
             {loading ? <strong>loading...</strong>:
@@ -73,7 +78,7 @@ function AlcoholDetail(prop:any){
 
                     <div className='input-btn'>
                         <button className="d-btn" onClick={onclick}>뒤로</button>
-                        <button className="m-btn">칵테일 레시피</button>
+                        <button className="m-btn" onClick={Recipe}>칵테일 레시피</button>
                     </div>
                 <div>
                     <AlchoComment></AlchoComment>

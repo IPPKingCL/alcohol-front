@@ -41,7 +41,7 @@ import { GoogleLogin } from 'react-google-login';
 import { useNavigate } from 'react-router-dom';
 import { gapi } from 'gapi-script';
 import { addr } from '../Common/serverAddr';
-import { setCookie } from '../Common/Cookies';
+import { getCookie, setCookie } from '../Common/Cookies';
 
 // ============================|| FIREBASE - LOGIN ||============================ //
 
@@ -252,10 +252,9 @@ const FirebaseLogin = ({ ...others }) => {
                                     if (!res.success) {
                                         setCookie('myToken', res.token, {
                                             path: "/",
-                                            secure: true,
-                                            sameSite: "none"
+                                            sameSite: "Lax"
                                         })
-                                        alert('로그인 성공!');
+                                        alert(getCookie('myToken'));
                                         navigate('/Main');
                                     }
                                     else {
