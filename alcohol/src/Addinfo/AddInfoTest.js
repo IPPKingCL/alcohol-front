@@ -12,6 +12,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 // material-ui
 import { useTheme } from '@mui/material/styles';
+import { useLocation } from 'react-router';
 import {
     Box,
     Button,
@@ -47,9 +48,9 @@ import * as Yup from 'yup';
 import { Formik } from 'formik';
 
 // project imports
-import useScriptRef from './useScriptRef';
-import AnimateButton from './AnimateButton';
-import { strengthColor, strengthIndicator } from './password-strength';
+import useScriptRef from '../Login/useScriptRef';
+import AnimateButton from '../Login/AnimateButton';
+import { strengthColor, strengthIndicator } from '../Login/password-strength';
 import { setCookie } from '../Common/Cookies';
 
 // assets
@@ -70,10 +71,13 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const FirebaseRegister = ({ ...others }) => {
+const AddInfoTest = ({ ...others }) => {
     const theme = useTheme();
     const scriptedRef = useScriptRef();
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
+
+    const { state } = useLocation();
+
     const customization = useSelector((state) => state.customization);
     const [showPassword, setShowPassword] = useState(false);
     const classes = useStyles();
@@ -202,18 +206,13 @@ const FirebaseRegister = ({ ...others }) => {
             <Grid container direction="column" justifyContent="center" spacing={2}>
                 <Grid item xs={12} container alignItems="center" justifyContent="center">
                     <Box sx={{ mb: 2 }}>
-                        <Typography variant="subtitle1">이메일 주소로 회원가입</Typography>
+                        <Typography variant="subtitle1">소셜 아이디로 간편 회원가입</Typography>
                     </Box>
                 </Grid>
             </Grid>
 
             <Formik
-                initialValues={{
-                    email: '',
-                    password: '',
-                    passwordConfirm: '',
-                    fname: '',
-                    ename: '',
+                initialValues={{                    
                     nickname: '',
                     age: '',
                     birth: '',
@@ -225,18 +224,14 @@ const FirebaseRegister = ({ ...others }) => {
                     submit: null
                 }}
                 validationSchema={Yup.object().shape({
-                    fname: Yup.string().required('성을 입력하세요'),
-                    ename: Yup.string().required('이름을 입력하세요'),
-                    email: Yup.string().email('이메일 형식이 아닙니다.').max(255).required('이메일을 입력하세요.'),
-                    password: Yup.string().max(255).required('비밀번호를 입력하세요.'),
-                    passwordConfirm: Yup.string().oneOf([Yup.ref('password'), null], '비밀번호가 일치 하지 않습니다.').required('비밀번호를 다시 입력해주세요.'),
                     nickname: Yup.string().min(2, "2글자 이상 입력하세요").max(8, "8글자 이하만 가능합니다.").matches(/^[가-힣a-zA-z0-9]*$/, { message: "닉네임 형식이 올바르지 않습니다." }).required('닉네임을 입력하세요'),
                     age: Yup.number({ message: '숫자만 입력하세요.' }).max(100, "100이하만 입력하세요.").required('나이를 입력하세요'),
-                    birth: Yup.date().max(new Date(), 'You can\'t be born in the future!').required('생일을 입력하세요'),
+                    birth: Yup.date().required('생일을 입력하세요'),
                     maxPrice: Yup.number().min(1000, '1000원 이상 입력하세요').max(99999999, '1억원 미만으로 입력하세요').required('허용 최대 가격을 입력하세요'),
                 })}
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
                     try {
+                        console.log("?");
                         if (scriptedRef.current) {
                             setStatus({ success: true });
                             setSubmitting(false);
@@ -247,18 +242,18 @@ const FirebaseRegister = ({ ...others }) => {
                                     "Content-Type": "application/json",
                                 },
                                 body: JSON.stringify({
-                                    name: values.fname + values.ename,
-                                    email: values.email,
-                                    loginType: values.loginType,
+                                    name: state.name,
+                                    email: state.email,
+                                    loginType: state.loginType,
                                     age: values.age,
                                     birth: values.birth,
                                     nickname: values.nickname,
                                     sex: values.sex,
                                     job: values.job,
-                                    userId: values.email,
+                                    userId: state.id,
                                     price: values.maxPrice,
                                     favorite: values.FavorList,
-                                    password: values.password
+                                    password: '-'
                                 }),
                             }).then(res => res.json())
                                 .then((res) => {
@@ -290,178 +285,6 @@ const FirebaseRegister = ({ ...others }) => {
             >
                 {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
                     <form noValidate onSubmit={handleSubmit} {...others}>
-                        <Grid container spacing={matchDownSM ? 0 : 2}>
-                            <Grid item xs={6} sm={6}>
-                                <TextField
-                                    fullWidth
-                                    label="성"
-                                    margin="normal"
-                                    name="fname"
-                                    type="text"
-                                    value={values.fname}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    sx={{ ...theme.typography.customInput }}
-                                />
-                                {touched.fname && errors.fname && (
-                                    <FormHelperText error id="standard-weight-helper-text-fname-register">
-                                        {errors.fname}
-                                    </FormHelperText>
-                                )}
-                            </Grid>
-                            <Grid item xs={6} sm={6}>
-                                <TextField
-                                    fullWidth
-                                    label="이름"
-                                    margin="normal"
-                                    name="ename"
-                                    type="text"
-                                    value={values.ename}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    sx={{ ...theme.typography.customInput }}
-                                />
-                                {touched.ename && errors.ename && (
-                                    <FormHelperText error id="standard-weight-helper-text-ename-register">
-                                        {errors.ename}
-                                    </FormHelperText>
-                                )}
-                            </Grid>
-
-
-
-
-                        </Grid>
-                        <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
-                            <InputLabel htmlFor="outlined-adornment-email-register">이메일</InputLabel>
-                            <OutlinedInput
-                                id="outlined-adornment-email-register"
-                                type="email"
-                                label="이메일"
-                                value={values.email}
-                                name="email"
-                                onBlur={handleBlur}
-                                onChange={handleChange}
-                                inputProps={{}}
-                            />
-                            {touched.email && errors.email && (
-                                <FormHelperText error id="standard-weight-helper-text-email-register">
-                                    {errors.email}
-                                </FormHelperText>
-                            )}
-                        </FormControl>
-
-                        <FormControl
-                            fullWidth
-                            error={Boolean(touched.password && errors.password)}
-                            sx={{ ...theme.typography.customInput }}
-                            margin='normal'
-                        >
-                            <InputLabel htmlFor="outlined-adornment-password-register">비밀번호</InputLabel>
-                            <OutlinedInput
-                                id="outlined-adornment-password-register"
-                                type={showPassword ? 'text' : 'password'}
-                                value={values.password}
-                                name="password"
-                                label="비밀번호"
-                                onBlur={handleBlur}
-                                onChange={(e) => {
-                                    handleChange(e);
-                                    changePassword(e.target.value);
-                                }}
-                                endAdornment={
-                                    <InputAdornment position="end">
-                                        <IconButton
-                                            aria-label="toggle password visibility"
-                                            onClick={handleClickShowPassword}
-                                            onMouseDown={handleMouseDownPassword}
-                                            edge="end"
-                                            size="large"
-                                        >
-                                            {showPassword ? <Visibility /> : <VisibilityOff />}
-                                        </IconButton>
-                                    </InputAdornment>
-                                }
-                                inputProps={{}}
-                            />
-                            {touched.password && errors.password && (
-                                <FormHelperText error id="standard-weight-helper-text-password-register">
-                                    {errors.password}
-                                </FormHelperText>
-                            )}
-                        </FormControl>
-
-                        {strength !== 0 && (
-                            <FormControl fullWidth>
-                                <Box sx={{ mb: 2 }}>
-                                    <Grid container spacing={2} alignItems="center">
-                                        <Grid item>
-                                            <Box
-                                                style={{ backgroundColor: level?.color }}
-                                                sx={{ width: 85, height: 8, borderRadius: '7px' }}
-                                            />
-                                        </Grid>
-                                        <Grid item>
-                                            <Typography variant="subtitle1" fontSize="0.75rem">
-                                                {level?.label}
-                                            </Typography>
-                                        </Grid>
-                                    </Grid>
-                                </Box>
-                            </FormControl>
-                        )}
-
-                        <FormControl
-                            fullWidth
-                            error={Boolean(touched.password && errors.password)}
-                            sx={{ ...theme.typography.customInput }}
-                            margin='normal'
-                        >
-                            <InputLabel htmlFor="outlined-adornment-passwordConfirm-register">비밀번호 확인</InputLabel>
-                            <OutlinedInput
-                                id="outlined-adornment-passwordConfirm-register"
-                                type={showPassword ? 'text' : 'password'}
-                                value={values.passwordConfirm}
-                                name="passwordConfirm"
-                                label="비밀번호 확인"
-                                onBlur={handleBlur}
-                                onChange={(e) => {
-                                    handleChange(e);
-                                    changePasswordConfirm(values.password, e.target.value);
-                                }}
-                                endAdornment={
-                                    <InputAdornment position="end">
-                                        <IconButton
-                                            aria-label="toggle passwordConfirm visibility"
-                                            onClick={handleClickShowPassword}
-                                            onMouseDown={handleMouseDownPassword}
-                                            edge="end"
-                                            size="large"
-                                        >
-                                            {showPassword ? <Visibility /> : <VisibilityOff />}
-                                        </IconButton>
-                                    </InputAdornment>
-                                }
-                                inputProps={{}}
-                            />
-                            {passwordConfirm ? <ThemeProvider theme={finalTheme}>
-                                <Chip
-                                    color="success"
-                                    label={
-                                        <span>
-                                            <b>Status:</b> Completed
-                                        </span>
-                                    }
-                                    icon={<Check fontSize="small" />}
-                                />
-                            </ThemeProvider> : null}
-                            {touched.passwordConfirm && errors.passwordConfirm && (
-                                <FormHelperText error id="standard-weight-helper-text-passwordConfirm-register">
-                                    {errors.passwordConfirm}
-                                </FormHelperText>
-                            )}
-                        </FormControl>
-
                         <FormControl fullWidth error={Boolean(touched.nickname && errors.nickname)} sx={{ ...theme.typography.customInput }} margin='normal'>
                             <InputLabel htmlFor="outlined-adornment-nickname-register">닉네임</InputLabel>
                             <OutlinedInput
@@ -506,7 +329,6 @@ const FirebaseRegister = ({ ...others }) => {
                                 label="생일"
                                 type="date"
                                 name="birth"
-                                defaultValue="2000-01-01"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 InputLabelProps={{
@@ -659,4 +481,4 @@ const FirebaseRegister = ({ ...others }) => {
     );
 };
 
-export default FirebaseRegister;
+export default AddInfoTest;

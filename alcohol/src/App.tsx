@@ -28,7 +28,11 @@ import Register from './register/Register';
 import LoginC from './Login/LoginC';
 import CocktailList from './Cocktail/CocktailList';
 import Recipe from './Cocktail/Recipe/Recipe';
+
 import ScrollToTop from './Common/ScrollToTop';
+
+import AddInfoT from './Addinfo/AddInfoT';
+
 
 
 
@@ -47,6 +51,7 @@ function App() {
             <Route path="/LoginTest" element={<LoginC />}></Route>
             <Route path="/register" element={<Register />}></Route>
             <Route path="/AddInfo" element={<AddInfo />}></Route>
+            <Route path="/AddInfoT" element={<AddInfoT />}></Route>
 
             <Route path="/free" element={<FreeBoard />}></Route>
             <Route path="/free/write" element={<FreeWrite />}></Route>
