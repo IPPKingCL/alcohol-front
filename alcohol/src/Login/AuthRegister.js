@@ -259,6 +259,7 @@ const FirebaseRegister = ({ ...others }) => {
                                     price: values.maxPrice,
                                     favorite: values.FavorList,
                                     password: values.password,
+                                    favorite: values.FavorList
                                 }),
                             }).then(res => res.json())
                                 .then((res) => {
@@ -600,8 +601,9 @@ const FirebaseRegister = ({ ...others }) => {
                                             disablePadding
                                             value={value.id}                                            
                                             onClick={() => {
+                                                const alchoListElement = {id : value.id, category : value.category}
                                                 if(checked.indexOf(value) === -1 && checked.length < 3) {
-                                                    values.FavorList.push(value.id)
+                                                    values.FavorList.push(alchoListElement)
                                                 } else {
                                                     values.FavorList = values.FavorList.filter((element) => element !== value.id);
                                                 }
