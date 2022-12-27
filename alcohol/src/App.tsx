@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './css/App.css';
 import Login from './Login';
 
@@ -6,6 +6,7 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
+  useLocation,
 } from "react-router-dom";
 import AddInfo from './Addinfo/AddInfo';
 import FreeBoard from './Board/FreeBoard';
@@ -27,20 +28,20 @@ import Register from './register/Register';
 import LoginC from './Login/LoginC';
 import CocktailList from './Cocktail/CocktailList';
 import Recipe from './Cocktail/Recipe/Recipe';
+import ScrollToTop from './Common/ScrollToTop';
 
 
 
 function App() {
-
-  const [isLogin, setIsLogin] = useState<boolean>(false);
-
-
+  
   return (
     <>
       <CssBaseline />
       <Router>
+        <ScrollToTop/>
         <div className="content-all">
           <Routes>
+            
             <Route path="/" element={<Cover />}></Route>
             <Route path="/Login" element={<Login />}></Route>
             <Route path="/LoginTest" element={<LoginC />}></Route>

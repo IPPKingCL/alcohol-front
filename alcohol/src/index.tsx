@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { CookiesProvider } from 'react-cookie';
 import { createStoreHook, Provider } from 'react-redux';
 import {store} from './store'
+import ScrollToTop from './Common/ScrollToTop';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -14,7 +15,9 @@ const root = ReactDOM.createRoot(
 root.render(
   // <React.StrictMode>
   <Provider store={store}>
+    
     <CookiesProvider>
+      
       <App />
     </CookiesProvider>
   </Provider>
