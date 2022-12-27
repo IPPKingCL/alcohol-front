@@ -26,7 +26,7 @@ import { CssBaseline } from '@mui/material';
 import Register from './register/Register';
 import LoginC from './Login/LoginC';
 import CocktailList from './Cocktail/CocktailList';
-import Recipe from './Cocktail/Recipe';
+import Recipe from './Cocktail/Recipe/Recipe';
 
 
 
@@ -58,7 +58,7 @@ function App() {
             <Route path="/alcohol/detail/:id" element={<AlcoholDetail />}></Route>
 
             <Route path='/cocktail/list/:id' element={<CocktailList/>}/>
-            <Route path='/cocktail/recipe/:id' element={<Recipe/>}/>
+            <Route path='/cocktail/recipe/:id?' element={<Recipe/>}/>
 
             <Route path="/test" element={<UploadImageToS3WithNativeSdk />}></Route>
             <Route path="/test1" element={<Test />}></Route>

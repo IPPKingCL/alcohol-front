@@ -121,7 +121,8 @@
 }
 
 .search-form{
-    display:inline
+    display:inline;
+    height: 26px;
 }
 
 .alcoholImg{
