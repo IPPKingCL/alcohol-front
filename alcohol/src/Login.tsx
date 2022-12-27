@@ -80,7 +80,7 @@ function Login() {
         }).then((res) => res.json())
             .then((res) => {
                 if (res.success) {
-                    redirectAddInfo(userdata);
+                    redirectAddInfoT(userdata);
                 } else {
                     console.log(res.token)
                     setCookie('myToken', res.token, {
@@ -110,6 +110,10 @@ function Login() {
 
     const redirectAddInfo = (data: any) => {
         navigate("/AddInfo", { state: data });
+    }
+
+    const redirectAddInfoT = (data: any) => {
+        navigate("/AddInfoT", { state: data });
     }
 
 

@@ -143,7 +143,7 @@ const FirebaseLogin = ({ ...others }) => {
     const navigate = useNavigate();
 
     const redirectAddInfo = (data) => {
-        navigate("/AddInfo", { state: data });
+        navigate("/AddInfoT", { state: data });
     }
 
 
