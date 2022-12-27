@@ -20,6 +20,8 @@ import React, { useEffect, useState } from "react";
 
 import { Grid } from "@mui/material";
 import { RecipeList } from "../../interface/RecipeList";
+import { addr } from "../../Common/serverAddr";
+import { getCookie } from "../../Common/Cookies";
 
 
 interface ExpandMoreProps extends IconButtonProps {
@@ -56,7 +58,20 @@ const RecipeOne = (prop: any) => {
     };
 
     const favorite = () => {
-
+        fetch(addr + '/cocktail/likeOne/' + prop.data.id, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ` + getCookie('myToken'),
+            }
+        }).then(res => res.json())
+            .then((res) => {
+                if (res.success) {
+                    alert("추천완료")
+                } else {
+                    alert(res.msg);
+                }
+            })
     }
     return (
         <div className="alchoWrapper" >
