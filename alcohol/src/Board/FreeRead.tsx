@@ -10,6 +10,7 @@ function FreeRead(){
     const [loading,setLoading] = useState<boolean>(true);
     const [board, setBoard] = useState<boardRead>();
     const {id} = useParams();
+    
     const navigate = useNavigate();
     
     const list = async () => {
@@ -24,7 +25,7 @@ function FreeRead(){
             setBoard(res);
            
         })
-
+        
         setLoading(false);
     }
 
