@@ -54,6 +54,10 @@ const RecipeOne = (prop: any) => {
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
+
+    const favorite = () => {
+
+    }
     return (
         <div className="alchoWrapper" >
             <Grid style={{ display:'flex', justifyContent:'center' }}>
@@ -69,8 +73,8 @@ const RecipeOne = (prop: any) => {
                                 <MoreVertIcon />
                             </IconButton>
                         }
-                        title={prop.data.name}
-                        subheader={prop.data.category}
+                        title={recipeList?.cocktail.name}
+                        subheader={recipeList?.cocktail.likeOne+' 추천'} 
                     />
                     <CardMedia
                         component="img"
@@ -80,12 +84,12 @@ const RecipeOne = (prop: any) => {
                         onClick={onclick}
                     />
                     <CardContent>
-                        <Typography variant="body2" color="text.secondary">
+                        {/*<Typography variant="body2" color="text.secondary">
 
-                        </Typography>
+                    </Typography>*/}
                     </CardContent>
                     <CardActions disableSpacing>
-                        <IconButton aria-label="add to favorites" >
+                        <IconButton aria-label="add to favorites" onClick={favorite}>
                             <FavoriteIcon />
                         </IconButton>
                         {/*<IconButton aria-label="share">
@@ -102,25 +106,12 @@ const RecipeOne = (prop: any) => {
                     </CardActions>
                     <Collapse in={expanded} timeout="auto" unmountOnExit>
                         <CardContent>
-                            <Typography paragraph>{prop.data.name}</Typography>
                             <Typography paragraph>
-                                종류 : {prop.data.category}
+                                레시피 보러가기
                             </Typography>
-                            <Typography paragraph>
-                                당도 : {prop.data.sugar} (달수록 숫자가 높습니다)
-                            </Typography>
-                            <Typography paragraph>
-                                색 : {}
-                            </Typography>
-                            <Typography paragraph>
-                                도수 : {prop.data.dosu}
-                            </Typography>
-                            <Typography paragraph>
-                                가격 : {prop.data.price}원 (판매점마다 가격이 다를 수 있습니다)
-                            </Typography>
-                            <Typography >
+                            {/*<Typography >
                                 <strong>{prop.data.name}을 이용한 레시피 보기</strong>
-                            </Typography>
+                </Typography>*/}
                         </CardContent>
                     </Collapse>
                 </Card>
