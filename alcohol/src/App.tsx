@@ -55,6 +55,8 @@ function App() {
             <Route path='/alcohol' element={<AlcoholInfo />}></Route>
             <Route path="/alcohol/detail/:id" element={<AlcoholDetail />}></Route>
 
+            
+
             <Route path="/test" element={<UploadImageToS3WithNativeSdk />}></Route>
             <Route path="/test1" element={<Test />}></Route>
             <Route path="/myPage" element={<MyPage />} />
