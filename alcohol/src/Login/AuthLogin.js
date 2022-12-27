@@ -170,39 +170,18 @@ const FirebaseLogin = ({ ...others }) => {
         event.preventDefault();
     };
 
-    const handle = (value) => {
-        fetch(addr + '/user/EmailLogin', {
-            method: "POST",
-            headers: {
-                "Access-Control-Allow-Origin": addr,
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                email: value.email,
-                password: value.password,
-            }),
-        }).then((res) => res.json())
-            .then((res) => {
-                if (!res.success) {
-                    console.log("통신 다녀옴?");
-                    console.log(value);
-                }
-                console.log("왜 3번일까? "+ value);
-            })
-    }
-
     return (
         <>
             <Grid container direction="column" justifyContent="center" spacing={2}>
                 <Grid item xs={12} justifyContent="center" display="flex">
                     <AnimateButton>
-                            <GoogleLogin
-                                clientId={clientId}
-                                theme="dark"
-                                buttonText="구글 로그인 하기"
-                                onSuccess={onSuccess}
-                                onFailure={onFailure}
-                            />
+                        <GoogleLogin
+                            clientId={clientId}
+                            theme="dark"
+                            buttonText="구글 로그인 하기"
+                            onSuccess={onSuccess}
+                            onFailure={onFailure}
+                        />
                     </AnimateButton>
                 </Grid>
                 <Grid item xs={12}>
@@ -257,6 +236,32 @@ const FirebaseLogin = ({ ...others }) => {
                         if (scriptedRef.current) {
                             setStatus({ success: true });
                             setSubmitting(false);
+
+                            fetch(addr + '/user/EmailLogin', {
+                                method: "POST",
+                                headers: {
+                                    "Access-Control-Allow-Origin": addr,
+                                    "Content-Type": "application/json",
+                                },
+                                body: JSON.stringify({
+                                    email: values.email,
+                                    password: values.password,
+                                }),
+                            }).then((res) => res.json())
+                                .then((res) => {
+                                    if (!res.success) {
+                                        setCookie('myToken', res.token, {
+                                            path: "/",
+                                            secure: true,
+                                            sameSite: "none"
+                                        })
+                                        alert('로그인 성공!');
+                                        navigate('/Main');
+                                    }
+                                    else {
+                                        alert('이메일이 등록되지 않았거나 비밀번호 오류 입니다.');
+                                    }
+                                })
                         }
                     } catch (err) {
                         console.error(err);
@@ -352,25 +357,6 @@ const FirebaseLogin = ({ ...others }) => {
                                     disableElevation
                                     disabled={isSubmitting}
                                     fullWidth
-                                    onClick={() => fetch(addr + '/user/EmailLogin', {
-                                        method: "POST",
-                                        headers: {
-                                            "Access-Control-Allow-Origin": addr,
-                                            "Content-Type": "application/json",
-                                        },
-                                        body: JSON.stringify({
-                                            email: values.email,
-                                            password: values.password,
-                                        }),
-                                    }).then((res) => res.json())
-                                        .then((res) => {                                            
-                                            if (!res.success) {
-                                                alert("로그인 성공!");
-                                                navigate("/Main")
-                                            }else {
-                                                alert("이메일이 존재하지 않거나 비밀번호 오류입니다.");
-                                            }
-                                        })}
                                     size="large"
                                     type="submit"
                                     variant="contained"

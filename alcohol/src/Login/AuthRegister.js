@@ -216,7 +216,7 @@ const FirebaseRegister = ({ ...others }) => {
                     sex: 'M',
                     job: '',
                     maxPrice: '',
-                    FavorList: [],
+                    FavorList: '',
                     loginType: 'd',
                     submit: null
                 }}
@@ -581,7 +581,7 @@ const FirebaseRegister = ({ ...others }) => {
 
                         <FormControl fullWidth error={Boolean(touched.FavorList && errors.FavorList)} sx={{ ...theme.typography.customInput }} margin='normal' onChange={() => console.log(values)}>
                             <Typography variant="subtitle1">(*선택사항) 좋아하는 술 목록 (최대 3개)</Typography>
-                            <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }} id="FavorList" name="FavorList" onChange={handleChange}>
+                            <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
                                 {itemList.map((value) => {
                                     const labelId = `checkbox-list-label-${value.id}`;
 
@@ -603,6 +603,8 @@ const FirebaseRegister = ({ ...others }) => {
                                                         tabIndex={-1}
                                                         disableRipple
                                                         inputProps={{ 'aria-labelledby': labelId }}
+                                                        name="FavorList"
+                                                        onChange={handleChange}
                                                     />
                                                 </ListItemIcon>
                                                 <ListItemText id={labelId} primary={`${value.category}`} />
