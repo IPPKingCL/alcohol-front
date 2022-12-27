@@ -64,6 +64,7 @@
     border: 1px solid #0e0d0d;
     overflow-y:auto;
     background: #fff;
+    white-space: pre-line;
   
 }
 
