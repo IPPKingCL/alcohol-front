@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { addr } from "../../Common/serverAddr";
 import { RecipeList } from "../../interface/RecipeList";
+import RecipeListco from "./RecipeListco";
+
 
 const Recipe = () => {
     const {id} = useParams();
@@ -51,9 +53,10 @@ const Recipe = () => {
 
             <hr></hr>
 
-            
+
             {loading ? <strong>loading....</strong>:
-                <button onClick={test}>테스트</button>
+                <RecipeListco
+                    datas={recipeList}/>
             }
             
         </div>

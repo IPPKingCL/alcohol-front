@@ -17,9 +17,10 @@ import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import React, { useEffect, useState } from "react";
-import { addr } from "../Common/serverAddr";
-import { getCookie } from "../Common/Cookies";
+
 import { Grid } from "@mui/material";
+import { RecipeList } from "../../interface/RecipeList";
+
 
 interface ExpandMoreProps extends IconButtonProps {
     expand: boolean;
@@ -37,19 +38,15 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 }));
 
 
-function AlcoholTable(prop: any) {
-    const navigate = useNavigate();
-    const [color, setColor] = useState<string>();
-
-    useEffect(() => {
-        if (prop.data.color === 'tp') {
-            setColor("Transparency(무색)")
-        } else {
-            setColor(prop.data.color);
-        }
-    }, []);
+const RecipeOne = (prop: any) => {
+    console.log(prop.data)
+    const [recipeList,setRecipeList] = useState<RecipeList>();
+    useEffect(()=>{
+        setRecipeList(prop.data);
+    },[])
+    
     const onclick = () => {
-        navigate('/alcohol/detail/' + prop.data.id);
+
     }
 
     const [expanded, setExpanded] = React.useState(false);
@@ -57,28 +54,6 @@ function AlcoholTable(prop: any) {
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
-
-    const like = () => {
-        fetch(addr + '/alcohol/like/' + prop.data.id, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ` + getCookie('myToken'),
-            }
-        }).then(res => res.json())
-            .then((res) => {
-                if (res.success) {
-                    alert("추천완료")
-                } else {
-                    alert(res.msg);
-                }
-            })
-    }
-
-    const cocktail = () => {
-        navigate('/cocktail/recipe/'+prop.data.id);
-    }
-
     return (
         <div className="alchoWrapper" >
             <Grid style={{ display:'flex', justifyContent:'center' }}>
@@ -86,7 +61,7 @@ function AlcoholTable(prop: any) {
                     <CardHeader
                         avatar={
                             <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                                <img className="alcoholImg" src={prop.data.imgUrl} />
+                                <img className="alcoholImg" src={recipeList?.cocktail.imgUrl||''} />
                             </Avatar>
                         }
                         action={
@@ -100,7 +75,7 @@ function AlcoholTable(prop: any) {
                     <CardMedia
                         component="img"
                         height="400"
-                        image={prop.data.imgUrl}
+                        image={prop.data.cocktail.imgUrl}
                         alt="Paella dish"
                         onClick={onclick}
                     />
@@ -110,7 +85,7 @@ function AlcoholTable(prop: any) {
                         </Typography>
                     </CardContent>
                     <CardActions disableSpacing>
-                        <IconButton aria-label="add to favorites" onClick={like}>
+                        <IconButton aria-label="add to favorites" >
                             <FavoriteIcon />
                         </IconButton>
                         {/*<IconButton aria-label="share">
@@ -135,7 +110,7 @@ function AlcoholTable(prop: any) {
                                 당도 : {prop.data.sugar} (달수록 숫자가 높습니다)
                             </Typography>
                             <Typography paragraph>
-                                색 : {color}
+                                색 : {}
                             </Typography>
                             <Typography paragraph>
                                 도수 : {prop.data.dosu}
@@ -143,22 +118,15 @@ function AlcoholTable(prop: any) {
                             <Typography paragraph>
                                 가격 : {prop.data.price}원 (판매점마다 가격이 다를 수 있습니다)
                             </Typography>
-                            <Typography onClick={cocktail}>
+                            <Typography >
                                 <strong>{prop.data.name}을 이용한 레시피 보기</strong>
-                            </Typography>
-                            <Typography>
-                                <strong>{prop.data.category}을 이용한 레시피 보기</strong>
                             </Typography>
                         </CardContent>
                     </Collapse>
                 </Card>
             </Grid>
-            {/*<h2 className="board-title" >{}</h2>
-            <span className="board-title">종류 : {}</span>
-            <img className="alcoholImg" src={prop.data.imgUrl}/>*/}
-
         </div>
     )
 }
 
-export default AlcoholTable;
+export default RecipeOne;
