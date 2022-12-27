@@ -56,6 +56,8 @@ function FreeWrite() {
             .then((res) => {
                 console.log(res.data);
 
+                let imageUrl="";
+
                 fetch(res.data, {
                     method: "put",
                     headers: {
@@ -64,9 +66,13 @@ function FreeWrite() {
                     },
                     body: selectedFile
                 })
-
-                const imageUrl = res.data.split('?')[0]
-                console.log(imageUrl)
+                if(selectedFile.size>0){
+                    imageUrl = res.data.split('?')[0];
+                }else{
+                    imageUrl="";
+                }
+                
+                
 
                 fetch(addr + '/board/write', {
                     method: "POST",

@@ -114,8 +114,6 @@ export default Main;
 
 8. 트랜잭션 작업 (나중에)
 
-9. app bar 만들기
-
 
 
 */
