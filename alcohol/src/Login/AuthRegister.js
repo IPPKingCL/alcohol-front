@@ -145,6 +145,8 @@ const FirebaseRegister = ({ ...others }) => {
 
     const [checked, setChecked] = useState([]);
 
+    const [full, setFull] = useState(false);
+
     useEffect(() => {
         console.log(checked);
     }, [checked])
@@ -157,7 +159,9 @@ const FirebaseRegister = ({ ...others }) => {
 
         if (checked.length > 2 && currentIndex === -1) {
             alert('3개이상은 안돼요!');
+            setFull(true);
         } else {
+            setFull(false);
             if (currentIndex === -1) {
                 newChecked.push(value);
             } else {
@@ -216,7 +220,7 @@ const FirebaseRegister = ({ ...others }) => {
                     sex: 'M',
                     job: '',
                     maxPrice: '',
-                    FavorList: '',
+                    FavorList: new Array(),
                     loginType: 'd',
                     submit: null
                 }}
@@ -267,7 +271,7 @@ const FirebaseRegister = ({ ...others }) => {
                                             sameSite: "none"
                                         })
 
-                                        navigate("/Main");
+                                        navigate("/LoginTest");
                                     } else {
                                         alert("회원가입 중 에러 발생");
                                         return;
@@ -579,9 +583,9 @@ const FirebaseRegister = ({ ...others }) => {
                             )}
                         </FormControl>
 
-                        <FormControl fullWidth error={Boolean(touched.FavorList && errors.FavorList)} sx={{ ...theme.typography.customInput }} margin='normal' onChange={() => console.log(values)}>
+                        <FormControl fullWidth error={Boolean(touched.FavorList && errors.FavorList)} sx={{ ...theme.typography.customInput }} margin='normal' onChange={() => {console.log(values)}}>
                             <Typography variant="subtitle1">(*선택사항) 좋아하는 술 목록 (최대 3개)</Typography>
-                            <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+                            <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }} >
                                 {itemList.map((value) => {
                                     const labelId = `checkbox-list-label-${value.id}`;
 
@@ -594,6 +598,14 @@ const FirebaseRegister = ({ ...others }) => {
                                                 </IconButton>
                                             }
                                             disablePadding
+                                            value={value.id}                                            
+                                            onClick={() => {
+                                                if(checked.indexOf(value) === -1 && checked.length < 3) {
+                                                    values.FavorList.push(value.id)
+                                                } else {
+                                                    values.FavorList = values.FavorList.filter((element) => element !== value.id);
+                                                }
+                                            }}
                                         >
                                             <ListItemButton role={undefined} onClick={handleToggle(value)} dense>
                                                 <ListItemIcon>
@@ -603,11 +615,9 @@ const FirebaseRegister = ({ ...others }) => {
                                                         tabIndex={-1}
                                                         disableRipple
                                                         inputProps={{ 'aria-labelledby': labelId }}
-                                                        name="FavorList"
-                                                        onChange={handleChange}
                                                     />
                                                 </ListItemIcon>
-                                                <ListItemText id={labelId} primary={`${value.category}`} />
+                                                <ListItemText id={labelId} primary={`${value.category}`}/>
                                             </ListItemButton>
                                         </ListItem>
                                     );
