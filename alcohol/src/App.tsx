@@ -42,8 +42,9 @@ function App() {
     <>
       <CssBaseline />
       <Router>
-        <ScrollToTop/>
+        
         <div className="content-all">
+        <ScrollToTop/>
           <Routes>
             
             <Route path="/" element={<Cover />}></Route>
