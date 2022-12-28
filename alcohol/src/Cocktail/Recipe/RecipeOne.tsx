@@ -42,10 +42,10 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 
 const RecipeOne = (prop: any) => {
     console.log(prop.data)
-    const [recipeList,setRecipeList] = useState<RecipeList>();
-    useEffect(()=>{
+    const [recipeList, setRecipeList] = useState<RecipeList>();
+    useEffect(() => {
         setRecipeList(prop.data);
-    },[])
+    }, [])
     const navigate = useNavigate();
 
     const onclick = () => {
@@ -76,17 +76,17 @@ const RecipeOne = (prop: any) => {
     }
 
     const recipeOne = () => {
-        navigate('/cocktail/recipeRead/'+prop.data.id);
+        navigate('/cocktail/recipeRead/' + prop.data.id);
     }
 
     return (
         <div className="alchoWrapper" >
-            <Grid style={{ display:'flex', justifyContent:'center' }}>
-                <Card  sx={{ maxWidth: 390 }} style={{ marginBlock: 20, backgroundColor: 'gray', color: 'maroon', position: 'relative' }} >
+            <Grid style={{ display: 'flex', justifyContent: 'center' }}>
+                <Card sx={{ maxWidth: 390, width: '100%' }} style={{ marginBlock: 20, backgroundColor: 'orange', color: 'maroon', position: 'relative' }} >
                     <CardHeader
                         avatar={
                             <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                                <img className="alcoholImg" src={recipeList?.imgUrl||''} />
+                                <img className="alcoholImg" src={recipeList?.imgUrl || ''} />
                             </Avatar>
                         }
                         action={
@@ -95,7 +95,7 @@ const RecipeOne = (prop: any) => {
                             </IconButton>
                         }
                         title={recipeList?.name}
-                        subheader={recipeList?.likeOne+' 평가'} 
+                        subheader={recipeList?.likeOne + ' 평가'}
                     />
                     <CardMedia
                         onClick={recipeOne}
@@ -104,10 +104,9 @@ const RecipeOne = (prop: any) => {
                         image={recipeList?.imgUrl}
                         alt="Paella dish"
                         sx={{
-                            width : "auto",
-                            //objectFit: "contain",
+                            objectFit: "fill",
                         }}
-                        
+
                     />
                     <CardContent>
                         {/*<Typography variant="body2" color="text.secondary">

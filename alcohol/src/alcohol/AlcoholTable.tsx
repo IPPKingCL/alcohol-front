@@ -76,13 +76,13 @@ function AlcoholTable(prop: any) {
     }
 
     const cocktail = () => {
-        navigate('/cocktail/recipe/'+prop.data.id+'&'+prop.data.category);
+        navigate('/cocktail/recipe/' + prop.data.id + '&' + prop.data.category);
     }
 
     return (
         <div className="alchoWrapper" >
-            <Grid style={{ display:'flex', justifyContent:'center' }}>
-                <Card sx={{ maxWidth: 390, width: '100%' }} style={{marginBlock: 20, backgroundColor: 'gray', color: 'maroon', position: 'relative' }}>
+            <Grid style={{ display: 'flex', justifyContent: 'center' }}>
+                <Card sx={{ maxWidth: 390, width: '100%' }} style={{ marginBlock: 20, backgroundColor: 'orange', color: 'maroon', position: 'relative' }}>
                     <CardHeader
                         avatar={
                             <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -104,7 +104,9 @@ function AlcoholTable(prop: any) {
                         image={prop.data.imgUrl}
                         alt="Paella dish"
                         onClick={onclick}
-                        sx={{objectFit: "fill"}}
+                        sx={{
+                            objectFit: "fill"
+                        }}
                     />
                     <CardContent>
                         <Typography variant="body2" color="text.secondary">
