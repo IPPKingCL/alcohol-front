@@ -9,22 +9,45 @@ const Recipe = () => {
     const {id} = useParams();
     const [recipeList,setRecipeList] = useState<RecipeList[]>([]);
     const [loading,setLoading] = useState<boolean>(true);
-    const list = () => {
-        fetch(addr+'/cocktail/alchoCock/'+id,{
-            method:"GET",
+    const list = async (id:number,category:string) => {
+        fetch(addr+'/cocktail/alchoCock',{
+            method:"Post",
             headers:{
                 "Content-Type":"application/json",
-            }
+            },
+            body:JSON.stringify({
+                id:id,
+                category:category
+            }),
         }).then((res)=>res.json())
         .then(res => {
-            console.log(res);
-            setRecipeList(res);
+            if(res.success!==undefined){
+                if (!window.confirm("해당 술을 사용한 칵테일이 없어요\n대신 이 술과 같은 종류의 술로 만든 칵테일을 알려드릴게요!!")) {
+                    window.history.go(-1);
+                } else {
+                    alert("확인(예)을 누르셨습니다.");
+                }
+            }else{
+                console.log(res);
+                setRecipeList(res);
+            }
+            
+            
         })
         setLoading(false);
     }
 
     useEffect(() => {
-        list();
+        console.log(id);
+        if(id!==undefined){
+            const param = id?.split('&');
+       
+            list(parseInt(param[0]),param[1])
+        }else{
+            alert('조회 중 에러 발생 \n다시 시도해주세요');
+        }
+        
+
     },[])
 
     const test = () => {

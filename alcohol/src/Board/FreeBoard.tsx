@@ -16,7 +16,6 @@ function FreeBoard() {
     const [aData, setAData] = useState<boardList[]>([]);
     const [search,setSearch] = useState<string>("");//검색어
     const focusRef = useRef<HTMLInputElement>();
-
     const list = async () => {
         setArrData([]);
         fetch(addr + '/board', {

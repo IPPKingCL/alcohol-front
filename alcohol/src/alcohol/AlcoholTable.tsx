@@ -76,7 +76,7 @@ function AlcoholTable(prop: any) {
     }
 
     const cocktail = () => {
-        navigate('/cocktail/recipe/'+prop.data.id);
+        navigate('/cocktail/recipe/'+prop.data.id+'&'+prop.data.category);
     }
 
     return (
