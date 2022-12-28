@@ -46,7 +46,8 @@ const RecipeOne = (prop: any) => {
     useEffect(()=>{
         setRecipeList(prop.data);
     },[])
-    
+    const navigate = useNavigate();
+
     const onclick = () => {
 
     }
@@ -73,10 +74,15 @@ const RecipeOne = (prop: any) => {
                 }
             })
     }
+
+    const recipeOne = () => {
+        navigate('/cocktail/recipeRead/'+prop.data.id);
+    }
+
     return (
         <div className="alchoWrapper" >
             <Grid style={{ display:'flex', justifyContent:'center' }}>
-                <Card sx={{ maxWidth: 390 }} style={{ marginBlock: 20, backgroundColor: 'gray', color: 'maroon', position: 'relative' }}>
+                <Card  sx={{ maxWidth: 390 }} style={{ marginBlock: 20, backgroundColor: 'gray', color: 'maroon', position: 'relative' }} >
                     <CardHeader
                         avatar={
                             <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -89,14 +95,19 @@ const RecipeOne = (prop: any) => {
                             </IconButton>
                         }
                         title={recipeList?.name}
-                        subheader={recipeList?.likeOne+' 추천'} 
+                        subheader={recipeList?.likeOne+' 평가'} 
                     />
                     <CardMedia
+                        onClick={recipeOne}
                         component="img"
                         height="400"
                         image={recipeList?.imgUrl}
                         alt="Paella dish"
-                        onClick={onclick}
+                        sx={{
+                            width : "auto",
+                            //objectFit: "contain",
+                        }}
+                        
                     />
                     <CardContent>
                         {/*<Typography variant="body2" color="text.secondary">
@@ -121,7 +132,7 @@ const RecipeOne = (prop: any) => {
                     </CardActions>
                     <Collapse in={expanded} timeout="auto" unmountOnExit>
                         <CardContent>
-                            <Typography paragraph>
+                            <Typography paragraph onClick={recipeOne}>
                                 레시피 보러가기
                             </Typography>
                             {/*<Typography >
