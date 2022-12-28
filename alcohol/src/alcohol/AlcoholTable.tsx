@@ -82,7 +82,7 @@ function AlcoholTable(prop: any) {
     return (
         <div className="alchoWrapper" >
             <Grid style={{ display:'flex', justifyContent:'center' }}>
-                <Card sx={{ maxWidth: 390 }} style={{ marginBlock: 20, backgroundColor: 'gray', color: 'maroon', position: 'relative' }}>
+                <Card sx={{ maxWidth: 390, width: '100%' }} style={{marginBlock: 20, backgroundColor: 'gray', color: 'maroon', position: 'relative' }}>
                     <CardHeader
                         avatar={
                             <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -99,10 +99,12 @@ function AlcoholTable(prop: any) {
                     />
                     <CardMedia
                         component="img"
-                        height="400"
+                        height="400vh"
+                        width="400vh"
                         image={prop.data.imgUrl}
                         alt="Paella dish"
                         onClick={onclick}
+                        sx={{objectFit: "fill"}}
                     />
                     <CardContent>
                         <Typography variant="body2" color="text.secondary">
