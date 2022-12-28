@@ -191,10 +191,6 @@ const AddInfoTest = ({ ...others }) => {
                 let i = 0;
                 for (i; i < res.length; i++) {
                     const alcho = { id: res[i].id, category: res[i].category };
-                    console.log("1 " + res[i].id);
-                    console.log("2 " + res[i].category);
-                    console.log("alcho " + alcho.id);
-                    console.log("alcho " + alcho.category);
                     setItemList(itemList => [...itemList, alcho]);
                 }
 

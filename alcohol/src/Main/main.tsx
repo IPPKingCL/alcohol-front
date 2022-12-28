@@ -1,103 +1,63 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { setCookie, getCookie } from '../Common/Cookies';
 import '../css/App.css';
 import '../css/Login.css';
 import { recommand } from '../interface/recommand';
 import { addr } from '../Common/serverAddr';
+import { Grid } from '@mui/material';
+import { gridSpacing } from '../store/constant';
+import EarningCard from './EarningCard';
+import PopularCard from './PopularCard';
+// import TotalGrowthBarChart from './TotalGrowthBarChart';
+// import TotalIncomeDarkCard from './TotalIncomeDarkCard';
+// import TotalIncomeLightCard from './TotalIncomeLightCard';
+// import TotalOrderLineChartCard from './TotalOrderLineChartCard';
 
 function Main() {
 
-    const [recommandList, setRecommandList] = useState<recommand[]>([]);
-
-    const [whereConnect, setWhereConnect] = useState<string>();
-
-    const tok = getCookie('myToken');
-
-
-    const check = () => {
-        const filter = "win16|win32|win64|mac|macintel";
-
-        let device = "";
-
-        if(navigator.platform) {
-            if(filter.indexOf(navigator.platform.toLowerCase()) < 0) {
-                device = "mobile";
-            }else {
-                device = "pc";
-            }
-            
-        }
-
-        setCookie('device', device,{
-            path:"/",
-            sameSite:"Lax"
-        });
-
-        alert(getCookie('device') + "  " + device);
-    }
-    
-
-    
-
-    const reco = () => {
-        console.log(recommandList);
-    }
-
-    const onClick = () => {
-        fetch(addr + '/recommand', {
-            method: "GET",
-            headers: {
-                "Access-Control-Allow-Origin": "http://localhost:3000",
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ` + tok,
-            },
-        }).then((res) => res.json())
-            .then((res) => {
-                if (res.success) {
-                    console.log(res);
-                    fetch('http://localhost:8080/recommand', {
-                        method: "POST",
-                        headers: {
-                            "Access-Control-Allow-Origin": "http://localhost:3000",
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify({
-                            id: res.id,
-                        })
-                    }).then((res) => res.json())
-                        .then((res) => {
-                            let i :number = 0;
-                            setRecommandList([]);
-                            for (i; i < res.items.length; i++) {
-                                const data: recommand = {
-                                    uid : res.items[i].uid,
-                                    iid : res.items[i].iid,
-                                    est : res.items[i].est
-                                }
-                                setRecommandList(recommandList => [...recommandList, data]);
-                            }
-                        })
-                } else {
-                    console.log("토큰 에러 로그인페이지로 리다이렉트 해아함");
-                }
-            })
-    }
-
+    const [isLoading, setLoading] = useState<boolean>(true);
+    useEffect(() => {
+        setLoading(false);
+    }, []);
 
     return (
-        <div>
-            <h1>메인 페이지 입니다.</h1>
-            <button onClick={onClick}>추천 해줘!!</button>
-            <button onClick={reco}>출력</button>
-            <button onClick={check}>쿠키 입력해줘!</button>
-        </div>
+        <Grid container spacing={gridSpacing}>
+            <Grid item xs={12}>
+                <Grid container spacing={gridSpacing}>
+                    <Grid item lg={4} md={6} sm={6} xs={12}>
+                        <EarningCard isLoading={isLoading} />
+                    </Grid>
+                    <Grid item lg={4} md={6} sm={6} xs={12}>
+                        {/* <TotalOrderLineChartCard isLoading={isLoading} /> */}
+                    </Grid>
+                    <Grid item lg={4} md={12} sm={12} xs={12}>
+                        <Grid container spacing={gridSpacing}>
+                            <Grid item sm={6} xs={12} md={6} lg={12}>
+                                {/* <TotalIncomeDarkCard isLoading={isLoading} /> */}
+                            </Grid>
+                            <Grid item sm={6} xs={12} md={6} lg={12}>
+                                {/* <TotalIncomeLightCard isLoading={isLoading} /> */}
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <Grid item xs={12}>
+                <Grid container spacing={gridSpacing}>
+                    <Grid item xs={12} md={8}>
+                        {/* <TotalGrowthBarChart isLoading={isLoading} /> */}
+                    </Grid>
+                    <Grid item xs={12} md={4}>
+                        <PopularCard isLoading={isLoading} />
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
     );
 
 }
 
 export default Main;
-
-
 
 
 /*
