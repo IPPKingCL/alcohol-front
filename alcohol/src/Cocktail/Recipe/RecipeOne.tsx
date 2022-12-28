@@ -95,7 +95,7 @@ const RecipeOne = (prop: any) => {
                             </IconButton>
                         }
                         title={recipeList?.name}
-                        subheader={recipeList?.likeOne+' 추천'} 
+                        subheader={recipeList?.likeOne+' 평가'} 
                     />
                     <CardMedia
                         onClick={recipeOne}
