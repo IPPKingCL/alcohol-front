@@ -25,7 +25,16 @@ const Recipe = () => {
                 if (!window.confirm("해당 술을 사용한 칵테일이 없어요\n대신 이 술과 같은 종류의 술로 만든 칵테일을 알려드릴게요!!")) {
                     window.history.go(-1);
                 } else {
-                    alert("확인(예)을 누르셨습니다.");
+                    
+                    fetch(addr+'/cocktail/categoryCock/'+category,{
+                        method:"Get",
+                        headers:{
+                            "Content-Type":"application/json",
+                        },
+                    }).then((res)=>res.json())
+                    .then(res => {
+                        setRecipeList(res);
+                    })
                 }
             }else{
                 console.log(res);

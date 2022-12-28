@@ -80,7 +80,7 @@ const RecipeOne = (prop: any) => {
                     <CardHeader
                         avatar={
                             <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                                <img className="alcoholImg" src={recipeList?.cocktail.imgUrl||''} />
+                                <img className="alcoholImg" src={recipeList?.imgUrl||''} />
                             </Avatar>
                         }
                         action={
@@ -88,13 +88,13 @@ const RecipeOne = (prop: any) => {
                                 <MoreVertIcon />
                             </IconButton>
                         }
-                        title={recipeList?.cocktail.name}
-                        subheader={recipeList?.cocktail.likeOne+' 추천'} 
+                        title={recipeList?.name}
+                        subheader={recipeList?.likeOne+' 추천'} 
                     />
                     <CardMedia
                         component="img"
                         height="400"
-                        image={prop.data.cocktail.imgUrl}
+                        image={recipeList?.imgUrl}
                         alt="Paella dish"
                         onClick={onclick}
                     />
