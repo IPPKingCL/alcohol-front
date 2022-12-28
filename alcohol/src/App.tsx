@@ -32,6 +32,8 @@ import Recipe from './Cocktail/Recipe/Recipe';
 import ScrollToTop from './Common/ScrollToTop';
 
 import AddInfoT from './Addinfo/AddInfoT';
+import RecipeOne from './Cocktail/Recipe/RecipeOne';
+import RecipeRead from './Cocktail/Recipe/RecipeRead';
 
 
 
@@ -66,6 +68,7 @@ function App() {
 
             <Route path='/cocktail/list/:id' element={<CocktailList/>}/>
             <Route path='/cocktail/recipe/:id?' element={<Recipe/>}/>
+            <Route path='/cocktail/recipeRead/:id' element={<RecipeRead/>}/>
 
             <Route path="/test" element={<UploadImageToS3WithNativeSdk />}></Route>
             <Route path="/test1" element={<Test />}></Route>
