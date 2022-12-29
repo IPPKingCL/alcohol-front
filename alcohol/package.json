@@ -23,7 +23,7 @@
     "@types/react": "^18.0.25",
     "@types/react-datepicker": "^4.8.0",
     "@types/react-dom": "^18.0.8",
-    "apexcharts": "^3.36.3",
+    "apexcharts": "^3.35.3",
     "aws-sdk": "^2.1264.0",
     "dayjs": "^1.11.7",
     "formik": "^2.2.9",
