@@ -44,7 +44,7 @@ function AlcoholDetail(prop:any){
     }
 
     const Recipe = () => {
-        navigate('/cocktail/recipe/'+id);
+        navigate('/cocktail/recipe/'+id+'&'+alcoholData?.category);
     }
 
     return (
