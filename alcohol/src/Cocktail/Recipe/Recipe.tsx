@@ -9,44 +9,60 @@ const Recipe = () => {
     const {id} = useParams();
     const [recipeList,setRecipeList] = useState<RecipeList[]>([]);
     const [loading,setLoading] = useState<boolean>(true);
-    const list = async (id:number,category:string) => {
-        fetch(addr+'/cocktail/alchoCock',{
-            method:"Post",
-            headers:{
-                "Content-Type":"application/json",
-            },
-            body:JSON.stringify({
-                id:id,
-                category:category
-            }),
-        }).then((res)=>res.json())
-        .then(res => {
-            if(res.success!==undefined){
-                if (!window.confirm("해당 술을 사용한 칵테일이 없어요\n대신 이 술과 같은 종류의 술로 만든 칵테일을 알려드릴게요!!")) {
-                    window.history.go(-1);
-                } else {
-                    
-                    fetch(addr+'/cocktail/categoryCock/'+category,{
-                        method:"Get",
-                        headers:{
-                            "Content-Type":"application/json",
-                        },
-                    }).then((res)=>res.json())
-                    .then(res => {
-                        setRecipeList(res);
-                    })
+    const list = async (id:string,category:string) => {
+        setLoading(true);
+        setRecipeList([]);
+        console.log(id);
+        console.log(id.toString.length);
+        if(id!==''){
+            const numId = parseInt(id);
+            console.log("dfdfada"+numId)
+            fetch(addr+'/cocktail/alchoCock',{
+                method:"Post",
+                headers:{
+                    "Content-Type":"application/json",
+                },
+                body:JSON.stringify({
+                    id:numId,
+                    category:category
+                }),
+            }).then((res)=>res.json())
+            .then(async res => {
+                if(res.success!==undefined){
+                    if (!window.confirm("해당 술을 사용한 칵테일이 없어요\n대신 이 술과 같은 종류의 술로 만든 칵테일을 알려드릴게요!!")) {
+                        window.history.go(-1);
+                    } else {
+                        await categoryAll(category);
+                    }
+                }else{
+                    console.log(res);
+                    setRecipeList(res);
                 }
-            }else{
-                console.log(res);
-                setRecipeList(res);
-            }
-            
-            
-        })
+                
+                
+            })
+        }else{
+            await categoryAll(category);
+        }
+       
         setLoading(false);
     }
 
+    const categoryAll = async (category: string) =>{
+        fetch(addr+'/cocktail/categoryCock/'+category,{
+            method:"Get",
+            headers:{
+                "Content-Type":"application/json",
+            },
+        }).then((res)=>res.json())
+        .then(res => {
+            setRecipeList(res);
+        })
+    }
+
     const allList = async () => {
+        setLoading(true);
+        setRecipeList([]);
         fetch(addr+'/cocktail',{
             method:"Get",
             headers:{
@@ -66,7 +82,8 @@ const Recipe = () => {
                 allList();
             }else{
                 const param = id?.split('&');
-                list(parseInt(param[0]),param[1]);
+                console.log(param[0])
+                list(param[0],param[1]);
             }
             
         }else{

@@ -79,6 +79,10 @@ function AlcoholTable(prop: any) {
         navigate('/cocktail/recipe/' + prop.data.id + '&' + prop.data.category);
     }
 
+    const category = () => {
+        navigate('/cocktail/recipe/&' + prop.data.category);
+    }
+
     return (
         <div className="alchoWrapper" >
             <Grid style={{ display: 'flex', justifyContent: 'center' }}>
@@ -150,7 +154,7 @@ function AlcoholTable(prop: any) {
                             <Typography onClick={cocktail}>
                                 <strong>{prop.data.name}을 이용한 레시피 보기</strong>
                             </Typography>
-                            <Typography>
+                            <Typography onClick={category}>
                                 <strong>{prop.data.category}을 이용한 레시피 보기</strong>
                             </Typography>
                         </CardContent>
