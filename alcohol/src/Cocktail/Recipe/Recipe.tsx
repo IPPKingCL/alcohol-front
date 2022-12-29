@@ -46,12 +46,29 @@ const Recipe = () => {
         setLoading(false);
     }
 
+    const allList = async () => {
+        fetch(addr+'/cocktail',{
+            method:"Get",
+            headers:{
+                "Content-Type":"application/json",
+            },
+        }).then((res)=>res.json())
+        .then((res)=>{
+            setRecipeList(res);
+        })
+        setLoading(false);
+    }
+
     useEffect(() => {
         console.log(id);
         if(id!==undefined){
-            const param = id?.split('&');
-       
-            list(parseInt(param[0]),param[1])
+            if(id==='all'){
+                allList();
+            }else{
+                const param = id?.split('&');
+                list(parseInt(param[0]),param[1]);
+            }
+            
         }else{
             alert('조회 중 에러 발생 \n다시 시도해주세요');
         }
