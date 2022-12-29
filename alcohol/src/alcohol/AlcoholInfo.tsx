@@ -78,6 +78,9 @@ function AlcoholInfo(){
             case 'WI':
                 category='와인';
                 break;
+            case 'Rq':
+                category='리큐르';
+                break;
         }
         console.log(category)
         setLoading(true);
@@ -142,6 +145,7 @@ function AlcoholInfo(){
                     <option value='R'>럼</option>
                     <option value="D">데낄라</option>
                     <option value='WI'>와인</option>
+                    <option value="Rq">리큐르</option>
                 </select>
                 <form className='search-form' onSubmit={e => onSearch(e)}>
                     <input type="text" id="search" value={search} onChange={onChangeSearch} ></input>
