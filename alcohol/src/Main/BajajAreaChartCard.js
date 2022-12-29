@@ -24,13 +24,12 @@ const BajajAreaChartCard = () => {
     useEffect(() => {
         const newSupportChart = {
             ...chartData.options,
-            colors: [orangeDark],
             tooltip: {
                 theme: 'light'
             },
         };
-        ApexCharts.exec(`support-chart`, 'updateOptions', newSupportChart, false, true);
-    }, [navType, orangeDark]);
+        ApexCharts.exec(`support-chart`, 'updateOptions', newSupportChart);
+    }, [navType]);
 
     return (
         <Card sx={{ bgcolor: 'secondary.light' }}>
