@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import { useParams } from "react-router";
 import { addr } from "../../Common/serverAddr";
 import * as React from 'react';
@@ -26,7 +26,8 @@ const labels: { [index: string]: string } = {
   }
 const RecipeRead = () =>{
     const {id} = useParams();
-    const recipe = async () => {
+    const [recipe,setRecipe] = useState();
+    const recipeFunc = async () => {
         fetch(addr+'/cocktail/'+id,{
             method: "GET",
             headers: {
@@ -39,7 +40,7 @@ const RecipeRead = () =>{
     }
 
     useEffect(()=>{
-        recipe()
+        recipeFunc()
     },[])
 
     const [value, setValue] = React.useState<number | null>(2);
