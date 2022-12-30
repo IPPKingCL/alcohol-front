@@ -28,6 +28,7 @@ const labels: { [index: string]: string } = {
 const RecipeRead = () =>{
     const {id} = useParams();
     const [recipe,setRecipe] = useState<Cock>();
+    const [loading,setLoading] = useState<boolean>(true);
     const recipeFunc = async () => {
         fetch(addr+'/cocktail/'+id,{
             method: "GET",
@@ -37,6 +38,8 @@ const RecipeRead = () =>{
         }).then((res)=>res.json())
         .then((res)=>{
             console.log(res);
+            setRecipe(res);
+            setLoading(false);
         })
     }
 
@@ -44,11 +47,15 @@ const RecipeRead = () =>{
         recipeFunc()
     },[])
 
+    const onclick = () => {
+        console.log(recipe);
+    }
+
     const [value, setValue] = React.useState<number | null>(2);
     const [hover, setHover] = React.useState(-1);
     return (
         <div>
-            dsfadsjfkdasf
+            {/*dsfadsjfkdasf
             https://mui.com/material-ui/react-rating/
             <Box
                 sx={{
@@ -73,7 +80,11 @@ const RecipeRead = () =>{
                 {value !== null && (
                     <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
                 )}
-                </Box>
+                </Box>*/}
+
+                {loading ? <strong>loading...</strong>:
+                    <button onClick={onclick}>확인</button>
+                }
         </div>
     )
 }
