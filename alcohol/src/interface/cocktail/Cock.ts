@@ -1,6 +1,7 @@
 import { Cocktail } from "../Cocktail";
-import { CockAlcho } from "./CockAlcho";
-import { CockJuice } from "./CockJuice";
+import { CockAlcho } from "./cockAlcho";
+import { CockJuice } from "./cockJuice";
+
 
 export interface Cock{
     cocktail:Cocktail;

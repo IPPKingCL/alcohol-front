@@ -7,6 +7,7 @@ import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import StarIcon from '@mui/icons-material/Star';
+import { Cock } from "../../interface/cocktail/Cock";
 
 const labels: { [index: string]: string } = {
     0.5: 'Useless',
@@ -26,7 +27,7 @@ const labels: { [index: string]: string } = {
   }
 const RecipeRead = () =>{
     const {id} = useParams();
-    const [recipe,setRecipe] = useState();
+    const [recipe,setRecipe] = useState<Cock>();
     const recipeFunc = async () => {
         fetch(addr+'/cocktail/'+id,{
             method: "GET",
