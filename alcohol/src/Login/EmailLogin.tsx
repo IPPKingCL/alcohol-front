@@ -72,9 +72,6 @@ function EmailLogin() {
             }).then((res) => res.json())
                 .then((res) => {
                     if (!res.success) {
-                        console.log("통신 다녀옴?");
-                        console.log(res.msg);
-                        console.log(res.token);
                         setLoading(false);
                     }
                     alert("존재하지 않는 사용자입니다.");
