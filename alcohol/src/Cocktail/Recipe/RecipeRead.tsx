@@ -29,6 +29,7 @@ const RecipeRead = () =>{
     const {id} = useParams();
     const [recipe,setRecipe] = useState<Cock>();
     const [loading,setLoading] = useState<boolean>(true);
+    const [amount, setAmount] = useState<string>();
     const recipeFunc = async () => {
         fetch(addr+'/cocktail/'+id,{
             method: "GET",
@@ -38,6 +39,16 @@ const RecipeRead = () =>{
         }).then((res)=>res.json())
         .then((res)=>{
             console.log(res);
+            if(res['cocktail'].only){
+                res['cocktail'].only = '해당 술만 사용할 수 있는 칵테일입니다'
+            }else{
+                res['cocktail'].only = '같은 종류의 술을 대체하여 사용할 수 있는 칵테일입니다.'
+            }
+            
+            if(res['cockJuice'].amount>1000){
+                console.log(res['cockJuice'].amount)
+                setAmount(String(res['cockJuice'].amount>1000)+"% 높이로 따라주세요")
+            }
             setRecipe(res);
             setLoading(false);
         })
@@ -47,10 +58,10 @@ const RecipeRead = () =>{
         recipeFunc()
     },[])
 
-    const onclick = () => {
+    const onclick = () =>{
         console.log(recipe);
+        console.log(amount);
     }
-
     const [value, setValue] = React.useState<number | null>(2);
     const [hover, setHover] = React.useState(-1);
     return (
@@ -91,6 +102,7 @@ const RecipeRead = () =>{
                     <img src={recipe?.cocktail.imgUrl}/>
                     <hr></hr>
                     <h3>레시피</h3>
+                    <button onClick ={onclick}>테스트</button>
                     
                 </>
                     
