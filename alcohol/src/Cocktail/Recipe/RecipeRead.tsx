@@ -83,7 +83,17 @@ const RecipeRead = () =>{
                 </Box>*/}
 
                 {loading ? <strong>loading...</strong>:
-                    <button onClick={onclick}>확인</button>
+                <>
+                    <h2>{recipe?.cocktail.name}</h2>
+                    <hr></hr>
+                    <span>{recipe?.cocktail.dosu}</span>
+                    <span>{recipe?.cocktail.only}</span>
+                    <img src={recipe?.cocktail.imgUrl}/>
+                    <hr></hr>
+                    <h3>레시피</h3>
+                    
+                </>
+                    
                 }
         </div>
     )
