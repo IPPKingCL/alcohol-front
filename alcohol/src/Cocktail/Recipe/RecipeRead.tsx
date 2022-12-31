@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import { useParams } from "react-router";
 import { addr } from "../../Common/serverAddr";
 import * as React from 'react';
@@ -7,6 +7,7 @@ import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import StarIcon from '@mui/icons-material/Star';
+import { Cock } from "../../interface/cocktail/Cock";
 
 const labels: { [index: string]: string } = {
     0.5: 'Useless',
@@ -26,7 +27,10 @@ const labels: { [index: string]: string } = {
   }
 const RecipeRead = () =>{
     const {id} = useParams();
-    const recipe = async () => {
+    const [recipe,setRecipe] = useState<Cock>();
+    const [loading,setLoading] = useState<boolean>(true);
+    const [amount, setAmount] = useState<string>();
+    const recipeFunc = async () => {
         fetch(addr+'/cocktail/'+id,{
             method: "GET",
             headers: {
@@ -35,18 +39,34 @@ const RecipeRead = () =>{
         }).then((res)=>res.json())
         .then((res)=>{
             console.log(res);
+            if(res['cocktail'].only){
+                res['cocktail'].only = '해당 술만 사용할 수 있는 칵테일입니다'
+            }else{
+                res['cocktail'].only = '같은 종류의 술을 대체하여 사용할 수 있는 칵테일입니다.'
+            }
+            
+            if(res['cockJuice'].amount>1000){
+                console.log(res['cockJuice'].amount)
+                setAmount(String(res['cockJuice'].amount>1000)+"% 높이로 따라주세요")
+            }
+            setRecipe(res);
+            setLoading(false);
         })
     }
 
     useEffect(()=>{
-        recipe()
+        recipeFunc()
     },[])
 
+    const onclick = () =>{
+        console.log(recipe);
+        console.log(amount);
+    }
     const [value, setValue] = React.useState<number | null>(2);
     const [hover, setHover] = React.useState(-1);
     return (
         <div>
-            dsfadsjfkdasf
+            {/*dsfadsjfkdasf
             https://mui.com/material-ui/react-rating/
             <Box
                 sx={{
@@ -71,7 +91,22 @@ const RecipeRead = () =>{
                 {value !== null && (
                     <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
                 )}
-                </Box>
+                </Box>*/}
+
+                {loading ? <strong>loading...</strong>:
+                <>
+                    <h2>{recipe?.cocktail.name}</h2>
+                    <hr></hr>
+                    <span>{recipe?.cocktail.dosu}</span>
+                    <span>{recipe?.cocktail.only}</span>
+                    <img src={recipe?.cocktail.imgUrl}/>
+                    <hr></hr>
+                    <h3>레시피</h3>
+                    <button onClick ={onclick}>테스트</button>
+                    
+                </>
+                    
+                }
         </div>
     )
 }
