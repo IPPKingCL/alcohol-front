@@ -45,8 +45,8 @@ const RecipeRead = () =>{
                 res['cocktail'].only = '같은 종류의 술을 대체하여 사용할 수 있는 칵테일입니다.'
             }
             
-            if(res['cockJuice'].amount>1000){
-                console.log(res['cockJuice'].amount)
+            
+            if(parseInt(res['cockJuice'].amount)>1000){
                 setAmount(String(res['cockJuice'].amount>1000)+"% 높이로 따라주세요")
             }
             setRecipe(res);
@@ -97,8 +97,8 @@ const RecipeRead = () =>{
                 <>
                     <h2>{recipe?.cocktail.name}</h2>
                     <hr></hr>
-                    <span>{recipe?.cocktail.dosu}</span>
-                    <span>{recipe?.cocktail.only}</span>
+                    <h5>도수 : {recipe?.cocktail.dosu}도</h5>
+                    <h5>이 칵테일은 {recipe?.cocktail.only}</h5>
                     <img src={recipe?.cocktail.imgUrl}/>
                     <hr></hr>
                     <h3>레시피</h3>
