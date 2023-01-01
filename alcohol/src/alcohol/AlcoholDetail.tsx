@@ -40,7 +40,7 @@ function AlcoholDetail(prop:any){
     },[]);
 
     const onclick = () => {
-        navigate('/alcohol')
+        window.history.go(-1);
     }
 
     const Recipe = () => {
