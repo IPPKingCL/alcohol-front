@@ -34,6 +34,7 @@ import ScrollToTop from './Common/ScrollToTop';
 import AddInfoT from './Addinfo/AddInfoT';
 import RecipeOne from './Cocktail/Recipe/RecipeOne';
 import RecipeRead from './Cocktail/Recipe/RecipeRead';
+import AlchoIndex from './alcohol/AlchoIndex';
 
 
 
@@ -63,7 +64,8 @@ function App() {
 
             <Route path="/Main" element={<Main />}></Route>
 
-            <Route path='/alcohol' element={<AlcoholInfo />}></Route>
+            <Route path='/alcohol' element={<AlchoIndex/>}/>
+            <Route path='/alcohol/info' element={<AlcoholInfo />}></Route>
             <Route path="/alcohol/detail/:id" element={<AlcoholDetail />}></Route>
 
             <Route path='/cocktail/list/:id' element={<CocktailList/>}/>
