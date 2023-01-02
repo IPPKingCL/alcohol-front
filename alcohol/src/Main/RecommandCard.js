@@ -56,7 +56,7 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
 
 // ===========================|| DASHBOARD DEFAULT - EARNING CARD ||=========================== //
 
-const EarningCard = ({ isLoading }) => {
+const RecommandCard = ({ isLoading }) => {
     const theme = useTheme();
 
     const [anchorEl, setAnchorEl] = useState(null);
@@ -87,21 +87,9 @@ const EarningCard = ({ isLoading }) => {
                             <Grid item>
                                 <Grid container alignItems="center">
                                     <Grid item>
-                                        <Typography sx={{ fontSize: '2.125rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>
-                                            오 추 술
+                                        <Typography sx={{ fontSize: '1.875rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>
+                                            추천 받기
                                         </Typography>
-                                    </Grid>
-                                    <Grid item>
-                                        <Avatar
-                                            sx={{
-                                                cursor: 'pointer',
-                                                ...theme.typography.smallAvatar,
-                                                backgroundColor: theme.palette.secondary[200],
-                                                color: theme.palette.secondary.dark
-                                            }}
-                                        >
-                                            <ArrowUpwardIcon fontSize="inherit" sx={{ transform: 'rotate3d(1, 1, 1, 45deg)' }} />
-                                        </Avatar>
                                     </Grid>
                                 </Grid>
                             </Grid>
@@ -113,7 +101,7 @@ const EarningCard = ({ isLoading }) => {
                                         color: theme.palette.secondary[200]
                                     }}
                                 >
-                                    Total Earning
+                                    칵테일을 추천받아 보세요!
                                 </Typography>
                             </Grid>
                         </Grid>
@@ -124,8 +112,8 @@ const EarningCard = ({ isLoading }) => {
     );
 };
 
-EarningCard.propTypes = {
+RecommandCard.propTypes = {
     isLoading: PropTypes.bool
 };
 
-export default EarningCard;
+export default RecommandCard;

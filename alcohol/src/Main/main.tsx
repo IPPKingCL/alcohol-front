@@ -6,7 +6,9 @@ import { recommand } from '../interface/recommand';
 import { addr } from '../Common/serverAddr';
 import { Grid } from '@mui/material';
 import { gridSpacing } from '../store/constant';
-import EarningCard from './EarningCard';
+import TodayAlchoCard from './TodayAlchoCard';
+import InfoCard from './InfoCard';
+import RecommandCard from './RecommandCard';
 import PopularCard from './PopularCard';
 // import TotalGrowthBarChart from './TotalGrowthBarChart';
 // import TotalIncomeDarkCard from './TotalIncomeDarkCard';
@@ -25,15 +27,15 @@ function Main() {
             <Grid item xs={12}>
                 <Grid container spacing={gridSpacing}>
                     <Grid item lg={4} md={6} sm={6} xs={12}>
-                        <EarningCard isLoading={isLoading} />
+                        <TodayAlchoCard isLoading={isLoading} />
                     </Grid>
                     <Grid item lg={4} md={12} sm={12} xs={12}>
                         <Grid container spacing={gridSpacing}>
                             <Grid item sm={6} xs={6} md={6} lg={12}>
-                                <EarningCard isLoading={isLoading} />
+                                <InfoCard isLoading={isLoading} />
                             </Grid>
                             <Grid item sm={6} xs={6} md={6} lg={12}>
-                                <EarningCard isLoading={isLoading} />
+                                <RecommandCard isLoading={isLoading} />
                             </Grid>
                         </Grid>
                     </Grid>
