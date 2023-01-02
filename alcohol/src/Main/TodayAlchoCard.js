@@ -93,9 +93,9 @@ const TodayAlchoCard = ({ isLoading }) => {
                             <Grid item>
                                 <Grid container alignItems="center">
                                     <Grid item>
-                                        <Carousel>
+                                        <Carousel autoPlay sx={{width : "400px"}}>
                                             {
-                                                items.map((item, i) => <img src={item.src}></img>)
+                                                items.map((item, i) => <img className="todayAlcho" src={item.src}></img>)
                                             }
                                         </Carousel>
                                     </Grid>
