@@ -88,7 +88,7 @@ const RecommandCard = ({ isLoading }) => {
                                 <Grid container alignItems="center">
                                     <Grid item>
                                         <Typography sx={{ fontSize: '1.875rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>
-                                            추천 받기
+                                            추천
                                         </Typography>
                                     </Grid>
                                 </Grid>

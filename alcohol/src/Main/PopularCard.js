@@ -74,7 +74,6 @@ const PopularCard = ({ isLoading }) => {
                                         >
                                             <MenuItem onClick={handleClose}> 하루 </MenuItem>
                                             <MenuItem onClick={handleClose}> 1주</MenuItem>
-                                            <MenuItem onClick={handleClose}> 1달 </MenuItem>
                                         </Menu>
                                     </Grid>
                                 </Grid>

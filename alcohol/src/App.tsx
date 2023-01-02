@@ -79,8 +79,7 @@ function App() {
           </Routes>
         </div>
         <LabelBottomNavigation />
-
-
+        
       </Router>
     </>
 

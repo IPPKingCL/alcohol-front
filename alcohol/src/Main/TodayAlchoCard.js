@@ -9,6 +9,9 @@ import { Avatar, Box, Grid, Menu, MenuItem, Typography } from '@mui/material';
 import MainCard from '../ui-component/cards/MainCard';
 import SkeletonEarningCard from '../ui-component/cards/Skeleton/EarningCard';
 
+import Carousel from 'react-material-ui-carousel'
+import { Paper, Button } from '@mui/material'
+
 // assets
 import EarningIcon from './earning.svg';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
@@ -17,6 +20,7 @@ import GetAppTwoToneIcon from '@mui/icons-material/GetAppOutlined';
 import FileCopyTwoToneIcon from '@mui/icons-material/FileCopyOutlined';
 import PictureAsPdfTwoToneIcon from '@mui/icons-material/PictureAsPdfOutlined';
 import ArchiveTwoToneIcon from '@mui/icons-material/ArchiveOutlined';
+
 
 const CardWrapper = styled(MainCard)(({ theme }) => ({
     backgroundColor: theme.palette.secondary.dark,
@@ -69,6 +73,15 @@ const TodayAlchoCard = ({ isLoading }) => {
         setAnchorEl(null);
     };
 
+
+
+    const items = [
+        { src: "https://myhsproject.s3.ap-northeast-2.amazonaws.com/image_readmed_2017_354377_14958324642895797.jpeg" },
+        { src: "https://myhsproject.s3.ap-northeast-2.amazonaws.com/%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C+(2).jfif" },
+        { src: "https://myhsproject.s3.ap-northeast-2.amazonaws.com/img+(1).jpg" },
+        { src: "https://myhsproject.s3.ap-northeast-2.amazonaws.com/4135731d63daca9e71fb0f280fe4b25e697411015ec2429f3dca1514405d0137992d2ccc48bde4e3bf7632756e36ec340ef295ca1ccc3fa312a9f9f4db5c6c67382045e1bdc6e88267f288cf8d569457.jfif" },
+    ];
+
     return (
         <>
             {isLoading ? (
@@ -78,31 +91,15 @@ const TodayAlchoCard = ({ isLoading }) => {
                     <Box sx={{ p: 2.25 }}>
                         <Grid container direction="column">
                             <Grid item>
-                                <Grid container justifyContent="space-between">
-                                    <Grid item>
-                                        
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                            <Grid item>
                                 <Grid container alignItems="center">
                                     <Grid item>
-                                        <Typography sx={{ fontSize: '2.125rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>
-                                            오늘의 술 이미지
-                                        </Typography>
+                                        <Carousel>
+                                            {
+                                                items.map((item, i) => <img src={item.src}></img>)
+                                            }
+                                        </Carousel>
                                     </Grid>
                                 </Grid>
-                            </Grid>
-                            <Grid item sx={{ mb: 1.25 }}>
-                                <Typography
-                                    sx={{
-                                        fontSize: '1rem',
-                                        fontWeight: 500,
-                                        color: theme.palette.secondary[200]
-                                    }}
-                                >
-                                    
-                                </Typography>
                             </Grid>
                         </Grid>
                     </Box>

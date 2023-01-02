@@ -95,7 +95,7 @@ const InfoCard = ({ isLoading }) => {
                                 <Grid container alignItems="center">
                                     <Grid item>
                                         <Typography sx={{ fontSize: '1.875rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>
-                                            칵테일 정보
+                                            정보
                                         </Typography>
                                     </Grid>
                                 </Grid>

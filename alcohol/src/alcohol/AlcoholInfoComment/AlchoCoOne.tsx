@@ -7,9 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 
 function AlchoCoOne(prop:any){
-    console.log("qlqlqlq")
     useEffect(()=>{
-        console.log("hihihihih"+prop.data)
     },[]);
     const navigate = useNavigate();
     const onclick = async () => {
