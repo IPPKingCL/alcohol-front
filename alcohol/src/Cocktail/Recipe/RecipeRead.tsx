@@ -48,14 +48,7 @@ const RecipeRead = () =>{
             }else{
                 res['cocktail'].only = '같은 종류의 술을 대체하여 사용할 수 있는 칵테일입니다.'
             }
-            
-            for(let i = 0 ;i<res['cockJuice'].length; i++){
-                if(parseInt(res['cockJuice'][i].amount)>1000){
-                    res['cockJuice'][i].amount=res['cockJuice'][i].amount/100;
-                    tempAmount=res['cockJuice'][i].amount;
-                }
-            }
-            setAmount(tempAmount+"% 높이로 따라주세요");
+
             setRecipe(res);
             setLoading(false);
         })
