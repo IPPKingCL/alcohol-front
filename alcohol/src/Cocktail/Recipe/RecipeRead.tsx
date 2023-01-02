@@ -9,6 +9,7 @@ import Stack from '@mui/material/Stack';
 import StarIcon from '@mui/icons-material/Star';
 import { Cock } from "../../interface/cocktail/Cock";
 import CockJuice from "./RecipeDetail/CockJuice";
+import CockAlcho from "./RecipeDetail/CockAlcho";
 
 const labels: { [index: string]: string } = {
     0.5: 'Useless',
@@ -108,6 +109,7 @@ const RecipeRead = () =>{
                     <img src={recipe?.cocktail.imgUrl}/>
                     <hr></hr>
                     <h3>레시피</h3>
+                    <CockAlcho datas={recipe?.cockAlcho}/>
                     <CockJuice datas={recipe?.cockJuice}/>
                     
                 </>
