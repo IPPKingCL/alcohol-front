@@ -17,6 +17,7 @@ import GetAppTwoToneIcon from '@mui/icons-material/GetAppOutlined';
 import FileCopyTwoToneIcon from '@mui/icons-material/FileCopyOutlined';
 import PictureAsPdfTwoToneIcon from '@mui/icons-material/PictureAsPdfOutlined';
 import ArchiveTwoToneIcon from '@mui/icons-material/ArchiveOutlined';
+import { useNavigate } from 'react-router-dom';
 
 const CardWrapper = styled(MainCard)(({ theme }) => ({
     backgroundColor: theme.palette.secondary.dark,
@@ -59,6 +60,8 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
 const InfoCard = ({ isLoading }) => {
     const theme = useTheme();
 
+    const navigate = useNavigate();
+
     const [anchorEl, setAnchorEl] = useState(null);
 
     const handleClick = (event) => {
@@ -69,12 +72,16 @@ const InfoCard = ({ isLoading }) => {
         setAnchorEl(null);
     };
 
+    const onClick = () => {
+        navigate('/cocktail/recipe/all');
+    }
+
     return (
         <>
             {isLoading ? (
                 <SkeletonEarningCard />
             ) : (
-                <CardWrapper border={false} content={false}>
+                <CardWrapper border={false} content={false} onClick={onClick}>
                     <Box sx={{ p: 2.25 }}>
                         <Grid container direction="column">
                             <Grid item>
@@ -101,7 +108,7 @@ const InfoCard = ({ isLoading }) => {
                                         color: theme.palette.secondary[200]
                                     }}
                                 >
-                                    술 정보를 빠르게 알아봐요!
+                                    칵테일 정보를 빠르게 알아봐요!
                                 </Typography>
                             </Grid>
                         </Grid>

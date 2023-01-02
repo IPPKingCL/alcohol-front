@@ -72,9 +72,9 @@ const PopularCard = ({ isLoading }) => {
                                                 horizontal: 'right'
                                             }}
                                         >
-                                            <MenuItem onClick={handleClose}> Today</MenuItem>
-                                            <MenuItem onClick={handleClose}> This Month</MenuItem>
-                                            <MenuItem onClick={handleClose}> This Year </MenuItem>
+                                            <MenuItem onClick={handleClose}> 하루 </MenuItem>
+                                            <MenuItem onClick={handleClose}> 1주</MenuItem>
+                                            <MenuItem onClick={handleClose}> 1달 </MenuItem>
                                         </Menu>
                                     </Grid>
                                 </Grid>
