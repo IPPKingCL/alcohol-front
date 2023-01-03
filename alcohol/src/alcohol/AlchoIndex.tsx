@@ -9,6 +9,8 @@ const AlchoIndex = () =>{
     const recipe = () =>{
         navigate('/cocktail/recipe/all')
     }
+
+    
     return (
         <div>
             <h2>술 정보</h2>
@@ -22,8 +24,7 @@ const AlchoIndex = () =>{
             <div>
                 <img onClick={recipe} src="https://myhsproject.s3.ap-northeast-2.amazonaws.com/istockphoto-1302161390-612x612.jpg"/>
                 <strong>홈텐딩을 위한 칵테일 레시피</strong>
-            </div>
-            
+            </div>            
         </div>
     )
 }

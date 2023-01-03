@@ -80,10 +80,16 @@ const TodayAlchoCard = ({ isLoading }) => {
                 <CardWrapper border={false} content={false}>
                     <Box sx={{ p: 2.25 }}>
                         <Grid container direction="column">
+                            <Typography align='center' paragraph variant='h4' sx={{
+                                marginRight:"2rem",
+                                color:"yellow"
+                            }}>
+                                오늘의 술
+                            </Typography>
                             <Grid item>
                                 <Grid container alignItems="center">
                                     <Grid item>
-                                        <Carousel autoPlay sx={{width : "400px"}}>
+                                        <Carousel autoPlay sx={{ width: "400px" }}>
                                             {
                                                 items.map((item, i) => <img className="todayAlcho" src={item.src}></img>)
                                             }
