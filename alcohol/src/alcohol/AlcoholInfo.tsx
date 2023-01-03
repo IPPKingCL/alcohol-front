@@ -73,7 +73,7 @@ function AlcoholInfo(){
                 category='럼';
                 break;
             case 'D':
-                category='데낄라';
+                category='데킬라';
                 break;
             case 'WI':
                 category='와인';
