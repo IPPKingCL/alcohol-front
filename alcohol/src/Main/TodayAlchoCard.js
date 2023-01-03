@@ -10,16 +10,6 @@ import MainCard from '../ui-component/cards/MainCard';
 import SkeletonEarningCard from '../ui-component/cards/Skeleton/EarningCard';
 
 import Carousel from 'react-material-ui-carousel'
-import { Paper, Button } from '@mui/material'
-
-// assets
-import EarningIcon from './earning.svg';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-import GetAppTwoToneIcon from '@mui/icons-material/GetAppOutlined';
-import FileCopyTwoToneIcon from '@mui/icons-material/FileCopyOutlined';
-import PictureAsPdfTwoToneIcon from '@mui/icons-material/PictureAsPdfOutlined';
-import ArchiveTwoToneIcon from '@mui/icons-material/ArchiveOutlined';
 
 
 const CardWrapper = styled(MainCard)(({ theme }) => ({

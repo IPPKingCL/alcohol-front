@@ -77,5 +77,8 @@ export default Main;
 
 10. 스크롤 상단 버튼 + (+)플러스 메뉴 만들기
 
+11. https://namu.wiki/w/%EC%B9%B5%ED%85%8C%EC%9D%BC
+
+-> 칵테일 정보 받아서 db 저장하기
 
 */
