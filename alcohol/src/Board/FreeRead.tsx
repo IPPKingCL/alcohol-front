@@ -70,7 +70,7 @@ function FreeRead(){
         }).then((res)=>res.json())
         .then((res) => {
             if(res.success){
-                alert("추천되었습니다");
+                alert(res.msg);
             }else{
                 if(res.message=='Unauthorized'){
                     alert('로그인 후 이용 가능합니다')
