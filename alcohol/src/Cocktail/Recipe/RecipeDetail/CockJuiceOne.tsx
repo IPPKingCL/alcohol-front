@@ -9,7 +9,7 @@ const CockJuiceOne = (prop:any) => {
     
     useEffect(() => {
         setJuice(prop.data)
-        if(prop.data.amount>1000){
+        if(prop.data.amount>=1000){
             tempAmount = String(prop.data.amount/100);
             setAmount(tempAmount+"% 높이로 따라주세요");
         }else{
@@ -25,4 +25,4 @@ const CockJuiceOne = (prop:any) => {
     )
 }
 
-export default CockJuiceOne;
+export default CockJuiceOne; 
