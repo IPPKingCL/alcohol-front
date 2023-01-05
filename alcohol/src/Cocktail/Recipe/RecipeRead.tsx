@@ -11,6 +11,7 @@ import { Cock } from "../../interface/cocktail/Cock";
 import CockJuice from "./RecipeDetail/CockJuice";
 import CockAlcho from "./RecipeDetail/CockAlcho";
 import CocktailComment from "./RecipeComment/CocktailComment";
+import { getCookie } from "../../Common/Cookies";
 
 const labels: { [index: string]: string } = {
     0.5: 'Useless',
@@ -60,15 +61,31 @@ const RecipeRead = () =>{
     },[])
 
     const onclick = () =>{
-        alert(value);
+        fetch(addr+'/cocktail/rating',{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json",
+                Authorization:`Bearer ${getCookie('myToken')}`,
+            },
+            body : JSON.stringify({
+                cocktailId:id,
+                rating:value
+            })
+        }).then((res)=>res.json())
+        .then((res)=>{
+            if(res.success){
+                alert('평가되었습니다');
+                //다시 평가시 재평가 될 수 있도록 서버 수정 해야됨
+            }else{
+                alert(res.msg);
+            }
+        })
     }
     const [value, setValue] = React.useState<number | null>(2);
     const [hover, setHover] = React.useState(-1);
     return (
         <div>
-            
-
-                {loading ? <strong>loading...</strong>:
+            {loading ? <strong>loading...</strong>:
                 <>
                     <h2>{recipe?.cocktail.name}</h2>
                     <hr></hr>
@@ -101,7 +118,7 @@ const RecipeRead = () =>{
                 </>
                
                 
-                }
+            }            
         </div>
     )
 }
