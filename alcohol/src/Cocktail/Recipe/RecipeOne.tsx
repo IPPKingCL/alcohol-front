@@ -75,6 +75,8 @@ const RecipeOne = (prop: any) => {
             })
     }
 
+    
+
     const recipeOne = () => {
         navigate('/cocktail/recipeRead/' + prop.data.id);
     }

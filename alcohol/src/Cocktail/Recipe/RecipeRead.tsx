@@ -60,39 +60,13 @@ const RecipeRead = () =>{
     },[])
 
     const onclick = () =>{
-        console.log(recipe);
-        console.log(amount);
+        alert(value);
     }
     const [value, setValue] = React.useState<number | null>(2);
     const [hover, setHover] = React.useState(-1);
     return (
         <div>
-            {/*dsfadsjfkdasf
-            https://mui.com/material-ui/react-rating/
-            <Box
-                sx={{
-                    width: 200,
-                    display: 'flex',
-                    alignItems: 'center',
-                }}
-                >
-                <Rating
-                    name="hover-feedback"
-                    value={value}
-                    precision={0.5}
-                    getLabelText={getLabelText}
-                    onChange={(event, newValue) => {
-                    setValue(newValue);
-                    }}
-                    onChangeActive={(event, newHover) => {
-                    setHover(newHover);
-                    }}
-                    emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
-                />
-                {value !== null && (
-                    <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
-                )}
-                </Box>*/}
+            
 
                 {loading ? <strong>loading...</strong>:
                 <>
@@ -105,6 +79,22 @@ const RecipeRead = () =>{
                     <h3>레시피</h3>
                     <CockAlcho datas={recipe?.cockAlcho}/>
                     <CockJuice datas={recipe?.cockJuice}/>
+                    <Box
+                        sx={{
+                            '& > legend': { mt: 2 },
+                        }}
+                        >
+                        <Typography component="legend">Rating</Typography>
+                        <Rating
+                            name="simple-controlled"
+                            value={value}
+                            onChange={(event, newValue) => {
+                            setValue(newValue);
+                            }}
+                        />
+                        
+                        <button onClick={onclick}>별점주기</button>
+                    </Box>
                     <div>
                         <CocktailComment/>
                     </div>
