@@ -1,28 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { commentList } from '../interface/CommentList';
-import { addr } from '../Common/serverAddr';
-import CommentList from './CommentList';
-import '../css/footer.css';
-import { getCookie } from '../Common/Cookies';
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router";
+import { getCookie } from "../../../Common/Cookies";
+import { addr } from "../../../Common/serverAddr";
+import { commentList } from "../../../interface/CommentList";
+import CocktailCoList from "./CocktailCoList";
 
-function Comment(){
+const CocktailComment = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [content, setContent] = useState<string>();
+    const [comment, setComment] = useState<commentList[]>([]);
     const {id} = useParams();
-    const [comment,setComment] = useState<commentList[]>([]);
     const [commentNum,setCommentNum] = useState<number>();
     const navigate = useNavigate();
     
     const commentList = async () => {
-        fetch(addr+'/board/comment/'+id,{
+        fetch(addr+'/cocktail/comment/all/'+id,{
             method:"GET",
-            headers: {
+            headers:{
                 "Content-Type" : "application/json",
             }
         }).then((res)=>res.json())
         .then((res) => {
-            console.log(res);
             let i:number = 0;
             setCommentNum(res.length);
             for(i;i<res.length;i++){
@@ -46,15 +44,15 @@ function Comment(){
     },[]);
 
     const onRemove = (id:number) => {
-        //setComment(comment.filter(comment => comment.id !== id));
         setComment([]);
         commentList();
     }
     const onchange = (e:React.ChangeEvent<HTMLInputElement>) => {
         setContent(e.target.value);
     }
+
     const onclick = async () => { 
-        fetch(addr+'/board/insertComment',{
+        fetch(addr+'/cocktail/comment/insert',{
             method:"POST",
             headers:{
                 "Content-Type" : "application/json",
@@ -83,8 +81,7 @@ function Comment(){
             }
         })
     }
-
-    return(
+    return (
         <div id='wrapper'>
             <div>
                 <span>댓글 {commentNum}</span>
@@ -97,7 +94,7 @@ function Comment(){
             <hr></hr>
             {loading ? <strong>loading...</strong> :
                 <div>
-                    <CommentList
+                    <CocktailCoList
                         datas={comment}
                         onRemove={onRemove}
                     />
@@ -109,4 +106,4 @@ function Comment(){
     )
 }
 
-export default Comment;
+export default CocktailComment;
