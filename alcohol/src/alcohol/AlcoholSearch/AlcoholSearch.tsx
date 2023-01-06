@@ -1,4 +1,33 @@
+import { useEffect, useState } from "react";
+import { addr } from "../../Common/serverAddr";
+
 const AlcoholSearch = (props:any) => {
+    const [option,setOption] = useState<string[]>([]);
+    const [loading,setLoading] = useState<boolean>(true);
+    const list = async () => {
+        setOption([]);
+        fetch(addr+'/alcohol/category',{
+            method:"GET",
+            headers:{
+                "Content-Type":"application/json",
+            }
+        }).then((res)=>res.json())
+        .then((res)=>{
+            console.log(res);
+            for(let i = 0; i<res.length;i++){
+                setOption(option => [...option,res[i].category])
+            }
+            
+        })
+    }
+
+    useEffect(()=>{
+        list();
+    },[])
+
+    const test = () => {
+        console.log( option);
+    }
     return (
         <div>
             <div className='search-tool'>
@@ -19,6 +48,7 @@ const AlcoholSearch = (props:any) => {
                     <input type="text" id="search" onChange={props.onChangeSearch}></input>
                     <button type='submit' className='btn-submit'>검색</button>
                 </form>
+                <button onClick={test}>테스트</button>
             </div>
         </div>
     )

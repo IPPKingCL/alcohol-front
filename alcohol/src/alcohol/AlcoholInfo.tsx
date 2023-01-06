@@ -3,7 +3,7 @@ import { alcho } from "../interface/Alcho";
 import { addr } from "../Common/serverAddr";
 import AlcoholList from "./AlcoholList";
 import { setServers } from "dns/promises";
-import AlcoholSearch from "./AlcoholSearch";
+import AlcoholSearch from "./AlcoholSearch/AlcoholSearch";
 
 function AlcoholInfo(){
     const [arrData,setArrData] = useState<alcho[]>([])
