@@ -3,6 +3,7 @@ import { alcho } from "../interface/Alcho";
 import { addr } from "../Common/serverAddr";
 import AlcoholList from "./AlcoholList";
 import { setServers } from "dns/promises";
+import AlcoholSearch from "./AlcoholSearch";
 
 function AlcoholInfo(){
     const [arrData,setArrData] = useState<alcho[]>([])
@@ -45,7 +46,7 @@ function AlcoholInfo(){
 
     const onChange = (e:any) => {
         let category = '';
-        
+        console.log(e.target.value)
         switch(e.target.value){
             case 'A':
                 list();
@@ -133,7 +134,7 @@ function AlcoholInfo(){
     
     return(
         <div id='wrapper2'>
-            <div className='search-tool'>
+            {/*<div className='search-tool'>
                 <select name="selectBoard" id="selectBoard" className="select-search" onChange = {onChange}>
                     <option value="A">전체</option>
                     <option value="W">위스키</option>
@@ -151,8 +152,12 @@ function AlcoholInfo(){
                     <input type="text" id="search" value={search} onChange={onChangeSearch} ></input>
                     <button type='submit' className='btn-submit'>검색</button>
                 </form>
-            </div>
-
+        </div>*/}
+            <AlcoholSearch
+                onSearch={onSearch}
+                onChange={onChange}
+                onChangeSearch = {onChangeSearch}
+                />
             <hr></hr>
 
             {loading ? <strong>Loading...</strong> :
