@@ -88,7 +88,7 @@ const RecipeOne = (prop: any) => {
                     <CardHeader
                         avatar={
                             <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                                <img className="alcoholImg" src={recipeList?.imgUrl || ''} />
+                                <img loading='lazy' className="alcoholImg" src={recipeList?.imgUrl || ''} />
                             </Avatar>
                         }
                         action={
