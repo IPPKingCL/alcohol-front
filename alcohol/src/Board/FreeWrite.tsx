@@ -34,7 +34,7 @@ function FreeWrite() {
     const onclick = async () => {
 
 
-        console.log(board);
+       
         if (!board.title || !board.contents) {
             alert("제목과 내용을 입력해주세요");
             return;
