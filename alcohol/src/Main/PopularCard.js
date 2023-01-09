@@ -18,11 +18,15 @@ import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
 import KeyboardArrowUpOutlinedIcon from '@mui/icons-material/KeyboardArrowUpOutlined';
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 import { addr } from '../Common/serverAddr';
+import { useNavigate } from 'react-router-dom';
+import AnimateButton from '../ui-component/extended/AnimateButton';
 
 // ==============================|| DASHBOARD DEFAULT - POPULAR CARD ||============================== //
 
 const PopularCard = ({ isLoading }) => {
     const theme = useTheme();
+
+    const navigate = useNavigate();
 
     const [anchorEl, setAnchorEl] = useState(null);
 
@@ -68,6 +72,10 @@ const PopularCard = ({ isLoading }) => {
     useEffect(() => {
         fetchBoard();
     }, [])
+
+    const onClickNavigate = (id) => {
+        navigate("/free/read/" + id);
+    }
 
     return (
         <>
@@ -118,9 +126,9 @@ const PopularCard = ({ isLoading }) => {
                             <Grid item xs={12}>
                                 {boardItems.map((boardItems) => {
                                     return (
-                                        <Grid key={boardItems.id}>
+                                        <Grid key={boardItems.id} >
                                             <Divider sx={{ my: 1.5 }} />
-                                            <Grid container direction="column">
+                                            <Grid container direction="column" >
                                                 <Grid item>
                                                     <Grid container alignItems="center" justifyContent="space-between">
                                                         <Grid item>
@@ -132,12 +140,12 @@ const PopularCard = ({ isLoading }) => {
                                                             <Grid container alignItems="center" justifyContent="space-between">
                                                                 <Grid item>
                                                                     <Typography variant="subtitle1" color="inherit" sx={{
-                                                                        marginRight : '1rem',
-                                                                        color : 'blue'
+                                                                        marginRight: '1rem',
+                                                                        color: 'blue'
                                                                     }}>
                                                                         {boardItems.nickname}
                                                                     </Typography>
-                                                                </Grid>                                                                
+                                                                </Grid>
                                                                 <RecommendIcon />
                                                                 <Grid item>
                                                                     <Avatar
@@ -162,6 +170,16 @@ const PopularCard = ({ isLoading }) => {
                                                     <Typography variant="subtitle2" sx={{ color: 'success.dark' }}>
                                                         {boardItems.contents}
                                                     </Typography>
+                                                    <AnimateButton>
+                                                        <Button
+                                                            disableElevation                           
+                                                            fullWidth
+                                                            size="large"
+                                                            type="submit"
+                                                            variant="contained"
+                                                            color="secondary"
+                                                            onClick={onClickNavigate}>게시글 바로가기</Button>
+                                                    </AnimateButton>
                                                 </Grid>
                                             </Grid>
                                         </Grid>
