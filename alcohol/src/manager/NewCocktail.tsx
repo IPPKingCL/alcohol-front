@@ -35,7 +35,25 @@ const NewCocktail = () => {
     return(
         <div>
             {loading ? <strong>loading...</strong>:
-                <h1>관리자 페이지</h1>
+                <>
+                    <h1>관리자 페이지</h1>
+                    <hr></hr>
+                    칵테일 이름 : <input type="text"/><br></br>
+                    이미지 : <input accept="image/*" multiple type="file"/>
+
+                    <div>
+
+                    </div>
+
+                    <div>
+
+
+                    </div>
+
+                    <button>완료</button>
+                </>
+                
+                
                 
             }
         </div>
