@@ -66,10 +66,10 @@ const TodayAlchoCard = ({ isLoading }) => {
 
 
     const items = [
-        { src: "https://myhsproject.s3.ap-northeast-2.amazonaws.com/image_readmed_2017_354377_14958324642895797.jpeg" },
-        { src: "https://myhsproject.s3.ap-northeast-2.amazonaws.com/%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C+(2).jfif" },
-        { src: "https://myhsproject.s3.ap-northeast-2.amazonaws.com/img+(1).jpg" },
-        { src: "https://myhsproject.s3.ap-northeast-2.amazonaws.com/4135731d63daca9e71fb0f280fe4b25e697411015ec2429f3dca1514405d0137992d2ccc48bde4e3bf7632756e36ec340ef295ca1ccc3fa312a9f9f4db5c6c67382045e1bdc6e88267f288cf8d569457.jfif" },
+        { id : 1, src: "https://myhsproject.s3.ap-northeast-2.amazonaws.com/image_readmed_2017_354377_14958324642895797.jpeg" },
+        { id : 2,  src: "https://myhsproject.s3.ap-northeast-2.amazonaws.com/%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C+(2).jfif" },
+        { id : 3,  src: "https://myhsproject.s3.ap-northeast-2.amazonaws.com/img+(1).jpg" },
+        { id : 4,  src: "https://myhsproject.s3.ap-northeast-2.amazonaws.com/4135731d63daca9e71fb0f280fe4b25e697411015ec2429f3dca1514405d0137992d2ccc48bde4e3bf7632756e36ec340ef295ca1ccc3fa312a9f9f4db5c6c67382045e1bdc6e88267f288cf8d569457.jfif" },
     ];
 
     return (
@@ -91,7 +91,7 @@ const TodayAlchoCard = ({ isLoading }) => {
                                     <Grid item>
                                         <Carousel autoPlay sx={{ width: "400px" }}>
                                             {
-                                                items.map((item, i) => <img className="todayAlcho" src={item.src}></img>)
+                                                items.map((item, i) => <Grid key={item.id}><img className="todayAlcho" src={item.src}></img></Grid>)
                                             }
                                         </Carousel>
                                     </Grid>

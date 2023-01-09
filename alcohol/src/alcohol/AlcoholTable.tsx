@@ -114,7 +114,7 @@ function AlcoholTable(prop: any) {
                     />
                     <CardContent>
                         <Typography variant="body2" color="text.secondary">
-
+                            
                         </Typography>
                     </CardContent>
                     <CardActions disableSpacing>
