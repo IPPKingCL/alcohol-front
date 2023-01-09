@@ -37,6 +37,7 @@ import RecipeOne from './Cocktail/Recipe/RecipeOne';
 import RecipeRead from './Cocktail/Recipe/RecipeRead';
 import AlchoIndex from './alcohol/AlchoIndex';
 import Manager from './manager/Manager';
+import NewCocktail from './manager/NewCocktail';
 
 
 
@@ -80,6 +81,7 @@ function App() {
             <Route path='/myPage/modify' element={<MyPageModify />} />
 
             <Route path='/manager' element={<Manager/>}/>
+            <Route path='/manager/newCocktail' element={<NewCocktail/>}/>
           </Routes>
         </div>
         <LabelBottomNavigation />
