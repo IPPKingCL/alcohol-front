@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { CockAlcho } from "../../../interface/cocktail/CockAlcho";
 
 const CockAlchoOne = (prop:any) => {
-    console.log(prop.data);
     const [alcho,setAlcho] = useState<CockAlcho>()
     
     

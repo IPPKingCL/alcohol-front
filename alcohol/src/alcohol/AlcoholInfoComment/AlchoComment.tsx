@@ -24,7 +24,6 @@ function AlchoComment(){
             }
         }).then((res)=>res.json())
         .then((res) => {
-            console.log(res);
             let i:number = 0;
             setCommentNum(res.length);
             for(i;i<res.length;i++){

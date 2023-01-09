@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { CockJuice } from "../../../interface/cocktail/CockJuice";
 
 const CockJuiceOne = (prop:any) => {
-    console.log(prop.data);
+    
     const [juice,setJuice] = useState<CockJuice>()
     const [amount, setAmount] = useState<string>();
     let tempAmount ='';

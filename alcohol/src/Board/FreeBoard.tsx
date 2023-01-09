@@ -77,7 +77,6 @@ function FreeBoard() {
     }
 
     const onChangeBoard = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        console.log(e.target.value);
         const tag = e.target.value;
         if (tag === 'D') {
             list();

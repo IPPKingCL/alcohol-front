@@ -7,10 +7,8 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 
 function CommentOne(prop:any){
-    console.log(prop)
     const navigate = useNavigate();
     const onclick = async () => {
-        console.log(prop.data.userId)
         fetch(addr + '/board/deleteComment',{
             method:"POST",
             headers:{

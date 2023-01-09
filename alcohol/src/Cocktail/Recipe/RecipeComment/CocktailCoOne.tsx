@@ -8,7 +8,6 @@ import { addr } from '../../../Common/serverAddr';
 const CocktailCoOne = (prop:any) => {
     const navigate = useNavigate();
     const onclick = async () => {
-        console.log(prop.data.userId)
         fetch(addr + '/cocktail/comment/delete',{
             method:"POST",
             headers:{
