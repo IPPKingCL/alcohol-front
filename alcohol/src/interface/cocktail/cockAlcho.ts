@@ -5,3 +5,4 @@ export interface CockAlcho{
     imgUrl:string;
     name:string;
 }
+
