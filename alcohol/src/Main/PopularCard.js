@@ -177,7 +177,7 @@ const PopularCard = ({ isLoading }) => {
                                                             size="large"
                                                             type="submit"
                                                             variant="contained"
-                                                            color="secondary"
+                                                            color="warning"
                                                             onClick={onClickNavigate}>게시글 바로가기</Button>
                                                     </AnimateButton>
                                                 </Grid>
