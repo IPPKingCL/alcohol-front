@@ -46,9 +46,9 @@ function AlcoholInfo(){
 
     const onChange = (e:any) => {
         let category = '';
-        console.log(e.target.value)
+        
         category = e.target.value;
-        console.log(category)
+        
         setLoading(true);
         setArrData([]);
         fetch(addr+'/alcohol/category/'+category,{

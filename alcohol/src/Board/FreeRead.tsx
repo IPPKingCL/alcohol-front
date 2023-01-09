@@ -60,7 +60,6 @@ function FreeRead(){
     }
 
     const recommend = () => {
-        console.log(id);
         fetch(addr+'/board/recommendBoard/'+id,{
             method :"Get",
             headers: {

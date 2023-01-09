@@ -12,11 +12,10 @@ const Recipe = () => {
     const list = async (id:string,category:string) => {
         setLoading(true);
         setRecipeList([]);
-        console.log(id);
-        console.log(id.toString.length);
+        
         if(id!==''){
             const numId = parseInt(id);
-            console.log("dfdfada"+numId)
+            
             fetch(addr+'/cocktail/alchoCock',{
                 method:"Post",
                 headers:{
@@ -35,7 +34,7 @@ const Recipe = () => {
                         await categoryAll(category);
                     }
                 }else{
-                    console.log(res);
+                    
                     setRecipeList(res);
                 }
                 
@@ -76,13 +75,12 @@ const Recipe = () => {
     }
 
     useEffect(() => {
-        console.log(id);
         if(id!==undefined){
             if(id==='all'){
                 allList();
             }else{
                 const param = id?.split('&');
-                console.log(param[0])
+                
                 list(param[0],param[1]);
             }
             

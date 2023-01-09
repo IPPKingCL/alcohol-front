@@ -23,7 +23,6 @@ function AlcoholDetail(prop:any){
             }
         }).then((res) => res.json())
         .then((res)=>{
-            console.log(res)
             setAlcoholData(res);
             if(res.color=='tp'){
                 setColor("Transparency(무색)")
