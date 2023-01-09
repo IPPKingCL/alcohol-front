@@ -90,7 +90,7 @@ function AlcoholTable(prop: any) {
                     <CardHeader
                         avatar={
                             <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                                <img className="alcoholImg" src={prop.data.imgUrl} />
+                                <img loading='lazy' className="alcoholImg" src={prop.data.imgUrl} />
                             </Avatar>
                         }
                         action={

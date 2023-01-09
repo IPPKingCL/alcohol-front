@@ -69,7 +69,10 @@ const RecipeOne = (prop: any) => {
             .then((res) => {
                 if (res.success) {
                     alert("추천완료")
-                } else {
+                }else if(res.message="Unauthorized"){
+                    alert('로그인 후 이용 가능합니다')
+                    navigate('/login');
+                }else {
                     alert(res.msg);
                 }
             })

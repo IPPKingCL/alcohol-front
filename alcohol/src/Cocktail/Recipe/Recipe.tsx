@@ -121,6 +121,7 @@ const Recipe = () => {
 
 
             {loading ? <strong>loading....</strong>:
+                
                 <RecipeListco
                     datas={recipeList}/>
             }
