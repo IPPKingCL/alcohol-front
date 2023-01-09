@@ -172,12 +172,15 @@ const PopularCard = ({ isLoading }) => {
                                                     </Typography>
                                                     <AnimateButton>
                                                         <Button
-                                                            disableElevation                           
-                                                            fullWidth
+                                                            disableElevation
                                                             size="large"
                                                             type="submit"
                                                             variant="contained"
                                                             color="warning"
+                                                            float="right"
+                                                            sx = {{
+                                                                float : 'right'
+                                                            }}
                                                             onClick={onClickNavigate}>게시글 바로가기</Button>
                                                     </AnimateButton>
                                                 </Grid>
