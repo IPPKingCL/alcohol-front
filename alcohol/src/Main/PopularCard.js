@@ -10,6 +10,7 @@ import BajajAreaChartCard from './BajajAreaChartCard';
 import MainCard from '../ui-component/cards/MainCard';
 import SkeletonPopularCard from '../ui-component/cards/Skeleton/PopularCard';
 import { gridSpacing } from '../store/constant';
+import RecommendIcon from '@mui/icons-material/Recommend';
 
 // assets
 import ChevronRightOutlinedIcon from '@mui/icons-material/ChevronRightOutlined';
@@ -55,7 +56,8 @@ const PopularCard = ({ isLoading }) => {
                         id: res[i].id,
                         title: res[i].title,
                         contents: res[i].contents,
-                        nickname: res[i].nickname
+                        nickname: res[i].nickname,
+                        recommend: res[i].recommend
                     }
                     setBoardItems(boardItems => [...boardItems, data])
                 }
@@ -116,7 +118,7 @@ const PopularCard = ({ isLoading }) => {
                             <Grid item xs={12}>
                                 {boardItems.map((boardItems) => {
                                     return (
-                                        <Grid>
+                                        <Grid key={boardItems.id}>
                                             <Divider sx={{ my: 1.5 }} />
                                             <Grid container direction="column">
                                                 <Grid item>
@@ -129,23 +131,27 @@ const PopularCard = ({ isLoading }) => {
                                                         <Grid item>
                                                             <Grid container alignItems="center" justifyContent="space-between">
                                                                 <Grid item>
-                                                                    <Typography variant="subtitle1" color="inherit">
-                                                                    {boardItems.nickname}
+                                                                    <Typography variant="subtitle1" color="inherit" sx={{
+                                                                        marginRight : '1rem',
+                                                                        color : 'blue'
+                                                                    }}>
+                                                                        {boardItems.nickname}
                                                                     </Typography>
-                                                                </Grid>
+                                                                </Grid>                                                                
+                                                                <RecommendIcon />
                                                                 <Grid item>
                                                                     <Avatar
                                                                         variant="rounded"
                                                                         sx={{
-                                                                            width: 16,
-                                                                            height: 16,
+                                                                            width: 24,
+                                                                            height: 24,
                                                                             borderRadius: '5px',
                                                                             backgroundColor: theme.palette.success.light,
                                                                             color: theme.palette.success.dark,
                                                                             ml: 2
                                                                         }}
                                                                     >
-                                                                        <KeyboardArrowUpOutlinedIcon fontSize="small" color="inherit" />
+                                                                        {boardItems.recommend}
                                                                     </Avatar>
                                                                 </Grid>
                                                             </Grid>
@@ -154,7 +160,7 @@ const PopularCard = ({ isLoading }) => {
                                                 </Grid>
                                                 <Grid item>
                                                     <Typography variant="subtitle2" sx={{ color: 'success.dark' }}>
-                                                    {boardItems.contents}
+                                                        {boardItems.contents}
                                                     </Typography>
                                                 </Grid>
                                             </Grid>
