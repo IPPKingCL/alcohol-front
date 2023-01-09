@@ -173,34 +173,34 @@ const PopularCard = ({ isLoading }) => {
                                                         textOverflow: 'ellipsis',
                                                         whiteSpace: 'nowrap',
                                                         width: '10rem'
-                                                        }}>
-                                                    {boardItems.contents}
-                                                </Typography>
-                                                <AnimateButton>
-                                                    <Button
-                                                        disableElevation
-                                                        size="medium"
-                                                        type="submit"
-                                                        variant="contained"
-                                                        color="warning"
-                                                        float="right"
-                                                        sx={{
-                                                            float: 'right'
-                                                        }}
-                                                        onClick={onClickNavigate}>바로가기</Button>
-                                                </AnimateButton>
+                                                    }}>
+                                                        {boardItems.contents}
+                                                    </Typography>
+                                                    <AnimateButton>
+                                                        <Button
+                                                            disableElevation
+                                                            size="medium"
+                                                            type="submit"
+                                                            variant="contained"
+                                                            color="warning"
+                                                            float="right"
+                                                            sx={{
+                                                                float: 'right'
+                                                            }}
+                                                            onClick={onClickNavigate(73)}>바로가기</Button>
+                                                    </AnimateButton>
+                                                </Grid>
                                             </Grid>
                                         </Grid>
-                                        </Grid>
-                            );
+                                    );
 
                                 })}
+                            </Grid>
                         </Grid>
-                    </Grid>
-                </CardContent>
+                    </CardContent>
                 </MainCard>
-    )
-}
+            )
+            }
         </>
     );
 };
