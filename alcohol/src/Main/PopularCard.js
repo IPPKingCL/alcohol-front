@@ -187,7 +187,7 @@ const PopularCard = ({ isLoading }) => {
                                                             sx={{
                                                                 float: 'right'
                                                             }}
-                                                            onClick={onClickNavigate(73)}>바로가기</Button>
+                                                            onClick={onClickNavigate}>바로가기</Button>
                                                     </AnimateButton>
                                                 </Grid>
                                             </Grid>
