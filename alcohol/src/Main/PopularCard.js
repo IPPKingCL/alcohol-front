@@ -167,34 +167,40 @@ const PopularCard = ({ isLoading }) => {
                                                     </Grid>
                                                 </Grid>
                                                 <Grid item>
-                                                    <Typography variant="subtitle2" sx={{ color: 'success.dark' }}>
-                                                        {boardItems.contents}
-                                                    </Typography>
-                                                    <AnimateButton>
-                                                        <Button
-                                                            disableElevation
-                                                            size="large"
-                                                            type="submit"
-                                                            variant="contained"
-                                                            color="warning"
-                                                            float="right"
-                                                            sx = {{
-                                                                float : 'right'
-                                                            }}
-                                                            onClick={onClickNavigate}>게시글 바로가기</Button>
-                                                    </AnimateButton>
-                                                </Grid>
+                                                    <Typography variant="subtitle2" sx={{
+                                                        color: 'success.dark',
+                                                        overflow: 'hidden',
+                                                        textOverflow: 'ellipsis',
+                                                        whiteSpace: 'nowrap',
+                                                        width: '10rem'
+                                                        }}>
+                                                    {boardItems.contents}
+                                                </Typography>
+                                                <AnimateButton>
+                                                    <Button
+                                                        disableElevation
+                                                        size="medium"
+                                                        type="submit"
+                                                        variant="contained"
+                                                        color="warning"
+                                                        float="right"
+                                                        sx={{
+                                                            float: 'right'
+                                                        }}
+                                                        onClick={onClickNavigate}>바로가기</Button>
+                                                </AnimateButton>
                                             </Grid>
                                         </Grid>
-                                    );
+                                        </Grid>
+                            );
 
                                 })}
-                            </Grid>
                         </Grid>
-                    </CardContent>
+                    </Grid>
+                </CardContent>
                 </MainCard>
-            )
-            }
+    )
+}
         </>
     );
 };
