@@ -41,7 +41,7 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 
 
 const RecipeOne = (prop: any) => {
-    console.log(prop.data)
+    
     const [recipeList, setRecipeList] = useState<RecipeList>();
     useEffect(() => {
         setRecipeList(prop.data);
