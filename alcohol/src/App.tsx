@@ -37,7 +37,7 @@ import RecipeOne from './Cocktail/Recipe/RecipeOne';
 import RecipeRead from './Cocktail/Recipe/RecipeRead';
 import AlchoIndex from './alcohol/AlchoIndex';
 import Manager from './manager/Manager';
-import NewCocktail from './manager/NewCocktail';
+import NewCocktail from './manager/new/NewCocktail';
 
 
 
