@@ -5,18 +5,12 @@ import { getCookie } from "../../Common/Cookies";
 import { addr } from "../../Common/serverAddr";
 import { alcho } from "../../interface/Alcho"
 import { CockJuice } from "../../interface/cocktail/CockJuice";
+import { InputItem } from "../../interface/manage/InputItem";
 import { Unit } from "../../interface/unit";
 import SearchOption from "./SearchOption";
 
 
-interface InputItem {
-    id: number;
-    name : number,
-    amount: number;//양
-    unit:number;
-    only:boolean;
 
-}
 
 const NewCocktail = () => {
     const [alcho, setAlcho] = useState<alcho[]>([]);
@@ -172,18 +166,74 @@ const NewCocktail = () => {
         inputItemsCopy[index].only = Boolean(e.target.value); // 그리고 해당 인덱스를 가진 <input>의 내용을 변경해주자 
         setInputItemsJuice(inputItemsCopy);		  // 그걸 InputItems 에 저장해주자
     }
+    
+    const [cocktail,setCocktail] = useState<string>('');
+    const insertCocktail = (e : React.ChangeEvent<HTMLInputElement>) => {
+        setCocktail(e.target.value);
+    }
+    const [selectedFile, setSelectedFile] = useState<any>('');
+    const handleFileInput = (e: any) => {
+        console.log("event : " + e);
+        const file = e.target.files[0];
+        console.log(file);
+        setSelectedFile(file);
+    }
+
     const test = () =>{
         console.log(inputItems);
         console.log(inputItemsJuice);
+        console.log(cocktail);
+        console.log(selectedFile)
     }
+
+    const insert = async () => {
+        if(!cocktail){
+            alert("이름을 입력해주세요");
+            return;
+        }else if(!selectedFile){
+            alert("사진을 넣어주세요");
+            return;
+        }else if(!inputItems){
+            alert("술 레시피를 알려주세요");
+            return;
+        }else if(!inputItemsJuice){
+            alert("음료 레시피를 알려주세요");
+            return;
+        }
+
+        fetch(addr + '/board/s3url',{
+            method:"GET",
+            headers : {
+                "Content-Type" : "application/json",
+            }
+        }).then((res) => res.json())
+        .then((res) => {
+            let imageUrl = '';
+            
+            fetch(res.data,{
+                method:"put",
+                headers : {
+                    "Content-Type": "multipart/form-data",
+                },
+                body : selectedFile
+            })
+            if(selectedFile.size>0){
+                imageUrl = res.data.split('?')[0];
+            }else{
+                alert('이미지 오류');
+                return;
+            }
+        })
+    }
+
     return (
         <div>
             {loading ? <strong>loading...</strong> :
                 <>
                     <h1>관리자 페이지</h1>
                     <hr></hr>
-                    칵테일 이름 : <input type="text" /><br></br>
-                    이미지 : <input accept="image/*" multiple type="file" />
+                    칵테일 이름 : <input type="text" onChange={insertCocktail}/><br></br>
+                    이미지 : <input accept="image/*" multiple type="file" onChange={handleFileInput}/>
 
                     <hr></hr>
 
