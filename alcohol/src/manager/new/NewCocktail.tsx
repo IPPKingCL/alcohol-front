@@ -12,7 +12,7 @@ import SearchOption from "./SearchOption";
 interface InputItem {
     id: number;
     name : number,
-    title: string;//양
+    amount: number;//양
     unit:number;
     only:boolean;
 
@@ -47,14 +47,14 @@ const NewCocktail = () => {
     
 
     const nextID = useRef<number>(1);
-    const [inputItems, setInputItems] = useState<InputItem[]>([{ id: 0, name:0, title: '' ,unit:0, only:false}]);
+    const [inputItems, setInputItems] = useState<InputItem[]>([{ id: 0, name:0, amount:0 ,unit:0, only:false}]);
 
     // 추가
     function addInput() {
         const input = {			  // 새로운 인풋객체를 하나 만들고,
             id: nextID.current,		  // id 값은 변수로 넣어주고,
             name:0,
-            title: '',              // 내용은 빈칸으로 만들자
+            amount:0,              // 내용은 빈칸으로 만들자
             unit:0,
             only:false			  
         };
@@ -84,7 +84,7 @@ const NewCocktail = () => {
 
         // 인풋배열을 copy 해주자
         const inputItemsCopy: InputItem[] = JSON.parse(JSON.stringify(inputItems));
-        inputItemsCopy[index].title = e.target.value; // 그리고 해당 인덱스를 가진 <input>의 내용을 변경해주자 
+        inputItemsCopy[index].amount = parseInt(e.target.value); // 그리고 해당 인덱스를 가진 <input>의 내용을 변경해주자 
         setInputItems(inputItemsCopy);		  // 그걸 InputItems 에 저장해주자
     }
 
@@ -112,14 +112,14 @@ const NewCocktail = () => {
     
     
     const nextIDJuice = useRef<number>(1);
-    const [inputItemsJuice, setInputItemsJuice] = useState<InputItem[]>([{ id: 0, name:0, title: '' ,unit:0, only:false}]);
+    const [inputItemsJuice, setInputItemsJuice] = useState<InputItem[]>([{ id: 0, name:0, amount:0 ,unit:0, only:false}]);
 
     // 추가
     function addInputJuice() {
         const input = {			  // 새로운 인풋객체를 하나 만들고,
             id: nextIDJuice.current,		  // id 값은 변수로 넣어주고,
             name:0,
-            title: '',			  // 내용은 빈칸으로 만들자
+            amount:0,			  // 내용은 빈칸으로 만들자
             unit:0,
             only:false
         };
@@ -140,7 +140,7 @@ const NewCocktail = () => {
 
         // 인풋배열을 copy 해주자
         const inputItemsCopy: InputItem[] = JSON.parse(JSON.stringify(inputItems));
-        inputItemsCopy[index].title = e.target.value; // 그리고 해당 인덱스를 가진 <input>의 내용을 변경해주자 
+        inputItemsCopy[index].amount = parseInt(e.target.value); // 그리고 해당 인덱스를 가진 <input>의 내용을 변경해주자 
         setInputItemsJuice(inputItemsCopy);		  // 그걸 InputItems 에 저장해주자
     }
 
@@ -174,7 +174,7 @@ const NewCocktail = () => {
                                     type="text"
                                     className={`title-${index}`}
                                     onChange={e => handleChange(e, index)}
-                                    value={item.title}
+                                    value={item.amount}
                                 />
                                 <select onChange={e => unitChange(e, index)}>
                                     {unit.map((data: any) => (
@@ -182,7 +182,7 @@ const NewCocktail = () => {
                                     ))}
                                 </select>
                                 only<input onChange={e =>onlyChange(e, index)}
-                                        type="radio"
+                                        type="checkBox"
                                     />                 
                                     
 
@@ -216,14 +216,14 @@ const NewCocktail = () => {
                                     type="text"
                                     className={`title-${index}`}
                                     onChange={e => handleChangeJuice(e, index)}
-                                    value={item.title}
+                                    value={item.amount}
                                 />
                                 <select>
                                     {unit.map((data: any) => (
                                         <SearchOption prop={data} key={data.id} />
                                     ))}
                                 </select>
-                                only<Radio></Radio>
+                                only<input type='radio'/>
 
 
                                 {index === 0 && inputItems.length < 4 && (
