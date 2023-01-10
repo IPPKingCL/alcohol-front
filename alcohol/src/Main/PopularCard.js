@@ -69,10 +69,19 @@ const PopularCard = ({ isLoading }) => {
             })
     }
 
+
+
+    const compactNumberFormatter = new Intl.NumberFormat('ko', {
+        notation: 'compact',
+    });
+
+    function compactNumber(number) {
+        return compactNumberFormatter.format(number);
+    }
     useEffect(() => {
         fetchBoard();
     }, [])
-    
+
     return (
         <>
             {isLoading ? (
@@ -147,15 +156,16 @@ const PopularCard = ({ isLoading }) => {
                                                                     <Avatar
                                                                         variant="rounded"
                                                                         sx={{
-                                                                            width: 24,
+                                                                            width: 'auto',
                                                                             height: 24,
+                                                                            padding: '1rem',
                                                                             borderRadius: '5px',
                                                                             backgroundColor: theme.palette.success.light,
                                                                             color: theme.palette.success.dark,
                                                                             ml: 2
                                                                         }}
                                                                     >
-                                                                        {boardItems.recommend}
+                                                                        {compactNumber(boardItems.recommend)}
                                                                     </Avatar>
                                                                 </Grid>
                                                             </Grid>
