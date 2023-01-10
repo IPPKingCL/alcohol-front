@@ -72,6 +72,39 @@ const NewCocktail = () => {
         inputItemsCopy[index].title = e.target.value; // 그리고 해당 인덱스를 가진 <input>의 내용을 변경해주자 
         setInputItems(inputItemsCopy);		  // 그걸 InputItems 에 저장해주자
     }
+
+
+    const nextIDJuice = useRef<number>(1);
+    const [inputItemsJuice, setInputItemsJuice] = useState<InputItem[]>([{ id: 0, title: '' }]);
+
+    // 추가
+    function addInputJuice() {
+        const input = {			  // 새로운 인풋객체를 하나 만들고,
+            id: nextIDJuice.current,		  // id 값은 변수로 넣어주고,
+            title: '',			  // 내용은 빈칸으로 만들자
+        };
+
+        setInputItemsJuice([...inputItemsJuice, input]); // 기존 값에 새로운 인풋객체를 추가해준다.
+        nextIDJuice.current += 1; 		   // id값은 1씩 늘려준다.
+    }
+
+    // 삭제
+    function deleteInputJuice(index: number) {    // 인덱스 값을 받아서
+        setInputItemsJuice(inputItemsJuice.filter(item => item.id !== index)); // 인덱스 값과 같지 않은 애들만 남겨둔다
+    }
+
+    function handleChangeJuice( 	// ↓ 이벤트 객체를 받고, 인덱스를 받자
+        e: React.ChangeEvent<HTMLInputElement>, index: number
+    ) {
+        if (index > inputItems.length) return; // 혹시 모르니 예외처리
+
+        // 인풋배열을 copy 해주자
+        const inputItemsCopy: InputItem[] = JSON.parse(JSON.stringify(inputItems));
+        inputItemsCopy[index].title = e.target.value; // 그리고 해당 인덱스를 가진 <input>의 내용을 변경해주자 
+        setInputItemsJuice(inputItemsCopy);		  // 그걸 InputItems 에 저장해주자
+    }
+
+
     return (
         <div>
             {loading ? <strong>loading...</strong> :
@@ -125,7 +158,7 @@ const NewCocktail = () => {
                     <hr></hr>
 
                     <div>
-                        {inputItems.map((item, index) => (
+                        {inputItemsJuice.map((item, index) => (
                             <div key={index}>
                                 <div>음료 레시피</div>
                                 <select>
@@ -136,7 +169,7 @@ const NewCocktail = () => {
                                 <input
                                     type="text"
                                     className={`title-${index}`}
-                                    onChange={e => handleChange(e, index)}
+                                    onChange={e => handleChangeJuice(e, index)}
                                     value={item.title}
                                 />
                                 <select>
@@ -148,11 +181,11 @@ const NewCocktail = () => {
 
 
                                 {index === 0 && inputItems.length < 4 && (
-                                    <button onClick={addInput}> + </button>
+                                    <button onClick={addInputJuice}> + </button>
                                 )}
 
                                 {index > 0 && inputItems[index - 1] ? (
-                                    <button onClick={() => deleteInput(item.id)}> - </button>
+                                    <button onClick={() => deleteInputJuice(item.id)}> - </button>
                                 ) : (
                                     ''
                                 )}
