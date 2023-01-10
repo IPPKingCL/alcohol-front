@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // material-ui
 import { styled, useTheme } from '@mui/material/styles';
@@ -10,6 +10,7 @@ import MainCard from '../ui-component/cards/MainCard';
 import SkeletonEarningCard from '../ui-component/cards/Skeleton/EarningCard';
 
 import Carousel from 'react-material-ui-carousel'
+import { addr } from '../Common/serverAddr';
 
 
 const CardWrapper = styled(MainCard)(({ theme }) => ({
@@ -51,8 +52,9 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
 // ===========================|| DASHBOARD DEFAULT - EARNING CARD ||=========================== //
 
 const TodayAlchoCard = ({ isLoading }) => {
-    const theme = useTheme();
 
+    const theme = useTheme();
+    
     const [anchorEl, setAnchorEl] = useState(null);
 
     const handleClick = (event) => {
@@ -65,19 +67,47 @@ const TodayAlchoCard = ({ isLoading }) => {
 
 
 
-    const items = [
-        { id : 1, src: "https://myhsproject.s3.ap-northeast-2.amazonaws.com/image_readmed_2017_354377_14958324642895797.jpeg" },
-        { id : 2,  src: "https://myhsproject.s3.ap-northeast-2.amazonaws.com/%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C+(2).jfif" },
-        { id : 3,  src: "https://myhsproject.s3.ap-northeast-2.amazonaws.com/img+(1).jpg" },
-        { id : 4,  src: "https://myhsproject.s3.ap-northeast-2.amazonaws.com/4135731d63daca9e71fb0f280fe4b25e697411015ec2429f3dca1514405d0137992d2ccc48bde4e3bf7632756e36ec340ef295ca1ccc3fa312a9f9f4db5c6c67382045e1bdc6e88267f288cf8d569457.jfif" },
-    ];
+    const [image, setImage] = useState([]);
+
+
+    const items = [];
+
+    const fetchImage = () => {
+        fetch(addr + '/cocktail/rating/day', {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        }).then(res => res.json())
+            .then((res) => {
+                console.log(res);
+                setImage([]);
+                for (let i = 0; i < res.length; i++) {
+                    const data = {
+                        cocktailId: res[i].cocktailId,
+                        cnt: res[i].cnt,
+                        imgUrl: res[i].imgUrl,
+                        name: res[i].name                        
+                    }
+                    items.push({id : data.cocktailId, src : data.imgUrl});
+                    setImage(image => [...image, data.imgUrl])
+                }
+            })
+    }
+
+    useEffect(() => {
+        fetchImage();
+    }, [])
+
+
+    
 
     return (
         <>
             {isLoading ? (
                 <SkeletonEarningCard />
             ) : (
-                <CardWrapper border={false} content={false}>
+                <CardWrapper border={false} content={false} onClick={() => {console.log(image)}}>
                     <Box sx={{ p: 2.25 }}>
                         <Grid container direction="column">
                             <Typography align='center' paragraph variant='h4' sx={{
@@ -91,7 +121,7 @@ const TodayAlchoCard = ({ isLoading }) => {
                                     <Grid item>
                                         <Carousel autoPlay sx={{ width: "400px" }}>
                                             {
-                                                items.map((item, i) => <Grid key={item.id}><img className="todayAlcho" src={item.src}></img></Grid>)
+                                                image.map((img, i) => <Grid key={i}><img className="todayAlcho" src={img}></img></Grid>)
                                             }
                                         </Carousel>
                                     </Grid>
