@@ -133,20 +133,48 @@ const NewCocktail = () => {
         setInputItemsJuice(inputItemsJuice.filter(item => item.id !== index)); // 인덱스 값과 같지 않은 애들만 남겨둔다
     }
 
+    function optionChangeJuice( e: React.ChangeEvent<HTMLSelectElement>, index: number){
+        if (index > inputItemsJuice.length) return; // 혹시 모르니 예외처리
+
+        // 인풋배열을 copy 해주자
+        const inputItemsCopy: InputItem[] = JSON.parse(JSON.stringify(inputItemsJuice));
+        inputItemsCopy[index].name = parseInt(e.target.value); // 그리고 해당 인덱스를 가진 <input>의 내용을 변경해주자 
+        setInputItemsJuice(inputItemsCopy);		  // 그걸 InputItems 에 저장해주자
+    }
+
     function handleChangeJuice( 	// ↓ 이벤트 객체를 받고, 인덱스를 받자
         e: React.ChangeEvent<HTMLInputElement>, index: number
     ) {
-        if (index > inputItems.length) return; // 혹시 모르니 예외처리
+        if (index > inputItemsJuice.length) return; // 혹시 모르니 예외처리
 
         // 인풋배열을 copy 해주자
-        const inputItemsCopy: InputItem[] = JSON.parse(JSON.stringify(inputItems));
+        const inputItemsCopy: InputItem[] = JSON.parse(JSON.stringify(inputItemsJuice));
         inputItemsCopy[index].amount = parseInt(e.target.value); // 그리고 해당 인덱스를 가진 <input>의 내용을 변경해주자 
         setInputItemsJuice(inputItemsCopy);		  // 그걸 InputItems 에 저장해주자
     }
 
+    function unitChangeJuice( e: React.ChangeEvent<HTMLSelectElement>, index: number){
+        if (index > inputItemsJuice.length) return; // 혹시 모르니 예외처리
 
+        // 인풋배열을 copy 해주자
+        const inputItemsCopy: InputItem[] = JSON.parse(JSON.stringify(inputItemsJuice));
+        inputItemsCopy[index].unit = parseInt(e.target.value); // 그리고 해당 인덱스를 가진 <input>의 내용을 변경해주자 
+        setInputItemsJuice(inputItemsCopy);		  // 그걸 InputItems 에 저장해주자
+    }
+
+
+    function onlyChangeJuice( e: React.ChangeEvent<HTMLInputElement>, index: number){
+        if (index > inputItemsJuice.length) return; // 혹시 모르니 예외처리
+        
+        // 인풋배열을 copy 해주자
+        const inputItemsCopy: InputItem[] = JSON.parse(JSON.stringify(inputItemsJuice));
+        console.log(e.target.value)
+        inputItemsCopy[index].only = Boolean(e.target.value); // 그리고 해당 인덱스를 가진 <input>의 내용을 변경해주자 
+        setInputItemsJuice(inputItemsCopy);		  // 그걸 InputItems 에 저장해주자
+    }
     const test = () =>{
         console.log(inputItems);
+        console.log(inputItemsJuice);
     }
     return (
         <div>
@@ -207,7 +235,7 @@ const NewCocktail = () => {
                         {inputItemsJuice.map((item, index) => (
                             <div key={index}>
                                 <div>음료 레시피</div>
-                                <select>
+                                <select onChange={e => optionChangeJuice(e, index)}>
                                     {juice.map((data: any) => (
                                         <SearchOption prop={data} key={data.id} />
                                     ))}
@@ -218,13 +246,14 @@ const NewCocktail = () => {
                                     onChange={e => handleChangeJuice(e, index)}
                                     value={item.amount}
                                 />
-                                <select>
+                                <select onChange={e => unitChangeJuice(e, index)}>
                                     {unit.map((data: any) => (
                                         <SearchOption prop={data} key={data.id} />
                                     ))}
                                 </select>
-                                only<input type='radio'/>
-
+                                only<input onChange={e =>onlyChangeJuice(e, index)}
+                                        type="checkBox"
+                                    /> 
 
                                 {index === 0 && inputItems.length < 4 && (
                                     <button onClick={addInputJuice}> + </button>
