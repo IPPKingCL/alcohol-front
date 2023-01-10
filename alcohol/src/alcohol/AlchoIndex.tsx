@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router"
-import MainCard from "../ui-component/cards/MainCard";
 import { styled, useTheme } from '@mui/material/styles';
+import MainCard from '../ui-component/cards/MainCard';
+import { Box, Grid, Typography } from "@mui/material";
+import Carousel from "react-material-ui-carousel";
 
-const CardWrapper = styled(MainCard)(({ theme }) => ({
+const CardWrapper: any = styled(MainCard)(({ theme }: any) => ({
     backgroundColor: theme.palette.secondary.dark,
     color: '#fff',
     overflow: 'hidden',
@@ -12,7 +14,7 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
         position: 'absolute',
         width: 210,
         height: 210,
-        // background: theme.palette.secondary[800],
+        background: theme.palette.secondary,
         borderRadius: '50%',
         top: -85,
         right: -95,
@@ -26,7 +28,7 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
         position: 'absolute',
         width: 210,
         height: 210,
-        // background: theme.palette.secondary[800],
+        background: theme.palette.secondary,
         borderRadius: '50%',
         top: -125,
         right: -15,
@@ -37,6 +39,7 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
         }
     }
 }));
+
 
 const AlchoIndex = () => {
     const navigate = useNavigate();
@@ -51,17 +54,31 @@ const AlchoIndex = () => {
 
     return (
         <>
-            {/* <CardWrapper border={false} content={false}>
-
-
-            </CardWrapper> */}
             <h2>술 정보</h2>
-            <span>다양한 술 정보와 칵테일 레시피</span>
-            <hr></hr>
-            <div>
-                <img onClick={info} src="https://myhsproject.s3.ap-northeast-2.amazonaws.com/KakaoTalk_20221231_173124605.jpg" />
-                <strong>다양한 술을 알아보자</strong>
-            </div>
+            <CardWrapper border={false} content={false}>
+                <Box sx={{ p: 2.25 }}>
+                    <Grid container direction="column">
+                        <Typography align='center' paragraph variant='h6' sx={{
+                            marginRight: "2rem",
+                            color: "yellow"
+                        }}>
+                            다양한 술 정보와 칵테일 레시피
+                        </Typography>
+                    </Grid>
+                    <Grid container alignItems="center">
+                        <Grid item>
+                            <img onClick={info} src="https://myhsproject.s3.ap-northeast-2.amazonaws.com/KakaoTalk_20221231_173124605.jpg" />
+                            <Typography align='center' paragraph variant='h6' sx={{
+                                marginRight: "2rem",
+                                color: "yellow"
+                            }}>
+                                다양한 술을 알아보자
+                            </Typography>
+                        </Grid>
+                    </Grid>
+                </Box>
+            </CardWrapper>
+
             <hr></hr>
             <div>
                 <img onClick={recipe} src="https://myhsproject.s3.ap-northeast-2.amazonaws.com/istockphoto-1302161390-612x612.jpg" />
