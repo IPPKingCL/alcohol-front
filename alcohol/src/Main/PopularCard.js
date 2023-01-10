@@ -72,11 +72,7 @@ const PopularCard = ({ isLoading }) => {
     useEffect(() => {
         fetchBoard();
     }, [])
-
-    const onClickNavigate = (id) => {
-        navigate("/free/read/" + id);
-    }
-
+    
     return (
         <>
             {isLoading ? (
@@ -187,7 +183,9 @@ const PopularCard = ({ isLoading }) => {
                                                             sx={{
                                                                 float: 'right'
                                                             }}
-                                                            onClick={onClickNavigate}>바로가기</Button>
+                                                            onClick={() => {
+                                                                navigate("/free/read/" + boardItems.id);
+                                                            }}>바로가기</Button>
                                                     </AnimateButton>
                                                 </Grid>
                                             </Grid>
