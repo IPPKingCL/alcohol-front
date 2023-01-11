@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router"
 import { styled, useTheme } from '@mui/material/styles';
 import MainCard from '../ui-component/cards/MainCard';
-import { Box, Grid, Typography } from "@mui/material";
-import Carousel from "react-material-ui-carousel";
+import { Box, Button, Grid, Typography } from "@mui/material";
+import CardMedia from '@mui/material/CardMedia';
+import AnimateButtonT from "../ui-component/extended/AnimateButtonT";
 
 const CardWrapper: any = styled(MainCard)(({ theme }: any) => ({
     backgroundColor: theme.palette.secondary.dark,
@@ -54,36 +55,109 @@ const AlchoIndex = () => {
 
     return (
         <>
-            <h2>술 정보</h2>
             <CardWrapper border={false} content={false}>
-                <Box sx={{ p: 2.25 }}>
+                <Box>
                     <Grid container direction="column">
-                        <Typography align='center' paragraph variant='h6' sx={{
-                            marginRight: "2rem",
+                        <Typography align='center' paragraph variant='h4' sx={{
+                            marginTop: "1rem",
+                            color: "yellow"
+                        }}>
+                            술 정보
+                        </Typography>
+                    </Grid>
+                </Box>
+                <Box>
+                    <Grid container direction="column">
+                        <Typography align='center' paragraph variant='h6' sx={{                            
                             color: "yellow"
                         }}>
                             다양한 술 정보와 칵테일 레시피
                         </Typography>
                     </Grid>
+                </Box>
+            </CardWrapper>
+            <hr />
+            <CardWrapper border={false} content={false}>
+                <Box sx={{ p: 2.25 }}>
                     <Grid container alignItems="center">
                         <Grid item>
-                            <img onClick={info} src="https://myhsproject.s3.ap-northeast-2.amazonaws.com/KakaoTalk_20221231_173124605.jpg" />
-                            <Typography align='center' paragraph variant='h6' sx={{
-                                marginRight: "2rem",
-                                color: "yellow"
-                            }}>
-                                다양한 술을 알아보자
-                            </Typography>
+                            <CardMedia
+                                component="img"
+                                height="400vh"
+                                width="400vh"
+                                image="https://myhsproject.s3.ap-northeast-2.amazonaws.com/KakaoTalk_20221231_173124605.jpg"
+                                alt="Paella dish"
+                                sx={{
+                                    objectFit: "fill",
+                                    borderRadius: "20px"                                    
+                                }}
+                            />
+                            <AnimateButtonT>
+                                <Button
+                                    disableElevation
+                                    fullWidth
+                                    size="medium"
+                                    type="submit"
+                                    variant="contained"
+                                    color="warning"
+                                    onClick={info}
+                                    sx={{
+                                        float: 'center',
+                                        marginTop: '1rem'                       
+                                    }}>
+                                    <Typography align='center' sx={{
+                                        color: "yellow"
+                                    }}>
+                                        다양한 술 알아보기
+                                    </Typography>
+                                </Button>
+                            </AnimateButtonT>
                         </Grid>
                     </Grid>
                 </Box>
             </CardWrapper>
 
-            <hr></hr>
-            <div>
-                <img onClick={recipe} src="https://myhsproject.s3.ap-northeast-2.amazonaws.com/istockphoto-1302161390-612x612.jpg" />
-                <strong>홈텐딩을 위한 칵테일 레시피</strong>
-            </div>
+            <hr />
+
+            <CardWrapper border={false} content={false}>
+                <Box sx={{ p: 2.25 }}>
+                    <Grid container alignItems="center">
+                        <Grid item>
+                            <CardMedia
+                                component="img"
+                                height="400vh"
+                                width="400vh"
+                                image="https://myhsproject.s3.ap-northeast-2.amazonaws.com/istockphoto-1302161390-612x612.jpg"
+                                alt="Paella dish"
+                                sx={{
+                                    objectFit: "fill",
+                                    borderRadius: "20px"
+                                }}
+                            />
+                            <AnimateButtonT>
+                                <Button
+                                    disableElevation
+                                    fullWidth
+                                    size="medium"
+                                    type="submit"
+                                    variant="contained"
+                                    color="warning"
+                                    onClick={recipe}
+                                    sx={{
+                                        float: 'center',
+                                        marginTop: '1rem'
+                                    }}>
+                                    <Typography align='center' sx={{
+                                        color: "yellow"
+                                    }}>
+                                        홈텐딩을 위한 칵테일 레시피
+                                    </Typography>
+                                </Button>
+                            </AnimateButtonT>
+                        </Grid>
+                    </Grid>
+                </Box>
+            </CardWrapper>
         </>
     )
 }
