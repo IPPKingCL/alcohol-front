@@ -15,7 +15,6 @@ function MyPage(){
     const navigate = useNavigate();
     let copy;
     const user = () =>{
-        console.log(getCookie('myToken'))
         
         fetch(addr+'/user/selectUser',{
             method:'GET',
@@ -32,9 +31,8 @@ function MyPage(){
             }
             if(res.message=='Unauthorized'){
                 alert('로그인 후 이용 가능합니다')
-                navigate('/LoginTest');
+                navigate('/Login');
             }
-            console.log(res);
             setUserData(res);
             favoriteList();
             
