@@ -44,8 +44,8 @@ const RecipeRead = () =>{
             }
         }).then((res)=>res.json())
         .then((res)=>{
-            console.log(res);
-            if(res['cocktail'].only){
+            console.log(res['cockAlcho'].only);
+            if(res['cockAlcho'][0].only){
                 res['cocktail'].only = '해당 술만 사용할 수 있는 칵테일입니다'
             }else{
                 res['cocktail'].only = '같은 종류의 술을 대체하여 사용할 수 있는 칵테일입니다.'

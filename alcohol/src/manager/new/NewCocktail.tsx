@@ -41,7 +41,7 @@ const NewCocktail = () => {
     
 
     const nextID = useRef<number>(1);
-    const [inputItems, setInputItems] = useState<InputItem[]>([{ id: 0, name:0, amount:0 ,unit:0, only:false}]);
+    const [inputItems, setInputItems] = useState<InputItem[]>([{ id: 0, name:0, amount:0 ,unit:1, only:false}]);
 
     // 추가
     function addInput() {
@@ -49,7 +49,7 @@ const NewCocktail = () => {
             id: nextID.current,		  // id 값은 변수로 넣어주고,
             name:0,
             amount:0,              // 내용은 빈칸으로 만들자
-            unit:0,
+            unit:1,
             only:false			  
         };
 
@@ -106,7 +106,7 @@ const NewCocktail = () => {
     
     
     const nextIDJuice = useRef<number>(1);
-    const [inputItemsJuice, setInputItemsJuice] = useState<InputItem[]>([{ id: 0, name:0, amount:0 ,unit:0, only:false}]);
+    const [inputItemsJuice, setInputItemsJuice] = useState<InputItem[]>([{ id: 0, name:0, amount:0 ,unit:1, only:false}]);
 
     // 추가
     function addInputJuice() {
@@ -114,7 +114,7 @@ const NewCocktail = () => {
             id: nextIDJuice.current,		  // id 값은 변수로 넣어주고,
             name:0,
             amount:0,			  // 내용은 빈칸으로 만들자
-            unit:0,
+            unit:1,
             only:false
         };
 
