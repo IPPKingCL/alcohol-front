@@ -179,6 +179,10 @@ const NewCocktail = () => {
         setSelectedFile(file);
     }
 
+    const [dosu,setDosu] = useState<number>();
+    const dosuChange = (e : React.ChangeEvent<HTMLInputElement>) => {
+        setDosu(parseInt(e.target.value));
+    }
     const test = () =>{
         console.log(inputItems);
         console.log(inputItemsJuice);
@@ -223,6 +227,29 @@ const NewCocktail = () => {
                 alert('이미지 오류');
                 return;
             }
+
+            fetch(addr + '/admin/insert',{
+                method : "POST",
+                headers : {
+                    "Content-Type": "application/json",
+                    "Authorization":`Bearer ${getCookie('myToken')}`,
+                },
+                body : JSON.stringify({
+                    name:cocktail,
+                    imgUrl:imageUrl,
+                    dosu : dosu,
+                    alcho : inputItems,
+                    juice : inputItemsJuice
+                })
+            }).then((res) => res.json())
+            .then((res)=>{
+                if(res.success){
+                    alert('등록 성공');
+                    
+                }else{
+                    alert(res.msg);
+                }
+            })
         })
     }
 
@@ -234,7 +261,7 @@ const NewCocktail = () => {
                     <hr></hr>
                     칵테일 이름 : <input type="text" onChange={insertCocktail}/><br></br>
                     이미지 : <input accept="image/*" multiple type="file" onChange={handleFileInput}/>
-
+                    도수 : <input type = "text" onChange={dosuChange}/>
                     <hr></hr>
 
 
@@ -321,7 +348,7 @@ const NewCocktail = () => {
                         ))}
                     </div>
                     <hr></hr>
-                    <button onClick={test}>완료</button>
+                    <button onClick={insert}>완료</button>
                 </>
 
 
