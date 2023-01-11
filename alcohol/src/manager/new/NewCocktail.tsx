@@ -5,18 +5,12 @@ import { getCookie } from "../../Common/Cookies";
 import { addr } from "../../Common/serverAddr";
 import { alcho } from "../../interface/Alcho"
 import { CockJuice } from "../../interface/cocktail/CockJuice";
+import { InputItem } from "../../interface/manage/InputItem";
 import { Unit } from "../../interface/unit";
 import SearchOption from "./SearchOption";
 
 
-interface InputItem {
-    id: number;
-    name : number,
-    title: string;//양
-    unit:number;
-    only:boolean;
 
-}
 
 const NewCocktail = () => {
     const [alcho, setAlcho] = useState<alcho[]>([]);
@@ -47,14 +41,14 @@ const NewCocktail = () => {
     
 
     const nextID = useRef<number>(1);
-    const [inputItems, setInputItems] = useState<InputItem[]>([{ id: 0, name:0, title: '' ,unit:0, only:false}]);
+    const [inputItems, setInputItems] = useState<InputItem[]>([{ id: 0, name:0, amount:0 ,unit:0, only:false}]);
 
     // 추가
     function addInput() {
         const input = {			  // 새로운 인풋객체를 하나 만들고,
             id: nextID.current,		  // id 값은 변수로 넣어주고,
             name:0,
-            title: '',              // 내용은 빈칸으로 만들자
+            amount:0,              // 내용은 빈칸으로 만들자
             unit:0,
             only:false			  
         };
@@ -84,7 +78,7 @@ const NewCocktail = () => {
 
         // 인풋배열을 copy 해주자
         const inputItemsCopy: InputItem[] = JSON.parse(JSON.stringify(inputItems));
-        inputItemsCopy[index].title = e.target.value; // 그리고 해당 인덱스를 가진 <input>의 내용을 변경해주자 
+        inputItemsCopy[index].amount = parseInt(e.target.value); // 그리고 해당 인덱스를 가진 <input>의 내용을 변경해주자 
         setInputItems(inputItemsCopy);		  // 그걸 InputItems 에 저장해주자
     }
 
@@ -112,14 +106,14 @@ const NewCocktail = () => {
     
     
     const nextIDJuice = useRef<number>(1);
-    const [inputItemsJuice, setInputItemsJuice] = useState<InputItem[]>([{ id: 0, name:0, title: '' ,unit:0, only:false}]);
+    const [inputItemsJuice, setInputItemsJuice] = useState<InputItem[]>([{ id: 0, name:0, amount:0 ,unit:0, only:false}]);
 
     // 추가
     function addInputJuice() {
         const input = {			  // 새로운 인풋객체를 하나 만들고,
             id: nextIDJuice.current,		  // id 값은 변수로 넣어주고,
             name:0,
-            title: '',			  // 내용은 빈칸으로 만들자
+            amount:0,			  // 내용은 빈칸으로 만들자
             unit:0,
             only:false
         };
@@ -133,29 +127,113 @@ const NewCocktail = () => {
         setInputItemsJuice(inputItemsJuice.filter(item => item.id !== index)); // 인덱스 값과 같지 않은 애들만 남겨둔다
     }
 
+    function optionChangeJuice( e: React.ChangeEvent<HTMLSelectElement>, index: number){
+        if (index > inputItemsJuice.length) return; // 혹시 모르니 예외처리
+
+        // 인풋배열을 copy 해주자
+        const inputItemsCopy: InputItem[] = JSON.parse(JSON.stringify(inputItemsJuice));
+        inputItemsCopy[index].name = parseInt(e.target.value); // 그리고 해당 인덱스를 가진 <input>의 내용을 변경해주자 
+        setInputItemsJuice(inputItemsCopy);		  // 그걸 InputItems 에 저장해주자
+    }
+
     function handleChangeJuice( 	// ↓ 이벤트 객체를 받고, 인덱스를 받자
         e: React.ChangeEvent<HTMLInputElement>, index: number
     ) {
-        if (index > inputItems.length) return; // 혹시 모르니 예외처리
+        if (index > inputItemsJuice.length) return; // 혹시 모르니 예외처리
 
         // 인풋배열을 copy 해주자
-        const inputItemsCopy: InputItem[] = JSON.parse(JSON.stringify(inputItems));
-        inputItemsCopy[index].title = e.target.value; // 그리고 해당 인덱스를 가진 <input>의 내용을 변경해주자 
+        const inputItemsCopy: InputItem[] = JSON.parse(JSON.stringify(inputItemsJuice));
+        inputItemsCopy[index].amount = parseInt(e.target.value); // 그리고 해당 인덱스를 가진 <input>의 내용을 변경해주자 
+        setInputItemsJuice(inputItemsCopy);		  // 그걸 InputItems 에 저장해주자
+    }
+
+    function unitChangeJuice( e: React.ChangeEvent<HTMLSelectElement>, index: number){
+        if (index > inputItemsJuice.length) return; // 혹시 모르니 예외처리
+
+        // 인풋배열을 copy 해주자
+        const inputItemsCopy: InputItem[] = JSON.parse(JSON.stringify(inputItemsJuice));
+        inputItemsCopy[index].unit = parseInt(e.target.value); // 그리고 해당 인덱스를 가진 <input>의 내용을 변경해주자 
         setInputItemsJuice(inputItemsCopy);		  // 그걸 InputItems 에 저장해주자
     }
 
 
+    function onlyChangeJuice( e: React.ChangeEvent<HTMLInputElement>, index: number){
+        if (index > inputItemsJuice.length) return; // 혹시 모르니 예외처리
+        
+        // 인풋배열을 copy 해주자
+        const inputItemsCopy: InputItem[] = JSON.parse(JSON.stringify(inputItemsJuice));
+        console.log(e.target.value)
+        inputItemsCopy[index].only = Boolean(e.target.value); // 그리고 해당 인덱스를 가진 <input>의 내용을 변경해주자 
+        setInputItemsJuice(inputItemsCopy);		  // 그걸 InputItems 에 저장해주자
+    }
+    
+    const [cocktail,setCocktail] = useState<string>('');
+    const insertCocktail = (e : React.ChangeEvent<HTMLInputElement>) => {
+        setCocktail(e.target.value);
+    }
+    const [selectedFile, setSelectedFile] = useState<any>('');
+    const handleFileInput = (e: any) => {
+        console.log("event : " + e);
+        const file = e.target.files[0];
+        console.log(file);
+        setSelectedFile(file);
+    }
+
     const test = () =>{
         console.log(inputItems);
+        console.log(inputItemsJuice);
+        console.log(cocktail);
+        console.log(selectedFile)
     }
+
+    const insert = async () => {
+        if(!cocktail){
+            alert("이름을 입력해주세요");
+            return;
+        }else if(!selectedFile){
+            alert("사진을 넣어주세요");
+            return;
+        }else if(!inputItems){
+            alert("술 레시피를 알려주세요");
+            return;
+        }else if(!inputItemsJuice){
+            alert("음료 레시피를 알려주세요");
+            return;
+        }
+
+        fetch(addr + '/board/s3url',{
+            method:"GET",
+            headers : {
+                "Content-Type" : "application/json",
+            }
+        }).then((res) => res.json())
+        .then((res) => {
+            let imageUrl = '';
+            
+            fetch(res.data,{
+                method:"put",
+                headers : {
+                    "Content-Type": "multipart/form-data",
+                },
+                body : selectedFile
+            })
+            if(selectedFile.size>0){
+                imageUrl = res.data.split('?')[0];
+            }else{
+                alert('이미지 오류');
+                return;
+            }
+        })
+    }
+
     return (
         <div>
             {loading ? <strong>loading...</strong> :
                 <>
                     <h1>관리자 페이지</h1>
                     <hr></hr>
-                    칵테일 이름 : <input type="text" /><br></br>
-                    이미지 : <input accept="image/*" multiple type="file" />
+                    칵테일 이름 : <input type="text" onChange={insertCocktail}/><br></br>
+                    이미지 : <input accept="image/*" multiple type="file" onChange={handleFileInput}/>
 
                     <hr></hr>
 
@@ -174,7 +252,7 @@ const NewCocktail = () => {
                                     type="text"
                                     className={`title-${index}`}
                                     onChange={e => handleChange(e, index)}
-                                    value={item.title}
+                                    value={item.amount}
                                 />
                                 <select onChange={e => unitChange(e, index)}>
                                     {unit.map((data: any) => (
@@ -182,7 +260,7 @@ const NewCocktail = () => {
                                     ))}
                                 </select>
                                 only<input onChange={e =>onlyChange(e, index)}
-                                        type="radio"
+                                        type="checkBox"
                                     />                 
                                     
 
@@ -207,7 +285,7 @@ const NewCocktail = () => {
                         {inputItemsJuice.map((item, index) => (
                             <div key={index}>
                                 <div>음료 레시피</div>
-                                <select>
+                                <select onChange={e => optionChangeJuice(e, index)}>
                                     {juice.map((data: any) => (
                                         <SearchOption prop={data} key={data.id} />
                                     ))}
@@ -216,15 +294,16 @@ const NewCocktail = () => {
                                     type="text"
                                     className={`title-${index}`}
                                     onChange={e => handleChangeJuice(e, index)}
-                                    value={item.title}
+                                    value={item.amount}
                                 />
-                                <select>
+                                <select onChange={e => unitChangeJuice(e, index)}>
                                     {unit.map((data: any) => (
                                         <SearchOption prop={data} key={data.id} />
                                     ))}
                                 </select>
-                                only<Radio></Radio>
-
+                                only<input onChange={e =>onlyChangeJuice(e, index)}
+                                        type="checkBox"
+                                    /> 
 
                                 {index === 0 && inputItems.length < 4 && (
                                     <button onClick={addInputJuice}> + </button>
