@@ -83,7 +83,7 @@ const CocktailComment = () => {
     }
     return (
         <div id='wrapper'>
-            <div>
+            <div style={{marginBlock : '1.4rem'}}>
                 <span>댓글 {commentNum}</span>
                 <hr></hr>
             </div>
@@ -93,7 +93,7 @@ const CocktailComment = () => {
             </div>
             <hr></hr>
             {loading ? <strong>loading...</strong> :
-                <div>
+                <div style={{overflow : 'scroll'}}>
                     <CocktailCoList
                         datas={comment}
                         onRemove={onRemove}
