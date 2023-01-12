@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
+import CockSkeleton from "../../../Common/CockSkeleton";
 import { getCookie } from "../../../Common/Cookies";
 import { addr } from "../../../Common/serverAddr";
 import { commentList } from "../../../interface/CommentList";
@@ -92,7 +93,7 @@ const CocktailComment = () => {
                 <button className = "btn-submit" onClick={onclick}>등록</button>
             </div>
             <hr></hr>
-            {loading ? <strong>loading...</strong> :
+            {loading ? <CockSkeleton/> :
                 <div style={{overflow : 'scroll'}}>
                     <CocktailCoList
                         datas={comment}

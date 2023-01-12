@@ -37,11 +37,11 @@ function AlcoholInfo(){
             }
             
         })
-        setLoading(false);
     }
 
     useEffect(() => {
-        list();
+        list();        
+        setLoading(false);
     },[]);
 
     const onChange = (e:any) => {
