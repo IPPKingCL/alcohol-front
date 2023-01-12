@@ -30,7 +30,7 @@ const CockJuiceOne = (prop: any) => {
                     objectFit: "fill",
                     borderRadius: "20px"
                 }}
-            />
+            /><br/>
             {juice?.name}을(를) {amount}
         </div>
     )

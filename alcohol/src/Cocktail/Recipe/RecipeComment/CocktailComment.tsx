@@ -1,3 +1,4 @@
+import { Box, Button, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import CockSkeleton from "../../../Common/CockSkeleton";
@@ -88,10 +89,30 @@ const CocktailComment = () => {
                 <span>댓글 {commentNum}</span>
                 <hr></hr>
             </div>
-            <div className="comment-box">
-                <input type="text" name="comment" className='select-search' value={content||''} onChange={onchange}></input>
-                <button className = "btn-submit" onClick={onclick}>등록</button>
-            </div>
+            <Box sx={{ p: 2.25 }}>
+                <TextField
+                    type="string"
+                    fullWidth
+                    id="outlined-basic"
+                    label="댓글 입력"
+                    multiline={true}
+                    variant="standard"
+                    value={content || ''}
+                    onChange={onchange}
+                    inputProps={{ maxLength: 50 }}
+                />
+                <Button
+                    disableElevation
+                    fullWidth
+                    size="large"
+                    type="submit"
+                    variant="contained"
+                    color="warning"
+                    onClick={onclick}
+                    sx={{
+                        marginBlock: "1rem",
+                    }}>등록</Button>
+            </Box>
             <hr></hr>
             {loading ? <CockSkeleton/> :
                 <div style={{overflow : 'scroll'}}>
