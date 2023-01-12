@@ -1,3 +1,4 @@
+import { CardMedia } from "@mui/material";
 import { useEffect, useState } from "react";
 import { CockAlcho } from "../../../interface/cocktail/CockAlcho";
 
@@ -12,7 +13,16 @@ const CockAlchoOne = (prop:any) => {
 
     return (
         <div>
-            <img src={alcho?.imgUrl}/>
+            <CardMedia
+                        component="img"
+                        height="400vh"
+                        width="400vh"
+                        image={alcho?.imgUrl}
+                        alt="Paella dish"
+                        sx={{
+                            objectFit: "fill"
+                        }}
+                    />
             {alcho?.name}을(를) {alcho?.amount}ml 만큼 따라주세요
         </div>
     )

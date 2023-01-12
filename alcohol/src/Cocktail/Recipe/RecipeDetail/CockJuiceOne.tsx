@@ -19,6 +19,7 @@ const CockJuiceOne = (prop:any) => {
 
     return (
         <div>
+            
             <img src={juice?.imgUrl}/>
             {juice?.name}을(를) {amount}
         </div>

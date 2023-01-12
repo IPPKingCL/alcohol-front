@@ -56,42 +56,7 @@ const CardWrapper: any = styled(MainCard)(({ theme }: any) => ({
     }
 }));
 
-const CardWrapper2: any = styled(MainCard)(({ theme }: any) => ({
-    backgroundColor: theme.palette.warning.light,
-    color: '#fff',
-    overflow: 'hidden',
-    position: 'relative',
-    width: 'auto',
-    '&:after': {
-        content: '""',
-        position: 'relative',
-        width: 210,
-        height: 210,
-        background: theme.palette.secondary,
-        borderRadius: '50%',
-        top: -85,
-        right: -95,
-        [theme.breakpoints.down('sm')]: {
-            top: -105,
-            right: -140
-        }
-    },
-    '&:before': {
-        content: '""',
-        position: 'absolute',
-        width: 210,
-        height: 210,
-        background: theme.palette.secondary,
-        borderRadius: '50%',
-        top: -125,
-        right: -15,
-        opacity: 0.5,
-        [theme.breakpoints.down('sm')]: {
-            top: -155,
-            right: -70
-        }
-    }
-}));
+
 
 const StyledBox = styled(Box)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'light' ? '	#99cc33' : '#424242',
@@ -256,7 +221,7 @@ function AlcoholDetail(prop: any, props: Props) {
                             type="submit"
                             variant="contained"
                             color="warning"
-                            onClick={onclick}
+                            onClick={Recipe}
                             sx={{
                                 marginBlock: "1rem"
                             }}>칵테일 레시피</Button>
@@ -281,8 +246,7 @@ function AlcoholDetail(prop: any, props: Props) {
                                     borderTopRightRadius: 8,
                                     visibility: 'visible',
                                     right: 0,
-                                    left: 0,
-                                    overflow: 'scroll'
+                                    left: 0
                                 }}
                             >
                                 <Puller sx={{
