@@ -11,8 +11,17 @@ import CockJuice from "./RecipeDetail/CockJuice";
 import CockAlcho from "./RecipeDetail/CockAlcho";
 import CocktailComment from "./RecipeComment/CocktailComment";
 import { getCookie } from "../../Common/Cookies";
-import { Button, Typography, styled, CardMedia, SwipeableDrawer, Grid } from "@mui/material";
+import { Button, Typography, styled, CardMedia, SwipeableDrawer, Grid, CssBaseline } from "@mui/material";
 import MainCard from '../../ui-component/cards/MainCard';
+import { Global } from "@emotion/react";
+
+interface Props {
+    /**
+     * Injected by the documentation to work in an iframe.
+     * You won't need it on your project.
+     */
+    windowT?: () => Window;
+}
 
 const labels: { [index: string]: string } = {
     0.5: 'Useless',
@@ -31,13 +40,7 @@ function getLabelText(value: number) {
     return `${value} Star${value !== 1 ? 's' : ''}, ${labels[value]}`;
 }
 
-interface Props {
-    /**
-     * Injected by the documentation to work in an iframe.
-     * You won't need it on your project.
-     */
-    windowT?: () => Window;
-}
+
 
 
 const CardWrapper: any = styled(MainCard)(({ theme }: any) => ({
@@ -201,6 +204,15 @@ const RecipeRead = (props: Props) => {
         <div>
             {loading ? <strong>loading...</strong> :
                 <>
+                    <CssBaseline />
+                    <Global
+                        styles={{
+                            '.MuiDrawer-root > .MuiPaper-root': {
+                                height: `calc(50% - ${drawerBleeding}px)`,
+                                overflow: 'visible'
+                            },
+                        }}
+                    />
                     <CardWrapper2 border={false} content={false} sx={{
                         marginBottom: "1rem"
                     }}>
