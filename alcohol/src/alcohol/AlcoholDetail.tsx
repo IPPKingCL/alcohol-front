@@ -164,9 +164,9 @@ function AlcoholDetail(prop: any, props: Props) {
             {loading ? <strong>loading...</strong> :
                 <>
                     <Grid sx={{
-                        marginBlock : '1rem',
-                        marginLeft : '1rem',
-                        marginRight : '1rem'
+                        marginBlock: '1rem',
+                        marginLeft: '1rem',
+                        marginRight: '1rem'
                     }}>
                         <CssBaseline />
                         <Global
@@ -177,30 +177,15 @@ function AlcoholDetail(prop: any, props: Props) {
                                 },
                             }}
                         />
-
-                        <CardWrapper2 border={false} content={false}>
+                        <CardWrapper border={false} content={false}>
                             <Typography align='justify' paragraph variant="h3" sx={{
                                 color: "dark",
                                 marginBlock: "1rem",
-                            }}>
-                                Title
-                            </Typography>
-                        </CardWrapper2>
-                        <hr/>
-                        <Typography align='justify' paragraph variant="h3" sx={{
-                                color: "dark",
-                                marginBlock: "1rem",
+                                textAlign: "center",
                             }}>
                                 {alcoholData?.name}
                             </Typography>
-                        <CardWrapper2 border={false} content={false}>
-                            <Typography align='justify' paragraph variant="h3" sx={{
-                                color: "dark",
-                                marginBlock: "1rem",
-                            }}>
-                                Detail
-                            </Typography>
-                        </CardWrapper2>
+                        </CardWrapper>                        
                         <hr />
                         <CardWrapper border={false} content={false}>
                             <Box sx={{ p: 2.25 }}>
@@ -253,10 +238,28 @@ function AlcoholDetail(prop: any, props: Props) {
                             </Typography>
                         </CardWrapper>
 
-                        <div className='input-btn'>
-                            <button className="d-btn" onClick={onclick}>뒤로</button>
-                            <button className="m-btn" onClick={Recipe}>칵테일 레시피</button>
-                        </div>
+                        <Button
+                            disableElevation
+                            fullWidth
+                            size="large"
+                            type="submit"
+                            variant="contained"
+                            color="warning"
+                            onClick={onclick}
+                            sx={{
+                                marginBlock: "1rem"
+                            }}>뒤로</Button>
+                        <Button
+                            disableElevation
+                            fullWidth
+                            size="large"
+                            type="submit"
+                            variant="contained"
+                            color="warning"
+                            onClick={onclick}
+                            sx={{
+                                marginBlock: "1rem"
+                            }}>칵테일 레시피</Button>
 
                         <SwipeableDrawer
                             container={container}
@@ -283,14 +286,11 @@ function AlcoholDetail(prop: any, props: Props) {
                                 }}
                             >
                                 <Puller sx={{
-                                    backgroundColor : "warning"
+                                    backgroundColor: "warning"
                                 }} />
                                 <AlchoComment></AlchoComment>
                             </StyledBox>
                         </SwipeableDrawer>
-                        <div>
-
-                        </div>
                     </Grid>
                 </>
             }
