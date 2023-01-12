@@ -94,7 +94,7 @@ const CardWrapper2: any = styled(MainCard)(({ theme }: any) => ({
 }));
 
 const StyledBox = styled(Box)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'light' ? '#fff' : '#424242',
+    backgroundColor: theme.palette.mode === 'light' ? '	#99cc33' : '#424242',
 }));
 
 const Puller = styled(Box)(({ theme }) => ({
@@ -278,10 +278,13 @@ function AlcoholDetail(prop: any, props: Props) {
                                     borderTopRightRadius: 8,
                                     visibility: 'visible',
                                     right: 0,
-                                    left: 0
+                                    left: 0,
+                                    overflow: 'scroll'
                                 }}
                             >
-                                <Puller />
+                                <Puller sx={{
+                                    backgroundColor : "warning"
+                                }} />
                                 <AlchoComment></AlchoComment>
                             </StyledBox>
                         </SwipeableDrawer>

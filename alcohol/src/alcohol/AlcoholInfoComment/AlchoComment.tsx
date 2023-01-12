@@ -87,8 +87,8 @@ function AlchoComment(){
 
     
     return(
-        <div id='wrapper'>
-            <div>
+        <div id='wrapper' style={{overflow : "scroll"}}>
+            <div style={{marginBlock : '1.4rem'}}>
                 <span>댓글 {commentNum}</span>
                 <hr></hr>
             </div>
@@ -98,7 +98,7 @@ function AlchoComment(){
             </div>
             <hr></hr>
             {loading ? <strong>loading...</strong> :
-                <div>
+                <div style={{overflow : 'scroll'}}>
                     <AlchoCoList
                         datas={comment}
                         onRemove={onRemove}
