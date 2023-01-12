@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import AlcoholSearch from "../../alcohol/AlcoholSearch/AlcoholSearch";
 import { addr } from "../../Common/serverAddr";
+import { Cocktail } from "../../interface/cocktail/cocktail";
 import { RecipeList } from "../../interface/RecipeList";
 import RecipeListco from "./RecipeListco";
 
@@ -94,9 +96,63 @@ const Recipe = () => {
     const test = () => {
         console.log(recipeList)
     }
+    const [search, setSearch] = useState<string>('');
+    const [searchData,setSearchData] = useState<Cocktail[]>([])
+    const [arrData,setArrData] = useState<Cocktail[]>([])
+    const onChange = (e:any) => {
+        let category = '';
+        
+        category = e.target.value;
+        
+        setLoading(true);
+        setArrData([]);
+        fetch(addr+'/alcohol/category/'+category,{
+            method:'GET',
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }).then((res) => res.json())
+        .then((res) => {
+            let i:number = 0;
+            for (i; i < res.length; i++) {
+                const data:Cocktail ={
+                    id: res[i].id,
+                    name: res[i].name,
+                    dosu: res[i].dosu,
+                    imgUrl: res[i].imgUrl,
+                    only: res[i].only,
+                    likeOne: res[i].likeOne
+                }
+                setArrData(arrData => [...arrData,data]);
+                
+            }
+            
+            setLoading(false);
+        })
+    }
+
+    const onSearch = (e:React.FormEvent<HTMLFormElement>) => {
+        
+        e.preventDefault();
+        console.log(search);
+        if(search==''){
+            allList();
+            return;
+        }
+        const filterData = searchData.filter((row)=>row.name.includes(search));
+
+        setArrData(filterData)
+        setSearch('');
+    }
+
+    const onChangeSearch = (e:React.ChangeEvent<HTMLInputElement>) => {
+        e.preventDefault();
+        setSearch(e.target.value);
+    }
+
     return (
         <div id='wrapper2'>
-            <div className='search-tool'>
+            {/* <div className='search-tool'>
                 <select name="selectBoard" id="selectBoard" className="select-search">
                     <option value="A">전체</option>
                     <option value="W">위스키</option>
@@ -113,7 +169,12 @@ const Recipe = () => {
                     <input type="text" id="search"  ></input>
                     <button type='submit' className='btn-submit'>검색</button>
                 </form>
-            </div>
+            </div> */}
+            <AlcoholSearch
+                onSearch={onSearch}
+                onChange={onChange}
+                onChangeSearch = {onChangeSearch}
+                />
 
             <hr></hr>
 

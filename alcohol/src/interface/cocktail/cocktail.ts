@@ -5,4 +5,5 @@ export interface Cocktail{
     likeOne:number;
     name:string;
     only:boolean;
+    
 }
