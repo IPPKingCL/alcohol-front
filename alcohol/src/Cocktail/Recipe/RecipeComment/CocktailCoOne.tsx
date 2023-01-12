@@ -1,4 +1,5 @@
 import DeleteIcon from '@mui/icons-material/Delete';
+import { FilledInput } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import { useNavigate } from 'react-router';
@@ -41,7 +42,7 @@ const CocktailCoOne = (prop:any) => {
     }
    return (
         <div>
-            {prop.data.nickname} : <input type="text" className="comment-input" value={prop.data.contents} disabled/>     <Tooltip title="Delete">
+            {prop.data.nickname} : <FilledInput value={prop.data.contents} />     <Tooltip title="Delete">
             <IconButton>
                 <DeleteIcon onClick={onclick}/>
             </IconButton>
