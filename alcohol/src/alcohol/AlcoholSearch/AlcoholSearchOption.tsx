@@ -1,7 +1,8 @@
 const AlcoholSearchOption = (prop:any) => {
+    
     return(
         <>
-        <option value={prop.prop}>{prop.prop}</option>
+        <option value={prop.prop.id}>{prop.prop.category}</option>
         </>
     )
 }

@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { addr } from "../../Common/serverAddr";
+import { AlchoCategory } from "../../interface/AlchoCategory";
 import AlcoholSearchOption from "./AlcoholSearchOption";
 
 const AlcoholSearch = (props:any) => {
-    const [option,setOption] = useState<string[]>([]);
+    const [option,setOption] = useState<AlchoCategory[]>([]);
     const [loading,setLoading] = useState<boolean>(true);
     const list = async () => {
         setOption([]);
@@ -15,9 +16,7 @@ const AlcoholSearch = (props:any) => {
         }).then((res)=>res.json())
         .then((res)=>{
             console.log(res);
-            for(let i = 0; i<res.length;i++){
-                setOption(option => [...option,res[i].category])
-            }
+            setOption(res);
             
         })
         setLoading(false);
@@ -34,7 +33,7 @@ const AlcoholSearch = (props:any) => {
                 <div className='search-tool'>
                     <select name="selectBoard" id="selectBoard" className="select-search"  onChange = {props.onChange}>
                         {option.map((data:any)=>(
-                                <AlcoholSearchOption prop={data} key={data}/>
+                                <AlcoholSearchOption prop={data} key={data.id}/>
                         ))}
                     </select>
                     <form className='search-form' onSubmit={e => props.onSearch(e)}>

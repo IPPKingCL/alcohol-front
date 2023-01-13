@@ -101,7 +101,7 @@ const Recipe = () => {
         let category = '';
         
         category = e.target.value;
-        
+        console.log('category : '+category);
         setLoading(true);
         setRecipeList([]);
         fetch(addr+'/cocktail/search/'+category,{
