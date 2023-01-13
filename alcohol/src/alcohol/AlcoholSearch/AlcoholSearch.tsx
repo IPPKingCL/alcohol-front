@@ -32,6 +32,7 @@ const AlcoholSearch = (props:any) => {
             {loading ? <strong>Loading....</strong>:
                 <div className='search-tool'>
                     <select name="selectBoard" id="selectBoard" className="select-search"  onChange = {props.onChange}>
+                        <option value={0}>전체</option>
                         {option.map((data:any)=>(
                                 <AlcoholSearchOption prop={data} key={data.id}/>
                         ))}
