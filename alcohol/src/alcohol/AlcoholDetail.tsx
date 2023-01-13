@@ -6,7 +6,7 @@ import { addr } from "../Common/serverAddr";
 import AlchoComment from "./AlcoholInfoComment/AlchoComment";
 import MainCard from '../ui-component/cards/MainCard';
 import { styled } from '@mui/material/styles';
-import { Box, Button, CssBaseline, FilledInput, Grid, Skeleton, SwipeableDrawer, Typography } from "@mui/material";
+import { Box, Button, CssBaseline, FilledInput, Grid, Skeleton, SwipeableDrawer, TextField, Typography } from "@mui/material";
 import CardMedia from '@mui/material/CardMedia';
 import { MarginRounded } from "@mui/icons-material";
 import { Global } from "@emotion/react";
@@ -201,9 +201,15 @@ function AlcoholDetail(prop: any, props: Props) {
                             }}>
                                 가격 : {alcoholData?.price}원 (매장 별 가격 상이)
                             </Typography>
-                            
+
                         </CardWrapper>
-                        
+                        <TextField
+                            id="outlined-multiline-flexible"
+                            label="Multiline"
+                            multiline
+                            maxRows={4}
+                        />
+
                         <Button
                             disableElevation
                             fullWidth
