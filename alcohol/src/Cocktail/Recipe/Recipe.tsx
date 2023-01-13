@@ -93,26 +93,25 @@ const Recipe = () => {
 
     },[])
 
-    const test = () => {
-        console.log(recipeList)
-    }
+  
     const [search, setSearch] = useState<string>('');
     const [searchData,setSearchData] = useState<Cocktail[]>([])
-    const [arrData,setArrData] = useState<Cocktail[]>([])
+    
     const onChange = (e:any) => {
         let category = '';
         
         category = e.target.value;
         
         setLoading(true);
-        setArrData([]);
-        fetch(addr+'/alcohol/category/'+category,{
+        setRecipeList([]);
+        fetch(addr+'/cocktail/search/'+category,{
             method:'GET',
             headers: {
                 "Content-Type": "application/json",
             },
         }).then((res) => res.json())
         .then((res) => {
+            console.log(res);
             let i:number = 0;
             for (i; i < res.length; i++) {
                 const data:Cocktail ={
@@ -123,7 +122,7 @@ const Recipe = () => {
                     only: res[i].only,
                     likeOne: res[i].likeOne
                 }
-                setArrData(arrData => [...arrData,data]);
+                setRecipeList(recipeList => [...recipeList,data]);
                 
             }
             
@@ -139,9 +138,9 @@ const Recipe = () => {
             allList();
             return;
         }
-        const filterData = searchData.filter((row)=>row.name.includes(search));
+        const filterData = recipeList.filter((row)=>row.name.includes(search));
 
-        setArrData(filterData)
+        setRecipeList(filterData)
         setSearch('');
     }
 
@@ -152,24 +151,6 @@ const Recipe = () => {
 
     return (
         <div id='wrapper2'>
-            {/* <div className='search-tool'>
-                <select name="selectBoard" id="selectBoard" className="select-search">
-                    <option value="A">전체</option>
-                    <option value="W">위스키</option>
-                    <option value="B">보드카</option>
-                    <option value="BR">브랜디</option>
-                    <option value="S">전통주</option>
-                    <option value="BE">맥주</option>
-                    <option value='G'>진</option>
-                    <option value='R'>럼</option>
-                    <option value="D">데낄라</option>
-                    <option value='WI'>와인</option>
-                </select>
-                <form className='search-form' >
-                    <input type="text" id="search"  ></input>
-                    <button type='submit' className='btn-submit'>검색</button>
-                </form>
-            </div> */}
             <AlcoholSearch
                 onSearch={onSearch}
                 onChange={onChange}
