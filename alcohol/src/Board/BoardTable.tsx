@@ -6,6 +6,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { red } from '@mui/material/colors';
+import CommentIcon from '@mui/icons-material/Comment';
 
 interface ExpandMoreProps extends IconButtonProps {
     expand: boolean;
@@ -53,16 +54,30 @@ function BoardTable(props: any) {
                 />
                 <CardContent>
                     <Typography variant="body2" color="text.secondary">
-                        
+
                     </Typography>
                 </CardContent>
                 <CardActions disableSpacing>
                     <IconButton aria-label="add to favorites">
                         <FavoriteIcon />
                     </IconButton>
+                    <IconButton aria-label="add to favorites"
+                        onClick={handleExpandClick}>
+                        <CommentIcon />
+                        <Typography align='center' sx={{
+                            color: "black",
+                            marginLeft: "1rem"
+                        }}>
+                            Comment
+                        </Typography>
+                    </IconButton>
+
                 </CardActions>
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
                     <CardContent>
+                        <Typography paragraph>
+                            댓글
+                        </Typography>
                     </CardContent>
                 </Collapse>
             </Card>
