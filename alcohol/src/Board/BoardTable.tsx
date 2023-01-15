@@ -76,7 +76,7 @@ function BoardTable(props: any) {
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
                     <CardContent>
                         <Typography paragraph>
-                            댓글
+                            댓글 박스
                         </Typography>
                     </CardContent>
                 </Collapse>
