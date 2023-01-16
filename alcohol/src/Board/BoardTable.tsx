@@ -1,4 +1,4 @@
-import { Avatar, Card, CardActions, CardContent, CardHeader, CardMedia, Collapse, IconButton, IconButtonProps, Typography } from "@mui/material";
+import { Avatar, Button, Card, CardActions, CardContent, CardHeader, CardMedia, Collapse, IconButton, IconButtonProps, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { styled } from '@mui/material/styles';
@@ -50,12 +50,22 @@ function BoardTable(props: any) {
                         </Avatar>
                     }
                     title={props.data.title}
-                    onClick={onclick}
                 />
                 <CardContent>
                     <Typography variant="body2" color="text.secondary">
 
                     </Typography>
+                    <Button
+                        disableElevation
+                        fullWidth
+                        size="large"
+                        type="submit"
+                        variant="contained"
+                        color="warning"
+                        onClick={onclick}
+                        sx={{
+                            marginBlock: "1rem"
+                        }}>게시글 바로가기</Button>
                 </CardContent>
                 <CardActions disableSpacing>
                     <IconButton aria-label="add to favorites">
