@@ -203,12 +203,6 @@ function AlcoholDetail(prop: any, props: Props) {
                             </Typography>
 
                         </CardWrapper>
-                        <TextField
-                            id="outlined-multiline-flexible"
-                            label="Multiline"
-                            multiline
-                            maxRows={4}
-                        />
 
                         <Button
                             disableElevation
