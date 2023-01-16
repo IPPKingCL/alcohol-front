@@ -1,4 +1,3 @@
-import { defaultListboxReducer } from "@mui/base"
 import { Box, Button, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -7,7 +6,7 @@ import { addr } from "../../Common/serverAddr";
 import { alchoComment } from "../../interface/AlchoComment";
 import { commentList } from "../../interface/CommentList";
 import AlchoCoList from "./AlchoCoList";
-
+import CommentIcon from '@mui/icons-material/Comment';
 
 function AlchoComment() {
     const [loading, setLoading] = useState<boolean>(true);
@@ -90,31 +89,32 @@ function AlchoComment() {
     return (
         <div id='wrapper' style={{ overflow: "scroll" }}>
             <div style={{ marginBlock: '1.4rem' }}>
+                <CommentIcon/>
                 <span>댓글 {commentNum}</span>
                 <hr></hr>
             </div>
-            <Box sx={{ p: 2.25 }}>
+            <Box sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' }, p: 2.25 }}>
                 <TextField
-                    type="string"
-                    fullWidth
-                    id="outlined-basic"
-                    label="댓글 입력"
-                    multiline={true}
-                    variant="standard"
+                    id="outlined-multiline-flexible"
+                    label="comment"
+                    multiline
+                    variant="outlined"
                     value={content || ''}
                     onChange={onchange}
                     inputProps={{ maxLength: 50 }}
+                    sx={{
+                        height:'3rem'
+                    }}
                 />
                 <Button
                     disableElevation
-                    fullWidth
                     size="large"
                     type="submit"
                     variant="contained"
                     color="warning"
                     onClick={onclick}
                     sx={{
-                        marginBlock: "1rem",
+                        marginLeft: "1rem",
                     }}>등록</Button>
             </Box>
             <hr></hr>
