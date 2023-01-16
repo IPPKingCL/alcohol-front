@@ -111,7 +111,7 @@ const Recipe = () => {
             },
         }).then((res) => res.json())
         .then((res) => {
-            console.log(res);
+            
             let i:number = 0;
             for (i; i < res.length; i++) {
                 const data:Cocktail ={
