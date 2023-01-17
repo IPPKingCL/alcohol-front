@@ -3,6 +3,7 @@ export interface boardList{
     title:string;
     contents:string;
     dateTime:string;
-    isDeleted:string;
     isModified:string;
+    boardType:string;
+    userId:string;
 }

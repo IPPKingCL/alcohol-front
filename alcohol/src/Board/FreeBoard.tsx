@@ -25,6 +25,7 @@ function FreeBoard() {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
+                "Authorization":`Bearer ${getCookie('myToken')}`,
             }
         }).then((res) => res.json())
             .then((res) => {
@@ -35,8 +36,9 @@ function FreeBoard() {
                         title: res[i].title,
                         contents: res[i].contents,
                         dateTime: res[i].dateTime,
-                        isDeleted: res[i].isDeleted,
                         isModified: res[i].isModified,
+                        boardType: res[i].boardType,
+                        userId: res[i].userId
                     }
                     setArrData(arrData => [...arrData, data]);
                 }
@@ -46,8 +48,6 @@ function FreeBoard() {
                     setPageCount(res.length / 10 + 1);
                 }
                 setAData(res.slice(0, 10));
-
-
             })
         setLoading(false);
     }
@@ -109,8 +109,9 @@ function FreeBoard() {
                             title: res[i].title,
                             contents: res[i].contents,
                             dateTime: res[i].dateTime,
-                            isDeleted: res[i].isDeleted,
                             isModified: res[i].isModified,
+                            boardType: res[i].boardType,
+                            userId: res[i].userId
                         }
                         setArrData(arrData => [...arrData, data]);
                     }
