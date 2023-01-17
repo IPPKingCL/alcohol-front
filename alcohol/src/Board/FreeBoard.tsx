@@ -6,6 +6,7 @@ import List from './List';
 import '../css/board.css';
 import Pagination from './Paginattion';
 import { getCookie } from '../Common/Cookies';
+import PaginationBoard from './Paginattion';
 
 function FreeBoard() {
     const [loading, setLoading] = useState<boolean>(true);
@@ -178,7 +179,7 @@ function FreeBoard() {
                     <List
                         datas={aData}
                     />
-                    <Pagination
+                    <PaginationBoard
                         num={pageCount}
                         getCurrentPage={getCurrentPage}
                     />
