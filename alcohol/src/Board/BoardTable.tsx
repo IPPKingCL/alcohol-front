@@ -28,6 +28,7 @@ function BoardTable(props: any) {
 
     const [expanded, setExpanded] = React.useState(false);
 
+    console.log(props.data.userId)
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -69,7 +70,7 @@ function BoardTable(props: any) {
                 </CardContent>
                 <CardActions disableSpacing>
                     <IconButton aria-label="add to favorites">
-                        <FavoriteIcon />
+                        {props.data.userId === null ? <FavoriteIcon /> : <FavoriteIcon sx={{color : "red"}}/>}
                     </IconButton>
                     <IconButton aria-label="add to favorites"
                         onClick={handleExpandClick}>

@@ -46,6 +46,7 @@ function FreeBoard() {
                     }
                     setArrData(arrData => [...arrData, data]);
                 }
+                console.log(arrData);
                 if (res.length % 10 == 0) {
                     setPageCount(res.length / 10);
                 } else {
