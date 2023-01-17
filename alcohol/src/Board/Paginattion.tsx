@@ -14,7 +14,7 @@ function PaginationBoard({ num, getCurrentPage }: number | any) {
 
   return (
     <div className="paging">
-      <Pagination count={5} onChange={onclick} variant="outlined" color="primary" 
+      <Pagination count={pageNumbers.length} onChange={onclick} color="primary" 
       sx={{
         alignItems: "center"
       }}/>
@@ -35,7 +35,6 @@ function PaginationBoard({ num, getCurrentPage }: number | any) {
         </li>
       ))}
     </div>
-    <li className="bar_menu" key={number} onClick={onclick} value={number}>{number}    </li>
  
   )*/
 }

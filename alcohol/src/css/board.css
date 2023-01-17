@@ -109,6 +109,8 @@
 }
 
 .paging{
+    display: flex;
+    justify-content: center;
     padding : 6px;
 }
 .bar_menu{
