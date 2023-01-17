@@ -25,10 +25,14 @@ function FreeBoard() {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization":`Bearer ${getCookie('myToken')}`,
+                "Authorization": `Bearer ${getCookie('myToken')}`,
             }
         }).then((res) => res.json())
             .then((res) => {
+                if (res.message == 'Unauthorized') {
+                    alert('로그인 후 이용 가능합니다')
+                    navigate('/Login');
+                }
                 let i: number = 0
                 for (i; i < res.length; i++) {
                     const data: boardList = {
