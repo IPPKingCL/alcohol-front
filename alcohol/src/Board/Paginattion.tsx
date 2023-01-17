@@ -14,10 +14,7 @@ function PaginationBoard({ num, getCurrentPage }: number | any) {
 
   return (
     <div className="paging">
-      <Pagination count={pageNumbers.length} onChange={onclick} color="primary" 
-      sx={{
-        alignItems: "center"
-      }}/>
+      <Pagination count={pageNumbers.length} onChange={onclick} color="primary"/>
     </div>
   )
   /*return (

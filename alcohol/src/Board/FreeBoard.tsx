@@ -7,6 +7,8 @@ import '../css/board.css';
 import Pagination from './Paginattion';
 import { getCookie } from '../Common/Cookies';
 import PaginationBoard from './Paginattion';
+import BasicSpeedDial from './BasicSpeedDial';
+import { Box } from '@mui/material';
 
 function FreeBoard() {
     const [loading, setLoading] = useState<boolean>(true);
@@ -15,7 +17,7 @@ function FreeBoard() {
     const [currentPage, setCurrentPage] = useState<number>(1);//default 1 page
     const [pageCount, setPageCount] = useState<number>();  //page count
     const [aData, setAData] = useState<boardList[]>([]);
-    const [search,setSearch] = useState<string>("");//검색어
+    const [search, setSearch] = useState<string>("");//검색어
     const focusRef = useRef<HTMLInputElement>();
     const list = async () => {
         setArrData([]);
@@ -45,7 +47,7 @@ function FreeBoard() {
                 }
                 setAData(res.slice(0, 10));
 
-                
+
             })
         setLoading(false);
     }
@@ -59,22 +61,22 @@ function FreeBoard() {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                Authorization:`Bearer ${getCookie('myToken')}`,
+                Authorization: `Bearer ${getCookie('myToken')}`,
             },
         }).then((res) => res.json())
-        .then((res) => {
-            if(res.success){
-                navigate('write');
-            }else{
-                if(res.message=="Unauthorized"){
-                    alert('로그인 후 사용가능합니다');
-                    navigate('/login');
-                }else{
-                    alert('에러 발생 잠시 후 시도해주세요');
+            .then((res) => {
+                if (res.success) {
+                    navigate('write');
+                } else {
+                    if (res.message == "Unauthorized") {
+                        alert('로그인 후 사용가능합니다');
+                        navigate('/login');
+                    } else {
+                        alert('에러 발생 잠시 후 시도해주세요');
+                    }
                 }
-            }
-        })
-        
+            })
+
     }
 
     const onChangeBoard = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -126,22 +128,22 @@ function FreeBoard() {
     }
 
     const getCurrentPage = (num: number) => {
-        let page = 10*(num-1);
+        let page = 10 * (num - 1);
         //if(search===''||search === null){
-            setAData(arrData.slice(page,page+10));
-       // }else{
+        setAData(arrData.slice(page, page + 10));
+        // }else{
 
         //}
-        
+
     }
 
     /**/
-    
-    const onSearch = (e:React.FormEvent<HTMLFormElement>) => {
+
+    const onSearch = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.log(search);
-        const filterData = aData.filter((row)=>row.title.includes(search));
-        
+        const filterData = aData.filter((row) => row.title.includes(search));
+
 
         if (filterData.length % 10 == 0) {
             setPageCount(filterData.length / 10);
@@ -153,45 +155,47 @@ function FreeBoard() {
         //focusRef.current.focus()
     }
 
-    const onChangeSearch = (e:React.ChangeEvent<HTMLInputElement>) => {
+    const onChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
         setSearch(e.target.value);
     }
     return (
-        <div id='wrapper'>
-            <div className='search-tool'>
-                <select name="selectBoard" id="selectBoard" className="select-search" onChange={onChangeBoard}>
-                    <option value="D">전체 게시글</option>
-                    <option value="F">자유게시판</option>
-                    <option value="A">술 관련 게시판</option>
-                    <option value="R">레시피 게시판</option>
-                </select>
-                <form className='search-form' onSubmit={e => onSearch(e)}>
-                    <input type="text" id="search" value={search} onChange={onChangeSearch} ></input>
-                    <button type='submit' className='btn-submit'>검색</button>
-                </form>
-            </div>
-
-            <hr></hr>
-
-            {loading ? <strong>Loading...</strong> :
-                <div>
-                    <List
-                        datas={aData}
-                    />
-                    <PaginationBoard
-                        num={pageCount}
-                        getCurrentPage={getCurrentPage}
-                    />
-                    <button className='btn-write' onClick={onclick}>글쓰기</button>
-
+        <>
+            <div id='wrapper'>
+                <div className='search-tool'>
+                    <select name="selectBoard" id="selectBoard" className="select-search" onChange={onChangeBoard}>
+                        <option value="D">전체 게시글</option>
+                        <option value="F">자유게시판</option>
+                        <option value="A">술 관련 게시판</option>
+                        <option value="R">레시피 게시판</option>
+                    </select>
+                    <form className='search-form' onSubmit={e => onSearch(e)}>
+                        <input type="text" id="search" value={search} onChange={onChangeSearch} ></input>
+                        <button type='submit' className='btn-submit'>검색</button>
+                    </form>
                 </div>
 
+                <hr></hr>
 
-            }
+                {loading ? <strong>Loading...</strong> :
+                    <div>
+                        <List
+                            datas={aData}
+                        />
+                        <PaginationBoard
+                            num={pageCount}
+                            getCurrentPage={getCurrentPage}
+                        />
+                        <button className='btn-write' onClick={onclick}>글쓰기</button>
+                    </div>
+                }
 
 
-        </div>
+            </div>
+            {/* <div style={{position: 'fixed'}}>
+                <BasicSpeedDial></BasicSpeedDial>
+            </div> */}
+        </>
     )
 }
 
