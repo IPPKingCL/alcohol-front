@@ -88,11 +88,13 @@ function BoardTable(props: any) {
                     avatar={
                         <Avatar src={props.data.imgurl} aria-label="recipe" />
                     }
-                    title={props.data.title + " ------- " + props.data.nickname}
+                    title={<Typography paragraph >
+                        <span style={{ fontSize: "20px" }}>{props.data.title}</span><span style={{ float: "right", fontSize: "20px", color: "blue" }}>{props.data.nickname}</span>
+                    </Typography>}
                     subheader={boardDateTime}
                 />
                 <CardContent>
-                    <Typography variant="body2" color="text.secondary" sx={{
+                    <Typography variant="h6" color="text.secondary" sx={{
                     }}>
                         {props.data.contents}
                     </Typography>
