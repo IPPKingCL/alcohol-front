@@ -8,6 +8,12 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { red } from '@mui/material/colors';
 import CommentIcon from '@mui/icons-material/Comment';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import AnimateButtonT from "../ui-component/extended/AnimateButtonT";
+import { addr } from "../Common/serverAddr";
+import { getCookie } from "../Common/Cookies";
+import { commentList } from "../interface/CommentList";
+import { boardList } from "../interface/BoardList";
+import { SummarycommentList } from "../interface/SummaryCommentList";
 
 interface ExpandMoreProps extends IconButtonProps {
     expand: boolean;
@@ -28,7 +34,13 @@ function BoardTable(props: any) {
     const navigate = useNavigate();
 
     const dateTime: Date = new Date(props.data.dateTime);
+    const id = props.data.id;
 
+    const [comment, setComment] = useState<SummarycommentList[]>([{
+        contents: "",
+        nickname: "",
+        dateTime: ""
+    }]);
     const boardDateTime = dateTime.getFullYear() + "-" + (dateTime.getMonth() + 1) + "-" + dateTime.getDate() + " " +
         dateTime.getHours().toString().padStart(2, '0') + ":" + dateTime.getMinutes().toString().padStart(2, '0') + ":" + dateTime.getSeconds().toString().padStart(2, '0');
 
@@ -36,6 +48,26 @@ function BoardTable(props: any) {
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
+
+        fetch(addr + '/board/select/comment/' + id, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${getCookie('myToken')}`,
+            }
+        }).then((res) => res.json())
+            .then((res) => {
+                let i: number = 0;
+                setComment([]);
+                for (i; i < res.length; i++) {
+                    const data: SummarycommentList = {
+                        contents: res[i].contents,
+                        nickname: res[i].nickname,
+                        dateTime: res[i].dateTime
+                    }
+                    setComment(comment => [...comment, data]);
+                }
+            })
     };
 
     const onclick = () => {
@@ -53,7 +85,7 @@ function BoardTable(props: any) {
                         <Avatar src={props.data.imgurl} aria-label="recipe" />
                     }
                     title={props.data.title + " ------- " + props.data.nickname}
-                    subheader={props.data.dateTime}
+                    subheader={boardDateTime}
                 />
                 <CardContent>
                     <Typography variant="body2" color="text.secondary" sx={{
@@ -76,27 +108,51 @@ function BoardTable(props: any) {
                     <IconButton aria-label="add to favorites">
                         {props.data.userId === null ? <FavoriteIcon /> : <FavoriteIcon sx={{ color: "red" }} />}
                     </IconButton>
-                    <IconButton aria-label="add to favorites"
-                        onClick={handleExpandClick}>
-                        <CommentIcon />
-                        <Typography align='center' sx={{
-                            color: "black",
-                            marginLeft: "1rem"
-                        }}>
-                            Comment
-                        </Typography>
+                    <IconButton aria-label="add to favorites">
+                        <CommentIcon sx={{
+                            color: "#00A4FF"
+                        }} />
                     </IconButton>
-
+                    <AnimateButtonT>
+                        <Button
+                            disableElevation
+                            variant="outlined"
+                            color="info"
+                            onClick={handleExpandClick}
+                            sx={{
+                                marginLeft: "1rem"
+                            }}>
+                            <Typography align='center' sx={{
+                                color: "black"
+                            }}>Comment</Typography>
+                        </Button>
+                    </AnimateButtonT>
                 </CardActions>
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
                     <CardContent>
-                        <Typography paragraph>
-                            댓글 박스
-                        </Typography>
+                        {comment.map((comm, i) => {
+                            return (
+                                <Card key={i} sx={{ maxWidth: 390, width: '100%' }} style={{ marginBlock: 20, backgroundColor: '#DAFFFE', color: 'maroon', position: 'relative' }}>
+                                    <Typography paragraph sx={{
+                                        marginBlock: '1rem',
+                                        marginLeft: '1rem'
+                                    }}>
+                                        닉네임 : {comm.nickname}
+                                    </Typography>
+                                    <Typography paragraph sx={{
+                                        marginBlock: '1rem',
+                                        marginLeft: '1rem'
+                                    }}>
+                                        {comm.contents}
+                                    </Typography>
+                                </Card>
+                            )
+                        }
+                        )}
                     </CardContent>
                 </Collapse>
             </Card>
-        </div>
+        </div >
 
 
     );
