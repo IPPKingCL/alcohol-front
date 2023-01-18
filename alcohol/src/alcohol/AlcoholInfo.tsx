@@ -80,7 +80,6 @@ function AlcoholInfo(){
     const onSearch = (e:React.FormEvent<HTMLFormElement>) => {
         
         e.preventDefault();
-        console.log(search);
         if(search==''){
             list();
             return;
@@ -99,7 +98,6 @@ function AlcoholInfo(){
     
     return(
         <div id='wrapper2'>
-           
             <AlcoholSearch
                 onSearch={onSearch}
                 onChange={onChange}

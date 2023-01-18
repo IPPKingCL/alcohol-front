@@ -7,6 +7,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { red } from '@mui/material/colors';
 import CommentIcon from '@mui/icons-material/Comment';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 interface ExpandMoreProps extends IconButtonProps {
     expand: boolean;
@@ -26,9 +27,12 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 function BoardTable(props: any) {
     const navigate = useNavigate();
 
-    const [expanded, setExpanded] = React.useState(false);
+    const dateTime: Date = new Date(props.data.dateTime);
 
-    console.log(props.data.userId)
+    const boardDateTime = dateTime.getFullYear() + "-" + (dateTime.getMonth() + 1) + "-" + dateTime.getDate() + " " +
+        dateTime.getHours().toString().padStart(2, '0') + ":" + dateTime.getMinutes().toString().padStart(2, '0') + ":" + dateTime.getSeconds().toString().padStart(2, '0');
+
+    const [expanded, setExpanded] = React.useState(false);
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -46,15 +50,15 @@ function BoardTable(props: any) {
             <Card sx={{ maxWidth: 390, width: '100%' }} style={{ marginBlock: 20, backgroundColor: 'white', color: 'maroon', position: 'relative' }}>
                 <CardHeader
                     avatar={
-                        <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                            <img loading='lazy' className="alcoholImg" src="" />
-                        </Avatar>
+                        <Avatar src={props.data.imgurl} aria-label="recipe" />
                     }
                     title={props.data.title}
+                    subheader={props.data.nickname}
                 />
                 <CardContent>
-                    <Typography variant="body2" color="text.secondary">
-
+                    <Typography variant="body2" color="text.secondary" sx={{
+                    }}>
+                        {props.data.contents}
                     </Typography>
                     <Button
                         disableElevation
@@ -70,7 +74,7 @@ function BoardTable(props: any) {
                 </CardContent>
                 <CardActions disableSpacing>
                     <IconButton aria-label="add to favorites">
-                        {props.data.userId === null ? <FavoriteIcon /> : <FavoriteIcon sx={{color : "red"}}/>}
+                        {props.data.userId === null ? <FavoriteIcon /> : <FavoriteIcon sx={{ color: "red" }} />}
                     </IconButton>
                     <IconButton aria-label="add to favorites"
                         onClick={handleExpandClick}>

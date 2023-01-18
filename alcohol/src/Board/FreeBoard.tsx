@@ -42,17 +42,12 @@ function FreeBoard() {
                         dateTime: res[i].dateTime,
                         isModified: res[i].isModified,
                         boardType: res[i].boardType,
-                        userId: res[i].userId
+                        userId: res[i].userId,
+                        imgurl: res[i].img,
+                        nickname: res[i].nickname,
                     }
                     setArrData(arrData => [...arrData, data]);
                 }
-                console.log(arrData);
-                if (res.length % 10 == 0) {
-                    setPageCount(res.length / 10);
-                } else {
-                    setPageCount(res.length / 10 + 1);
-                }
-                setAData(res.slice(0, 10));
             })
         setLoading(false);
     }
@@ -60,6 +55,15 @@ function FreeBoard() {
     useEffect(() => {
         list();
     }, [])
+
+    useEffect(() => {
+        if (arrData.length % 10 == 0) {
+            setPageCount(arrData.length / 10);
+        } else {
+            setPageCount(arrData.length / 10 + 1);
+        }
+        setAData(arrData.slice(0, 10));
+    },[arrData])
 
     const onclick = () => {
         fetch(addr + '/board/check', {
@@ -96,13 +100,13 @@ function FreeBoard() {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                Authorization: `Bearer ${getCookie('myToken')}`,
             },
             body: JSON.stringify({
                 boardType: tag
             }),
         }).then((res) => res.json())
             .then((res) => {
-                console.log(res.length)
                 let i: number = 0
                 if (res.length == 0) {
                     setLoading(false);
@@ -116,7 +120,9 @@ function FreeBoard() {
                             dateTime: res[i].dateTime,
                             isModified: res[i].isModified,
                             boardType: res[i].boardType,
-                            userId: res[i].userId
+                            userId: res[i].userId,
+                            imgurl: res[i].img,
+                            nickname: res[i].nickname,
                         }
                         setArrData(arrData => [...arrData, data]);
                     }
@@ -126,7 +132,7 @@ function FreeBoard() {
                     } else {
                         setPageCount(res.length / 10 + 1);
                     }
-                    setAData(res.slice(0, 10));
+                    setAData(arrData.slice(0, 10));
                     setLoading(false);
                 }
 
@@ -165,6 +171,11 @@ function FreeBoard() {
         e.preventDefault();
         setSearch(e.target.value);
     }
+
+    const test = () => {
+        console.log(arrData);
+        console.log(aData);
+    }
     return (
         <>
             <div id='wrapper'>
@@ -177,7 +188,8 @@ function FreeBoard() {
                     </select>
                     <form className='search-form' onSubmit={e => onSearch(e)}>
                         <input type="text" id="search" value={search} onChange={onChangeSearch} ></input>
-                        <button type='submit' className='btn-submit'>검색</button>
+                        {/* <button type='submit' className='btn-submit'>검색</button>; */}
+                        <button type='submit' onClick={test}>검색</button>
                     </form>
                 </div>
 

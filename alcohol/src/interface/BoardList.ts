@@ -6,4 +6,6 @@ export interface boardList{
     isModified:string;
     boardType:string;
     userId:string;
+    imgurl:string;
+    nickname:string;
 }

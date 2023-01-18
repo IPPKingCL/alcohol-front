@@ -15,7 +15,6 @@ const AlcoholSearch = (props:any) => {
             }
         }).then((res)=>res.json())
         .then((res)=>{
-            console.log(res);
             setOption(res);
             
         })
