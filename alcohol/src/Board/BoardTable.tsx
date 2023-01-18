@@ -1,4 +1,4 @@
-import { Avatar, Button, Card, CardActions, CardContent, CardHeader, CardMedia, Collapse, IconButton, IconButtonProps, Typography } from "@mui/material";
+import { Avatar, Button, Card, CardActions, CardContent, CardHeader, CardMedia, Collapse, Grid, IconButton, IconButtonProps, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { styled } from '@mui/material/styles';
@@ -59,11 +59,15 @@ function BoardTable(props: any) {
             .then((res) => {
                 let i: number = 0;
                 setComment([]);
+
                 for (i; i < res.length; i++) {
+                    const tempDate: Date = new Date(res[i].dateTime);
+                    const realDate: string = (tempDate.getFullYear() - 2000) + "-" + (tempDate.getMonth() + 1).toString().padStart(2, '0') + "-" + tempDate.getDate() + " " +
+                        tempDate.getHours().toString().padStart(2, '0') + ":" + tempDate.getMinutes().toString().padStart(2, '0') + ":" + tempDate.getSeconds().toString().padStart(2, '0');
                     const data: SummarycommentList = {
                         contents: res[i].contents,
                         nickname: res[i].nickname,
-                        dateTime: res[i].dateTime
+                        dateTime: realDate
                     }
                     setComment(comment => [...comment, data]);
                 }
@@ -133,23 +137,43 @@ function BoardTable(props: any) {
                         {comment.map((comm, i) => {
                             return (
                                 <Card key={i} sx={{ maxWidth: 390, width: '100%' }} style={{ marginBlock: 20, backgroundColor: '#DAFFFE', color: 'maroon', position: 'relative' }}>
-                                    <Typography paragraph sx={{
-                                        marginBlock: '1rem',
-                                        marginLeft: '1rem'
-                                    }}>
-                                        닉네임 : {comm.nickname}
-                                    </Typography>
-                                    <Typography paragraph sx={{
-                                        marginBlock: '1rem',
-                                        marginLeft: '1rem'
-                                    }}>
-                                        {comm.contents}
-                                    </Typography>
+                                    <Grid container spacing={1}>
+                                        <Grid item xs={12} sm={4}>
+                                            <Typography paragraph sx={{
+                                                marginBlock: '1rem',
+                                                marginLeft: '1rem'
+                                            }}>
+                                                <span>작성자 : {comm.nickname}</span>
+                                                <span style={{ float: "right", marginRight: "1rem" }}>{comm.dateTime}</span>
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <Typography paragraph sx={{
+                                                marginBlock: '1rem',
+                                                marginLeft: '1rem'
+                                            }}>
+                                                {comm.contents}
+                                            </Typography>
+                                        </Grid>
+                                    </Grid>
                                 </Card>
                             )
                         }
                         )}
                     </CardContent>
+                    <Button
+                        disableElevation
+                        variant="outlined"
+                        color="info"
+                        onClick={onclick}
+                        sx={{
+                            marginBlock: "1rem",
+                            marginLeft: "1rem"
+                        }}>
+                        <Typography align='center' sx={{
+                            color: "black"
+                        }}>댓글 바로 가기</Typography>
+                    </Button>
                 </Collapse>
             </Card>
         </div >
