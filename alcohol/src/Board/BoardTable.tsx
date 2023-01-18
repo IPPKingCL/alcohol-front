@@ -47,13 +47,13 @@ function BoardTable(props: any) {
     return (
 
         <div>
-            <Card sx={{ maxWidth: 390, width: '100%' }} style={{ marginBlock: 20, backgroundColor: 'white', color: 'maroon', position: 'relative' }}>
+            <Card sx={{ maxWidth: 390, width: '100%' }} style={{ marginBlock: 20, backgroundColor: '#FFFFB6', color: 'maroon', position: 'relative' }}>
                 <CardHeader
                     avatar={
                         <Avatar src={props.data.imgurl} aria-label="recipe" />
                     }
-                    title={props.data.title}
-                    subheader={props.data.nickname}
+                    title={props.data.title + " ------- " + props.data.nickname}
+                    subheader={props.data.dateTime}
                 />
                 <CardContent>
                     <Typography variant="body2" color="text.secondary" sx={{

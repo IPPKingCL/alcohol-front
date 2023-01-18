@@ -116,7 +116,6 @@ const FirebaseLogin = ({ ...others }) => {
                 if (res.success) {
                     redirectAddInfo(userdata);
                 } else {
-                    console.log(res.token)
                     setCookie('myToken', res.token, {
                         path: "/",
                         secure: true,
@@ -137,7 +136,6 @@ const FirebaseLogin = ({ ...others }) => {
 
     const onFailure = (res) => {
         alert("구글 로그인에 실패하였습니다");
-        console.log("err", res);
     };
 
     const navigate = useNavigate();
@@ -156,10 +154,6 @@ const FirebaseLogin = ({ ...others }) => {
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
     const customization = useSelector((state) => state.customization);
     const [checked, setChecked] = useState(true);
-
-    const googleHandler = async () => {
-        console.error('Login');
-    };
 
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => {
@@ -249,12 +243,13 @@ const FirebaseLogin = ({ ...others }) => {
                                 }),
                             }).then((res) => res.json())
                                 .then((res) => {
-                                    if (!res.success) {
+                                    console.log(res);
+                                    if (res.success) {
                                         setCookie('myToken', res.token, {
                                             path: "/",
                                             sameSite: "Lax"
                                         })
-                                        alert(getCookie('myToken'));
+                                        alert("로그인 성공!");
                                         navigate('/Main');
                                     }
                                     else {
@@ -263,7 +258,6 @@ const FirebaseLogin = ({ ...others }) => {
                                 })
                         }
                     } catch (err) {
-                        console.error(err);
                         if (scriptedRef.current) {
                             setStatus({ success: false });
                             setErrors({ submit: err.message });
