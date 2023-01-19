@@ -4,7 +4,7 @@ import { board } from '../interface/Board'
 import { addr } from '../Common/serverAddr';
 import AWS from 'aws-sdk';
 import { getCookie } from '../Common/Cookies';
-import { Button, IconButton } from '@mui/material';
+import { Avatar, Button, Card, CardHeader, IconButton, Typography } from '@mui/material';
 import { PhotoCamera } from '@mui/icons-material';
 
 //자유게시판 글 작성 컴포넌트
@@ -34,7 +34,7 @@ function FreeWrite() {
     const onclick = async () => {
 
 
-       
+
         if (!board.title || !board.contents) {
             alert("제목과 내용을 입력해주세요");
             return;
@@ -56,7 +56,7 @@ function FreeWrite() {
             .then((res) => {
                 console.log(res.data);
 
-                let imageUrl="";
+                let imageUrl = "";
 
                 fetch(res.data, {
                     method: "put",
@@ -66,13 +66,13 @@ function FreeWrite() {
                     },
                     body: selectedFile
                 })
-                if(selectedFile.size>0){
+                if (selectedFile.size > 0) {
                     imageUrl = res.data.split('?')[0];
-                }else{
-                    imageUrl="";
+                } else {
+                    imageUrl = "";
                 }
-                
-                
+
+
 
                 fetch(addr + '/board/write', {
                     method: "POST",
@@ -119,7 +119,7 @@ function FreeWrite() {
                 <h1>Title</h1>
                 <input name="title" type="text" className="search-input" onChange={onchange} />
             </div>
-
+            
             <div className='bar2'>
                 <h1>content</h1>
                 <textarea name="contents" className='content' id="content" onChange={onchange}></textarea>
@@ -134,7 +134,7 @@ function FreeWrite() {
             <div>
                 <Button variant="contained" component="label">
                     Upload
-                    <input hidden accept="image/*" multiple type="file" onChange={handleFileInput}/>
+                    <input hidden accept="image/*" multiple type="file" onChange={handleFileInput} />
                 </Button>
                 <IconButton color="primary" aria-label="upload picture" component="label">
                     <input hidden accept="image/*" type="file" onChange={handleFileInput} />
@@ -143,7 +143,6 @@ function FreeWrite() {
             </div>
 
             <button onClick={onclick}>등록</button>
-
         </div>
     )
 }

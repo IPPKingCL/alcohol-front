@@ -6,26 +6,19 @@ import SpeedDialAction from '@mui/material/SpeedDialAction';
 import FileCopyIcon from '@mui/icons-material/FileCopyOutlined';
 
 import EditIcon from '@mui/icons-material/Edit';
+import { Button } from 'reactstrap';
 
-const actions = [
-  { icon: <EditIcon  />, name: 'Write' },
-];
 
-export default function BasicSpeedDial() {
+export default function BasicSpeedDial(props :{click : any}) {
+  console.log(props.click);
   return (
-    <Box sx={{transform: 'translateZ(0px)'}}>
+    <Box>
       <SpeedDial
         ariaLabel="SpeedDial basic example"
-        sx={{ position: 'fixed', right: 16 }}
-        icon={<SpeedDialIcon />}
+        onClick={props.click}
+        sx={{ position: 'fixed', top : '80%' , right : '16px'}}
+        icon={<EditIcon  />}
       >
-        {actions.map((action) => (
-          <SpeedDialAction
-            key={action.name}
-            icon={action.icon}
-            tooltipTitle={action.name}
-          />
-        ))}
       </SpeedDial>
     </Box>
   );

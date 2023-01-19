@@ -172,7 +172,7 @@ function FreeBoard() {
     }
     return (
         <>
-            <div id='wrapper'>
+            <div>
                 <div className='search-tool'>
                     <select name="selectBoard" id="selectBoard" className="select-search" onChange={onChangeBoard}>
                         <option value="D">전체 게시글</option>
@@ -198,15 +198,11 @@ function FreeBoard() {
                             num={pageCount}
                             getCurrentPage={getCurrentPage}
                         />
-                        <button className='btn-write' onClick={onclick}>글쓰기</button>
                     </div>
                 }
 
-
+                <BasicSpeedDial click={onclick}></BasicSpeedDial>
             </div>
-            {/* <div style={{position: 'fixed'}}>
-                <BasicSpeedDial></BasicSpeedDial>
-            </div> */}
         </>
     )
 }
