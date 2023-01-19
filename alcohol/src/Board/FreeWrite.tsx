@@ -4,7 +4,7 @@ import { board } from '../interface/Board'
 import { addr } from '../Common/serverAddr';
 import AWS from 'aws-sdk';
 import { getCookie } from '../Common/Cookies';
-import { Avatar, Button, Card, CardHeader, IconButton, Typography } from '@mui/material';
+import { Avatar, Button, Card, CardHeader, IconButton, TextField, Typography } from '@mui/material';
 import { PhotoCamera } from '@mui/icons-material';
 
 //자유게시판 글 작성 컴포넌트
@@ -23,7 +23,7 @@ function FreeWrite() {
     },[])
     */
 
-    const onchange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLSelectElement>) => {
+    const onchange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLSelectElement> | any) => {
         const { name, value } = e.target;
         setBoard({
             ...board,
@@ -114,12 +114,25 @@ function FreeWrite() {
     }
 
     return (
-        <div className="input-Board">
-            <div >
-                <h1>Title</h1>
-                <input name="title" type="text" className="search-input" onChange={onchange} />
-            </div>
-            
+        <div>
+            <Card sx={{ maxWidth: 390, width: '100%' }} style={{ marginBlock: 20, backgroundColor: '#FFFFB6', color: 'maroon', position: 'relative' }}>
+                <CardHeader
+                    title={<Typography variant='h5' sx={{
+                        marginBottom:'1rem'
+                    }}>
+                        글 제목
+                    </Typography>}
+                    subheader={
+                        <TextField
+                            id="outlined-multiline-flexible"
+                            label="제목"
+                            multiline
+                            maxRows={4}
+                            onChange={onchange}
+                        />}
+                />
+            </Card>
+
             <div className='bar2'>
                 <h1>content</h1>
                 <textarea name="contents" className='content' id="content" onChange={onchange}></textarea>
