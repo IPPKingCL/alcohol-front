@@ -63,7 +63,7 @@ function FreeBoard() {
             setPageCount(arrData.length / 10 + 1);
         }
         setAData(arrData.slice(0, 10));
-    },[arrData])
+    }, [arrData])
 
     const onclick = () => {
         fetch(addr + '/board/check', {
@@ -127,16 +127,10 @@ function FreeBoard() {
                         setArrData(arrData => [...arrData, data]);
                     }
 
-                    if (res.length % 10 == 0) {
-                        setPageCount(res.length / 10);
-                    } else {
-                        setPageCount(res.length / 10 + 1);
-                    }
-                    setAData(arrData.slice(0, 10));
-                    setLoading(false);
                 }
 
             })
+        setLoading(false);
     }
 
     const getCurrentPage = (num: number) => {
