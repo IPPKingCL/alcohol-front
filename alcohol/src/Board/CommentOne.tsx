@@ -47,7 +47,6 @@ function CommentOne(prop:any){
                 <DeleteIcon onClick={onclick}/>
             </IconButton>
             </Tooltip>
-            <hr></hr>
         </div>
     )
 }
