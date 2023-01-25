@@ -126,18 +126,27 @@ function FreeWrite() {
                         <TextField
                             id="outlined-multiline-flexible-title"
                             label="제목"
+                            name='title'
                             multiline
-                            rows={1}
+                            maxRows={2}
                             autoFocus
                             fullWidth
+                            inputProps={{ maxLength: 39 }}
                             onChange={onchange}
                         />}
                 />
+                <Typography sx={{
+                    marginBottom: '1rem',
+                    marginRight: '1rem',
+                    float: 'right'
+                }}>
+                    {board.title.length}/40
+                </Typography>
             </Card>
 
             <Card sx={{ maxWidth: 390, width: '100%' }} style={{ marginBlock: 20, backgroundColor: '#FFFFB6', color: 'maroon', position: 'relative' }}>
 
-                <div className='bar2'>                    
+                <div className='bar2'>
                     <CardHeader
                         title={<Typography variant='h5' sx={{
                             marginBottom: '1rem'
@@ -151,11 +160,18 @@ function FreeWrite() {
                                 label="내용"
                                 multiline
                                 fullWidth
-                                inputProps={{ maxLength: 200 }}
+                                inputProps={{ maxLength: 199 }}
                                 rows={10}
                                 onChange={onchange}
                             />}
                     />
+                    <Typography sx={{
+                        marginBottom: '1rem',
+                        marginRight: '1rem',
+                        float: 'right'
+                    }}>
+                        {board.contents.length}/200
+                    </Typography>
 
                 </div>
 
