@@ -129,6 +129,7 @@ function FreeWrite() {
                             multiline
                             rows={1}
                             autoFocus
+                            fullWidth
                             onChange={onchange}
                         />}
                 />
@@ -149,7 +150,9 @@ function FreeWrite() {
                                 name='contents'
                                 label="내용"
                                 multiline
-                                rows={6}
+                                fullWidth
+                                inputProps={{ maxLength: 200 }}
+                                rows={10}
                                 onChange={onchange}
                             />}
                     />
