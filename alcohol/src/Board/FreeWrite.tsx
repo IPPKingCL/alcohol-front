@@ -115,7 +115,7 @@ function FreeWrite() {
 
     return (
         <div>
-            <Card sx={{ maxWidth: 390, width: '100%' }} style={{ marginBlock: 20, backgroundColor: '#FFFFB6', color: 'maroon', position: 'relative' }}>
+            <Card style={{ marginBlock: 20, backgroundColor: '#FFFFB6', color: 'maroon', position: 'relative' }}>
                 <CardHeader
                     title={<Typography variant='h5' sx={{
                         marginBottom: '1rem'
@@ -144,7 +144,7 @@ function FreeWrite() {
                 </Typography>
             </Card>
 
-            <Card sx={{ maxWidth: 390, width: '100%' }} style={{ marginBlock: 20, backgroundColor: '#FFFFB6', color: 'maroon', position: 'relative' }}>
+            <Card style={{ marginBlock: 20, backgroundColor: '#FFFFB6', color: 'maroon', position: 'relative' }}>
 
                 <div className='bar2'>
                     <CardHeader
@@ -194,7 +194,17 @@ function FreeWrite() {
                 </IconButton>
             </div>
 
-            <button onClick={onclick}>등록</button>
+            <Button
+                disableElevation
+                fullWidth
+                size="large"
+                type="submit"
+                variant="contained"
+                color="warning"
+                onClick={onclick}
+                sx={{
+                    marginBlock: "1rem"
+                }}>등록</Button>
         </div>
     )
 }
