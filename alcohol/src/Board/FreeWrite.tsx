@@ -118,25 +118,45 @@ function FreeWrite() {
             <Card sx={{ maxWidth: 390, width: '100%' }} style={{ marginBlock: 20, backgroundColor: '#FFFFB6', color: 'maroon', position: 'relative' }}>
                 <CardHeader
                     title={<Typography variant='h5' sx={{
-                        marginBottom:'1rem'
+                        marginBottom: '1rem'
                     }}>
                         글 제목
                     </Typography>}
                     subheader={
                         <TextField
-                            id="outlined-multiline-flexible"
+                            id="outlined-multiline-flexible-title"
                             label="제목"
                             multiline
-                            maxRows={4}
+                            rows={1}
+                            autoFocus
                             onChange={onchange}
                         />}
                 />
             </Card>
 
-            <div className='bar2'>
-                <h1>content</h1>
-                <textarea name="contents" className='content' id="content" onChange={onchange}></textarea>
-            </div>
+            <Card sx={{ maxWidth: 390, width: '100%' }} style={{ marginBlock: 20, backgroundColor: '#FFFFB6', color: 'maroon', position: 'relative' }}>
+
+                <div className='bar2'>                    
+                    <CardHeader
+                        title={<Typography variant='h5' sx={{
+                            marginBottom: '1rem'
+                        }}>
+                            내용
+                        </Typography>}
+                        subheader={
+                            <TextField
+                                id="outlined-multiline-flexible-contents"
+                                name='contents'
+                                label="내용"
+                                multiline
+                                rows={6}
+                                onChange={onchange}
+                            />}
+                    />
+
+                </div>
+
+            </Card>
 
             <select name="boardType" id="selectBoard" onChange={onchange}>
                 <option>카테고리 선택</option>
