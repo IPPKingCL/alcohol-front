@@ -35,7 +35,7 @@ const NewCocktail = () => {
                     navigater('/Login');
                 }else if(!res.success){
                     alert('권한이 없습니다');
-                    navigater('/main');
+                    navigater('/Main');
                 }
                 setAlcho(res.alchoCategory);
                 setJuice(res.juiceCategory);
