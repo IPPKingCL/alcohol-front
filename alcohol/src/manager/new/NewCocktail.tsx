@@ -1,5 +1,6 @@
 import { Radio } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import AlcoholSearchOption from "../../alcohol/AlcoholSearch/AlcoholSearchOption";
 import { getCookie } from "../../Common/Cookies";
 import { addr } from "../../Common/serverAddr";
@@ -17,6 +18,7 @@ const NewCocktail = () => {
     const [juice, setJuice] = useState<CockJuice[]>([]);
     const [unit, setUnit] = useState<Unit[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
+    const navigater = useNavigate();
 
     const list = async () => {
         fetch(addr + '/admin/newCocktail', {
@@ -28,6 +30,13 @@ const NewCocktail = () => {
         }).then((res) => res.json())
             .then((res) => {
                 console.log(res);
+                if(res.message ==='Unauthorized'){
+                    alert('로그인해주세요');
+                    navigater('/Login');
+                }else if(!res.success){
+                    alert('권한이 없습니다');
+                    navigater('/main');
+                }
                 setAlcho(res.alchoCategory);
                 setJuice(res.juiceCategory);
                 setUnit(res.unitCategory)
