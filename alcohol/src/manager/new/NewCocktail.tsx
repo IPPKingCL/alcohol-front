@@ -33,7 +33,7 @@ const NewCocktail = () => {
                 if(res.message ==='Unauthorized'){
                     alert('로그인해주세요');
                     navigater('/Login');
-                }else if(!res.success){
+                }else if(res.msg){
                     alert('권한이 없습니다');
                     navigater('/Main');
                 }

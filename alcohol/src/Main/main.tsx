@@ -19,6 +19,7 @@ function Main() {
 
     const [isLoading, setLoading] = useState<boolean>(true);
     useEffect(() => {
+        console.log(getCookie('myToken'));
         setLoading(false);
     }, []);
 
