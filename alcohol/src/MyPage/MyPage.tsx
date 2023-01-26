@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { getCookie } from '../Common/Cookies';
+import { getCookie, removeCookie, setCookie } from '../Common/Cookies';
 import { addr } from '../Common/serverAddr';
 import '../css/MyPage.css';
 import { User } from '../interface/user';
@@ -72,6 +72,21 @@ function MyPage(){
         user()
     },[]);
 
+    const logOut = () => {
+        const res = removeCookie('myToken');
+        
+        if(res.success){
+            alert('로그아웃 되었습니다');
+            navigate('/Main');
+        }else{
+            alert('로그아웃 도중 에러 발생');
+            return;
+        }
+        
+        //일단 현재 프로젝트 상황 상 클라이언트에서 쿠키 삭제로 로그인 구현해놓았습니다
+        //추후 좀 더 서치하고 보강할 예정입니다
+    }
+
     return(
         <div>
             {loading ? <strong>loading....</strong>:
@@ -101,10 +116,12 @@ function MyPage(){
                     
                     datas={favoirtes}/>
                 
+              
+              
             </div>
             
             }
-           
+            <button onClick ={logOut}>로그아웃</button>
             <button onClick = {()=>{navigate('/myPage/modify')}} >수정</button>
         </div>
     )
