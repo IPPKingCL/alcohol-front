@@ -14,6 +14,17 @@ export const getAllCookie = () => {
     return cookies.getAll();
 }
 
+export const removeCookie = (name:string) => {
+    try{
+        cookies.remove(name);
+        return {success:true};
+    }catch(err){
+        console.log(err);
+        return {success:false};
+    }
+}
+
+
 /*인증할 때 보내는 헤더 예시 참조*/
 /*
     headers:{
