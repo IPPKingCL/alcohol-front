@@ -41,7 +41,7 @@ function MyPage(){
 
                 setImg('https://ifh.cc/g/QCO7Gm.png');
 
-               // setUserData(copy);
+               
                 
             }else{
                 setImg(res.img);
