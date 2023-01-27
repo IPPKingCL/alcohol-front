@@ -39,20 +39,25 @@ import AlchoIndex from './alcohol/AlchoIndex';
 import Manager from './manager/Manager';
 import NewCocktail from './manager/new/NewCocktail';
 
-
+function setScreenSize() {
+  let vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty("--vh", `${vh}px`); //"--vh"라는 속성으로 정의해준다.
+}
 
 
 function App() {
-  
+
+  window.addEventListener('resize', () => setScreenSize());
+
   return (
     <>
       <CssBaseline />
       <Router>
-        
+
         <div className="content-all">
-        <ScrollToTop/>
+          <ScrollToTop />
           <Routes>
-            
+
             <Route path="/" element={<Cover />}></Route>
             <Route path="/login" element={<LoginC />}></Route>
             <Route path="/register" element={<Register />}></Route>
@@ -66,25 +71,25 @@ function App() {
 
             <Route path="/Main" element={<Main />}></Route>
 
-            <Route path='/alcohol' element={<AlchoIndex />}/>
+            <Route path='/alcohol' element={<AlchoIndex />} />
             <Route path='/alcohol/info' element={<AlcoholInfo />}></Route>
             <Route path="/alcohol/detail/:id" element={<AlcoholDetail />}></Route>
 
-            <Route path='/cocktail/list/:id' element={<CocktailList/>}/>
-            <Route path='/cocktail/recipe/:id?' element={<Recipe/>}/>
-            <Route path='/cocktail/recipeRead/:id' element={<RecipeRead/>}/>
+            <Route path='/cocktail/list/:id' element={<CocktailList />} />
+            <Route path='/cocktail/recipe/:id?' element={<Recipe />} />
+            <Route path='/cocktail/recipeRead/:id' element={<RecipeRead />} />
 
             <Route path="/test" element={<UploadImageToS3WithNativeSdk />}></Route>
             <Route path="/test1" element={<Test />}></Route>
             <Route path="/myPage" element={<MyPage />} />
             <Route path='/myPage/modify' element={<MyPageModify />} />
 
-            <Route path='/manager' element={<Manager/>}/>
-            <Route path='/manager/newCocktail' element={<NewCocktail/>}/>
+            <Route path='/manager' element={<Manager />} />
+            <Route path='/manager/newCocktail' element={<NewCocktail />} />
           </Routes>
         </div>
         <LabelBottomNavigation />
-        
+
       </Router>
     </>
 
