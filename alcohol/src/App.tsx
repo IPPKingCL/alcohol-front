@@ -40,14 +40,15 @@ import Manager from './manager/Manager';
 import NewCocktail from './manager/new/NewCocktail';
 
 function setScreenSize() {
-  let vh = window.innerHeight * 0.01;
-  document.documentElement.style.setProperty("--vh", `${vh}px`); //"--vh"라는 속성으로 정의해준다.
+  document.body.style.height = (document.documentElement.clientHeight + 5) + 'px';
+  // scroll를 제어 하는 코드
+  // setTimeout(scrollTo, 0, 0, 1);
 }
 
 
 function App() {
 
-  window.addEventListener('resize', () => setScreenSize());
+  window.addEventListener('load', () => setScreenSize(),false);
 
   return (
     <>
