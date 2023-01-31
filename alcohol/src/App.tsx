@@ -39,16 +39,7 @@ import AlchoIndex from './alcohol/AlchoIndex';
 import Manager from './manager/Manager';
 import NewCocktail from './manager/new/NewCocktail';
 
-function setScreenSize() {
-  document.body.style.height = (document.documentElement.clientHeight + 5) + 'px';
-  // scroll를 제어 하는 코드
-  // setTimeout(scrollTo, 0, 0, 1);
-}
-
-
 function App() {
-
-  window.addEventListener('load', () => setScreenSize(),false);
 
   return (
     <>

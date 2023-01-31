@@ -89,32 +89,32 @@ function AlchoComment() {
     return (
         <div id='wrapper' style={{ overflow: "scroll" }}>
             <div style={{ marginBlock: '1.4rem' }}>
-                <CommentIcon/>
+                <CommentIcon />
                 <span>댓글 {commentNum}</span>
                 <hr></hr>
             </div>
-            <Box sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' }, p: 2.25 }}>
+            <Box sx={{p: 2.25 }}>
                 <TextField
-                    id="outlined-multiline-flexible"
-                    label="comment"
-                    multiline
-                    variant="outlined"
+                    type="string"
+                    fullWidth
+                    id="outlined-basic"
+                    label="댓글 입력"
+                    multiline={true}
+                    variant="standard"
                     value={content || ''}
                     onChange={onchange}
                     inputProps={{ maxLength: 50 }}
-                    sx={{
-                        height:'3rem'
-                    }}
                 />
                 <Button
                     disableElevation
+                    fullWidth
                     size="large"
                     type="submit"
                     variant="contained"
                     color="warning"
                     onClick={onclick}
                     sx={{
-                        marginLeft: "1rem",
+                        marginBlock: "1rem",
                     }}>등록</Button>
             </Box>
             <hr></hr>
