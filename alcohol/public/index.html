@@ -3,9 +3,9 @@
 
 <head>
   <meta charset="utf-8" />
-  
+
   <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale = 1.0, user-scalable=no" />
   <meta name="theme-color" content="#000000" />
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -29,18 +29,27 @@
 </head>
 <script>
   // 주소창 숨기기 아이폰인 경우
-  if (navigator.userAgent.indexOf('iPhone') != -1) {    
-  addEventListener("load", function() {        
-    setTimeout(hideURLbar, 0);    }, false);
-  } 
+  if (navigator.userAgent.indexOf('iPhone') != -1) {
+    addEventListener("load", function () {
+      setTimeout(hideURLbar, 0);
+    }, false);
+  }
   //아이폰이 아닌경우
-  else {     
+  else {
     hideURLbar();
   }
 
-  function hideURLbar() {    window.scrollTo(0, 1);
+  function hideURLbar() {
+    window.scrollTo(0, 1);
   }
 </script>
+
+<script type="text/javascript" language="javascript">
+  window.addEventListener('load', function () {
+    setTimeout(scrollTo, 0, 0, 1);
+  }, false);
+</script>
+
 <body onload="setTimeout(function() {window.scrollTo(0, 1)}, 100)">
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root"></div>
