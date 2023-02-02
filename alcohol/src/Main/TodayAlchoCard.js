@@ -12,6 +12,8 @@ import SkeletonEarningCard from '../ui-component/cards/Skeleton/EarningCard';
 import Carousel from 'react-material-ui-carousel'
 import { addr } from '../Common/serverAddr';
 
+import AlchoImg from './AlchoImg';
+
 
 const CardWrapper = styled(MainCard)(({ theme }) => ({
     backgroundColor: theme.palette.secondary.dark,
@@ -65,8 +67,7 @@ const TodayAlchoCard = ({ isLoading }) => {
         setAnchorEl(null);
     };
 
-
-
+    
     const [image, setImage] = useState([]);
 
 
@@ -90,7 +91,7 @@ const TodayAlchoCard = ({ isLoading }) => {
                         name: res[i].name                        
                     }
                     items.push({id : data.cocktailId, src : data.imgUrl});
-                    setImage(image => [...image, data.imgUrl])
+                    setImage(image => [...image, data])
                 }
             })
     }
@@ -100,7 +101,7 @@ const TodayAlchoCard = ({ isLoading }) => {
     }, [])
 
 
-    
+  
 
     return (
         <>
@@ -121,7 +122,9 @@ const TodayAlchoCard = ({ isLoading }) => {
                                     <Grid item>
                                         <Carousel autoPlay sx={{ width: "400px" }}>
                                             {
-                                                image.map((img, i) => <Grid key={i}><img className="todayAlcho" src={img}></img></Grid>)
+                                                image.map((img, i) => {
+                                                    return <Grid key={i}><AlchoImg key={i} img={img.imgUrl} i={img.cocktailId} /></Grid>;
+                                                })
                                             }
                                         </Carousel>
                                     </Grid>
