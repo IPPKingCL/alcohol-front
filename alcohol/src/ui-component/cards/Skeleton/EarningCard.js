@@ -5,28 +5,13 @@ import Skeleton from '@mui/material/Skeleton';
 // ==============================|| SKELETON - EARNING CARD ||============================== //
 
 const EarningCard = () => (
-    <Card>
-        <CardContent>
-            <Grid container direction="column">
-                <Grid item>
-                    <Grid container justifyContent="space-between">
-                        <Grid item>
-                            <Skeleton variant="rectangular" width={44} height={44} />
-                        </Grid>
-                        <Grid item>
-                            <Skeleton variant="rectangular" width={34} height={34} />
-                        </Grid>
-                    </Grid>
-                </Grid>
-                <Grid item>
-                    <Skeleton variant="rectangular" sx={{ my: 2 }} height={40} />
-                </Grid>
-                <Grid item>
-                    <Skeleton variant="rectangular" height={30} />
-                </Grid>
-            </Grid>
-        </CardContent>
-    </Card>
-);
 
+    <CardWrapper border={false} content={false} onClick={() => { console.log(image) }}>
+        <Box sx={{ p: 2.25 }}>
+            <Skeleton variant="rectangular" width={44} height={44} />
+        </Box>
+
+    </CardWrapper>
+
+);
 export default EarningCard;
