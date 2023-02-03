@@ -35,13 +35,6 @@ function FreeWrite() {
 
     const onclick = async () => {
 
-        if(isAlreadySend) {
-            alert("이미 등록중입니다. 잠시만 기다려주세요.");
-            return;
-        }else {
-            setIsAlreadySend(true);
-        }
-
         if (!board.title || !board.contents) {
             alert("제목과 내용을 입력해주세요");
             return;
@@ -50,6 +43,13 @@ function FreeWrite() {
         if (!board.boardType) {
             alert("카테고리를 입력해주세요");
             return;
+        }
+
+        if(isAlreadySend) {
+            alert("이미 등록중입니다. 잠시만 기다려주세요.");
+            return;
+        }else {
+            setIsAlreadySend(true);
         }
         const tok = getCookie('myToken');
 
