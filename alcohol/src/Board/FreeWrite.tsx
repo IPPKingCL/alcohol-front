@@ -160,7 +160,7 @@ function FreeWrite() {
                                 label="내용"
                                 multiline
                                 fullWidth
-                                inputProps={{ maxLength: 199 }}
+                                inputProps={{ maxLength: 1999 }}
                                 rows={10}
                                 onChange={onchange}
                             />}
@@ -170,7 +170,7 @@ function FreeWrite() {
                         marginRight: '1rem',
                         float: 'right'
                     }}>
-                        {board.contents.length}/200
+                        {board.contents.length}/2000
                     </Typography>
 
                 </div>
