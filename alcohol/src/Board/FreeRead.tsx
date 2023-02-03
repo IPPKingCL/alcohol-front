@@ -137,17 +137,14 @@ function FreeRead() {
                             <Typography variant="h6" color="text.secondary" sx={{
                             }}>
                                 {board?.contents || ''}
+                                {board?.imgUrl != "" ?
                                 <CardMedia
                                     component="img"
-                                    height="400vh"
-                                    width="400vh"
-                                    image={board?.imgUrl || ''}
+                                    image={board?.imgUrl}
                                     alt="Paella dish"
                                     onClick={onclick}
-                                    sx={{
-                                        objectFit: "fill"
-                                    }}
-                                />
+                                /> : ""
+                                }
                             </Typography>
                         </CardContent>
                     </Card>
