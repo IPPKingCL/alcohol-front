@@ -128,8 +128,13 @@ function FreeRead() {
 
                     <Card sx={{ maxWidth: 390, width: '100%' }} style={{ marginBlock: 20, backgroundColor: '#FFFFB6', color: 'maroon', position: 'relative' }}>
                         <CardHeader
-                            title={<Typography>
-                                <span style={{ fontSize: "18px" }}>{board?.title || ''}</span><span style={{ float: "right", fontSize: "20px", color: "blue" }}>{board?.nickname}</span>
+                            title={<Typography sx = {{
+                                overflow: 'hidden',
+                                textOverflow: 'ellipsis',
+                                whiteSpace: 'nowrap',
+                                width: '10rem'
+                            }}>
+                                {board?.title || ''}<span style={{ float: "right", fontSize: "20px", color: "blue" }}>{board?.nickname}</span>
                             </Typography>}
                             subheader={<Typography><span>{board?.dateTime}</span></Typography>}
                         />
@@ -141,8 +146,6 @@ function FreeRead() {
                                 <CardMedia
                                     component="img"
                                     image={board?.imgUrl}
-                                    alt="Paella dish"
-                                    onClick={onclick}
                                 /> : ""
                                 }
                             </Typography>
