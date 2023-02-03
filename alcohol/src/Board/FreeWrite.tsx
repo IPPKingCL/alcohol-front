@@ -10,6 +10,8 @@ import { PhotoCamera } from '@mui/icons-material';
 //자유게시판 글 작성 컴포넌트
 function FreeWrite() {
 
+    const [isAlreadySend, setIsAlreadySend] = useState<boolean>(false);
+
     const [board, setBoard] = useState<board>({
         title: "",
         contents: "",
@@ -33,7 +35,12 @@ function FreeWrite() {
 
     const onclick = async () => {
 
-
+        if(isAlreadySend) {
+            alert("이미 등록중입니다. 잠시만 기다려주세요.");
+            return;
+        }else {
+            setIsAlreadySend(true);
+        }
 
         if (!board.title || !board.contents) {
             alert("제목과 내용을 입력해주세요");

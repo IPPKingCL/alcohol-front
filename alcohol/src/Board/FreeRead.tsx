@@ -125,7 +125,6 @@ function FreeRead() {
             </Card>
             {loading ? <strong>loading...</strong> :
                 <div>
-
                     <Card style={{ marginBlock: 20, backgroundColor: '#FFFFB6', color: 'maroon', position: 'relative' }}>
                         <CardHeader
                             title={<Typography sx = {{
@@ -134,7 +133,7 @@ function FreeRead() {
                                 whiteSpace: 'nowrap',
                                 width: '10rem'
                             }}>
-                                {board?.title || ''}<span style={{ float: "right", fontSize: "20px", color: "blue" }}>{board?.nickname}</span>
+                                <span style={{float: "inherit", fontSize: "20px", color: "#FFFFB6" }}>{board?.title || ''}</span><span style={{ float: "right", fontSize: "20px", color: "blue" }}>{board?.nickname}</span>
                             </Typography>}
                             subheader={<Typography><span>{board?.dateTime}</span></Typography>}
                         />
