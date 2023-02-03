@@ -86,7 +86,7 @@ function Comment() {
 
     return (
         <div id='wrapper'>
-            <Card sx={{ maxWidth: 390, width: '100%' }} style={{ marginBlock: 20, backgroundColor: '#FFFFB6', color: 'maroon', position: 'relative' }}>
+            <Card style={{ marginBlock: 20, backgroundColor: '#FFFFB6', color: 'maroon', position: 'relative' }}>
                 <span style={{marginLeft:'1rem', marginTop:'1rem'}}>댓글 {commentNum}</span>
                 <div className="comment-box">
                     <TextField
@@ -114,7 +114,7 @@ function Comment() {
                         }}>등록</Button>
                 </div>
             </Card>
-            <Card sx={{ maxWidth: 390, width: '100%' }} style={{ marginBlock: 20, backgroundColor: '#FFFFB6', color: 'maroon', position: 'relative' }}>
+            <Card style={{ marginBlock: 20, backgroundColor: '#FFFFB6', color: 'maroon', position: 'relative' }}>
                 {loading ? <strong>loading...</strong> :
                     <div>
                         <CommentList

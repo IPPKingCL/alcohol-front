@@ -120,13 +120,13 @@ function FreeRead() {
     }
     return (
         <div>
-            <Card sx={{ maxWidth: 390, width: '100%' }} style={{ marginBlock: 20, backgroundColor: '#FFFFB6', color: 'maroon', position: 'relative' }}>
+            <Card style={{ marginBlock: 20, backgroundColor: '#FFFFB6', color: 'maroon', position: 'relative' }}>
                 <h2 style={{ textAlign: 'center' }}>&nbsp;&nbsp;게시판</h2>
             </Card>
             {loading ? <strong>loading...</strong> :
                 <div>
 
-                    <Card sx={{ maxWidth: 390, width: '100%' }} style={{ marginBlock: 20, backgroundColor: '#FFFFB6', color: 'maroon', position: 'relative' }}>
+                    <Card style={{ marginBlock: 20, backgroundColor: '#FFFFB6', color: 'maroon', position: 'relative' }}>
                         <CardHeader
                             title={<Typography sx = {{
                                 overflow: 'hidden',
