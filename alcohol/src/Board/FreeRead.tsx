@@ -5,7 +5,7 @@ import { addr } from '../Common/serverAddr';
 import Comment from './Comment';
 import '../css/board.css';
 import { getCookie } from '../Common/Cookies';
-import { Avatar, Typography, Card, CardHeader, CardContent, Button, Grid } from '@mui/material';
+import { Avatar, Typography, Card, CardHeader, CardContent, Button, Grid, CardMedia } from '@mui/material';
 
 function FreeRead() {
     const [loading, setLoading] = useState<boolean>(true);
@@ -121,7 +121,7 @@ function FreeRead() {
     return (
         <div>
             <Card sx={{ maxWidth: 390, width: '100%' }} style={{ marginBlock: 20, backgroundColor: '#FFFFB6', color: 'maroon', position: 'relative' }}>
-                <h2 style={{textAlign:'center'}}>&nbsp;&nbsp;게시판</h2>
+                <h2 style={{ textAlign: 'center' }}>&nbsp;&nbsp;게시판</h2>
             </Card>
             {loading ? <strong>loading...</strong> :
                 <div>
@@ -137,12 +137,22 @@ function FreeRead() {
                             <Typography variant="h6" color="text.secondary" sx={{
                             }}>
                                 {board?.contents || ''}
-                                <img src={board?.imgUrl || ''}></img>
+                                <CardMedia
+                                    component="img"
+                                    height="400vh"
+                                    width="400vh"
+                                    image={board?.imgUrl || ''}
+                                    alt="Paella dish"
+                                    onClick={onclick}
+                                    sx={{
+                                        objectFit: "fill"
+                                    }}
+                                />
                             </Typography>
                         </CardContent>
                     </Card>
                     <Grid container spacing={4} sx={{
-                        marginBottom:'1rem'
+                        marginBottom: '1rem'
                     }}>
                         <Grid item xs={3}>
                             <Button
