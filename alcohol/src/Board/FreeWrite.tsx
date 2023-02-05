@@ -10,6 +10,8 @@ import { PhotoCamera } from '@mui/icons-material';
 //자유게시판 글 작성 컴포넌트
 function FreeWrite() {
 
+    const [isAlreadySend, setIsAlreadySend] = useState<boolean>(false);
+
     const [board, setBoard] = useState<board>({
         title: "",
         contents: "",
@@ -33,8 +35,6 @@ function FreeWrite() {
 
     const onclick = async () => {
 
-
-
         if (!board.title || !board.contents) {
             alert("제목과 내용을 입력해주세요");
             return;
@@ -43,6 +43,13 @@ function FreeWrite() {
         if (!board.boardType) {
             alert("카테고리를 입력해주세요");
             return;
+        }
+
+        if(isAlreadySend) {
+            alert("이미 등록중입니다. 잠시만 기다려주세요.");
+            return;
+        }else {
+            setIsAlreadySend(true);
         }
         const tok = getCookie('myToken');
 
@@ -160,7 +167,7 @@ function FreeWrite() {
                                 label="내용"
                                 multiline
                                 fullWidth
-                                inputProps={{ maxLength: 199 }}
+                                inputProps={{ maxLength: 1999 }}
                                 rows={10}
                                 onChange={onchange}
                             />}
@@ -170,7 +177,7 @@ function FreeWrite() {
                         marginRight: '1rem',
                         float: 'right'
                     }}>
-                        {board.contents.length}/200
+                        {board.contents.length}/2000
                     </Typography>
 
                 </div>

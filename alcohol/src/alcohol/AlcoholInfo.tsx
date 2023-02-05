@@ -2,10 +2,16 @@ import { useEffect, useState } from "react";
 import { alcho } from "../interface/Alcho";
 import { addr } from "../Common/serverAddr";
 import AlcoholList from "./AlcoholList";
-import { setServers } from "dns/promises";
 import AlcoholSearch from "./AlcoholSearch/AlcoholSearch";
 
 function AlcoholInfo(){
+
+    window.addEventListener('load', () => {
+        document.body.style.height = (document.documentElement.clientHeight + 5) + 'px';
+        // scroll를 제어 하는 코드
+        setTimeout(window.scrollTo, 0, 0, 1);
+      }, false);
+
     const [arrData,setArrData] = useState<alcho[]>([])
     const [loading,setLoading] = useState<boolean>(true);
     const [search, setSearch] = useState<string>("");

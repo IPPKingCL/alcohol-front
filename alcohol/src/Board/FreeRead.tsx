@@ -5,7 +5,7 @@ import { addr } from '../Common/serverAddr';
 import Comment from './Comment';
 import '../css/board.css';
 import { getCookie } from '../Common/Cookies';
-import { Avatar, Typography, Card, CardHeader, CardContent, Button, Grid } from '@mui/material';
+import { Avatar, Typography, Card, CardHeader, CardContent, Button, Grid, CardMedia } from '@mui/material';
 
 function FreeRead() {
     const [loading, setLoading] = useState<boolean>(true);
@@ -120,16 +120,20 @@ function FreeRead() {
     }
     return (
         <div>
-            <Card sx={{ maxWidth: 390, width: '100%' }} style={{ marginBlock: 20, backgroundColor: '#FFFFB6', color: 'maroon', position: 'relative' }}>
-                <h2 style={{textAlign:'center'}}>&nbsp;&nbsp;게시판</h2>
+            <Card style={{ marginBlock: 20, backgroundColor: '#FFFFB6', color: 'maroon', position: 'relative' }}>
+                <h2 style={{ textAlign: 'center' }}>&nbsp;&nbsp;게시판</h2>
             </Card>
             {loading ? <strong>loading...</strong> :
                 <div>
-
-                    <Card sx={{ maxWidth: 390, width: '100%' }} style={{ marginBlock: 20, backgroundColor: '#FFFFB6', color: 'maroon', position: 'relative' }}>
+                    <Card style={{ marginBlock: 20, backgroundColor: '#FFFFB6', color: 'maroon', position: 'relative' }}>
                         <CardHeader
-                            title={<Typography>
-                                <span style={{ fontSize: "18px" }}>{board?.title || ''}</span><span style={{ float: "right", fontSize: "20px", color: "blue" }}>{board?.nickname}</span>
+                            title={<Typography sx = {{
+                                overflow: 'hidden',
+                                textOverflow: 'ellipsis',
+                                whiteSpace: 'nowrap',
+                                width: '10rem'
+                            }}>
+                                <span style={{float: "inherit", fontSize: "20px", color: "#FFFFB6" }}>{board?.title || ''}</span><span style={{ float: "right", fontSize: "20px", color: "blue" }}>{board?.nickname}</span>
                             </Typography>}
                             subheader={<Typography><span>{board?.dateTime}</span></Typography>}
                         />
@@ -137,12 +141,17 @@ function FreeRead() {
                             <Typography variant="h6" color="text.secondary" sx={{
                             }}>
                                 {board?.contents || ''}
-                                <img src={board?.imgUrl || ''}></img>
+                                {board?.imgUrl != "" ?
+                                <CardMedia
+                                    component="img"
+                                    image={board?.imgUrl}
+                                /> : ""
+                                }
                             </Typography>
                         </CardContent>
                     </Card>
                     <Grid container spacing={4} sx={{
-                        marginBottom:'1rem'
+                        marginBottom: '1rem'
                     }}>
                         <Grid item xs={3}>
                             <Button
