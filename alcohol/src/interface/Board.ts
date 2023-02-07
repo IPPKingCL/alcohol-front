@@ -18,3 +18,7 @@ export interface boardRead extends board{
 export interface address{
     address:string,
 }
+
+export interface boardWrite extends board{
+    videoUrl:string
+}

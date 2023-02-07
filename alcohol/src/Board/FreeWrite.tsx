@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { board } from '../interface/Board'
+import { board, boardWrite } from '../interface/Board'
 import { addr } from '../Common/serverAddr';
 import AWS from 'aws-sdk';
 import { getCookie } from '../Common/Cookies';
@@ -12,10 +12,11 @@ function FreeWrite() {
 
     const [isAlreadySend, setIsAlreadySend] = useState<boolean>(false);
 
-    const [board, setBoard] = useState<board>({
+    const [board, setBoard] = useState<boardWrite>({
         title: "",
         contents: "",
-        boardType: ""
+        boardType: "",
+        videoUrl:""
     })
     const navigate = useNavigate();
 
@@ -92,7 +93,8 @@ function FreeWrite() {
                         title: board.title,
                         contents: board.contents,
                         boardType: board.boardType,
-                        imgUrl: imageUrl
+                        imgUrl: imageUrl,
+                        videoUrl : board.videoUrl
 
                     }),
                 }).then((res) => res.json())
@@ -200,7 +202,9 @@ function FreeWrite() {
                     <PhotoCamera />
                 </IconButton>
             </div>
-
+            <div>
+                <input className='video-input' type="text" onChange={onchange} placeholder="비디오 URL을 입력해주세요"/>
+            </div>
             <Button
                 disableElevation
                 fullWidth
