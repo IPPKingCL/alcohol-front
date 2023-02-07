@@ -35,7 +35,7 @@ function FreeWrite() {
     }
 
     const onclick = async () => {
-
+        console.log(board);
         if (!board.title || !board.contents) {
             alert("제목과 내용을 입력해주세요");
             return;
@@ -95,7 +95,6 @@ function FreeWrite() {
                         boardType: board.boardType,
                         imgUrl: imageUrl,
                         videoUrl : board.videoUrl
-
                     }),
                 }).then((res) => res.json())
                     .then((res) => {
@@ -105,6 +104,7 @@ function FreeWrite() {
                         } else {
                             console.log("등록 과정 중 에러 발생.");
                             alert("등록 과정 중 에러발생 \n다시 시도해주세요");
+                            setIsAlreadySend(false);
                         }
                     })
             })
@@ -203,7 +203,7 @@ function FreeWrite() {
                 </IconButton>
             </div>
             <div>
-                <input className='video-input' type="text" onChange={onchange} placeholder="비디오 URL을 입력해주세요"/>
+                <input className='video-input' name="videoUrl" type="text" onChange={onchange} placeholder="비디오 URL을 입력해주세요"/>
             </div>
             <Button
                 disableElevation
