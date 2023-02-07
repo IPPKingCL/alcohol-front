@@ -24,7 +24,7 @@ function FreeRead() {
         }).then((res) => res.json())
             .then((res) => {
                 setBoard(res);
-
+                console.log(res);
             })
 
         setLoading(false);
@@ -147,9 +147,12 @@ function FreeRead() {
                                     image={board?.imgUrl}
                                 /> : ""
                                 }
+
+                                
                             </Typography>
                         </CardContent>
                     </Card>
+                    
                     <Grid container spacing={4} sx={{
                         marginBottom: '1rem'
                     }}>

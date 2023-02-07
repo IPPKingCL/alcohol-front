@@ -12,6 +12,7 @@ export interface boardRead extends board{
     userId:number,
     nickname:string,
     imgUrl:string,
+    videoUrl:string
 }
 
 
