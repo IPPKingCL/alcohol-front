@@ -41,7 +41,7 @@ function BoardTable(props: any) {
         nickname: "",
         dateTime: ""
     }]);
-    const boardDateTime = dateTime.getFullYear() + "-" + (dateTime.getMonth() + 1) + "-" + dateTime.getDate() + " " +
+    const boardDateTime = dateTime.getFullYear() + "-" + (dateTime.getMonth() + 1).toString().padStart(2, '0') + "-" + dateTime.getDate().toString().padStart(2, '0') + " " +
         dateTime.getHours().toString().padStart(2, '0') + ":" + dateTime.getMinutes().toString().padStart(2, '0') + ":" + dateTime.getSeconds().toString().padStart(2, '0');
 
     const [expanded, setExpanded] = React.useState(false);
