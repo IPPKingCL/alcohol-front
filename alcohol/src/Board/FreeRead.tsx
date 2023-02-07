@@ -131,9 +131,9 @@ function FreeRead() {
                                 overflow: 'hidden',
                                 textOverflow: 'ellipsis',
                                 whiteSpace: 'nowrap',
-                                width: '10rem'
+                                width: '20rem'
                             }}>
-                                <span style={{float: "inherit", fontSize: "20px", color: "#FFFFB6" }}>{board?.title || ''}</span><span style={{ float: "right", fontSize: "20px", color: "blue" }}>{board?.nickname}</span>
+                                <span style={{float: "left", fontSize: "20px", color: "maroon" }}>{board?.title || ''}</span><span style={{ float: "right", fontSize: "20px", color: "blue" }}>{board?.nickname}</span>
                             </Typography>}
                             subheader={<Typography><span>{board?.dateTime}</span></Typography>}
                         />
