@@ -158,6 +158,47 @@ const AlchoIndex = () => {
                     </Grid>
                 </Box>
             </CardWrapper>
+
+            <hr></hr>
+            <CardWrapper border={false} content={false}>
+                <Box sx={{ p: 2.25 }}>
+                    <Grid container alignItems="center">
+                        <Grid item>
+                            <CardMedia
+                                component="img"
+                                height="400vh"
+                                width="400vh"
+                                image="https://alcoholcocktail.s3.ap-northeast-2.amazonaws.com/2367_1287_524.jpg"
+                                alt="Paella dish"
+                                sx={{
+                                    objectFit: "fill",
+                                    borderRadius: "20px"
+                                }}
+                            />
+                            <AnimateButtonT>
+                                <Button
+                                    disableElevation
+                                    fullWidth
+                                    size="medium"
+                                    type="submit"
+                                    variant="contained"
+                                    color="warning"
+                                    onClick={recipe}
+                                    sx={{
+                                        float: 'center',
+                                        marginTop: '1rem'
+                                    }}>
+                                    <Typography align='center' sx={{
+                                        color: "yellow"
+                                    }}>
+                                        나만의 칵테일 레시피
+                                    </Typography>
+                                </Button>
+                            </AnimateButtonT>
+                        </Grid>
+                    </Grid>
+                </Box>
+            </CardWrapper>
         </>
     )
 }
