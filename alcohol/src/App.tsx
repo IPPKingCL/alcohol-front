@@ -45,11 +45,9 @@ function App() {
     <>
       <CssBaseline />
       <Router>
-
         <div className="content-all">
           <ScrollToTop />
           <Routes>
-
             <Route path="/" element={<Cover />}></Route>
             <Route path="/login" element={<LoginC />}></Route>
             <Route path="/register" element={<Register />}></Route>

@@ -9,7 +9,7 @@ function Cover() {
     const navigate = useNavigate();
 
     const redirect = () => {
-        navigate("/LoginTest");
+        navigate("/Login");
     }
    
 
