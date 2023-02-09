@@ -1,16 +1,48 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CockJuice } from "../../interface/cocktail/CockJuice";
 import { alcho } from "../../interface/Alcho";
 import { Unit } from "../../interface/unit";
 import { InputItem } from "../../interface/manage/InputItem";
 import { getCookie } from "../../Common/Cookies";
 import { addr } from "../../Common/serverAddr";
+import SearchOption from "../../manager/new/SearchOption";
+import { useNavigate } from "react-router-dom";
 
-const selfCockInsert = () =>{
+const SelfCockInsert = () =>{
     const [alcho, setAlcho] = useState<alcho[]>([]);
     const [juice, setJuice] = useState<CockJuice[]>([]);
     const [unit, setUnit] = useState<Unit[]>([]);
-    //const [loading, setLoading] = useState<boolean>(true);
+    const [loading, setLoading] = useState<boolean>(true);
+
+    const navigater = useNavigate();
+
+    const list = async () => {
+        fetch(addr + '/admin/newCocktail', {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${getCookie('myToken')}`,
+            },
+        }).then((res) => res.json())
+            .then((res) => {
+                console.log(res);
+                if(res.message ==='Unauthorized'){
+                    alert('로그인해주세요');
+                    navigater('/Login');
+                }else if(res.msg){
+                    alert('권한이 없습니다');
+                    navigater('/Main');
+                }
+                setAlcho(res.alchoCategory);
+                setJuice(res.juiceCategory);
+                setUnit(res.unitCategory)
+            })
+        setLoading(false);
+    }
+
+    useEffect(() => {
+        list();
+    }, []);
 
     const nextID = useRef<number>(1);
     const [inputItems, setInputItems] = useState<InputItem[]>([{ id: 0, name:0, amount:0 ,unit:1, only:false}]);
@@ -227,9 +259,107 @@ const selfCockInsert = () =>{
 
     return (
         <div>
+             {loading ? <strong>loading...</strong> :
+                <>
+                    <h1>개인 레시피 넣기</h1>
+                    <hr></hr>
+                    칵테일 이름 : <input type="text" onChange={insertCocktail}/><br></br>
+                    이미지 : <input accept="image/*" multiple type="file" onChange={handleFileInput}/>
+                    도수 : <input type = "text" onChange={dosuChange}/>
+                    <hr></hr>
 
+
+
+                    <div>
+                        {inputItems.map((item, index) => (
+                            <div key={index}>
+                                <div>술 레시피</div>
+                                <select onChange={e => optionChange(e, index)}>
+                                    {alcho.map((data: any) => (
+                                        <SearchOption prop={data} key={data.id} />
+                                    ))}
+                                </select>
+                                <input
+                                    type="text"
+                                    className={`title-${index}`}
+                                    onChange={e => handleChange(e, index)}
+                                    value={item.amount}
+                                />
+                                <select onChange={e => unitChange(e, index)}>
+                                    {unit.map((data: any) => (
+                                        <SearchOption prop={data} key={data.id} />
+                                    ))}
+                                </select>
+                                only<input onChange={e =>onlyChange(e, index)}
+                                        type="checkBox"
+                                    />                 
+                                    
+
+
+                                {index === 0 && inputItems.length < 4 && (
+                                    <button onClick={addInput}> + </button>
+                                )}
+
+                                {index > 0 && inputItems[index - 1] ? (
+                                    <button onClick={() => deleteInput(item.id)}> - </button>
+                                ) : (
+                                    ''
+                                )}
+
+                            </div>
+                        ))}
+                    </div>
+
+                    <hr></hr>
+
+                    <div>
+                        {inputItemsJuice.map((item, index) => (
+                            <div key={index}>
+                                <div>음료 레시피</div>
+                                <select onChange={e => optionChangeJuice(e, index)}>
+                                    {juice.map((data: any) => (
+                                        <SearchOption prop={data} key={data.id} />
+                                    ))}
+                                </select>
+                                <input
+                                    type="text"
+                                    className={`title-${index}`}
+                                    onChange={e => handleChangeJuice(e, index)}
+                                    value={item.amount}
+                                />
+                                <select onChange={e => unitChangeJuice(e, index)}>
+                                    {unit.map((data: any) => (
+                                        <SearchOption prop={data} key={data.id} />
+                                    ))}
+                                </select>
+                                only<input onChange={e =>onlyChangeJuice(e, index)}
+                                        type="checkBox"
+                                    /> 
+
+                                {index === 0 && inputItems.length < 4 && (
+                                    <button onClick={addInputJuice}> + </button>
+                                )}
+
+                                {index > 0 && inputItems[index - 1] ? (
+                                    <button onClick={() => deleteInputJuice(item.id)}> - </button>
+                                ) : (
+                                    ''
+                                )}
+
+
+
+                            </div>
+                        ))}
+                    </div>
+                    <hr></hr>
+                    <button onClick={insert}>완료</button>
+                </>
+
+
+
+            }
         </div>
     )
 }
 
-export default selfCockInsert;
+export default SelfCockInsert;
