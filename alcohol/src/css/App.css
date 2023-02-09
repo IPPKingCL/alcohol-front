@@ -41,3 +41,8 @@
   overflow: scroll;
   height: 93vh;
 }
+
+.addicon{
+  top: 80%;
+  right: 16px;
+}
