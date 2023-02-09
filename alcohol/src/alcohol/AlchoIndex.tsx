@@ -52,6 +52,10 @@ const AlchoIndex = () => {
         navigate('/cocktail/recipe/all')
     }
 
+    const selfRecipe = () => {
+        navigate('/cocktail/recipe/self');
+    }
+
 
     return (
         <>
@@ -183,7 +187,7 @@ const AlchoIndex = () => {
                                     type="submit"
                                     variant="contained"
                                     color="warning"
-                                    onClick={recipe}
+                                    onClick={selfRecipe}
                                     sx={{
                                         float: 'center',
                                         marginTop: '1rem'
