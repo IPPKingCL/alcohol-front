@@ -39,6 +39,7 @@ import AlchoIndex from './alcohol/AlchoIndex';
 import Manager from './manager/Manager';
 import NewCocktail from './manager/new/NewCocktail';
 import SelfCock from './Cocktail/SelfRecipe/SelfCock';
+import SelfCockInsert from './Cocktail/SelfRecipe/SelfCockInsert';
 
 
 function App() {
@@ -71,6 +72,7 @@ function App() {
             <Route path='/cocktail/recipe/:id?' element={<Recipe />} />
             <Route path='/cocktail/recipeRead/:id' element={<RecipeRead />} />
             <Route path='/cocktail/recipe/self' element={<SelfCock/>}/>
+            <Route path='/cocktail/recipe/self/insert' element={<SelfCockInsert/>}/> 
 
             <Route path="/test" element={<UploadImageToS3WithNativeSdk />}></Route>
             <Route path="/test1" element={<Test />}></Route>

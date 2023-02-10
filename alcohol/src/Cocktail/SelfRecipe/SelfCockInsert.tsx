@@ -1,23 +1,19 @@
-import { Radio } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import AlcoholSearchOption from "../../alcohol/AlcoholSearch/AlcoholSearchOption";
+import { CockJuice } from "../../interface/cocktail/CockJuice";
+import { alcho } from "../../interface/Alcho";
+import { Unit } from "../../interface/unit";
+import { InputItem } from "../../interface/manage/InputItem";
 import { getCookie } from "../../Common/Cookies";
 import { addr } from "../../Common/serverAddr";
-import { alcho } from "../../interface/Alcho"
-import { CockJuice } from "../../interface/cocktail/CockJuice";
-import { InputItem } from "../../interface/manage/InputItem";
-import { Unit } from "../../interface/unit";
-import SearchOption from "./SearchOption";
+import SearchOption from "../../manager/new/SearchOption";
+import { useNavigate } from "react-router-dom";
 
-
-
-
-const NewCocktail = () => {
+const SelfCockInsert = () =>{
     const [alcho, setAlcho] = useState<alcho[]>([]);
     const [juice, setJuice] = useState<CockJuice[]>([]);
     const [unit, setUnit] = useState<Unit[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
+
     const navigater = useNavigate();
 
     const list = async () => {
@@ -47,16 +43,15 @@ const NewCocktail = () => {
     useEffect(() => {
         list();
     }, []);
-    
 
     const nextID = useRef<number>(1);
-    const [inputItems, setInputItems] = useState<InputItem[]>([{ id: 0, name:0, amount:0 ,unit:1, only:false}]);
+    const [inputItems, setInputItems] = useState<InputItem[]>([{ id: 0, name:1, amount:0 ,unit:1, only:false}]);
 
     // 추가
     function addInput() {
         const input = {			  // 새로운 인풋객체를 하나 만들고,
             id: nextID.current,		  // id 값은 변수로 넣어주고,
-            name:0,
+            name:1,
             amount:0,              // 내용은 빈칸으로 만들자
             unit:1,
             only:false			  
@@ -76,6 +71,7 @@ const NewCocktail = () => {
 
         // 인풋배열을 copy 해주자
         const inputItemsCopy: InputItem[] = JSON.parse(JSON.stringify(inputItems));
+        console.log(e.target.value);
         inputItemsCopy[index].name = parseInt(e.target.value); // 그리고 해당 인덱스를 가진 <input>의 내용을 변경해주자 
         setInputItems(inputItemsCopy);		  // 그걸 InputItems 에 저장해주자
     }
@@ -115,13 +111,13 @@ const NewCocktail = () => {
     
     
     const nextIDJuice = useRef<number>(1);
-    const [inputItemsJuice, setInputItemsJuice] = useState<InputItem[]>([{ id: 0, name:0, amount:0 ,unit:1, only:false}]);
+    const [inputItemsJuice, setInputItemsJuice] = useState<InputItem[]>([{ id: 0, name:1, amount:0 ,unit:1, only:false}]);
 
     // 추가
     function addInputJuice() {
         const input = {			  // 새로운 인풋객체를 하나 만들고,
             id: nextIDJuice.current,		  // id 값은 변수로 넣어주고,
-            name:0,
+            name:1,
             amount:0,			  // 내용은 빈칸으로 만들자
             unit:1,
             only:false
@@ -190,9 +186,12 @@ const NewCocktail = () => {
 
     const [dosu,setDosu] = useState<number>();
     const dosuChange = (e : React.ChangeEvent<HTMLInputElement>) => {
-        console.log(typeof(e.target.value))
+        setDosu(parseInt(e.target.value));
+    }
 
-        setDosu(parseFloat(e.target.value));
+    const [comment,setComment] = useState<string>();
+    const commentChange = (e : React.ChangeEvent<HTMLInputElement>) => {
+        setComment(e.target.value);
     }
     const test = () =>{
         console.log(inputItems);
@@ -239,9 +238,9 @@ const NewCocktail = () => {
                 return;
             }
 
-            console.log(dosu);
-            
-            fetch(addr + '/admin/insert',{
+            console.log(inputItems[0]);
+            console.log(inputItemsJuice[0]);
+            fetch(addr + '/selfcocktail/insert',{
                 method : "POST",
                 headers : {
                     "Content-Type": "application/json",
@@ -252,13 +251,14 @@ const NewCocktail = () => {
                     imgUrl:imageUrl,
                     dosu : dosu,
                     alcho : inputItems,
-                    juice : inputItemsJuice
+                    juice : inputItemsJuice,
+                    comment : comment
                 })
             }).then((res) => res.json())
             .then((res)=>{
                 if(res.success){
                     alert('등록 성공');
-                    
+                    window.history.go(-1);
                 }else{
                     alert(res.msg);
                 }
@@ -268,9 +268,9 @@ const NewCocktail = () => {
 
     return (
         <div>
-            {loading ? <strong>loading...</strong> :
+             {loading ? <strong>loading...</strong> :
                 <>
-                    <h1>관리자 페이지</h1>
+                    <h1>개인 레시피 넣기</h1>
                     <hr></hr>
                     칵테일 이름 : <input type="text" onChange={insertCocktail}/><br></br>
                     이미지 : <input accept="image/*" multiple type="file" onChange={handleFileInput}/>
@@ -361,6 +361,9 @@ const NewCocktail = () => {
                         ))}
                     </div>
                     <hr></hr>
+                    <div>설명</div>
+                    <input type="text" onChange={commentChange}/>
+                    <hr></hr>
                     <button onClick={insert}>완료</button>
                 </>
 
@@ -369,7 +372,6 @@ const NewCocktail = () => {
             }
         </div>
     )
-
 }
 
-export default NewCocktail;
+export default SelfCockInsert;

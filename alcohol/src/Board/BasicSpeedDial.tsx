@@ -17,7 +17,7 @@ export default function BasicSpeedDial(props :{click : any}) {
         ariaLabel="SpeedDial basic example"
         onClick={props.click}
         sx={{ position: 'fixed', top : '80%' , right : '16px'}}
-        icon={<EditIcon  />}
+        icon={<EditIcon />}
       >
       </SpeedDial>
     </Box>
