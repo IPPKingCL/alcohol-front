@@ -187,6 +187,11 @@ const SelfCockInsert = () =>{
     const dosuChange = (e : React.ChangeEvent<HTMLInputElement>) => {
         setDosu(parseInt(e.target.value));
     }
+
+    const [comment,setComment] = useState<string>();
+    const commentChange = (e : React.ChangeEvent<HTMLInputElement>) => {
+        setComment(e.target.value);
+    }
     const test = () =>{
         console.log(inputItems);
         console.log(inputItemsJuice);
@@ -243,7 +248,8 @@ const SelfCockInsert = () =>{
                     imgUrl:imageUrl,
                     dosu : dosu,
                     alcho : inputItems,
-                    juice : inputItemsJuice
+                    juice : inputItemsJuice,
+                    comment : comment
                 })
             }).then((res) => res.json())
             .then((res)=>{
@@ -351,6 +357,9 @@ const SelfCockInsert = () =>{
                             </div>
                         ))}
                     </div>
+                    <hr></hr>
+                    <div>설명</div>
+                    <input type="text" onChange={commentChange}/>
                     <hr></hr>
                     <button onClick={insert}>완료</button>
                 </>
