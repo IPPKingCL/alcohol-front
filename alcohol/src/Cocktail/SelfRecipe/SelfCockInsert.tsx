@@ -249,7 +249,7 @@ const SelfCockInsert = () =>{
             .then((res)=>{
                 if(res.success){
                     alert('등록 성공');
-                    
+                    window.history.go(-1);
                 }else{
                     alert(res.msg);
                 }
