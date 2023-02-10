@@ -7,6 +7,7 @@ import { addr } from '../Common/serverAddr';
 import '../css/MyPage.css';
 import { User } from '../interface/user';
 import MyFavorite from './MyFavorite';
+import { Table } from '@mui/material';
 
 
 function MyPage() {
@@ -97,7 +98,6 @@ function MyPage() {
                         <div className='mypage'>
                             <h3>{userData?.nickname}님의 마이페이지</h3>
                         </div>
-                        <hr></hr>
                         <div >
                             <img className="myImg" src={img} />
                             <div className='myHi'>
@@ -109,6 +109,7 @@ function MyPage() {
                                 <p className=''> {userData?.email}</p>
                             </div>
                         </div>
+                        <Table></Table>
                         <MyFavorite
                             datas={favoirtes} />
                     </div>
