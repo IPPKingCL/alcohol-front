@@ -190,7 +190,9 @@ const NewCocktail = () => {
 
     const [dosu,setDosu] = useState<number>();
     const dosuChange = (e : React.ChangeEvent<HTMLInputElement>) => {
-        setDosu(parseInt(e.target.value));
+        console.log(typeof(e.target.value))
+
+        setDosu(parseFloat(e.target.value));
     }
     const test = () =>{
         console.log(inputItems);
@@ -237,6 +239,8 @@ const NewCocktail = () => {
                 return;
             }
 
+            console.log(dosu);
+            
             fetch(addr + '/admin/insert',{
                 method : "POST",
                 headers : {
