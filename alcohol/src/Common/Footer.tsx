@@ -3,7 +3,7 @@ import '../css/footer.css';
 
 function Footer(){
     const navigate = useNavigate();
-    const recommend = () => {};//술 추천
+    const recommend = () => {navigate('/recommend')};//술 추천
     const mbti = () => {navigate('/alcohol')};//술 정보
     const home = () => {navigate('/Main')};
     const free = () => {navigate('/free')};

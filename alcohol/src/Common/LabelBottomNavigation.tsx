@@ -13,7 +13,7 @@ export default function LabelBottomNavigation() {
   const [value, setValue] = React.useState('recents');
 
   const navigate = useNavigate();
-  const recommend = () => { };//술 추천
+  const recommend = () => { navigate('/recommend') };//술 추천
   const mbti = () => { navigate('/alcohol') };//술 정보
   const home = () => { navigate('/Main') };
   const free = () => { navigate('/free') };
@@ -46,6 +46,7 @@ export default function LabelBottomNavigation() {
         label="오늘의 술"
         value="오늘의 술"
         icon={<FavoriteIcon />}
+        onClick={recommend}
       />
       <BottomNavigationAction
         label="술 정보"
