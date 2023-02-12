@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import RecipeListco from "../Cocktail/Recipe/RecipeListco";
 import { getCookie } from "../Common/Cookies";
 import { addr } from "../Common/serverAddr";
 import {Cocktail} from "../interface/Cocktail"
@@ -30,8 +31,12 @@ const FilterCocktail = () => {
     }
     return (
         <div>
+            <h1>당신에게 추천하는 칵테일</h1>
+            <h5>각 칵테일에 별점을 주시면 더 정확한 추천을 받으실 수 있습니다</h5>
+            <hr/>
             { loading ? <strong>loading...</strong>:
-                <button onClick={check}>체크</button>
+                 <RecipeListco
+                 datas={cocktail}/>
             }
         </div>
     )
