@@ -41,6 +41,7 @@ import NewCocktail from './manager/new/NewCocktail';
 import SelfCock from './Cocktail/SelfRecipe/SelfCock';
 import SelfCockInsert from './Cocktail/SelfRecipe/SelfCockInsert';
 import Recommend from './Recommend/Recommend';
+import FillterCocktail from './Recommend/FillterCocktail';
 
 
 function App() {
@@ -75,7 +76,8 @@ function App() {
             <Route path='/cocktail/recipe/self' element={<SelfCock/>}/>
             <Route path='/cocktail/recipe/self/insert' element={<SelfCockInsert/>}/> 
 
-            <Route path='recommend' element = {<Recommend/>}/>
+            <Route path='/recommend' element = {<Recommend/>}/>
+            <Route path='/recommend/cocktail' element = {<FillterCocktail/>}/>
 
             <Route path="/test" element={<UploadImageToS3WithNativeSdk />}></Route>
             <Route path="/test1" element={<Test />}></Route>
