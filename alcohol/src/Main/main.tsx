@@ -82,4 +82,6 @@ export default Main;
 
 18. 마이페이지 UI 설계 작업
 
+19. 추천페이지 만들기
+
 */
