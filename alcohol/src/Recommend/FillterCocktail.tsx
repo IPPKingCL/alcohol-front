@@ -18,6 +18,7 @@ const FilterCocktail = () => {
             console.log(res);
             setCocktail(res);
         })
+        setLoading(false);
     }
 
     useEffect(()=>{
