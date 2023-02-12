@@ -1,7 +1,13 @@
+import { useNavigate } from "react-router-dom"
+
 const Recommend = () => {
+    const navigate = useNavigate();
+    const onclick = () =>{
+        navigate('/recommend/cocktail')
+    }
     return (
         <div>
-            추천받기
+            <p onClick={onclick}>추천받기</p>
         </div>
     )
 }
