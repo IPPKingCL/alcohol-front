@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import RecipeListco from "../Cocktail/Recipe/RecipeListco";
@@ -35,6 +36,28 @@ const FilterCocktail = () => {
     const check = () => {
         console.log(cocktail);
     }
+
+    const again = () => {
+        setCocktail([]);
+        setLoading(true);
+        fetch(addr+'/cocktail/recommend/contentFiltering/again',{
+            method: "Get",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization":`Bearer ${getCookie('myToken')}`,
+            }
+            }).then((res) => res.json())
+            .then((res) =>{
+                if(res.message=='Unauthorized'){
+                    alert('로그인 후 이용하여 주세요');
+                    navigate('/Login');
+                }
+                console.log(res);
+                setCocktail(res);
+            })
+        setLoading(false);
+    }
+    
     return (
         <div>
             <h1>당신에게 추천하는 칵테일</h1>
@@ -43,7 +66,21 @@ const FilterCocktail = () => {
             { loading ? <strong>loading...</strong>:
                  <RecipeListco
                  datas={cocktail}/>
+                 
             }
+             <Button
+                        disableElevation
+                        fullWidth
+                        size="large"
+                        type="submit"
+                        variant="contained"
+                        color="warning"
+                        onClick={again}
+                        sx={{
+                            marginBlock: "1rem"
+                        }}>다시 추천 받기
+                    </Button>
+             
         </div>
     )
 }
