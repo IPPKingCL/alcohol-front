@@ -18,11 +18,9 @@ const FilterCocktail = () => {
             }
         }).then((res) => res.json())
         .then((res) =>{
-            if(res.message='Unauthorized'){
+            if(res.message=='Unauthorized'){
                 alert('로그인 후 이용하여 주세요');
                 navigate('/Login');
-            }else if(!res.success){
-                alert(res.msg);
             }
             console.log(res);
             setCocktail(res);
