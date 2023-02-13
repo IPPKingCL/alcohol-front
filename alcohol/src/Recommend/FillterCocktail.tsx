@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import RecipeListco from "../Cocktail/Recipe/RecipeListco";
 import { getCookie } from "../Common/Cookies";
 import { addr } from "../Common/serverAddr";
@@ -6,6 +7,7 @@ import {Cocktail} from "../interface/Cocktail"
 const FilterCocktail = () => {
     const [cocktail,setCocktail] = useState<Cocktail[]>();
     const [loading,setLoading] = useState<boolean>(true);
+    const navigate = useNavigate();
 
     const recommendCocktail = () => {
         fetch(addr+'/cocktail/recommend/contentFiltering',{
@@ -16,6 +18,12 @@ const FilterCocktail = () => {
             }
         }).then((res) => res.json())
         .then((res) =>{
+            if(res.message='Unauthorized'){
+                alert('로그인 후 이용하여 주세요');
+                navigate('/Login');
+            }else if(!res.success){
+                alert(res.msg);
+            }
             console.log(res);
             setCocktail(res);
         })
