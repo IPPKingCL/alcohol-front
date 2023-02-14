@@ -16,7 +16,6 @@ import FreeRead from './Board/FreeRead';
 import FreeModify from './Board/FreeModify';
 import Footer from './Common/Footer';
 import Main from './Main/main';
-import MyPage from './MyPage/MyPage';
 import UploadImageToS3WithNativeSdk from './Board/UploadImageToS3WithNativeSdk';
 import Test from './Board/test1';
 import AlcoholInfo from './alcohol/AlcoholInfo';
@@ -42,6 +41,7 @@ import SelfCock from './Cocktail/SelfRecipe/SelfCock';
 import SelfCockInsert from './Cocktail/SelfRecipe/SelfCockInsert';
 import Recommend from './Recommend/Recommend';
 import FillterCocktail from './Recommend/FillterCocktail';
+import MyPageInfo from './MyPage/MyPageInfo';
 
 
 function App() {
@@ -81,7 +81,7 @@ function App() {
 
             <Route path="/test" element={<UploadImageToS3WithNativeSdk />}></Route>
             <Route path="/test1" element={<Test />}></Route>
-            <Route path="/myPage" element={<MyPage />} />
+            <Route path="/myPage" element={<MyPageInfo />} />
             <Route path='/myPage/modify' element={<MyPageModify />} />
 
             <Route path='/manager' element={<Manager />} />
