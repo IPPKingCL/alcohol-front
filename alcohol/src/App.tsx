@@ -42,6 +42,7 @@ import SelfCockInsert from './Cocktail/SelfRecipe/SelfCockInsert';
 import Recommend from './Recommend/Recommend';
 import FillterCocktail from './Recommend/FillterCocktail';
 import MyPageInfo from './MyPage/MyPageInfo';
+import MyPage from './MyPage/Mypage';
 
 
 function App() {
@@ -81,7 +82,8 @@ function App() {
 
             <Route path="/test" element={<UploadImageToS3WithNativeSdk />}></Route>
             <Route path="/test1" element={<Test />}></Route>
-            <Route path="/myPage" element={<MyPageInfo />} />
+            <Route path="/myPage" element={<MyPage />} />
+            <Route path="/myPageInfo" element={<MyPageInfo />} />
             <Route path='/myPage/modify' element={<MyPageModify />} />
 
             <Route path='/manager' element={<Manager />} />

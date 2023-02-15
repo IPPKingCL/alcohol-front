@@ -92,7 +92,7 @@ function MyPageInfo() {
 
     function createData(
         name: string,
-        info : string|undefined,
+        info : string|number|undefined,
     ) {
         return { name, info};
     }
@@ -101,7 +101,7 @@ function MyPageInfo() {
         createData('이름', userData?.name),
         createData('닉네임', userData?.nickname),
         createData('직업군', userData?.job),
-        createData('가격', userData?.price.toString()),
+        createData('가격', userData?.price),
         createData('이메일', userData?.email),
     ];
 

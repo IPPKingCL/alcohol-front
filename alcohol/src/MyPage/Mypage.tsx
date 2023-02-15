@@ -11,11 +11,16 @@ import { Table } from '@mui/material';
 
 
 function MyPage() {
+    const navigate = useNavigate();
+
     return (
-        <div>
+        <Card style={{ backgroundColor: '#FFFFB6', color: 'maroon', position: 'relative' }}>
+            <div>
+                <p>mypage List</p>
 
-
-        </div>
+                <p onClick={() => {navigate('/mypageInfo')}}>info</p>
+            </div>
+        </Card>
     )
 }
 
