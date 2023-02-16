@@ -1,4 +1,4 @@
-import { Avatar, Typography } from '@mui/material';
+import { Avatar, Paper, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 import { ReactNode, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Card, CardHeader } from 'reactstrap';
@@ -10,7 +10,7 @@ import MyFavorite from './MyFavorite';
 import { Table } from '@mui/material';
 
 
-function MyPage() {
+function MyPageInfo() {
     const [userData, setUserData] = useState<User>();
     const [loading, setLoading] = useState<boolean>(true);
     const [favoirtes, setFavorite] = useState<string[]>([]);
@@ -90,6 +90,21 @@ function MyPage() {
         //추후 좀 더 서치하고 보강할 예정입니다
     }
 
+    function createData(
+        name: string,
+        info : string|number|undefined,
+    ) {
+        return { name, info};
+    }
+
+    const rows = [
+        createData('이름', userData?.name),
+        createData('닉네임', userData?.nickname),
+        createData('직업군', userData?.job),
+        createData('가격', userData?.price),
+        createData('이메일', userData?.email),
+    ];
+
     return (
         <Card style={{ backgroundColor: '#FFFFB6', color: 'maroon', position: 'relative' }}>
             <div>
@@ -99,17 +114,25 @@ function MyPage() {
                             <h3>{userData?.nickname}님의 마이페이지</h3>
                         </div>
                         <div >
-                            <img className="myImg" src={img} />
-                            <div className='myHi'>
-                                <p className=''> {userData?.name}</p>
-                                <p className=''> {userData?.nickname}</p>
-                                <p className=''> {userData?.birth}</p>
-                                <p className=''> {userData?.job}</p>
-                                <p className=''> {userData?.price}</p>
-                                <p className=''> {userData?.email}</p>
-                            </div>
+                            <img className="myImg" src={img} style={{marginBottom : '1rem'}}/>                            
                         </div>
-                        <Table></Table>
+                        <TableContainer component={Paper}>
+                            <Table sx={{backgroundColor: '#FFFFB6'}} aria-label="simple table">
+                                <TableBody>
+                                    {rows.map((row) => (
+                                        <TableRow
+                                            key={row.name}
+                                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                        >
+                                            <TableCell component="th" scope="row">
+                                                {row.name}
+                                            </TableCell>
+                                            <TableCell align="right">{row.info}</TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
                         <MyFavorite
                             datas={favoirtes} />
                     </div>
@@ -122,4 +145,4 @@ function MyPage() {
 }
 
 
-export default MyPage;
+export default MyPageInfo;

@@ -81,7 +81,7 @@ const AlchoIndex = () => {
                 </Box>
             </CardWrapper>
             <hr />
-            <CardWrapper border={false} content={false}>
+            <CardWrapper border={false} content={false} onClick={info}>
                 <Box sx={{ p: 2.25 }}>
                     <Grid container alignItems="center">
                         <Grid item>
@@ -123,7 +123,7 @@ const AlchoIndex = () => {
 
             <hr />
 
-            <CardWrapper border={false} content={false}>
+            <CardWrapper border={false} content={false} onClick={recipe}>
                 <Box sx={{ p: 2.25 }}>
                     <Grid container alignItems="center">
                         <Grid item>
@@ -164,7 +164,7 @@ const AlchoIndex = () => {
             </CardWrapper>
 
             <hr></hr>
-            <CardWrapper border={false} content={false}>
+            <CardWrapper border={false} content={false} onClick={selfRecipe}>
                 <Box sx={{ p: 2.25 }}>
                     <Grid container alignItems="center">
                         <Grid item>
