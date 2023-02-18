@@ -82,7 +82,7 @@ const Recommend = () => {
                                 component="img"
                                 height="400vh"
                                 width="400vh"
-                                image="https://myhsproject.s3.ap-northeast-2.amazonaws.com/KakaoTalk_20221231_173124605.jpg"
+                                image="https://alcoholcocktail.s3.ap-northeast-2.amazonaws.com/85119_152985_302.webp"
                                 alt="Paella dish"
                                 sx={{
                                     objectFit: "fill",
