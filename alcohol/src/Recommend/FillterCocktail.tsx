@@ -11,7 +11,7 @@ const FilterCocktail = () => {
     const navigate = useNavigate();
 
     const recommendCocktail = () => {
-        fetch(addr+'/cocktail/recommend/contentFiltering',{
+        fetch(addr+'/cocktail/recommend/type',{
             method: "Get",
             headers: {
                 "Content-Type": "application/json",
