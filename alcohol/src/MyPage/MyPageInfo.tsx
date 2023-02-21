@@ -1,4 +1,4 @@
-import { Avatar, Paper, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
+import { Avatar, Button, Paper, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 import { ReactNode, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Card, CardHeader } from 'reactstrap';
@@ -137,8 +137,8 @@ function MyPageInfo() {
                             datas={favoirtes} />
                     </div>
                 }
-                <button onClick={logOut}>로그아웃</button>
-                <button onClick={() => { navigate('/myPage/modify') }} >수정</button>
+                <Button variant="contained" color="warning" onClick={logOut}> 로그아웃</Button>
+                <Button variant="contained" color="warning" onClick={() => { navigate('/myPage/modify') }} >수정</Button>
             </div>
         </Card>
     )
