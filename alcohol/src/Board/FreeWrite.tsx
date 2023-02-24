@@ -35,7 +35,7 @@ function FreeWrite() {
     }
 
     const onclick = async () => {
-        console.log(board);
+        console.log(selectedFile[0]);
         if (!board.title || !board.contents) {
             alert("제목과 내용을 입력해주세요");
             return;
@@ -64,21 +64,26 @@ function FreeWrite() {
             .then((res) => {
                 console.log(res.data);
 
-                let imageUrl = "";
+                let imageUrl = new Array<string>();
 
-                fetch(res.data, {
-                    method: "put",
-                    headers: {
-                        "Content-Type": "multipart/form-data",
-
-                    },
-                    body: selectedFile
-                })
-                if (selectedFile.size > 0) {
-                    imageUrl = res.data.split('?')[0];
-                } else {
-                    imageUrl = "";
+                for(let i =0;i<selectedFile.length;i++){
+                    fetch(res.data, {
+                        method: "put",
+                        headers: {
+                            "Content-Type": "multipart/form-data",
+    
+                        },
+                        body: selectedFile[i]
+                    })
+                    if (selectedFile[i].size > 0) {
+                        imageUrl[i] = res.data.split('?')[0];
+                    } else {
+                        imageUrl[i] = "";
+                    }
                 }
+
+                console.log(imageUrl);
+               
 
 
 
@@ -114,12 +119,13 @@ function FreeWrite() {
 
 
 
-    const [selectedFile, setSelectedFile] = useState<any>('');
+    const [selectedFile, setSelectedFile] = useState<any[]>([]);
     const handleFileInput = (e: any) => {
         console.log("event : " + e);
         const file = e.target.files[0];
         console.log(file);
-        setSelectedFile(file);
+        console.log(typeof(e.target.files[1]));
+        setSelectedFile(e.target.files);
     }
 
     return (
@@ -195,16 +201,16 @@ function FreeWrite() {
             <div>
                 <Button variant="contained" component="label">
                     Upload
-                    <input hidden accept="image/*" multiple type="file" onChange={handleFileInput} />
+                    <input hidden accept="image/*" type="file" onChange={handleFileInput} multiple/>
                 </Button>
                 <IconButton color="primary" aria-label="upload picture" component="label">
-                    <input hidden accept="image/*" type="file" onChange={handleFileInput} />
+                    <input hidden accept="image/*" type="file" onChange={handleFileInput} multiple/>
                     <PhotoCamera />
                 </IconButton>
             </div>
-            <div>
+            {/* <div>
                 <input className='video-input' name="videoUrl" type="text" onChange={onchange} placeholder="비디오 URL을 입력해주세요"/>
-            </div>
+            </div> */}
             <Button
                 disableElevation
                 fullWidth
