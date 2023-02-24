@@ -48,7 +48,10 @@ function AlcoholTable(prop: any) {
             setColor(prop.data.color);
         }
     }, []);
+
     const onclick = () => {
+        console.log(window.scrollX);
+        console.log(window.scrollY);
         navigate('/alcohol/detail/' + prop.data.id);
     }
 

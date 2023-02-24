@@ -8,6 +8,7 @@ import {
   Routes,
   Route,
   useLocation,
+  ScrollRestoration,
 } from "react-router-dom";
 import AddInfo from './Addinfo/AddInfo';
 import FreeBoard from './Board/FreeBoard';
@@ -46,7 +47,9 @@ import MyPage from './MyPage/Mypage';
 
 
 function App() {
-
+  useEffect(()=>{
+    window.history.scrollRestoration = 'manual'
+  },[])
   return (
     <>
       <CssBaseline />
@@ -54,6 +57,7 @@ function App() {
         <div className="content-all">
           <ScrollToTop />
           <Routes>
+          
             <Route path="/" element={<Cover />}></Route>
             <Route path="/login" element={<LoginC />}></Route>
             <Route path="/register" element={<Register />}></Route>
@@ -72,7 +76,7 @@ function App() {
             <Route path="/alcohol/detail/:id" element={<AlcoholDetail />}></Route>
 
             <Route path='/cocktail/list/:id' element={<CocktailList />} />
-            <Route path='/cocktail/recipe/:id?' element={<Recipe />} />
+            <Route path='/cocktail/recipe/:id?' element={<Recipe />} ></Route>
             <Route path='/cocktail/recipeRead/:id' element={<RecipeRead />} />
             <Route path='/cocktail/recipe/self' element={<SelfCock/>}/>
             <Route path='/cocktail/recipe/self/insert' element={<SelfCockInsert/>}/> 

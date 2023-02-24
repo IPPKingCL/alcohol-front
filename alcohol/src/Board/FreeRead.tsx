@@ -59,7 +59,7 @@ function FreeRead() {
     }
 
     const boardList = () => {
-        navigate('/free');
+        window.history.go(-1);
     }
 
     const recommend = () => {
@@ -166,7 +166,7 @@ function FreeRead() {
                                 type="submit"
                                 variant="contained"
                                 color="warning"
-                                onClick={boardList}>목록</Button>
+                                onClick={boardList}>뒤로</Button>
                         </Grid>
                         <Grid item xs={3}>
                             <Button
