@@ -3,6 +3,7 @@ import { alcho } from "../interface/Alcho";
 import { addr } from "../Common/serverAddr";
 import AlcoholList from "./AlcoholList";
 import AlcoholSearch from "./AlcoholSearch/AlcoholSearch";
+import { ScrollRestoration } from "react-router-dom";
 
 function AlcoholInfo(){
 
@@ -46,6 +47,12 @@ function AlcoholInfo(){
     }
 
     useEffect(() => {
+        const scrollRestoration = window.history.scrollRestoration
+        if (scrollRestoration === 'manual') {
+            console.log('The location on the page is not restored, user will need to scroll manually.');
+            console.log(scrollRestoration)
+        }
+        
         list();        
         setLoading(false);
     },[]);
@@ -118,6 +125,7 @@ function AlcoholInfo(){
                     />
                 </div>    
             }
+            
         </div>
 
     )
