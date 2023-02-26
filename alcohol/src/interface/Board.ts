@@ -5,6 +5,10 @@ export interface board{
     
 }
 
+export interface modiBoard extends board{
+    userId:number
+}
+
 export interface boardRead extends board{
     dateTime:string,
     isDeleted:Boolean,

@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getCookie } from '../Common/Cookies';
-import { boardRead,board } from '../interface/Board';
+import { boardRead,board, modiBoard } from '../interface/Board';
 import { addr } from '../Common/serverAddr';
 
 function FreeModify(){
     const [loading, setLoading] = useState<boolean>(true);
     const [board, setBoard] = useState<boardRead>();
-    const [modiboard, setModiBoard] = useState<board>({
+    const [modiboard, setModiBoard] = useState<modiBoard>({
         title:"",
         contents:"",
-        boardType:""
+        boardType:"",
+        userId : 0
     })
 
     const navigate=useNavigate();
@@ -89,7 +90,7 @@ function FreeModify(){
                 title:modiboard.title,
                 contents:modiboard.contents,
                 boardType:modiboard.boardType,
-               
+                userId : board?.userId
             }),
         }).then((res) => res.json())
         .then((res) => {
