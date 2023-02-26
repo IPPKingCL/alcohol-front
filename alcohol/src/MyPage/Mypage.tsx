@@ -1,7 +1,7 @@
 import { Avatar, Paper, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 import { ReactNode, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { Card, CardHeader } from 'reactstrap';
+import { Card, CardHeader } from '@mui/material';
 import { getCookie, removeCookie, setCookie } from '../Common/Cookies';
 import { addr } from '../Common/serverAddr';
 import '../css/MyPage.css';
@@ -15,11 +15,15 @@ function MyPage() {
 
     return (
         <Card style={{ backgroundColor: '#FFFFB6', color: 'maroon', position: 'relative' }}>
-            <div>
-                <p>mypage List</p>
-
-                <p onClick={() => {navigate('/mypageInfo')}}>info</p>
-            </div>
+            <CardHeader
+                    avatar={
+                        <Avatar src="" aria-label="recipe" />
+                    }
+                    title={<Typography>
+                        <span style={{ fontSize: "18px" }}>마이 페이지</span>
+                    </Typography>}
+                    subheader={<Typography><span onClick={() => {navigate('/mypageInfo')}}>나의 정보 보러가기</span></Typography>}
+                />
         </Card>
     )
 }
