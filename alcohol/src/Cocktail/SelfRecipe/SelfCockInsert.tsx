@@ -307,11 +307,11 @@ const SelfCockInsert = () =>{
 
 
                                 {index === 0 && inputItems.length < 4 && (
-                                    <button onClick={addInput}> + </button>
+                                    <button className='d-btn' onClick={addInput}> + </button>
                                 )}
 
                                 {index > 0 && inputItems[index - 1] ? (
-                                    <button onClick={() => deleteInput(item.id)}> - </button>
+                                    <button className='d-btn' onClick={() => deleteInput(item.id)}> - </button>
                                 ) : (
                                     ''
                                 )}
@@ -348,11 +348,11 @@ const SelfCockInsert = () =>{
                                     /> 
 
                                 {index === 0 && inputItems.length < 4 && (
-                                    <button onClick={addInputJuice}> + </button>
+                                    <button className='d-btn' onClick={addInputJuice}> + </button>
                                 )}
 
                                 {index > 0 && inputItems[index - 1] ? (
-                                    <button onClick={() => deleteInputJuice(item.id)}> - </button>
+                                    <button className='d-btn' onClick={() => deleteInputJuice(item.id)}> - </button>
                                 ) : (
                                     ''
                                 )}
@@ -366,7 +366,7 @@ const SelfCockInsert = () =>{
                     <div>설명</div>
                     <input type="text" id="select-search" onChange={commentChange}/>
                     <hr></hr>
-                    <button onClick={insert}>완료</button>
+                    <button className='m-btn' onClick={insert}>완료</button>
                 </>
 
 
