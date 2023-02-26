@@ -7,6 +7,7 @@ import { getCookie } from "../../Common/Cookies";
 import { addr } from "../../Common/serverAddr";
 import SearchOption from "../../manager/new/SearchOption";
 import { useNavigate } from "react-router-dom";
+import { Button, Card, TextField } from '@mui/material';
 
 const SelfCockInsert = () =>{
     const [alcho, setAlcho] = useState<alcho[]>([]);
@@ -271,12 +272,28 @@ const SelfCockInsert = () =>{
              {loading ? <strong>loading...</strong> :
                 <>
                     <h1>개인 레시피 넣기</h1>
-                    <hr></hr>
+                    {/* <hr></hr>
                     칵테일 이름 : <input type="text" onChange={insertCocktail}/><br></br>
                     이미지 : <input accept="image/*" multiple type="file" onChange={handleFileInput}/>
                     도수 : <input type = "text" onChange={dosuChange}/>
+                    <hr></hr> */}
                     <hr></hr>
-
+                    <Card style={{ marginBlock: 20, backgroundColor: 'white', color: 'maroon', position: 'relative' }}>
+                        
+                        <div className="comment-box">
+                            <TextField
+                                id="outlined-multiline-flexible"
+                                label="칵테일 이름"
+                                multiline
+                                maxRows={3}
+                                onChange={insertCocktail}                        
+                                sx={{
+                                    marginLeft:'1rem'
+                                }}
+                            />
+                            
+                        </div>
+                    </Card>
 
 
                     <div>
