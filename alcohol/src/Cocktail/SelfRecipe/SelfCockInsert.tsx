@@ -272,9 +272,9 @@ const SelfCockInsert = () =>{
                 <>
                     <h1>개인 레시피 넣기</h1>
                     <hr></hr>
-                    칵테일 이름 : <input type="text" onChange={insertCocktail}/><br></br>
-                    이미지 : <input accept="image/*" multiple type="file" onChange={handleFileInput}/>
-                    도수 : <input type = "text" onChange={dosuChange}/>
+                    <input type="text" className="select-search" placeholder="칵테일 이름" onChange={insertCocktail}/><br></br>
+                    <input accept="image/*" multiple type="file" placeholder="이미지" onChange={handleFileInput}/><br></br>
+                    <input type = "text" id="select-search" placeholder="도수" onChange={dosuChange}/>
                     <hr></hr>
 
 
@@ -283,18 +283,19 @@ const SelfCockInsert = () =>{
                         {inputItems.map((item, index) => (
                             <div key={index}>
                                 <div>술 레시피</div>
-                                <select onChange={e => optionChange(e, index)}>
+                                <select className="select-search" onChange={e => optionChange(e, index)}>
                                     {alcho.map((data: any) => (
                                         <SearchOption prop={data} key={data.id} />
                                     ))}
                                 </select>
                                 <input
                                     type="text"
+                                    id="select-search"
                                     className={`title-${index}`}
                                     onChange={e => handleChange(e, index)}
                                     value={item.amount}
                                 />
-                                <select onChange={e => unitChange(e, index)}>
+                                <select className="select-search" onChange={e => unitChange(e, index)}>
                                     {unit.map((data: any) => (
                                         <SearchOption prop={data} key={data.id} />
                                     ))}
@@ -325,7 +326,7 @@ const SelfCockInsert = () =>{
                         {inputItemsJuice.map((item, index) => (
                             <div key={index}>
                                 <div>음료 레시피</div>
-                                <select onChange={e => optionChangeJuice(e, index)}>
+                                <select className="select-search" onChange={e => optionChangeJuice(e, index)}>
                                     {juice.map((data: any) => (
                                         <SearchOption prop={data} key={data.id} />
                                     ))}
@@ -333,10 +334,11 @@ const SelfCockInsert = () =>{
                                 <input
                                     type="text"
                                     className={`title-${index}`}
+                                    id="select-search"
                                     onChange={e => handleChangeJuice(e, index)}
                                     value={item.amount}
                                 />
-                                <select onChange={e => unitChangeJuice(e, index)}>
+                                <select className="select-search" onChange={e => unitChangeJuice(e, index)}>
                                     {unit.map((data: any) => (
                                         <SearchOption prop={data} key={data.id} />
                                     ))}
@@ -362,7 +364,7 @@ const SelfCockInsert = () =>{
                     </div>
                     <hr></hr>
                     <div>설명</div>
-                    <input type="text" onChange={commentChange}/>
+                    <input type="text" id="select-search" onChange={commentChange}/>
                     <hr></hr>
                     <button onClick={insert}>완료</button>
                 </>
