@@ -38,7 +38,7 @@ function MyPage() {
                 <CardContent>
                     <Typography variant="h6" color="text.secondary" sx={{
                     }}>
-                       내가 좋아하는 술
+                       내가 좋아하는 술 
                     </Typography>
                 </CardContent>
             </Card>
