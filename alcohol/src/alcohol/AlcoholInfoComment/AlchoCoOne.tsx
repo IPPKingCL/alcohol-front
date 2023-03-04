@@ -33,7 +33,7 @@ function AlchoCoOne(prop:any){
                     alert('로그인 후 이용 가능합니다')
                     navigate('/login');
                 }else{
-                    if(res.msg==='fail'){
+                    if(res.msg==='fail'||'no'){
                         alert('권한이 없습니다');
                         return;
                     }

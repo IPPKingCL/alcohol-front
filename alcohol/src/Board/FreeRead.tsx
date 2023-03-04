@@ -71,6 +71,7 @@ function FreeRead() {
             }
         }).then((res) => res.json())
             .then((res) => {
+                console.log(res);
                 if (res.success) {
                     alert(res.msg);
                 } else {
