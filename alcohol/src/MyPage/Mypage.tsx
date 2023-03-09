@@ -42,6 +42,30 @@ function MyPage() {
                     </Typography>
                 </CardContent>
             </Card>
+            <Card style={{ backgroundColor: '#FFFFB6', color: 'maroon', position: 'relative'}}>
+                <CardContent>
+                    <Typography variant="h6" color="text.secondary" sx={{
+                    }}>
+                       공지사항
+                    </Typography>
+                </CardContent>
+            </Card>
+            <Card style={{ backgroundColor: '#FFFFB6', color: 'maroon', position: 'relative'}}>
+                <CardContent>
+                    <Typography variant="h6" color="text.secondary" sx={{
+                    }}>
+                       내가 쓴 글
+                    </Typography>
+                </CardContent>
+            </Card>
+            <Card style={{ backgroundColor: '#FFFFB6', color: 'maroon', position: 'relative'}}>
+                <CardContent>
+                    <Typography variant="h6" color="text.secondary" sx={{
+                    }}>
+                       내가 쓴 댓글
+                    </Typography>
+                </CardContent>
+            </Card>
         </>
     )
 }
