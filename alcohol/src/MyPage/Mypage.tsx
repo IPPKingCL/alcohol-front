@@ -54,7 +54,7 @@ function MyPage() {
                 <CardContent>
                     <Typography variant="h6" color="text.secondary" sx={{
                     }}>
-                       내가 쓴 글
+                       내가 쓴 글 
                     </Typography>
                 </CardContent>
             </Card>
