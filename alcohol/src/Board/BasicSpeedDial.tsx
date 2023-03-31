@@ -10,7 +10,7 @@ import { Button } from 'reactstrap';
 
 
 export default function BasicSpeedDial(props :{click : any}) {
-  console.log(props.click);
+  // console.log(props.click);
   return (
     <Box>
       <SpeedDial
