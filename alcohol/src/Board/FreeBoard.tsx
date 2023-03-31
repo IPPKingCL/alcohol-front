@@ -8,7 +8,7 @@ import Pagination from './Paginattion';
 import { getCookie } from '../Common/Cookies';
 import PaginationBoard from './Paginattion';
 import BasicSpeedDial from './BasicSpeedDial';
-import { Box } from '@mui/material';
+import { Box, Button, Grid } from '@mui/material';
 
 function FreeBoard() {
     const [loading, setLoading] = useState<boolean>(true);
@@ -184,7 +184,16 @@ function FreeBoard() {
                     <form className='search-form' onSubmit={e => onSearch(e)}>
                         <input type="text" id="search" value={search} onChange={onChangeSearch} ></input>
                         {/* <button type='submit' className='btn-submit'>검색</button>; */}
-                        <button type='submit' onClick={test}>검색</button>
+                       
+                            <Button
+                                disableElevation
+                                size="medium"
+                                type="submit"
+                                variant="contained"
+                                color="primary"
+                                onClick={test}>검색</Button>
+                       
+                        {/* <button type='submit' onClick={test}>검색</button> */}
                     </form>
                 </div>
 
