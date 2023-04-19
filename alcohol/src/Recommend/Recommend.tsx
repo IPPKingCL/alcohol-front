@@ -113,6 +113,46 @@ const Recommend = () => {
                     </Grid>
                 </Box>
             </CardWrapper>
+            <hr/>
+            <CardWrapper border={false} content={false} onClick={onclick}>
+                <Box sx={{ p: 2.25 }}>
+                    <Grid container alignItems="center">
+                        <Grid item>
+                            <CardMedia
+                                component="img"
+                                height="400vh"
+                                width="400vh"
+                                image="https://alcoholcocktail.s3.ap-northeast-2.amazonaws.com/images.jfif"
+                                alt="Paella dish"
+                                sx={{
+                                    objectFit: "fill",
+                                    borderRadius: "20px"                                    
+                                }}
+                            />
+                            <AnimateButtonT>
+                                <Button
+                                    disableElevation
+                                    fullWidth
+                                    size="medium"
+                                    type="submit"
+                                    variant="contained"
+                                    color="warning"
+                                    onClick={onclick}
+                                    sx={{
+                                        float: 'center',
+                                        marginTop: '1rem'                       
+                                    }}>
+                                    <Typography align='center' sx={{
+                                        color: "yellow"
+                                    }}>
+                                        함께 술 마시기
+                                    </Typography>
+                                </Button>
+                            </AnimateButtonT>
+                        </Grid>
+                    </Grid>
+                </Box>
+            </CardWrapper>
        </>
     )
 }
