@@ -44,6 +44,7 @@ import Recommend from './Recommend/Recommend';
 import FillterCocktail from './Recommend/FillterCocktail';
 import MyPageInfo from './MyPage/MyPageInfo';
 import MyPage from './MyPage/Mypage';
+import FaceChatList from './faceChat/FaceChatList';
 
 
 function App() {
@@ -92,6 +93,8 @@ function App() {
 
             <Route path='/manager' element={<Manager />} />
             <Route path='/manager/newCocktail' element={<NewCocktail />} />
+
+            <Route path='/faceChat' element={<FaceChatList/>}/>
           </Routes>
         </div>
         <LabelBottomNavigation />
