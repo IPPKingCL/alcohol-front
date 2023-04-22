@@ -1,4 +1,5 @@
 import { Button } from 'primereact/button';
+import { DataView } from 'primereact/dataview';
 
 const FaceChatList =() => {
     
@@ -31,7 +32,10 @@ const FaceChatList =() => {
     };
 
     return (
-        <></>
+        <div>
+            <DataView value={testList} itemTemplate={itemTemplate} />
+
+        </div>
     )
 }
 
