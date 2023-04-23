@@ -1,10 +1,34 @@
 import { Button } from 'primereact/button';
 import { DataView } from 'primereact/dataview';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaceChat } from '../interface/faceChat';
+import { addr } from '../Common/serverAddr';
+import { getCookie } from '../Common/Cookies';
+import { useNavigate } from 'react-router-dom';
 
 const FaceChatList =() => {
     const [roomList, setRoomList] = useState<FaceChat[]>(); 
+    const navigate = useNavigate();
+
+    useEffect(()=>{
+        fetch(addr + '/face-chat/list',{
+            method:"GET",
+            headers:{
+                "Content-Type":"application/json",
+                Authorization: `Bearer ${getCookie('myToken')}`,
+
+            },
+        }).then((res)=>res.json())
+        .then((res)=>{
+            if(res.message== "Unauthorized") {
+                alert('로그인 후 사용가능합니다');
+                navigate('/login');
+            } 
+
+            setRoomList(res);
+        })
+    },[]);
+
     const itemTemplate = (product: FaceChat) => {
         return (
             <div className="col-12" style={{height:"5.5rem"}}>
