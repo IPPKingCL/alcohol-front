@@ -1,9 +1,11 @@
 import { Button } from 'primereact/button';
 import { DataView } from 'primereact/dataview';
+import { useState } from 'react';
+import { FaceChat } from '../interface/faceChat';
 
 const FaceChatList =() => {
-    
-    const itemTemplate = (product: testList) => {
+    const [roomList, setRoomList] = useState<FaceChat[]>(); 
+    const itemTemplate = (product: FaceChat) => {
         return (
             <div className="col-12" style={{height:"5.5rem"}}>
                 <div className="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
@@ -11,7 +13,7 @@ const FaceChatList =() => {
                         <div className="flex flex-column align-items-center sm:align-items-start gap-3">
                             <div className="text-2xl font-bold text-900" style={{marginLeft:"2rem", height:"2rem"}}>
                                 <h3>
-                                {product.level}과 단어시험
+                                {product.roomName}
 
                                 </h3>
                             </div>
@@ -23,7 +25,7 @@ const FaceChatList =() => {
                         </div>
                         <div className="flex sm:flex-column align-items-t sm:align-items-end gap-3 sm:gap-2">
                            
-                            <Button onClick = {()=>getTest(product.level)} style={{marginLeft:'14rem', }} className="p-button-rounded" size="small" label="시험보러가기" raised></Button>
+                            <Button style={{marginLeft:'14rem', }} className="p-button-rounded" size="small" label="시험보러가기" raised></Button>
                         </div>
                     </div>
                 </div>
@@ -33,7 +35,7 @@ const FaceChatList =() => {
 
     return (
         <div>
-            <DataView value={testList} itemTemplate={itemTemplate} />
+            <DataView value={roomList} itemTemplate={itemTemplate} />
 
         </div>
     )
