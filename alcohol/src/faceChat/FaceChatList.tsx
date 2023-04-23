@@ -5,6 +5,7 @@ import { FaceChat } from '../interface/faceChat';
 import { addr } from '../Common/serverAddr';
 import { getCookie } from '../Common/Cookies';
 import { useNavigate } from 'react-router-dom';
+import BasicSpeedDial from '../Board/BasicSpeedDial';
 
 const FaceChatList =() => {
     const [roomList, setRoomList] = useState<FaceChat[]>(); 
@@ -57,9 +58,14 @@ const FaceChatList =() => {
         );
     };
 
+    const onclick = () =>{
+        navigate('/addFaceChat');
+    }
+
     return (
         <div>
             <DataView value={roomList} itemTemplate={itemTemplate} />
+            <BasicSpeedDial click={onclick}></BasicSpeedDial>
 
         </div>
     )
