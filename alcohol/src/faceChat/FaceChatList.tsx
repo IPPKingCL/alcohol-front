@@ -50,7 +50,7 @@ const FaceChatList =() => {
                         </div>
                         <div className="flex sm:flex-column align-items-t sm:align-items-end gap-3 sm:gap-2">
                            
-                            <Button style={{marginLeft:'14rem', }} className="p-button-rounded" size="small" label="시험보러가기" raised></Button>
+                            <Button style={{marginLeft:'14rem', }} className="p-button-rounded" size="small" label="Let's Join!!" raised></Button>
                         </div>
                     </div>
                 </div>
