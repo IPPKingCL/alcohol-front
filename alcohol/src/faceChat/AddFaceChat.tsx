@@ -58,9 +58,9 @@ const AddFaceChatPage = () => {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ` +getCookie('myToken'),
             },
-            body:JSON.stringify({
+            body:JSON.stringify(
                 addFaceChat
-            }),
+            ),
         }).then(res=>res.json())
         .then((res)=>{
             if(res.success){
