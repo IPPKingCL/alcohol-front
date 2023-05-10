@@ -24,8 +24,12 @@ const AddFaceChatPage = () => {
     const [option,setOption] = useState<AlchoCategory[]>([]);
     const [loading,setLoading] = useState<boolean>(true);
 
-    const getRoomInfo = () => {
-
+    const getRoomInfo = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const {name,value} = e.target;
+        setAddFaceChat({
+            ...addFaceChat,
+            [name] : value
+        })
     }
 
     const list = async () => {
@@ -48,7 +52,7 @@ const AddFaceChatPage = () => {
     },[]);
 
     const AddRoom = () => {
-
+        console.log(addFaceChat);
     }
 
     return (
