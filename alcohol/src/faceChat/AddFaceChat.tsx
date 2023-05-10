@@ -6,6 +6,7 @@ import { AlchoCategory } from "../interface/AlchoCategory";
 import AlcoholSearchOption from "../alcohol/AlcoholSearch/AlcoholSearchOption";
 import { addr } from "../Common/serverAddr";
 import { Button } from "primereact/button";
+import { getCookie } from "../Common/Cookies";
 
 const AddFaceChatPage = () => {
     
@@ -54,15 +55,25 @@ const AddFaceChatPage = () => {
     const AddRoom = () => {
         console.log(addFaceChat);
 
-        // fetch(addr + '/face-chat/addFaceChat'),{
-        //     method:"POST",
-        //     headers: {
-        //         "Content-Type": "application/json",
-
-        //     },
-        //     body:
-
-        // }
+        fetch(addr + '/face-chat/addFaceChat',{
+            method:"POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ` +getCookie('myToken'),
+            },
+            body:JSON.stringify({
+                addFaceChat
+            }),
+        }).then(res=>res.json())
+        .then((res)=>{
+            if(res.success){
+                alert('생성 성공');
+                
+            }else{
+                alert('생성 실패');
+                return;
+            }
+        })
     }
 
     return (
