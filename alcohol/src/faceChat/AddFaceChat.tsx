@@ -5,6 +5,7 @@ import AlcoholSearch from "../alcohol/AlcoholSearch/AlcoholSearch";
 import { AlchoCategory } from "../interface/AlchoCategory";
 import AlcoholSearchOption from "../alcohol/AlcoholSearch/AlcoholSearchOption";
 import { addr } from "../Common/serverAddr";
+import { Button } from "primereact/button";
 
 const AddFaceChatPage = () => {
     
@@ -14,16 +15,19 @@ const AddFaceChatPage = () => {
         category:''
     });
 
-    const onchange = (e:React.ChangeEvent<HTMLSelectElement>) => {
-        let category = '';
-        
-        category = e.target.value;
+    let category = '';
 
-        console.log(category)
+    const onchange = (e:React.ChangeEvent<HTMLSelectElement>) => {
+        category = e.target.value;    
     }
 
     const [option,setOption] = useState<AlchoCategory[]>([]);
     const [loading,setLoading] = useState<boolean>(true);
+
+    const getRoomInfo = () => {
+
+    }
+
     const list = async () => {
         setOption([]);
         fetch(addr+'/alcohol/category',{
@@ -43,6 +47,10 @@ const AddFaceChatPage = () => {
         list();
     },[]);
 
+    const AddRoom = () => {
+
+    }
+
     return (
         <div style={{width:'90%',textAlign:'center'}}>
             <h2>Let's Drink Together!!</h2>
@@ -55,7 +63,7 @@ const AddFaceChatPage = () => {
                 autoFocus
                 fullWidth
                 inputProps={{ maxLength: 39 }}
-                //onChange={onchange}
+                onChange={getRoomInfo}
                 style={{marginLeft:'1rem'}}
             />
 
@@ -68,7 +76,7 @@ const AddFaceChatPage = () => {
                 autoFocus
                 fullWidth
                 inputProps={{ maxLength: 39 }}
-                //onChange={onchange}
+                onChange={getRoomInfo}
                 style={{marginLeft:'1rem',marginTop:'1rem'}}
             />
            
@@ -82,6 +90,8 @@ const AddFaceChatPage = () => {
                     </select>
 
             </>
+
+            <Button onClick={AddRoom}>생성</Button>
 
         </div>
     );
