@@ -1,6 +1,10 @@
 import { TextField, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {AddFaceChat} from '../interface/AddFaceChat'
+import AlcoholSearch from "../alcohol/AlcoholSearch/AlcoholSearch";
+import { AlchoCategory } from "../interface/AlchoCategory";
+import AlcoholSearchOption from "../alcohol/AlcoholSearch/AlcoholSearchOption";
+import { addr } from "../Common/serverAddr";
 
 const AddFaceChatPage = () => {
     
@@ -10,9 +14,34 @@ const AddFaceChatPage = () => {
         category:''
     });
 
-    const onchange = () => {
+    const onchange = (e:React.ChangeEvent<HTMLSelectElement>) => {
+        let category = '';
+        
+        category = e.target.value;
 
+        console.log(category)
     }
+
+    const [option,setOption] = useState<AlchoCategory[]>([]);
+    const [loading,setLoading] = useState<boolean>(true);
+    const list = async () => {
+        setOption([]);
+        fetch(addr+'/alcohol/category',{
+            method:"GET",
+            headers:{
+                "Content-Type":"application/json",
+            }
+        }).then((res)=>res.json())
+        .then((res)=>{
+            setOption(res);
+            
+        })
+        setLoading(false);
+    }
+
+    useEffect(()=>{
+        list();
+    },[]);
 
     return (
         <div style={{width:'90%',textAlign:'center'}}>
@@ -26,7 +55,7 @@ const AddFaceChatPage = () => {
                 autoFocus
                 fullWidth
                 inputProps={{ maxLength: 39 }}
-                onChange={onchange}
+                //onChange={onchange}
                 style={{marginLeft:'1rem'}}
             />
 
@@ -39,16 +68,20 @@ const AddFaceChatPage = () => {
                 autoFocus
                 fullWidth
                 inputProps={{ maxLength: 39 }}
-                onChange={onchange}
+                //onChange={onchange}
                 style={{marginLeft:'1rem',marginTop:'1rem'}}
             />
            
-           <select name="alchoCategory" id="selectBoard" onChange={onchange}>
-                <option>카테고리 선택</option>
-                <option value="F">자유게시판</option>
-                <option value="A">술 관련 게시판</option>
-                <option value="R">레시피 게시판</option>
-            </select>
+           
+            <>
+                    <select name="selectBoard" id="selectBoard" className="select-search"  onChange = {e=>onchange(e)}>
+                        <option value={0}>전체</option>
+                        {option.map((data:any)=>(
+                                <AlcoholSearchOption prop={data} key={data.id}/>
+                        ))}
+                    </select>
+
+            </>
 
         </div>
     );
