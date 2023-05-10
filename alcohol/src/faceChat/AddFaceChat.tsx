@@ -7,6 +7,7 @@ import AlcoholSearchOption from "../alcohol/AlcoholSearch/AlcoholSearchOption";
 import { addr } from "../Common/serverAddr";
 import { Button } from "primereact/button";
 import { getCookie } from "../Common/Cookies";
+import { useNavigate } from "react-router-dom";
 
 const AddFaceChatPage = () => {
     
@@ -16,11 +17,7 @@ const AddFaceChatPage = () => {
         category:''
     });
 
-    let category = '';
-
-    const onchange = (e:React.ChangeEvent<HTMLSelectElement>) => {
-        category = e.target.value;    
-    }
+   const navigate = useNavigate();
 
     const [option,setOption] = useState<AlchoCategory[]>([]);
     const [loading,setLoading] = useState<boolean>(true);
@@ -69,9 +66,14 @@ const AddFaceChatPage = () => {
             if(res.success){
                 alert('생성 성공');
                 
-            }else{
-                alert('생성 실패');
-                return;
+            }
+            else{
+                if (res.message == "Unauthorized") {
+                    alert('로그인 후 사용가능합니다');
+                    navigate('/login');
+                } else {
+                    alert('에러 발생 잠시 후 시도해주세요');
+                }
             }
         })
     }
