@@ -65,7 +65,7 @@ const AddFaceChatPage = () => {
         .then((res)=>{
             if(res.success){
                 alert('생성 성공');
-                
+                navigate('/faceChat/'+res.id)
             }
             else{
                 if (res.message == "Unauthorized") {
