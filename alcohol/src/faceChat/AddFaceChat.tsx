@@ -51,7 +51,12 @@ const AddFaceChatPage = () => {
 
     const AddRoom = () => {
         console.log(addFaceChat);
-
+        
+        if(!addFaceChat.category || !addFaceChat.detailComment || !addFaceChat.roomName){
+            alert("모든 입력칸을 입력해주세요");
+            return;
+        }
+        
         fetch(addr + '/face-chat/addFaceChat',{
             method:"POST",
             headers: {
