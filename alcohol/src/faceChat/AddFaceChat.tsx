@@ -24,7 +24,7 @@ const AddFaceChatPage = () => {
     const [option,setOption] = useState<AlchoCategory[]>([]);
     const [loading,setLoading] = useState<boolean>(true);
 
-    const getRoomInfo = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const getRoomInfo = (e: React.ChangeEvent<HTMLInputElement>|React.ChangeEvent<HTMLSelectElement|any>) => {//타입 수정 예정
         const {name,value} = e.target;
         setAddFaceChat({
             ...addFaceChat,
@@ -53,6 +53,16 @@ const AddFaceChatPage = () => {
 
     const AddRoom = () => {
         console.log(addFaceChat);
+
+        // fetch(addr + '/face-chat/addFaceChat'),{
+        //     method:"POST",
+        //     headers: {
+        //         "Content-Type": "application/json",
+
+        //     },
+        //     body:
+
+        // }
     }
 
     return (
@@ -86,7 +96,7 @@ const AddFaceChatPage = () => {
            
            
             <>
-                    <select name="selectBoard" id="selectBoard" className="select-search"  onChange = {e=>onchange(e)}>
+                    <select id="selectBoard" name='category' className="select-search"  onChange = {getRoomInfo}>
                         <option value={0}>전체</option>
                         {option.map((data:any)=>(
                                 <AlcoholSearchOption prop={data} key={data.id}/>
