@@ -46,6 +46,7 @@ import MyPageInfo from './MyPage/MyPageInfo';
 import MyPage from './MyPage/Mypage';
 import FaceChatList from './faceChat/FaceChatList';
 import AddFaceChatPage from './faceChat/AddFaceChat';
+import FaceChat from './faceChat/FactChat';
 
 
 function App() {
@@ -97,6 +98,7 @@ function App() {
 
             <Route path='/faceChat' element={<FaceChatList/>}/>
             <Route path='/addFaceChat' element={<AddFaceChatPage/>}/>
+            <Route path='/faceChat/:id' element={<FaceChat/>}/>
           </Routes>
         </div>
         <LabelBottomNavigation />

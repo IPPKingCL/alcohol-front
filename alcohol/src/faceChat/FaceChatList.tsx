@@ -30,6 +30,10 @@ const FaceChatList =() => {
         })
     },[]);
 
+    const getRoomId = (id : number) => {
+        navigate('/faceChat/'+id);
+    }
+
     const itemTemplate = (product: FaceChat) => {
         return (
             <div className="col-12" style={{height:"5.5rem"}}>
@@ -50,7 +54,7 @@ const FaceChatList =() => {
                         </div>
                         <div className="flex sm:flex-column align-items-t sm:align-items-end gap-3 sm:gap-2">
                            
-                            <Button style={{marginLeft:'14rem', }} className="p-button-rounded" size="small" label="Let's Join!!" raised></Button>
+                            <Button style={{marginLeft:'14rem', }} onClick = {() =>{getRoomId(product.id)}} className="p-button-rounded" size="small" label="Let's Join!!" raised></Button>
                         </div>
                     </div>
                 </div>
