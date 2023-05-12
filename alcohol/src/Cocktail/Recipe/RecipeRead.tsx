@@ -191,7 +191,6 @@ const RecipeRead = (props: Props) => {
             .then((res) => {
                 if (res.success) {
                     alert('평가되었습니다');
-                    //다시 평가시 재평가 될 수 있도록 서버 수정 해야됨
                 } else {
                     if(res.msg==='already'){
                         const message = '이미 평가하신 칵테일입니다. 다시 평가하시겠습니까?'
