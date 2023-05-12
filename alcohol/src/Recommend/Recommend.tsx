@@ -48,6 +48,9 @@ const Recommend = () => {
     const onclick = () =>{
         navigate('/recommend/cocktail')
     }
+    const faceChat = () => {
+        navigate('/faceChat');
+    }
     return (
        <>
         <CardWrapper border={false} content={false}>
@@ -114,7 +117,7 @@ const Recommend = () => {
                 </Box>
             </CardWrapper>
             <hr/>
-            <CardWrapper border={false} content={false} onClick={onclick}>
+            <CardWrapper border={false} content={false} onClick={faceChat}>
                 <Box sx={{ p: 2.25 }}>
                     <Grid container alignItems="center">
                         <Grid item>
@@ -137,7 +140,7 @@ const Recommend = () => {
                                     type="submit"
                                     variant="contained"
                                     color="warning"
-                                    onClick={onclick}
+                                    onClick={faceChat}
                                     sx={{
                                         float: 'center',
                                         marginTop: '1rem'                       
