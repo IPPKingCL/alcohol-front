@@ -139,6 +139,7 @@ const RecipeRead = (props: Props) => {
     const [recipe, setRecipe] = useState<Cock>();
     const [loading, setLoading] = useState<boolean>(true);
     const [amount, setAmount] = useState<string>();
+    let ratingCheck:boolean = false;
 
     const [open, setOpen] = useState(false);
 
@@ -174,7 +175,9 @@ const RecipeRead = (props: Props) => {
     }, [])
 
     const onclick = () => {
-        fetch(addr + '/cocktail/rating', {
+        const urlEndPoint :string = ratingCheck ? '/cocktail/ratingAgain':'/cocktail/rating'; 
+        console.log(ratingCheck)
+        fetch(addr + urlEndPoint, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -188,12 +191,25 @@ const RecipeRead = (props: Props) => {
             .then((res) => {
                 if (res.success) {
                     alert('평가되었습니다');
-                    //다시 평가시 재평가 될 수 있도록 서버 수정 해야됨
                 } else {
-                    alert(res.msg);
+                    if(res.msg==='already'){
+                        const message = '이미 평가하신 칵테일입니다. 다시 평가하시겠습니까?'
+               
+                        if(window.confirm(message)){
+                            ratingCheck = true;
+                            onclick();
+                        }else{
+
+                        }
+                    }else{
+                        alert(res.msg);
+
+                    }
                 }
             })
     }
+
+    
     const [value, setValue] = React.useState<number | null>(2);
     const [hover, setHover] = React.useState(-1);
 
