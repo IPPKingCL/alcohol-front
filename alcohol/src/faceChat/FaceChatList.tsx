@@ -30,6 +30,21 @@ const FaceChatList =() => {
         })
     },[]);
 
+    const getInFaceChat = (id:number) => {
+        fetch(addr + '/face-chat/faceChat/'+id,{
+            method:"GET",
+            headers:{
+                "Content-Type":"application/json",
+                Authorization: `Bearer ${getCookie('myToken')}`,
+            },
+        }).then((res)=>res.json())
+        .then((res)=>{
+            if(res.success){
+                alert('get in');
+            }
+        })
+    }
+
     const itemTemplate = (product: FaceChat) => {
         return (
             <div className="col-12" style={{height:"5.5rem"}}>
