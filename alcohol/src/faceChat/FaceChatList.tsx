@@ -39,10 +39,17 @@ const FaceChatList =() => {
             },
         }).then((res)=>res.json())
         .then((res)=>{
+            console.log(res);
             if(res.success){
-                alert('get in');
+                alert(res.msg);
+                navigate('/faceChat/'+id);
+            }else{
+                alert('잠시 후 다시 시도해주세요');
+                return;
             }
         })
+    }
+
     const getRoomId = (id : number) => {
         navigate('/faceChat/'+id);
     }
@@ -67,7 +74,7 @@ const FaceChatList =() => {
                         </div>
                         <div className="flex sm:flex-column align-items-t sm:align-items-end gap-3 sm:gap-2">
                            
-                            <Button style={{marginLeft:'14rem', }} onClick = {() =>{getRoomId(product.id)}} className="p-button-rounded" size="small" label="Let's Join!!" raised></Button>
+                            <Button style={{marginLeft:'14rem', }} onClick = {() =>{getInFaceChat(product.id)}} className="p-button-rounded" size="small" label="Let's Join!!" raised></Button>
                         </div>
                     </div>
                 </div>
