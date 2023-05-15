@@ -9,6 +9,7 @@ const CockAlchoOne = (prop:any) => {
     
     
     useEffect(() => {
+        console.log(prop.data.alcho)
         setAlcho(prop.data)
     },[]);
 

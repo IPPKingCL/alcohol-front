@@ -177,42 +177,43 @@ const SelfCockRecipeRead = (props: Props) => {
     }, [])
 
     const onclick = () => {
-        const urlEndPoint :string = ratingCheck ? '/cocktail/ratingAgain':'/cocktail/rating'; 
-        console.log(ratingCheck)
-        fetch(addr + urlEndPoint, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${getCookie('myToken')}`,
-            },
-            body: JSON.stringify({
-                cocktailId: id,
-                rating: value
-            })
-        }).then((res) => res.json())
-            .then((res) => {
-                if (res.success) {
-                    alert('평가되었습니다');
-                } else {
-                    if(res.msg==='already'){
-                        const message = '이미 평가하신 칵테일입니다. 다시 평가하시겠습니까?'
+        console.log(recipe);
+        // const urlEndPoint :string = ratingCheck ? '/cocktail/ratingAgain':'/cocktail/rating'; 
+        // console.log(ratingCheck)
+        // fetch(addr + urlEndPoint, {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //         Authorization: `Bearer ${getCookie('myToken')}`,
+        //     },
+        //     body: JSON.stringify({
+        //         cocktailId: id,
+        //         rating: value
+        //     })
+        // }).then((res) => res.json())
+        //     .then((res) => {
+        //         if (res.success) {
+        //             alert('평가되었습니다');
+        //         } else {
+        //             if(res.msg==='already'){
+        //                 const message = '이미 평가하신 칵테일입니다. 다시 평가하시겠습니까?'
                
-                        if(window.confirm(message)){
-                            ratingCheck = true;
-                            onclick();
-                        }else{
+        //                 if(window.confirm(message)){
+        //                     ratingCheck = true;
+        //                     onclick();
+        //                 }else{
 
-                        }
-                    }else if(res.message==='Unauthorized'){
-                        alert('로그인이 필요한 서비스입니다')
-                        navigate('/login');
-                    }
-                    else{
-                        alert(res.msg);
+        //                 }
+        //             }else if(res.message==='Unauthorized'){
+        //                 alert('로그인이 필요한 서비스입니다')
+        //                 navigate('/login');
+        //             }
+        //             else{
+        //                 alert(res.msg);
 
-                    }
-                }
-            })
+        //             }
+        //         }
+        //     })
     }
 
     
