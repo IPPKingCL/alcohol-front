@@ -161,7 +161,7 @@ const SelfCockRecipeRead = (props: Props) => {
         }).then((res) => res.json())
             .then((res) => {
                 console.log(res);
-                if (res['cockAlcho'][0].only) {
+                if (res['cocktail'].only) {
                     res['cocktail'].only = '해당 술만 사용할 수 있는 칵테일입니다'
                 } else {
                     res['cocktail'].only = '같은 종류의 술을 대체하여 사용할 수 있는 칵테일입니다.'
@@ -363,7 +363,7 @@ const SelfCockRecipeRead = (props: Props) => {
                                 <Puller sx={{
                                     backgroundColor: "warning"
                                 }} />
-                                <CocktailComment />
+                                {/* <CocktailComment /> 일단 댓글 없애놓겠음*/}
                             </StyledBox>
                         </SwipeableDrawer>
                     </Grid>
