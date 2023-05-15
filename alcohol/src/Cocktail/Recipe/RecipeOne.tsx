@@ -1,5 +1,5 @@
 import { PresignedPost } from "aws-sdk/clients/s3";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
@@ -41,10 +41,11 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 
 
 const RecipeOne = (prop: any) => {
-    
+    const param = useLocation();
     const [recipeList, setRecipeList] = useState<RecipeList>();
     useEffect(() => {
         setRecipeList(prop.data);
+      
     }, [])
     const navigate = useNavigate();
 
@@ -81,7 +82,11 @@ const RecipeOne = (prop: any) => {
     
 
     const recipeOne = () => {
-        navigate('/cocktail/recipeRead/' + prop.data.id);
+        let path : string = param.pathname;
+        
+        path === '/cocktail/recipe/all'?
+            navigate('/cocktail/recipeRead/' + prop.data.id):
+            navigate('/cocktail/recipe/self/read/' + prop.data.id);
     }
 
     return (
