@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState,  } from "react";
 import { useParams } from "react-router";
 import { addr } from "../../Common/serverAddr";
 import * as React from 'react';
@@ -14,6 +14,7 @@ import { getCookie } from "../../Common/Cookies";
 import { Button, Typography, styled, CardMedia, SwipeableDrawer, Grid, CssBaseline } from "@mui/material";
 import MainCard from '../../ui-component/cards/MainCard';
 import { Global } from "@emotion/react";
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
     /**
@@ -140,6 +141,7 @@ const RecipeRead = (props: Props) => {
     const [loading, setLoading] = useState<boolean>(true);
     const [amount, setAmount] = useState<string>();
     let ratingCheck:boolean = false;
+    const navigate = useNavigate();
 
     const [open, setOpen] = useState(false);
 
@@ -201,7 +203,11 @@ const RecipeRead = (props: Props) => {
                         }else{
 
                         }
-                    }else{
+                    }else if(res.message==='Unauthorized'){
+                        alert('로그인이 필요한 서비스입니다')
+                        navigate('/login');
+                    }
+                    else{
                         alert(res.msg);
 
                     }

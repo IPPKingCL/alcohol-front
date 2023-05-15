@@ -47,6 +47,7 @@ import MyPage from './MyPage/Mypage';
 import FaceChatList from './faceChat/FaceChatList';
 import AddFaceChatPage from './faceChat/AddFaceChat';
 import FaceChat from './faceChat/FactChat';
+import SelfCockRecipeRead from './Cocktail/SelfRecipe/SelfCockRecipeRead';
 
 
 function App() {
@@ -82,7 +83,8 @@ function App() {
             <Route path='/cocktail/recipe/:id?' element={<Recipe />} ></Route>
             <Route path='/cocktail/recipeRead/:id' element={<RecipeRead />} />
             <Route path='/cocktail/recipe/self' element={<SelfCock/>}/>
-            <Route path='/cocktail/recipe/self/insert' element={<SelfCockInsert/>}/> 
+            <Route path='/cocktail/recipe/self/insert' element={<SelfCockInsert/>}/>
+            <Route path='/cocktail/recipe/self/read/:id' element={<SelfCockRecipeRead/>}/> 
 
             <Route path='/recommend' element = {<Recommend/>}/>
             <Route path='/recommend/cocktail' element = {<FillterCocktail/>}/>
