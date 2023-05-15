@@ -153,14 +153,14 @@ const SelfCockRecipeRead = (props: Props) => {
 
     let tempAmount = '';
     const recipeFunc = async () => {
-        fetch(addr + '/cocktail/' + id, {
+        fetch(addr + '/selfcocktail/select/' + id, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
             }
         }).then((res) => res.json())
             .then((res) => {
-                console.log(res['cockAlcho'].only);
+                console.log(res);
                 if (res['cockAlcho'][0].only) {
                     res['cocktail'].only = '해당 술만 사용할 수 있는 칵테일입니다'
                 } else {
