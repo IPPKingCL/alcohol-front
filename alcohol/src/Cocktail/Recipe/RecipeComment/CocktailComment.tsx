@@ -19,7 +19,7 @@ const CocktailComment = (prop:any) => {
     const selfRecipeFlag = prop.url;
     
     const commentList = async () => {
-        const endPoint = selfRecipeFlag === 'recipe' ? '/cocktail/comment/all/' : '/selfcocktail/comment/all';
+        const endPoint = selfRecipeFlag === 'recipe' ? '/cocktail/comment/all/' : '/selfcocktail/comment/all/';
 
         fetch(addr+endPoint+id,{
             method:"GET",
@@ -58,8 +58,9 @@ const CocktailComment = (prop:any) => {
         setContent(e.target.value);
     }
 
-    const onclick = async () => { 
-        fetch(addr+'/cocktail/comment/insert',{
+    const onclick = async () => {
+        const endPoint = selfRecipeFlag === 'recipe' ? '/cocktail/comment/insert' : '/selfcocktail/comment/insert';
+        fetch(addr+endPoint,{
             method:"POST",
             headers:{
                 "Content-Type" : "application/json",
@@ -124,6 +125,7 @@ const CocktailComment = (prop:any) => {
                     <CocktailCoList
                         datas={comment}
                         onRemove={onRemove}
+                        url={selfRecipeFlag}
                     />
                 </div>
             }           
