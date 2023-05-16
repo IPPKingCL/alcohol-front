@@ -371,7 +371,9 @@ const SelfCockRecipeRead = (props: Props) => {
                                 <Puller sx={{
                                     backgroundColor: "warning"
                                 }} />
-                                {/* <CocktailComment /> 일단 댓글 없애놓겠음*/}
+                                <CocktailComment 
+                                    url={'selfrecipe'}
+                                /> 
                             </StyledBox>
                         </SwipeableDrawer>
                     </Grid>

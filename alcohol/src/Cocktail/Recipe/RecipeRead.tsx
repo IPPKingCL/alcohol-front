@@ -373,7 +373,9 @@ const RecipeRead = (props: Props) => {
                                 <Puller sx={{
                                     backgroundColor: "warning"
                                 }} />
-                                <CocktailComment />
+                                <CocktailComment 
+                                    url={'recipe'}
+                                />
                             </StyledBox>
                         </SwipeableDrawer>
                     </Grid>
