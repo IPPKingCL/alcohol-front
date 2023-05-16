@@ -160,14 +160,21 @@ const SelfCockRecipeRead = (props: Props) => {
             }
         }).then((res) => res.json())
             .then((res) => {
-                console.log(res);
-                if (res['cocktail'].only) {
-                    res['cocktail'].only = '해당 술만 사용할 수 있는 칵테일입니다'
-                } else {
-                    res['cocktail'].only = '같은 종류의 술을 대체하여 사용할 수 있는 칵테일입니다.'
+                if(res.success===false){
+                    alert('잠시 후 다시 시도해주세요');
+                    window.history.go(-1);
+                }else{
+                    console.log(res);
+                    if (res['cocktail'].only) {
+                        res['cocktail'].only = '해당 술만 사용할 수 있는 칵테일입니다'
+                    } else {
+                        res['cocktail'].only = '같은 종류의 술을 대체하여 사용할 수 있는 칵테일입니다.'
+                    }
+    
+                    setRecipe(res);
                 }
 
-                setRecipe(res);
+              
                 setLoading(false);
             })
     }
