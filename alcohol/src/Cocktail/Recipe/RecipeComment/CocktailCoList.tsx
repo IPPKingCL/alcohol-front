@@ -8,6 +8,7 @@ const CocktailCoList = (props:any) => {
                     data={data}
                     key={data.id}
                     onRemove={props.onRemove}
+                    url={data.url}
                 />
             )
             )}

@@ -8,8 +8,12 @@ import { addr } from '../../../Common/serverAddr';
 
 const CocktailCoOne = (prop:any) => {
     const navigate = useNavigate();
+    const selfRecipeFlag = prop.url;
+
     const onclick = async () => {
-        fetch(addr + '/cocktail/comment/delete',{
+        const endPoint = selfRecipeFlag === 'recipe' ? '/cocktail/comment/delete' : '/selfcocktail/comment/delete';
+
+        fetch(addr + endPoint,{
             method:"POST",
             headers:{
                 "Content-Type":"application/json",

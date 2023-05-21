@@ -160,15 +160,25 @@ const RecipeRead = (props: Props) => {
             }
         }).then((res) => res.json())
             .then((res) => {
-                console.log(res['cockAlcho'].only);
-                if (res['cockAlcho'][0].only) {
-                    res['cocktail'].only = '해당 술만 사용할 수 있는 칵테일입니다'
-                } else {
-                    res['cocktail'].only = '같은 종류의 술을 대체하여 사용할 수 있는 칵테일입니다.'
+                console.log(res);
+                if(res.success===false){
+                    alert('잠시 후 다시 시도해주세요');
+                    window.history.go(-1);
+                }else{
+                    console.log(res['cockAlcho'].only);
+
+                
+                    if (res['cockAlcho'][0].only) {
+                        res['cocktail'].only = '해당 술만 사용할 수 있는 칵테일입니다'
+                    } else {
+                        res['cocktail'].only = '같은 종류의 술을 대체하여 사용할 수 있는 칵테일입니다.'
+                    }
+    
+                    setRecipe(res);
+                    setLoading(false);
                 }
 
-                setRecipe(res);
-                setLoading(false);
+                
             })
     }
 
@@ -363,7 +373,9 @@ const RecipeRead = (props: Props) => {
                                 <Puller sx={{
                                     backgroundColor: "warning"
                                 }} />
-                                <CocktailComment />
+                                <CocktailComment 
+                                    url={'recipe'}
+                                />
                             </StyledBox>
                         </SwipeableDrawer>
                     </Grid>

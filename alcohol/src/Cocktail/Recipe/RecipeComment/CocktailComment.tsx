@@ -6,17 +6,22 @@ import { getCookie } from "../../../Common/Cookies";
 import { addr } from "../../../Common/serverAddr";
 import { commentList } from "../../../interface/CommentList";
 import CocktailCoList from "./CocktailCoList";
+import { useLocation } from "react-router-dom";
 
-const CocktailComment = () => {
+const CocktailComment = (prop:any) => {
     const [loading, setLoading] = useState<boolean>(true);
     const [content, setContent] = useState<string>();
     const [comment, setComment] = useState<commentList[]>([]);
     const {id} = useParams();
     const [commentNum,setCommentNum] = useState<number>();
     const navigate = useNavigate();
+    const param = useLocation();
+    const selfRecipeFlag = prop.url;
     
     const commentList = async () => {
-        fetch(addr+'/cocktail/comment/all/'+id,{
+        const endPoint = selfRecipeFlag === 'recipe' ? '/cocktail/comment/all/' : '/selfcocktail/comment/all/';
+
+        fetch(addr+endPoint+id,{
             method:"GET",
             headers:{
                 "Content-Type" : "application/json",
@@ -53,8 +58,9 @@ const CocktailComment = () => {
         setContent(e.target.value);
     }
 
-    const onclick = async () => { 
-        fetch(addr+'/cocktail/comment/insert',{
+    const onclick = async () => {
+        const endPoint = selfRecipeFlag === 'recipe' ? '/cocktail/comment/insert' : '/selfcocktail/comment/insert';
+        fetch(addr+endPoint,{
             method:"POST",
             headers:{
                 "Content-Type" : "application/json",
@@ -119,6 +125,7 @@ const CocktailComment = () => {
                     <CocktailCoList
                         datas={comment}
                         onRemove={onRemove}
+                        url={selfRecipeFlag}
                     />
                 </div>
             }           
