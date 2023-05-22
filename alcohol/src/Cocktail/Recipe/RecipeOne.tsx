@@ -84,9 +84,16 @@ const RecipeOne = (prop: any) => {
     const recipeOne = () => {
         let path : string = param.pathname;
         
-        path === '/cocktail/recipe/all'?
-            navigate('/cocktail/recipeRead/' + prop.data.id):
+        console.log(path);
+
+        if(path==='/cocktail/recipe/self'){
             navigate('/cocktail/recipe/self/read/' + prop.data.id);
+
+        }else{
+            navigate('/cocktail/recipeRead/' + prop.data.id);
+
+        }
+        // path === '/cocktail/recipe/all'?
     }
 
     return (
