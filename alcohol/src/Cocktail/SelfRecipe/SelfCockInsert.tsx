@@ -213,6 +213,9 @@ const SelfCockInsert = () =>{
         }else if(!inputItemsJuice){
             alert("음료 레시피를 알려주세요");
             return;
+        }else if(!comment){
+            alert("Comment를 입력해주세요");
+            return;
         }
 
         fetch(addr + '/board/s3url',{
@@ -238,8 +241,16 @@ const SelfCockInsert = () =>{
                 return;
             }
 
-            console.log(inputItems[0]);
-            console.log(inputItemsJuice[0]);
+            // console.log(inputItems[0]);
+            // console.log(inputItemsJuice[0]);
+
+            console.log(cocktail);
+            console.log(imageUrl);
+            console.log(dosu)
+            console.log(inputItems);
+            console.log(inputItemsJuice);
+            console.log(comment)
+
             fetch(addr + '/selfcocktail/insert',{
                 method : "POST",
                 headers : {
