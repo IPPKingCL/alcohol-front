@@ -41,6 +41,8 @@ function Test() {
          
             <input id="imageFile" type="file" onChange={handleFileInput} accept="image/*"/>
             <button onClick={onclick}>이미지 업로드</button>
+
+            
         
         </div>
     )

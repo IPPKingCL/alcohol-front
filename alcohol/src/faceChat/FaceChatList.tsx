@@ -44,8 +44,14 @@ const FaceChatList =() => {
                 alert(res.msg);
                 navigate('/faceChat/'+id);
             }else{
-                alert('잠시 후 다시 시도해주세요');
-                return;
+                if(res.statusCode===401){
+                    alert('로그인 후 이용 가능합니다');
+                    navigate('/login');
+                }else{
+                    alert('잠시 후 다시 시도해주세요');
+                    return;
+                }
+               
             }
         })
     }
