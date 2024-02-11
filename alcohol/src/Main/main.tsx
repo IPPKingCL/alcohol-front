@@ -88,4 +88,6 @@ export default Main;
 
 24. 웹 뷰로 앱 예정
 
+25. 미비된 부분 찾기
+
 */
